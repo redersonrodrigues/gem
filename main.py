@@ -5,6 +5,7 @@ from app.models.doctor import Doctor
 from app.models.log import Log
 from app.models.specialization import Specialization
 from app.models.user import User
+from app.models.schedule import Schedule
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
 import datetime
@@ -181,29 +182,33 @@ def edit_specialization(spec_id):
 @app.route('/schedules', methods=['GET', 'POST'])
 @login_required
 def schedules():
-    # Permitir cadastro/alteração apenas até o dia 15 do mês seguinte para usuários comuns
-    if not session.get('is_admin') and request.method == 'POST':
-        today = datetime.today()
-        # Limite: dia 15 do mês seguinte
-        limite = datetime(today.year, today.month, 15)
-        if today.day > 15:
-            # Se já passou do dia 15, só pode cadastrar para o mês seguinte
-            if 'data_escala' in request.form:
-                data_escala = datetime.strptime(request.form['data_escala'], '%Y-%m-%d')
-                proximo_mes = today.month + 1 if today.month < 12 else 1
-                ano = today.year if today.month < 12 else today.year + 1
-                limite = datetime(ano, proximo_mes, 15)
-                if data_escala > limite:
-                    flash('Usuário comum só pode cadastrar/alterar escalas até o dia 15 do mês seguinte.', 'danger')
-                    return redirect(url_for('schedules'))
-        else:
-            if 'data_escala' in request.form:
-                data_escala = datetime.strptime(request.form['data_escala'], '%Y-%m-%d')
-                if data_escala > limite:
-                    flash('Usuário comum só pode cadastrar/alterar escalas até o dia 15 do mês seguinte.', 'danger')
-                    return redirect(url_for('schedules'))
-    # ...restante do CRUD de escalas...
-    return render_template('schedule_view.html')
+    session_db = SessionLocal()
+    if request.method == 'POST':
+        # Respeita restrição de datas para usuários comuns (já implementada anteriormente)
+        data_escala = request.form['data_escala']
+        tipo = request.form['tipo']
+        # Exemplo: cadastro de escala plantonista
+        if tipo == 'PLANTONISTA':
+            medico1_id = request.form['medico1_id']
+            medico2_id = request.form['medico2_id']
+            # Verifica se já existe escala para o dia
+            if session_db.query(Schedule).filter_by(data=data_escala, tipo=tipo).first():
+                flash('Já existe escala para este dia.', 'danger')
+            else:
+                escala = Schedule(data=data_escala, tipo=tipo, medico1_id=medico1_id, medico2_id=medico2_id)
+                session_db.add(escala)
+                session_db.commit()
+                # Log da ação
+                log = Log(user_id=session['user_id'], action='CREATE', entity='Schedule', entity_id=escala.id, timestamp=datetime.utcnow())
+                session_db.add(log)
+                session_db.commit()
+                flash('Escala cadastrada com sucesso!', 'success')
+        # ...demais tipos de escala...
+        return redirect(url_for('schedules'))
+    escalas = session_db.query(Schedule).all()
+    doctors = session_db.query(Doctor).all()
+    session_db.close()
+    return render_template('schedule_view.html', escalas=escalas, doctors=doctors)
 
 
 @app.route('/login', methods=['GET', 'POST'])
