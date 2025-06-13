@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 from app.config import Config
 from app.models.database import init_db, SessionLocal
 from app.models.doctor import Doctor
+from app.models.log import Log
 from app.models.specialization import Specialization
 from app.models.user import User
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -24,23 +25,83 @@ def home():
     return render_template("home.html")
 
 
-@app.route("/doctors", methods=["GET", "POST"])
+@app.route('/doctors', methods=['GET', 'POST'])
 @admin_required
 @login_required
 def doctors():
     session_db = SessionLocal()
-    if request.method == "POST":
-        name = request.form["name"]
-        specialization_id = request.form["specialization_id"]
-        doctor = Doctor(name=name, specialization_id=specialization_id)
-        session_db.add(doctor)
-        session_db.commit()
-        return redirect(url_for("doctors"))
+    if request.method == 'POST':
+        name = request.form['name'].strip().upper()
+        specialization_id = request.form['specialization_id']
+        # Verifica nome único
+        if session_db.query(Doctor).filter_by(name=name).first():
+            flash('Já existe um médico com esse nome.', 'danger')
+        else:
+            doctor = Doctor(name=name, specialization_id=specialization_id)
+            session_db.add(doctor)
+            session_db.commit()
+            # Log da ação
+            log = Log(user_id=session['user_id'], action='CREATE', entity='Doctor', entity_id=doctor.id, timestamp=datetime.utcnow())
+            session_db.add(log)
+            session_db.commit()
+            flash('Médico cadastrado com sucesso!', 'success')
+        return redirect(url_for('doctors'))
     doctors = session_db.query(Doctor).all()
-    specializations = session_db.query(Specialization).all()
-    return render_template(
-        "doctor_form.html", doctors=doctors, specializations=specializations
-    )
+    specializations = session_db.query(app.models.specialization.Specialization).all()
+    session_db.close()
+    return render_template('doctor_form.html', doctors=doctors, specializations=specializations)
+
+
+@app.route('/doctors/delete/<int:doctor_id>', methods=['POST'])
+@admin_required
+@login_required
+def delete_doctor(doctor_id):
+    session_db = SessionLocal()
+    doctor = session_db.query(Doctor).get(doctor_id)
+    if doctor:
+        session_db.delete(doctor)
+        session_db.commit()
+        # Log da ação
+        log = Log(user_id=session['user_id'], action='DELETE', entity='Doctor', entity_id=doctor_id, timestamp=datetime.utcnow())
+        session_db.add(log)
+        session_db.commit()
+        flash('Médico removido com sucesso!', 'success')
+    else:
+        flash('Médico não encontrado.', 'danger')
+    session_db.close()
+    return redirect(url_for('doctors'))
+
+
+@app.route('/doctors/edit/<int:doctor_id>', methods=['GET', 'POST'])
+@admin_required
+@login_required
+def edit_doctor(doctor_id):
+    session_db = SessionLocal()
+    doctor = session_db.query(Doctor).get(doctor_id)
+    specializations = session_db.query(app.models.specialization.Specialization).all()
+    if not doctor:
+        flash('Médico não encontrado.', 'danger')
+        session_db.close()
+        return redirect(url_for('doctors'))
+    if request.method == 'POST':
+        name = request.form['name'].strip().upper()
+        specialization_id = request.form['specialization_id']
+        # Verifica nome único (exceto o próprio)
+        if session_db.query(Doctor).filter(Doctor.name == name, Doctor.id != doctor_id).first():
+            flash('Já existe um médico com esse nome.', 'danger')
+        else:
+            doctor.name = name
+            doctor.specialization_id = specialization_id
+            session_db.commit()
+            # Log da ação
+            log = Log(user_id=session['user_id'], action='UPDATE', entity='Doctor', entity_id=doctor.id, timestamp=datetime.utcnow())
+            session_db.add(log)
+            session_db.commit()
+            flash('Médico atualizado com sucesso!', 'success')
+            session_db.close()
+            return redirect(url_for('doctors'))
+    session_db.close()
+    return render_template('doctor_form.html', edit_doctor=doctor, specializations=specializations)
 
 
 @app.route('/specializations', methods=['GET', 'POST'])
