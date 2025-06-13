@@ -1,6 +1,5 @@
+from app.models.base import Base
 from sqlalchemy import Column, Integer, String
-
-from .database import Base
 
 
 # Modelo de especializações médicas

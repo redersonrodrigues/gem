@@ -1,6 +1,6 @@
+from app.models.base import Base
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
-from .database import Base
 
 # Modelo de médicos
 # Aqui ficará a definição da classe Doctor usando SQLAlchemy
