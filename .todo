@@ -1,0 +1,63 @@
+# TODO - Checklist de Tarefas do Projeto GEM
+
+## 1. Ambiente e Estrutura Inicial
+- [x] Criar ambiente virtual Python (.venv) e ativar
+- [x] Gerar e revisar o arquivo requirements.txt com todas as dependências
+- [x] Configurar o arquivo .gitignore para ignorar arquivos/pastas sensíveis e desnecessários
+- [x] Estruturar o projeto em pastas: app/, static/, templates/, tests/, docs/
+
+## 2. Banco de Dados e Modelagem
+- [x] Criar database.py com configuração do SQLite e SQLAlchemy
+- [x] Implementar modelos: Hospital, Medico, Especializacao, Escala
+- [x] Definir e normalizar relacionamentos (incluindo muitos-para-muitos para médicos e especializações)
+- [x] Garantir nomes únicos para médicos e especializações em maiúsculas
+- [x] Popular especializações iniciais via script
+- [ ] Implementar e validar CRUD completo para Médicos (com testes)
+- [ ] Implementar e validar CRUD completo para Especializações (com testes)
+- [ ] Implementar e validar CRUD completo para Escalas (plantonistas, sobreaviso ortopedia, sobreaviso demais especialidades) (com testes)
+- [ ] Implementar e validar CRUD completo para Relatórios (com testes)
+- [ ] Implementar e validar CRUD completo para Consultas (com testes)
+- [ ] Implementar e validar CRUD completo para Usuários (admin e comum, com autenticação, permissões e testes)
+- [ ] Otimizar consultas SQL para eficiência no SQLite (índices, chaves estrangeiras, queries otimizadas, views SQL se necessário)
+- [ ] Implementar rollback e testes de rollback para operações críticas
+- [ ] Implementar log de alterações (data, usuário, ação) em todas as entidades (com testes)
+- [ ] Implementar validação de dados e rastreabilidade de alterações em todas as entidades
+- [ ] Garantir operações atômicas e tratamento de exceções em todas as operações CRUD
+
+## 3. Backend e Lógica de Negócio
+- [ ] Implementar regras de negócio para escalas (turnos, regimes, validações, restrições de datas para usuários comuns)
+- [ ] Implementar regras de negócio para relatórios e consultas
+- [ ] Implementar controle de permissões: admin (acesso total), usuário comum (restrito a escalas até o dia 15 do mês seguinte)
+- [ ] Implementar autenticação e sessão de usuários
+
+## 4. Interface Gráfica e Web
+- [x] Criar templates base e componentes reutilizáveis (navbar, footer)
+- [x] Implementar telas: inicial, cadastro de médicos, gestão de escalas, relatórios (básico)
+- [ ] Implementar tela de login e controle de sessão
+- [ ] Implementar modo claro/escuro
+- [ ] Garantir layout responsivo e centralizado (Bootstrap)
+- [ ] Padronizar fontes e tamanhos (Times New Roman 12, labels, caixas de texto, combobox)
+- [ ] Integrar interface gráfica (PyQt5) com backend Flask
+
+## 5. Funcionalidades Específicas de Escalas
+- [ ] Implementar lógica de escalas de plantonistas (turnos de 12h, dois médicos por turno, registro único por dia)
+- [ ] Implementar lógica de escalas de sobreaviso ortopedia (quinzenal)
+- [ ] Implementar lógica de escalas de sobreaviso demais especialidades (semanal, 5 períodos de 7 dias)
+- [ ] Otimizar armazenamento das escalas conforme requisitos
+
+## 6. Testes e Validação
+- [x] Implementar testes unitários para modelos e scripts de popularização
+- [ ] Implementar testes para rotas e operações CRUD de todas as entidades
+- [ ] Implementar testes para autenticação, permissões e logs
+- [ ] Implementar testes de rollback e exceções
+- [ ] Implementar testes de integração (Pytest)
+- [ ] Realizar testes no ambiente do hospital
+
+## 7. Documentação
+- [ ] Documentar código e relacionamentos entre classes (docstrings)
+- [ ] Gerar documentação técnica com Sphinx
+- [ ] Documentar fluxos de uso e requisitos
+
+## 8. Versionamento e Deploy
+- [x] Versionar cada etapa no GitHub (commits claros e frequentes)
+- [ ] Validar versão final no Hospital Estadual Porto Primavera

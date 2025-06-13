@@ -1,63 +1,64 @@
-# Python Desktop Application
+# GEM - Gestão de Escalas Médicas
 
-This project is a desktop application built using Python, SQLite, and a GUI framework (such as PyQt or Tkinter). The application is designed to run offline and provides a user-friendly interface for interacting with a local SQLite database.
+## Descrição
+O GEM é um sistema para gestão de escalas médicas, cadastro de profissionais, especializações e relatórios, desenvolvido em Python com Flask, SQLite, SQLAlchemy, Bootstrap e PyQt5. O sistema é multiplataforma, responsivo e pode ser executado localmente, sem necessidade de internet.
 
-## Project Structure
+## Funcionalidades
+- Cadastro e gerenciamento de médicos, especializações e escalas
+- Relacionamento muitos-para-muitos entre médicos e especializações
+- Escalas de plantonistas (turnos de 12h, dois médicos por turno, registro único por dia)
+- Escalas de sobreaviso ortopedia (quinzenal) e demais especialidades (semanal)
+- Layout responsivo, modo claro/escuro, padronização visual
+- Testes automatizados com pytest
+- Documentação técnica com Sphinx
 
-```
-python-desktop-app
-├── app
-│   ├── __init__.py
-│   ├── config.py
-│   ├── controllers
-│   │   └── __init__.py
-│   ├── models
-│   │   └── __init__.py
-│   ├── views
-│   │   └── __init__.py
-│   ├── static
-│   │   └── style.css
-│   └── templates
-│       └── main_window.html
-├── main.py
-├── requirements.txt
-└── README.md
-```
-
-## Setup Instructions
-
-1. **Clone the repository**:
+## Instalação e Execução
+1. Clone o repositório:
+   ```powershell
+   git clone <url-do-repositorio>
+   cd gem
    ```
-   git clone <repository-url>
-   cd python-desktop-app
+2. Crie e ative o ambiente virtual:
+   ```powershell
+   python -m venv .venv
+   .\.venv\Scripts\Activate
    ```
-
-2. **Create a virtual environment** (optional but recommended):
-   ```
-   python -m venv venv
-   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-   ```
-
-3. **Install the required dependencies**:
-   ```
+3. Instale as dependências:
+   ```powershell
    pip install -r requirements.txt
    ```
-
-4. **Run the application**:
+4. Popule as especializações iniciais:
+   ```powershell
+   python -m app.models.populate_specializations
    ```
+5. Execute a aplicação:
+   ```powershell
    python main.py
    ```
+6. Execute os testes:
+   ```powershell
+   python -m pytest
+   ```
 
-## Usage Guidelines
+## Estrutura do Projeto
+- `app/` - Código principal (modelos, controladores, views)
+- `static/` - Arquivos estáticos (css, js, imagens, bootstrap, fontawesome)
+- `templates/` - Templates Jinja2
+- `tests/` - Testes automatizados
+- `docs/` - Documentação técnica
+- `main.py` - Inicialização do Flask
+- `requirements.txt` - Dependências
+- `.todo` - Checklist de tarefas do projeto
 
-- The application provides a graphical user interface for managing data stored in a local SQLite database.
-- Users can perform various operations such as adding, updating, and deleting records through the interface.
-- Ensure that the application has the necessary permissions to access the SQLite database file.
+## Melhorias, Funcionamentos e Ajustes
+- [ ] A cada nova funcionalidade ou ajuste, documentar aqui o que foi feito, por que e como utilizar.
+- [ ] Manter o checklist `.todo` atualizado, marcando tarefas concluídas e revisando sempre que necessário.
 
-## Contributing
+## Contribuição
+- Siga as boas práticas de versionamento (commits claros e frequentes)
+- Atualize o checklist `.todo` e este README.md a cada etapa
+- Documente código e funcionalidades
 
-Contributions are welcome! Please feel free to submit a pull request or open an issue for any suggestions or improvements.
+---
 
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
+*Este arquivo será atualizado continuamente conforme o desenvolvimento do projeto.*
