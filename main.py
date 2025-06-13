@@ -7,6 +7,7 @@ from app.models.user import User
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
 import datetime
+from datetime import datetime
 
 app = Flask(__name__, template_folder="app/views", static_folder="static")
 app.secret_key = 'sua-chave-secreta'
@@ -54,8 +55,28 @@ def specializations():
 @login_required
 def schedules():
     # Permitir cadastro/alteração apenas até o dia 15 do mês seguinte para usuários comuns
-    # Implementação CRUD para escalas
-    pass
+    if not session.get('is_admin') and request.method == 'POST':
+        today = datetime.today()
+        # Limite: dia 15 do mês seguinte
+        limite = datetime(today.year, today.month, 15)
+        if today.day > 15:
+            # Se já passou do dia 15, só pode cadastrar para o mês seguinte
+            if 'data_escala' in request.form:
+                data_escala = datetime.strptime(request.form['data_escala'], '%Y-%m-%d')
+                proximo_mes = today.month + 1 if today.month < 12 else 1
+                ano = today.year if today.month < 12 else today.year + 1
+                limite = datetime(ano, proximo_mes, 15)
+                if data_escala > limite:
+                    flash('Usuário comum só pode cadastrar/alterar escalas até o dia 15 do mês seguinte.', 'danger')
+                    return redirect(url_for('schedules'))
+        else:
+            if 'data_escala' in request.form:
+                data_escala = datetime.strptime(request.form['data_escala'], '%Y-%m-%d')
+                if data_escala > limite:
+                    flash('Usuário comum só pode cadastrar/alterar escalas até o dia 15 do mês seguinte.', 'danger')
+                    return redirect(url_for('schedules'))
+    # ...restante do CRUD de escalas...
+    return render_template('schedule_view.html')
 
 
 @app.route('/login', methods=['GET', 'POST'])
