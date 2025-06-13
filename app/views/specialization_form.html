@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Cadastrar Especialização</h2>
+    <form method="POST" class="mb-4">
+        <div class="mb-3">
+            <label for="name" class="form-label">Nome da Especialização</label>
+            <input type="text" class="form-control" id="name" name="name" required value="{{ edit_specialization.name if edit_specialization else '' }}">
+        </div>
+        <button type="submit" class="btn btn-primary">
+            {% if edit_specialization %}Atualizar{% else %}Cadastrar{% endif %}
+        </button>
+    </form>
+    <h3>Especializações Cadastradas</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for spec in specializations %}
+            <tr>
+                <td>{{ spec.name }}</td>
+                <td>
+                    <form method="POST" action="{{ url_for('delete_specialization', spec_id=spec.id) }}" style="display:inline-block;">
+                        <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+                    </form>
+                    <a href="{{ url_for('edit_specialization', spec_id=spec.id) }}" class="btn btn-warning btn-sm">Editar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

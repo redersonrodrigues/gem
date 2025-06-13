@@ -108,8 +108,74 @@ def edit_doctor(doctor_id):
 @admin_required
 @login_required
 def specializations():
-    # Implementação CRUD para especializações
-    pass
+    session_db = SessionLocal()
+    if request.method == 'POST':
+        name = request.form['name'].strip().upper()
+        # Verifica nome único
+        if session_db.query(Specialization).filter_by(name=name).first():
+            flash('Já existe uma especialização com esse nome.', 'danger')
+        else:
+            specialization = Specialization(name=name)
+            session_db.add(specialization)
+            session_db.commit()
+            # Log da ação
+            log = Log(user_id=session['user_id'], action='CREATE', entity='Specialization', entity_id=specialization.id, timestamp=datetime.utcnow())
+            session_db.add(log)
+            session_db.commit()
+            flash('Especialização cadastrada com sucesso!', 'success')
+        return redirect(url_for('specializations'))
+    specializations = session_db.query(Specialization).all()
+    session_db.close()
+    return render_template('specialization_form.html', specializations=specializations)
+
+
+@app.route('/specializations/delete/<int:spec_id>', methods=['POST'])
+@admin_required
+@login_required
+def delete_specialization(spec_id):
+    session_db = SessionLocal()
+    spec = session_db.query(Specialization).get(spec_id)
+    if spec:
+        session_db.delete(spec)
+        session_db.commit()
+        # Log da ação
+        log = Log(user_id=session['user_id'], action='DELETE', entity='Specialization', entity_id=spec_id, timestamp=datetime.utcnow())
+        session_db.add(log)
+        session_db.commit()
+        flash('Especialização removida com sucesso!', 'success')
+    else:
+        flash('Especialização não encontrada.', 'danger')
+    session_db.close()
+    return redirect(url_for('specializations'))
+
+
+@app.route('/specializations/edit/<int:spec_id>', methods=['GET', 'POST'])
+@admin_required
+@login_required
+def edit_specialization(spec_id):
+    session_db = SessionLocal()
+    spec = session_db.query(Specialization).get(spec_id)
+    if not spec:
+        flash('Especialização não encontrada.', 'danger')
+        session_db.close()
+        return redirect(url_for('specializations'))
+    if request.method == 'POST':
+        name = request.form['name'].strip().upper()
+        # Verifica nome único (exceto o próprio)
+        if session_db.query(Specialization).filter(Specialization.name == name, Specialization.id != spec_id).first():
+            flash('Já existe uma especialização com esse nome.', 'danger')
+        else:
+            spec.name = name
+            session_db.commit()
+            # Log da ação
+            log = Log(user_id=session['user_id'], action='UPDATE', entity='Specialization', entity_id=spec.id, timestamp=datetime.utcnow())
+            session_db.add(log)
+            session_db.commit()
+            flash('Especialização atualizada com sucesso!', 'success')
+            session_db.close()
+            return redirect(url_for('specializations'))
+    session_db.close()
+    return render_template('specialization_form.html', edit_specialization=spec)
 
 
 @app.route('/schedules', methods=['GET', 'POST'])
