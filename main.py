@@ -24,6 +24,8 @@ def home():
 
 
 @app.route("/doctors", methods=["GET", "POST"])
+@admin_required
+@login_required
 def doctors():
     session_db = SessionLocal()
     if request.method == "POST":
@@ -38,6 +40,22 @@ def doctors():
     return render_template(
         "doctor_form.html", doctors=doctors, specializations=specializations
     )
+
+
+@app.route('/specializations', methods=['GET', 'POST'])
+@admin_required
+@login_required
+def specializations():
+    # Implementação CRUD para especializações
+    pass
+
+
+@app.route('/schedules', methods=['GET', 'POST'])
+@login_required
+def schedules():
+    # Permitir cadastro/alteração apenas até o dia 15 do mês seguinte para usuários comuns
+    # Implementação CRUD para escalas
+    pass
 
 
 @app.route('/login', methods=['GET', 'POST'])
