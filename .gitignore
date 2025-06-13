@@ -1,0 +1,13 @@
+# Arquivos e pastas ignorados pelo Git
+__pycache__/
+*.pyc
+.env
+instance/
+db.sqlite3
+*.db
+.vscode/
+.idea/
+.DS_Store
+*.log
+/static/bootstrap/
+/static/fontawesome/

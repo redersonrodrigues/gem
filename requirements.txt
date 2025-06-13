@@ -1,0 +1,6 @@
+Flask
+SQLAlchemy
+Jinja2
+PyQt5
+pytest
+Sphinx
