@@ -1,1 +1,39 @@
-<!-- Cadastro de médicos -->
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Cadastrar Médico</h2>
+    <form method="POST" class="mb-4">
+        <div class="mb-3">
+            <label for="name" class="form-label">Nome do Médico</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="mb-3">
+            <label for="specialization_id" class="form-label">Especialização</label>
+            <select class="form-select" id="specialization_id" name="specialization_id" required>
+                <option value="">Selecione</option>
+                {% for specialization in specializations %}
+                <option value="{{ specialization.id }}">{{ specialization.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary"><i class="fas fa-user-md"></i> Cadastrar</button>
+    </form>
+    <h3>Médicos Cadastrados</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Especialização</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for doctor in doctors %}
+            <tr>
+                <td>{{ doctor.name }}</td>
+                <td>{{ doctor.specialization.name if doctor.specialization else '' }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
