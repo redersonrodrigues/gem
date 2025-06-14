@@ -1,5 +1,7 @@
 from app.models.base import Base
 from sqlalchemy import Column, Integer, Date, String, ForeignKey
+from sqlalchemy.orm import relationship
+
 
 class Sobreaviso(Base):
     __tablename__ = "sobreavisos"
@@ -7,3 +9,5 @@ class Sobreaviso(Base):
     data = Column(Date, nullable=False)
     especialidade = Column(String, nullable=False)
     medico_id = Column(Integer, ForeignKey("doctors.id"), nullable=False)
+
+    medico = relationship("Doctor", foreign_keys=[medico_id])

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Escalas de Sobreaviso</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Especialidade</th>
+                <th>Médico</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for escala in sobreavisos %}
+            <tr>
+                <td>{{ escala.data }}</td>
+                <td>{{ escala.especialidade }}</td>
+                <td>
+                    {{ escala.medico.name if escala.medico else escala.medico_id }}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

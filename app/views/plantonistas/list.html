@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Escalas Plantonistas</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Diurno Médico 1</th>
+                <th>Diurno Médico 2</th>
+                <th>Noturno Médico 1</th>
+                <th>Noturno Médico 2</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for escala in plantonistas %}
+            <tr>
+                <td>{{ escala.data }}</td>
+                <td>
+                  {{ escala.diurno_medico1.name if escala.diurno_medico1 else escala.diurno_medico1_id }}
+                </td>
+                <td>
+                  {{ escala.diurno_medico2.name if escala.diurno_medico2 else escala.diurno_medico2_id }}
+                </td>
+                <td>
+                  {{ escala.noturno_medico1.name if escala.noturno_medico1 else escala.noturno_medico1_id }}
+                </td>
+                <td>
+                  {{ escala.noturno_medico2.name if escala.noturno_medico2 else escala.noturno_medico2_id }}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
