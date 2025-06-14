@@ -1,58 +1,11 @@
 import random
 import datetime
-from abc import ABC, abstractmethod
 from sqlalchemy import text
 from app.models.database import SessionLocal, init_db
 from app.models.doctor import Doctor
 from app.models.specialization import Specialization
-from app.models.schedule import Schedule
-from sqlalchemy import Column, Date
-
-
-# Classe abstrata para Escala (Template Method)
-class Escala(ABC):
-    def __init__(self, session, data):
-        self.session = session
-        self.data = data
-
-    @abstractmethod
-    def criar(self, *args, **kwargs):
-        pass
-
-
-class Plantonista(Escala):
-    def criar(self, doctors):
-        plantonistas = random.sample(doctors, 4)
-        schedule = Schedule(
-            data=self.data,
-            diurno_medico1_id=plantonistas[0].id,
-            diurno_medico2_id=plantonistas[1].id,
-            noturno_medico1_id=plantonistas[2].id,
-            noturno_medico2_id=plantonistas[3].id,
-            tipo="PLANTONISTA",
-        )
-        self.session.add(schedule)
-
-
-class SobreavisoOrtopedia(Escala):
-    def criar(self, doctors):
-        ortopedia = random.choice(doctors)
-        schedule = Schedule(
-            data=self.data, ortopedia_medico_id=ortopedia.id, tipo="SOBREAVISO_ORTOPEDIA"
-        )
-        self.session.add(schedule)
-
-
-class SobreavisoOutras(Escala):
-    def criar(self, doctors, especialidade):
-        sobreaviso = random.choice(doctors)
-        schedule = Schedule(
-            data=self.data,
-            sobreaviso_especialidade=especialidade,
-            sobreaviso_medico_id=sobreaviso.id,
-            tipo="SOBREAVISO_OUTRAS",
-        )
-        self.session.add(schedule)
+from app.models.plantonista import Plantonista
+from app.models.sobreaviso import Sobreaviso
 
 
 def random_name(prefix, idx):
@@ -81,29 +34,30 @@ def populate_plantonistas(session, doctors, n=30):
     start_date = datetime.date.today()
     for i in range(n):
         data = start_date + datetime.timedelta(days=i)
-        escala = Plantonista(session, data)
-        escala.criar(doctors)
+        plantonistas = random.sample(doctors, 4)
+        escala = Plantonista(
+            data=data,
+            diurno_medico1_id=plantonistas[0].id,
+            diurno_medico2_id=plantonistas[1].id,
+            noturno_medico1_id=plantonistas[2].id,
+            noturno_medico2_id=plantonistas[3].id,
+        )
+        session.add(escala)
     session.commit()
 
 
-def populate_sobreaviso_ortopedia(session, doctors, n=2):
-    start_date = datetime.date.today()
-    for i in range(n):
-        data = start_date + datetime.timedelta(days=i * 15)
-        escala = SobreavisoOrtopedia(session, data)
-        escala.criar(doctors)
-    session.commit()
-
-
-def populate_sobreaviso_outras(session, doctors, specializations, n_weeks=4):
+def populate_sobreavisos(session, doctors, specializations, n_weeks=4):
     start_date = datetime.date.today()
     for spec in specializations:
-        if spec.name == "ORTOPEDISTA":
-            continue
         for i in range(n_weeks):
             data = start_date + datetime.timedelta(days=i * 7)
-            escala = SobreavisoOutras(session, data)
-            escala.criar(doctors, especialidade=spec.name)
+            medico = random.choice(doctors)
+            sobreaviso = Sobreaviso(
+                data=data,
+                especialidade=spec.name,
+                medico_id=medico.id,
+            )
+            session.add(sobreaviso)
     session.commit()
 
 
@@ -111,7 +65,8 @@ def main():
     init_db()
     session = SessionLocal()
     session.execute(text("DELETE FROM doctor_specialization"))
-    session.query(Schedule).delete()
+    session.query(Plantonista).delete()
+    session.query(Sobreaviso).delete()
     session.query(Doctor).delete()
     session.commit()
     if session.query(Specialization).count() == 0:
@@ -120,11 +75,8 @@ def main():
     doctors = populate_doctors(session, 100)
     specializations = session.query(Specialization).all()
     populate_plantonistas(session, doctors, n=30)
-    populate_sobreaviso_ortopedia(session, doctors, n=2)
-    populate_sobreaviso_outras(session, doctors, specializations, n_weeks=4)
-    print(
-        "Médicos e escalas (plantonistas, sobreaviso ortopedia, sobreaviso outras) populados com sucesso!"
-    )
+    populate_sobreavisos(session, doctors, specializations, n_weeks=4)
+    print("Médicos, plantonistas e sobreavisos populados com sucesso!")
     session.close()
 
 

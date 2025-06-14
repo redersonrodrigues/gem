@@ -9,6 +9,11 @@ from datetime import datetime
 def test_crud_specialization():
     init_db()
     session = SessionLocal()
+    # Remove usuário e especialização se já existirem
+    session.query(Specialization).filter_by(name="ESPECIAL TESTE").delete()
+    session.query(Specialization).filter_by(name="ESPECIAL TESTE EDITADO").delete()
+    session.query(User).filter_by(username="admin_spec").delete()
+    session.commit()
     # Cria usuário admin
     user = User(username="admin_spec", password_hash="hash", is_admin=True)
     session.add(user)
@@ -22,7 +27,7 @@ def test_crud_specialization():
         action="CREATE",
         entity="Specialization",
         entity_id=spec.id,
-        timestamp=datetime.datetime.utcnow(),
+        timestamp=datetime.utcnow(),
     )
     session.add(log)
     session.commit()
@@ -36,7 +41,7 @@ def test_crud_specialization():
         action="UPDATE",
         entity="Specialization",
         entity_id=found.id,
-        timestamp=datetime.datetime.utcnow(),
+        timestamp=datetime.utcnow(),
     )
     session.add(log)
     session.commit()
@@ -52,7 +57,7 @@ def test_crud_specialization():
         action="DELETE",
         entity="Specialization",
         entity_id=found2.id,
-        timestamp=datetime.datetime.utcnow(),
+        timestamp=datetime.utcnow(),
     )
     session.add(log)
     session.commit()

@@ -10,6 +10,12 @@ from datetime import datetime
 def test_crud_doctor():
     init_db()
     session = SessionLocal()
+    # Remove especialização, usuário e médico se já existirem
+    session.query(Doctor).filter_by(name="MEDICO TESTE").delete()
+    session.query(Doctor).filter_by(name="MEDICO TESTE EDITADO").delete()
+    session.query(Specialization).filter_by(name="TESTE").delete()
+    session.query(User).filter_by(username="admin_doctor").delete()
+    session.commit()
     # Cria especialização
     spec = Specialization(name="TESTE")
     session.add(spec)
@@ -19,7 +25,8 @@ def test_crud_doctor():
     session.add(user)
     session.commit()
     # CREATE
-    doctor = Doctor(name="MEDICO TESTE", specialization_id=spec.id)
+    doctor = Doctor(name="MEDICO TESTE", fantasy_name="FANTASIA TESTE")
+    doctor.specializations.append(spec)
     session.add(doctor)
     session.commit()
     log = Log(
@@ -27,7 +34,7 @@ def test_crud_doctor():
         action="CREATE",
         entity="Doctor",
         entity_id=doctor.id,
-        timestamp=datetime.datetime.utcnow(),
+        timestamp=datetime.utcnow(),
     )
     session.add(log)
     session.commit()
@@ -41,7 +48,7 @@ def test_crud_doctor():
         action="UPDATE",
         entity="Doctor",
         entity_id=found.id,
-        timestamp=datetime.datetime.utcnow(),
+        timestamp=datetime.utcnow(),
     )
     session.add(log)
     session.commit()
@@ -55,7 +62,7 @@ def test_crud_doctor():
         action="DELETE",
         entity="Doctor",
         entity_id=found2.id,
-        timestamp=datetime.datetime.utcnow(),
+        timestamp=datetime.utcnow(),
     )
     session.add(log)
     session.commit()

@@ -8,6 +8,9 @@ O GEM é um sistema para gestão de escalas médicas, cadastro de profissionais,
 - Relacionamento muitos-para-muitos entre médicos e especializações
 - Escalas de plantonistas (turnos de 12h, dois médicos por turno, registro único por dia)
 - Escalas de sobreaviso ortopedia (quinzenal) e demais especialidades (semanal)
+- Refatoração das escalas usando Template Method (classe abstrata Escala e concretas Plantonista/Sobreaviso)
+- Permite múltiplas escalas por dia (ajuste no modelo Schedule)
+- Popularização em massa de médicos e escalas para testes de performance
 - Layout responsivo, modo claro/escuro, padronização visual
 - Testes automatizados com pytest
 - Documentação técnica com Sphinx
