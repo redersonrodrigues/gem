@@ -5,16 +5,23 @@
     <form method="POST" class="mb-4">
         <div class="mb-3">
             <label for="name" class="form-label">Nome do Médico</label>
-            <input type="text" class="form-control" id="name" name="name" required>
+            <input type="text" class="form-control text-uppercase" id="name" name="name" required
+                style="text-transform:uppercase;">
         </div>
         <div class="mb-3">
-            <label for="specialization_id" class="form-label">Especialização</label>
-            <select class="form-select" id="specialization_id" name="specialization_id" required>
-                <option value="">Selecione</option>
+            <label for="fantasy_name" class="form-label">Nome Fantasia (PJ)</label>
+            <input type="text" class="form-control text-uppercase" id="fantasy_name" name="fantasy_name" required
+                style="text-transform:uppercase;">
+        </div>
+        <div class="mb-3">
+            <label for="specializations" class="form-label">Especializações</label>
+            <select class="form-select text-uppercase" id="specializations" name="specializations" multiple required
+                style="text-transform:uppercase;">
                 {% for specialization in specializations %}
                 <option value="{{ specialization.id }}">{{ specialization.name }}</option>
                 {% endfor %}
             </select>
+            <small class="form-text text-muted">Segure Ctrl para selecionar múltiplas especializações.</small>
         </div>
         <button type="submit" class="btn btn-primary"><i class="fas fa-user-md"></i> Cadastrar</button>
     </form>
@@ -23,14 +30,17 @@
         <thead>
             <tr>
                 <th>Nome</th>
-                <th>Especialização</th>
+                <th>Nome Fantasia</th>
+                <th>Especializações</th>
             </tr>
         </thead>
         <tbody>
             {% for doctor in doctors %}
             <tr>
                 <td>{{ doctor.name }}</td>
-                <td>{{ doctor.specialization.name if doctor.specialization else '' }}</td>
+                <td>{{ doctor.fantasy_name }}</td>
+                <td>{% for spec in doctor.specializations %}{{ spec.name }}{% if not loop.last %}, {% endif %}{% endfor
+                    %}</td>
             </tr>
             {% endfor %}
         </tbody>

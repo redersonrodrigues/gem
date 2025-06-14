@@ -2,6 +2,7 @@ import pytest
 from app.models.database import init_db, SessionLocal
 from app.models.user import User
 
+
 def test_create_user():
     init_db()
     session = SessionLocal()

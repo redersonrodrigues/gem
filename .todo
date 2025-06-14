@@ -12,9 +12,9 @@
 - [x] Definir e normalizar relacionamentos (incluindo muitos-para-muitos para médicos e especializações)
 - [x] Garantir nomes únicos para médicos e especializações em maiúsculas
 - [x] Popular especializações iniciais via script
-- [ ] Implementar e validar CRUD completo para Médicos (com testes)
-- [ ] Implementar e validar CRUD completo para Especializações (com testes)
-- [ ] Implementar e validar CRUD completo para Escalas (plantonistas, sobreaviso ortopedia, sobreaviso demais especialidades) (com testes)
+- [x] Implementar e validar CRUD completo para Médicos (com testes)
+- [x] Implementar e validar CRUD completo para Especializações (com testes)
+- [x] Implementar e validar CRUD completo para Escalas (plantonistas, sobreaviso ortopedia, sobreaviso demais especialidades) (com testes)
 - [ ] Implementar e validar CRUD completo para Relatórios (com testes)
 - [ ] Implementar e validar CRUD completo para Consultas (com testes)
 - [ ] Implementar e validar CRUD completo para Usuários (admin e comum, com autenticação, permissões e testes)

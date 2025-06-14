@@ -9,4 +9,5 @@ SessionLocal = sessionmaker(bind=engine)
 
 def init_db():
     from app.models import doctor, hospital, specialization, schedule, user, log
+
     Base.metadata.create_all(bind=engine)

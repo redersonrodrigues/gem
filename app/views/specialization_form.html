@@ -5,7 +5,8 @@
     <form method="POST" class="mb-4">
         <div class="mb-3">
             <label for="name" class="form-label">Nome da Especialização</label>
-            <input type="text" class="form-control" id="name" name="name" required value="{{ edit_specialization.name if edit_specialization else '' }}">
+            <input type="text" class="form-control text-uppercase" id="name" name="name" required
+                value="{{ edit_specialization.name if edit_specialization else '' }}" style="text-transform:uppercase;">
         </div>
         <button type="submit" class="btn btn-primary">
             {% if edit_specialization %}Atualizar{% else %}Cadastrar{% endif %}
@@ -24,10 +25,12 @@
             <tr>
                 <td>{{ spec.name }}</td>
                 <td>
-                    <form method="POST" action="{{ url_for('delete_specialization', spec_id=spec.id) }}" style="display:inline-block;">
+                    <form method="POST" action="{{ url_for('delete_specialization', spec_id=spec.id) }}"
+                        style="display:inline-block;">
                         <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
                     </form>
-                    <a href="{{ url_for('edit_specialization', spec_id=spec.id) }}" class="btn btn-warning btn-sm">Editar</a>
+                    <a href="{{ url_for('edit_specialization', spec_id=spec.id) }}"
+                        class="btn btn-warning btn-sm">Editar</a>
                 </td>
             </tr>
             {% endfor %}

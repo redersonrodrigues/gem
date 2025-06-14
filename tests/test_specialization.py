@@ -5,6 +5,7 @@ from app.models.user import User
 from app.models.log import Log
 from datetime import datetime
 
+
 def test_crud_specialization():
     init_db()
     session = SessionLocal()
@@ -16,7 +17,13 @@ def test_crud_specialization():
     spec = Specialization(name="ESPECIAL TESTE")
     session.add(spec)
     session.commit()
-    log = Log(user_id=user.id, action='CREATE', entity='Specialization', entity_id=spec.id, timestamp=datetime.datetime.utcnow())
+    log = Log(
+        user_id=user.id,
+        action="CREATE",
+        entity="Specialization",
+        entity_id=spec.id,
+        timestamp=datetime.datetime.utcnow(),
+    )
     session.add(log)
     session.commit()
     found = session.query(Specialization).filter_by(name="ESPECIAL TESTE").first()
@@ -24,18 +31,35 @@ def test_crud_specialization():
     # UPDATE
     found.name = "ESPECIAL TESTE EDITADO"
     session.commit()
-    log = Log(user_id=user.id, action='UPDATE', entity='Specialization', entity_id=found.id, timestamp=datetime.datetime.utcnow())
+    log = Log(
+        user_id=user.id,
+        action="UPDATE",
+        entity="Specialization",
+        entity_id=found.id,
+        timestamp=datetime.datetime.utcnow(),
+    )
     session.add(log)
     session.commit()
-    found2 = session.query(Specialization).filter_by(name="ESPECIAL TESTE EDITADO").first()
+    found2 = (
+        session.query(Specialization).filter_by(name="ESPECIAL TESTE EDITADO").first()
+    )
     assert found2 is not None
     # DELETE
     session.delete(found2)
     session.commit()
-    log = Log(user_id=user.id, action='DELETE', entity='Specialization', entity_id=found2.id, timestamp=datetime.datetime.utcnow())
+    log = Log(
+        user_id=user.id,
+        action="DELETE",
+        entity="Specialization",
+        entity_id=found2.id,
+        timestamp=datetime.datetime.utcnow(),
+    )
     session.add(log)
     session.commit()
-    assert session.query(Specialization).filter_by(name="ESPECIAL TESTE EDITADO").first() is None
+    assert (
+        session.query(Specialization).filter_by(name="ESPECIAL TESTE EDITADO").first()
+        is None
+    )
     # Limpeza
     session.delete(user)
     session.commit()
