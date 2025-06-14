@@ -8,7 +8,7 @@
 
 ## 2. Banco de Dados e Modelagem
 - [x] Criar database.py com configuração do SQLite e SQLAlchemy
-- [x] Implementar modelos: Hospital, Medico, Especializacao, Escala
+- [x] Implementar modelos: Hospital, Medico, Especializacao, Escala, Log, User
 - [x] Definir e normalizar relacionamentos (incluindo muitos-para-muitos para médicos e especializações)
 - [x] Garantir nomes únicos para médicos e especializações em maiúsculas
 - [x] Popular especializações iniciais via script
@@ -25,39 +25,62 @@
 - [ ] Garantir operações atômicas e tratamento de exceções em todas as operações CRUD
 
 ## 3. Backend e Lógica de Negócio
-- [ ] Implementar regras de negócio para escalas (turnos, regimes, validações, restrições de datas para usuários comuns)
+- [x] Implementar regras de negócio para escalas (turnos, regimes, validações, restrições de datas para usuários comuns)
 - [ ] Implementar regras de negócio para relatórios e consultas
 - [ ] Implementar controle de permissões: admin (acesso total), usuário comum (restrito a escalas até o dia 15 do mês seguinte)
-- [ ] Implementar autenticação e sessão de usuários
+- [x] Implementar autenticação e sessão de usuários
 
 ## 4. Interface Gráfica e Web
 - [x] Criar templates base e componentes reutilizáveis (navbar, footer)
 - [x] Implementar telas: inicial, cadastro de médicos, gestão de escalas, relatórios (básico)
-- [ ] Implementar tela de login e controle de sessão
+- [x] Implementar tela de login e controle de sessão
 - [ ] Implementar modo claro/escuro
 - [ ] Garantir layout responsivo e centralizado (Bootstrap)
 - [ ] Padronizar fontes e tamanhos (Times New Roman 12, labels, caixas de texto, combobox)
 - [ ] Integrar interface gráfica (PyQt5) com backend Flask
 
 ## 5. Funcionalidades Específicas de Escalas
-- [ ] Implementar lógica de escalas de plantonistas (turnos de 12h, dois médicos por turno, registro único por dia)
-- [ ] Implementar lógica de escalas de sobreaviso ortopedia (quinzenal)
-- [ ] Implementar lógica de escalas de sobreaviso demais especialidades (semanal, 5 períodos de 7 dias)
+- [x] Implementar lógica de escalas de plantonistas (turnos de 12h, dois médicos por turno, registro único por dia)
+- [x] Implementar lógica de escalas de sobreaviso ortopedia (quinzenal)
+- [x] Implementar lógica de escalas de sobreaviso demais especialidades (semanal, 5 períodos de 7 dias)
+- [x] Refatorar lógica de escalas usando Template Method (classe abstrata Escala e concretas Plantonista/Sobreaviso)
+- [x] Permitir múltiplas escalas por dia (ajuste no modelo Schedule)
+- [x] Popular 100 médicos e 100+ escalas para testes de performance e usabilidade
 - [ ] Otimizar armazenamento das escalas conforme requisitos
 
 ## 6. Testes e Validação
 - [x] Implementar testes unitários para modelos e scripts de popularização
-- [ ] Implementar testes para rotas e operações CRUD de todas as entidades
-- [ ] Implementar testes para autenticação, permissões e logs
+- [x] Implementar testes para rotas e operações CRUD de todas as entidades
+- [x] Implementar testes para autenticação, permissões e logs
 - [ ] Implementar testes de rollback e exceções
 - [ ] Implementar testes de integração (Pytest)
 - [ ] Realizar testes no ambiente do hospital
 
 ## 7. Documentação
 - [ ] Documentar código e relacionamentos entre classes (docstrings)
-- [ ] Gerar documentação técnica com Sphinx
-- [ ] Documentar fluxos de uso e requisitos
+- [x] Gerar documentação técnica com Sphinx
+- [x] Documentar fluxos de uso e requisitos
 
 ## 8. Versionamento e Deploy
 - [x] Versionar cada etapa no GitHub (commits claros e frequentes)
 - [ ] Validar versão final no Hospital Estadual Porto Primavera
+
+## 9. Dados Fictícios e Testes de Volume
+- [x] Popular 100 médicos e 100 escalas para testes de performance e usabilidade
+
+## 10. Logs, Auditoria e Segurança
+- [ ] Logar todas as alterações relevantes em entidades críticas
+- [ ] Implementar visualização de logs para auditoria
+- [ ] Proteger contra SQL Injection, XSS, CSRF
+- [ ] Garantir senhas seguras e hash no banco
+
+## 11. Usabilidade, Acessibilidade e Performance
+- [ ] Garantir navegação acessível e responsiva
+- [ ] Testar em diferentes navegadores/dispositivos
+- [ ] Otimizar queries e criar índices para grandes volumes de dados
+
+## 12. Relatórios e Exportação
+- [ ] Implementar relatórios customizáveis e exportação (PDF, CSV)
+
+## 13. Documentação de Fluxos de Uso
+- [ ] Adicionar exemplos de fluxos reais de uso do sistema

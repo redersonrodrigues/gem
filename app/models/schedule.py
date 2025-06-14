@@ -8,7 +8,7 @@ from sqlalchemy import Column, Integer, String, Date, ForeignKey, Time
 class Schedule(Base):
     __tablename__ = "schedules"
     id = Column(Integer, primary_key=True)
-    data = Column(Date, nullable=False, unique=True)
+    data = Column(Date, nullable=False)
     # Plantonistas
     diurno_medico1_id = Column(Integer, ForeignKey("doctors.id"))
     diurno_medico2_id = Column(Integer, ForeignKey("doctors.id"))
