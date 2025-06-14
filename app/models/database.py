@@ -1,9 +1,9 @@
 from app.models.base import Base
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from config import DATABASE_URI
+from app.config import Config
 
-engine = create_engine(DATABASE_URI)
+engine = create_engine(Config.DATABASE_URI)
 SessionLocal = sessionmaker(bind=engine)
 
 

@@ -23,7 +23,7 @@ def test_crud_schedule():
     escala = Schedule(data="2025-06-13", tipo="PLANTONISTA", medico1_id=doctor1.id, medico2_id=doctor2.id)
     session.add(escala)
     session.commit()
-    log = Log(user_id=user.id, action='CREATE', entity='Schedule', entity_id=escala.id, timestamp=datetime.utcnow())
+    log = Log(user_id=user.id, action='CREATE', entity='Schedule', entity_id=escala.id, timestamp=datetime.datetime.utcnow())
     session.add(log)
     session.commit()
     found = session.query(Schedule).filter_by(data="2025-06-13").first()
@@ -31,7 +31,7 @@ def test_crud_schedule():
     # UPDATE
     found.medico2_id = doctor1.id
     session.commit()
-    log = Log(user_id=user.id, action='UPDATE', entity='Schedule', entity_id=found.id, timestamp=datetime.utcnow())
+    log = Log(user_id=user.id, action='UPDATE', entity='Schedule', entity_id=found.id, timestamp=datetime.datetime.utcnow())
     session.add(log)
     session.commit()
     found2 = session.query(Schedule).filter_by(data="2025-06-13").first()
@@ -39,7 +39,7 @@ def test_crud_schedule():
     # DELETE
     session.delete(found2)
     session.commit()
-    log = Log(user_id=user.id, action='DELETE', entity='Schedule', entity_id=found2.id, timestamp=datetime.utcnow())
+    log = Log(user_id=user.id, action='DELETE', entity='Schedule', entity_id=found2.id, timestamp=datetime.datetime.utcnow())
     session.add(log)
     session.commit()
     assert session.query(Schedule).filter_by(data="2025-06-13").first() is None

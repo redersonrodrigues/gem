@@ -16,7 +16,7 @@ def test_crud_specialization():
     spec = Specialization(name="ESPECIAL TESTE")
     session.add(spec)
     session.commit()
-    log = Log(user_id=user.id, action='CREATE', entity='Specialization', entity_id=spec.id, timestamp=datetime.utcnow())
+    log = Log(user_id=user.id, action='CREATE', entity='Specialization', entity_id=spec.id, timestamp=datetime.datetime.utcnow())
     session.add(log)
     session.commit()
     found = session.query(Specialization).filter_by(name="ESPECIAL TESTE").first()
@@ -24,7 +24,7 @@ def test_crud_specialization():
     # UPDATE
     found.name = "ESPECIAL TESTE EDITADO"
     session.commit()
-    log = Log(user_id=user.id, action='UPDATE', entity='Specialization', entity_id=found.id, timestamp=datetime.utcnow())
+    log = Log(user_id=user.id, action='UPDATE', entity='Specialization', entity_id=found.id, timestamp=datetime.datetime.utcnow())
     session.add(log)
     session.commit()
     found2 = session.query(Specialization).filter_by(name="ESPECIAL TESTE EDITADO").first()
@@ -32,7 +32,7 @@ def test_crud_specialization():
     # DELETE
     session.delete(found2)
     session.commit()
-    log = Log(user_id=user.id, action='DELETE', entity='Specialization', entity_id=found2.id, timestamp=datetime.utcnow())
+    log = Log(user_id=user.id, action='DELETE', entity='Specialization', entity_id=found2.id, timestamp=datetime.datetime.utcnow())
     session.add(log)
     session.commit()
     assert session.query(Specialization).filter_by(name="ESPECIAL TESTE EDITADO").first() is None

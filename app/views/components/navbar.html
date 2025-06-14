@@ -1,1 +1,39 @@
 <!-- Barra de navegação -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">GEM</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/doctors">Médicos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/specializations">Especializações</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/schedules">Escalas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/reports">Relatórios</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ms-auto">
+        {% if session['user_id'] %}
+        <li class="nav-item">
+          <span class="navbar-text text-white me-2">{{ session['username'] }}</span>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/logout">Sair</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Entrar</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>

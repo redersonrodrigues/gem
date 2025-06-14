@@ -21,7 +21,7 @@ def test_crud_doctor():
     doctor = Doctor(name="MEDICO TESTE", specialization_id=spec.id)
     session.add(doctor)
     session.commit()
-    log = Log(user_id=user.id, action='CREATE', entity='Doctor', entity_id=doctor.id, timestamp=datetime.utcnow())
+    log = Log(user_id=user.id, action='CREATE', entity='Doctor', entity_id=doctor.id, timestamp=datetime.datetime.utcnow())
     session.add(log)
     session.commit()
     found = session.query(Doctor).filter_by(name="MEDICO TESTE").first()
@@ -29,7 +29,7 @@ def test_crud_doctor():
     # UPDATE
     found.name = "MEDICO TESTE EDITADO"
     session.commit()
-    log = Log(user_id=user.id, action='UPDATE', entity='Doctor', entity_id=found.id, timestamp=datetime.utcnow())
+    log = Log(user_id=user.id, action='UPDATE', entity='Doctor', entity_id=found.id, timestamp=datetime.datetime.utcnow())
     session.add(log)
     session.commit()
     found2 = session.query(Doctor).filter_by(name="MEDICO TESTE EDITADO").first()
@@ -37,7 +37,7 @@ def test_crud_doctor():
     # DELETE
     session.delete(found2)
     session.commit()
-    log = Log(user_id=user.id, action='DELETE', entity='Doctor', entity_id=found2.id, timestamp=datetime.utcnow())
+    log = Log(user_id=user.id, action='DELETE', entity='Doctor', entity_id=found2.id, timestamp=datetime.datetime.utcnow())
     session.add(log)
     session.commit()
     assert session.query(Doctor).filter_by(name="MEDICO TESTE EDITADO").first() is None

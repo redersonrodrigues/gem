@@ -1,21 +1,40 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
-from app.config import Config
 from app.models.database import init_db, SessionLocal
-from app.models.doctor import Doctor
-from app.models.log import Log
-from app.models.specialization import Specialization
 from app.models.user import User
+from app.models.doctor import Doctor
+from app.models.specialization import Specialization
 from app.models.schedule import Schedule
+from app.models.log import Log
+from app.config import Config
 from werkzeug.security import generate_password_hash, check_password_hash
-import os
 import datetime
-from datetime import datetime
+
+# Decorator para exigir login
+def login_required(f):
+    from functools import wraps
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if 'user_id' not in session:
+            return redirect(url_for('login'))
+        return f(*args, **kwargs)
+    return decorated_function
+
+# Decorator para exigir admin
+def admin_required(f):
+    from functools import wraps
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if not session.get('is_admin'):
+            flash('Acesso restrito ao administrador.', 'danger')
+            return redirect(url_for('home'))
+        return f(*args, **kwargs)
+    return decorated_function
 
 app = Flask(__name__, template_folder="app/views", static_folder="static")
 app.secret_key = 'sua-chave-secreta'
 
 
-@app.before_first_request
+@app.before_request
 def initialize_database():
     init_db()
 
@@ -42,13 +61,13 @@ def doctors():
             session_db.add(doctor)
             session_db.commit()
             # Log da ação
-            log = Log(user_id=session['user_id'], action='CREATE', entity='Doctor', entity_id=doctor.id, timestamp=datetime.utcnow())
+            log = Log(user_id=session['user_id'], action='CREATE', entity='Doctor', entity_id=doctor.id, timestamp=datetime.datetime.utcnow())
             session_db.add(log)
             session_db.commit()
             flash('Médico cadastrado com sucesso!', 'success')
         return redirect(url_for('doctors'))
     doctors = session_db.query(Doctor).all()
-    specializations = session_db.query(app.models.specialization.Specialization).all()
+    specializations = session_db.query(Specialization).all()
     session_db.close()
     return render_template('doctor_form.html', doctors=doctors, specializations=specializations)
 
@@ -63,7 +82,7 @@ def delete_doctor(doctor_id):
         session_db.delete(doctor)
         session_db.commit()
         # Log da ação
-        log = Log(user_id=session['user_id'], action='DELETE', entity='Doctor', entity_id=doctor_id, timestamp=datetime.utcnow())
+        log = Log(user_id=session['user_id'], action='DELETE', entity='Doctor', entity_id=doctor_id, timestamp=datetime.datetime.utcnow())
         session_db.add(log)
         session_db.commit()
         flash('Médico removido com sucesso!', 'success')
@@ -95,7 +114,7 @@ def edit_doctor(doctor_id):
             doctor.specialization_id = specialization_id
             session_db.commit()
             # Log da ação
-            log = Log(user_id=session['user_id'], action='UPDATE', entity='Doctor', entity_id=doctor.id, timestamp=datetime.utcnow())
+            log = Log(user_id=session['user_id'], action='UPDATE', entity='Doctor', entity_id=doctor.id, timestamp=datetime.datetime.utcnow())
             session_db.add(log)
             session_db.commit()
             flash('Médico atualizado com sucesso!', 'success')
@@ -120,7 +139,7 @@ def specializations():
             session_db.add(specialization)
             session_db.commit()
             # Log da ação
-            log = Log(user_id=session['user_id'], action='CREATE', entity='Specialization', entity_id=specialization.id, timestamp=datetime.utcnow())
+            log = Log(user_id=session['user_id'], action='CREATE', entity='Specialization', entity_id=specialization.id, timestamp=datetime.datetime.utcnow())
             session_db.add(log)
             session_db.commit()
             flash('Especialização cadastrada com sucesso!', 'success')
@@ -140,7 +159,7 @@ def delete_specialization(spec_id):
         session_db.delete(spec)
         session_db.commit()
         # Log da ação
-        log = Log(user_id=session['user_id'], action='DELETE', entity='Specialization', entity_id=spec_id, timestamp=datetime.utcnow())
+        log = Log(user_id=session['user_id'], action='DELETE', entity='Specialization', entity_id=spec_id, timestamp=datetime.datetime.utcnow())
         session_db.add(log)
         session_db.commit()
         flash('Especialização removida com sucesso!', 'success')
@@ -169,7 +188,7 @@ def edit_specialization(spec_id):
             spec.name = name
             session_db.commit()
             # Log da ação
-            log = Log(user_id=session['user_id'], action='UPDATE', entity='Specialization', entity_id=spec.id, timestamp=datetime.utcnow())
+            log = Log(user_id=session['user_id'], action='UPDATE', entity='Specialization', entity_id=spec.id, timestamp=datetime.datetime.utcnow())
             session_db.add(log)
             session_db.commit()
             flash('Especialização atualizada com sucesso!', 'success')
@@ -199,7 +218,7 @@ def schedules():
                 session_db.add(escala)
                 session_db.commit()
                 # Log da ação
-                log = Log(user_id=session['user_id'], action='CREATE', entity='Schedule', entity_id=escala.id, timestamp=datetime.utcnow())
+                log = Log(user_id=session['user_id'], action='CREATE', entity='Schedule', entity_id=escala.id, timestamp=datetime.datetime.utcnow())
                 session_db.add(log)
                 session_db.commit()
                 flash('Escala cadastrada com sucesso!', 'success')
@@ -237,40 +256,7 @@ def logout():
     return redirect(url_for('login'))
 
 
-# Decorator para exigir login
-def login_required(f):
-    from functools import wraps
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        if 'user_id' not in session:
-            return redirect(url_for('login'))
-        return f(*args, **kwargs)
-    return decorated_function
-
-
-# Decorator para exigir admin
-def admin_required(f):
-    from functools import wraps
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        if not session.get('is_admin'):
-            flash('Acesso restrito ao administrador.', 'danger')
-            return redirect(url_for('home'))
-        return f(*args, **kwargs)
-    return decorated_function
-
-
-def create_app():
-    app = Flask(__name__)
-    app.config.from_object(Config)
-
-    from app.controllers import main as main_controller
-
-    app.register_blueprint(main_controller)
-
-    return app
-
+# Remover a função create_app e rodar diretamente o app já configurado
 
 if __name__ == "__main__":
-    app = create_app()
     app.run(debug=True)
