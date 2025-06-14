@@ -63,6 +63,13 @@ O GEM é um sistema para gestão de escalas médicas, cadastro de profissionais,
 - Atualize o checklist `.todo` e este README.md a cada etapa
 - Documente código e funcionalidades
 
+## Otimizações e Boas Práticas Recentes
+
+- Adicionados índices nos campos de chave estrangeira e datas nos models Plantonista e Sobreaviso para acelerar consultas e filtros.
+- Ativado PRAGMA de chaves estrangeiras no SQLite para garantir integridade referencial.
+- Garantido uso de joinedload nos controllers para evitar N+1 queries e otimizar carregamento de dados.
+- Todas as alterações seguem boas práticas de design patterns e SQLAlchemy.
+
 ---
 
 *Este arquivo será atualizado continuamente conforme o desenvolvimento do projeto.*

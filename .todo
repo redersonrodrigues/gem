@@ -18,7 +18,7 @@
 - [ ] Implementar e validar CRUD completo para Relatórios (com testes)
 - [ ] Implementar e validar CRUD completo para Consultas (com testes)
 - [ ] Implementar e validar CRUD completo para Usuários (admin e comum, com autenticação, permissões e testes)
-- [ ] Otimizar consultas SQL para eficiência no SQLite (índices, chaves estrangeiras, queries otimizadas, views SQL se necessário)
+- [x] Otimizar consultas SQL para eficiência no SQLite (índices, chaves estrangeiras, queries otimizadas, views SQL se necessário)
 - [ ] Implementar rollback e testes de rollback para operações críticas
 - [ ] Implementar log de alterações (data, usuário, ação) em todas as entidades (com testes)
 - [ ] Implementar validação de dados e rastreabilidade de alterações em todas as entidades
