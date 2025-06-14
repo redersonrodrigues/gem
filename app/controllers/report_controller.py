@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash
 from app.models.report import Report
 from app.models.database import SessionLocal
 from app.models.plantonista import Plantonista
+from app.models.sobreaviso import Sobreaviso
 from sqlalchemy.orm import joinedload
 from sqlalchemy import func
 from datetime import datetime
@@ -92,3 +93,22 @@ def report_plantonistas():
     )
     session_db.close()
     return render_template("reports/plantonistas.html", plantonistas=plantonistas, mes=mes, ano=ano)
+
+
+@report_bp.route("/sobreavisos", methods=["GET"])
+def report_sobreavisos():
+    session_db = SessionLocal()
+    mes = request.args.get("mes", default=datetime.now().month, type=int)
+    ano = request.args.get("ano", default=datetime.now().year, type=int)
+    sobreavisos = (
+        session_db.query(Sobreaviso)
+        .options(joinedload(Sobreaviso.medico))
+        .filter(
+            func.extract('month', Sobreaviso.data) == mes,
+            func.extract('year', Sobreaviso.data) == ano
+        )
+        .order_by(Sobreaviso.data)
+        .all()
+    )
+    session_db.close()
+    return render_template("reports/sobreavisos.html", sobreavisos=sobreavisos, mes=mes, ano=ano)
