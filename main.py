@@ -130,7 +130,7 @@ def delete_doctor(doctor_id):
 def edit_doctor(doctor_id):
     session_db = SessionLocal()
     doctor = session_db.query(Doctor).get(doctor_id)
-    specializations = session_db.query(app.models.specialization.Specialization).all()
+    specializations = session_db.query(Specialization).all()
     if not doctor:
         flash("Médico não encontrado.", "danger")
         session_db.close()
@@ -167,12 +167,12 @@ def edit_doctor(doctor_id):
             session_db.add(log)
             session_db.commit()
             flash("Médico atualizado com sucesso!", "success")
-            session_db.close()
             return redirect(url_for("doctors"))
-    session_db.close()
-    return render_template(
+    response = render_template(
         "doctor_form.html", edit_doctor=doctor, specializations=specializations
     )
+    session_db.close()
+    return response
 
 
 @app.route("/specializations", methods=["GET", "POST"])

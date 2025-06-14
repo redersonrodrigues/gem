@@ -1,29 +1,38 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="container mt-4">
-    <h2>Cadastrar Médico</h2>
+    <h2>{% if edit_doctor %}Editar Médico{% else %}Cadastrar Médico{% endif %}</h2>
     <form method="POST" class="mb-4">
         <div class="mb-3">
             <label for="name" class="form-label">Nome do Médico</label>
             <input type="text" class="form-control text-uppercase" id="name" name="name" required
-                style="text-transform:uppercase;">
+                style="text-transform:uppercase;" value="{{ edit_doctor.name if edit_doctor else '' }}">
         </div>
         <div class="mb-3">
             <label for="fantasy_name" class="form-label">Nome Fantasia (PJ)</label>
             <input type="text" class="form-control text-uppercase" id="fantasy_name" name="fantasy_name" required
-                style="text-transform:uppercase;">
+                style="text-transform:uppercase;" value="{{ edit_doctor.fantasy_name if edit_doctor else '' }}">
         </div>
         <div class="mb-3">
             <label for="specializations" class="form-label">Especializações</label>
             <select class="form-select text-uppercase" id="specializations" name="specializations" multiple required
                 style="text-transform:uppercase;">
                 {% for specialization in specializations %}
-                <option value="{{ specialization.id }}">{{ specialization.name }}</option>
+                <option value="{{ specialization.id }}" {% if edit_doctor and specialization in
+                    edit_doctor.specializations %}selected{% endif %}>
+                    {{ specialization.name }}
+                </option>
                 {% endfor %}
             </select>
             <small class="form-text text-muted">Segure Ctrl para selecionar múltiplas especializações.</small>
         </div>
-        <button type="submit" class="btn btn-primary"><i class="fas fa-user-md"></i> Cadastrar</button>
+        <button type="submit" class="btn btn-primary">
+            <i class="fas fa-user-md"></i>
+            {% if edit_doctor %}Salvar Alterações{% else %}Cadastrar{% endif %}
+        </button>
+        {% if edit_doctor %}
+        <a href="{{ url_for('doctors') }}" class="btn btn-secondary ms-2">Cancelar</a>
+        {% endif %}
     </form>
     <h3>Médicos Cadastrados</h3>
     <table class="table table-striped">
@@ -32,6 +41,7 @@
                 <th>Nome</th>
                 <th>Nome Fantasia</th>
                 <th>Especializações</th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -39,8 +49,20 @@
             <tr>
                 <td>{{ doctor.name }}</td>
                 <td>{{ doctor.fantasy_name }}</td>
-                <td>{% for spec in doctor.specializations %}{{ spec.name }}{% if not loop.last %}, {% endif %}{% endfor
-                    %}</td>
+                <td>
+                    {% for spec in doctor.specializations %}
+                    {{ spec.name }}{% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                </td>
+                <td>
+                    <a href="{{ url_for('edit_doctor', doctor_id=doctor.id) }}"
+                        class="btn btn-sm btn-warning">Editar</a>
+                    <form action="{{ url_for('delete_doctor', doctor_id=doctor.id) }}" method="post"
+                        style="display:inline;">
+                        <button type="submit" class="btn btn-sm btn-danger"
+                            onclick="return confirm('Tem certeza que deseja excluir este médico?');">Excluir</button>
+                    </form>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
