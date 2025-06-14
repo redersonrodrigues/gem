@@ -1,0 +1,94 @@
+from flask import Blueprint, render_template, request, redirect, url_for, flash
+from app.models.report import Report
+from app.models.database import SessionLocal
+from app.models.plantonista import Plantonista
+from sqlalchemy.orm import joinedload
+from sqlalchemy import func
+from datetime import datetime
+
+report_bp = Blueprint("reports", __name__, url_prefix="/reports")
+
+
+@report_bp.route("/")
+def list_reports():
+    session_db = SessionLocal()
+    reports = session_db.query(Report).all()
+    session_db.close()
+    return render_template("reports/list.html", reports=reports)
+
+
+@report_bp.route("/novo", methods=["GET", "POST"])
+def create_report():
+    session_db = SessionLocal()
+    if request.method == "POST":
+        name = request.form["name"]
+        description = request.form["description"]
+        type = request.form["type"]
+        filters = request.form["filters"]
+        report = Report(name=name, description=description, type=type, filters=filters)
+        session_db.add(report)
+        session_db.commit()
+        flash("Relatório criado com sucesso!", "success")
+        session_db.close()
+        return redirect(url_for("reports.list_reports"))
+    session_db.close()
+    return render_template("reports/form.html", report=None)
+
+
+@report_bp.route("/editar/<int:id>", methods=["GET", "POST"])
+def edit_report(id):
+    session_db = SessionLocal()
+    report = session_db.query(Report).get(id)
+    if not report:
+        flash("Relatório não encontrado.", "danger")
+        session_db.close()
+        return redirect(url_for("reports.list_reports"))
+    if request.method == "POST":
+        report.name = request.form["name"]
+        report.description = request.form["description"]
+        report.type = request.form["type"]
+        report.filters = request.form["filters"]
+        session_db.commit()
+        flash("Relatório atualizado com sucesso!", "success")
+        session_db.close()
+        return redirect(url_for("reports.list_reports"))
+    session_db.close()
+    return render_template("reports/form.html", report=report)
+
+
+@report_bp.route("/excluir/<int:id>", methods=["POST"])
+def delete_report(id):
+    session_db = SessionLocal()
+    report = session_db.query(Report).get(id)
+    if not report:
+        flash("Relatório não encontrado.", "danger")
+    else:
+        session_db.delete(report)
+        session_db.commit()
+        flash("Relatório excluído com sucesso!", "success")
+    session_db.close()
+    return redirect(url_for("reports.list_reports"))
+
+
+@report_bp.route("/plantonistas", methods=["GET"])
+def report_plantonistas():
+    session_db = SessionLocal()
+    mes = request.args.get("mes", default=datetime.now().month, type=int)
+    ano = request.args.get("ano", default=datetime.now().year, type=int)
+    plantonistas = (
+        session_db.query(Plantonista)
+        .options(
+            joinedload(Plantonista.diurno_medico1),
+            joinedload(Plantonista.diurno_medico2),
+            joinedload(Plantonista.noturno_medico1),
+            joinedload(Plantonista.noturno_medico2),
+        )
+        .filter(
+            func.extract('month', Plantonista.data) == mes,
+            func.extract('year', Plantonista.data) == ano
+        )
+        .order_by(Plantonista.data)
+        .all()
+    )
+    session_db.close()
+    return render_template("reports/plantonistas.html", plantonistas=plantonistas, mes=mes, ano=ano)

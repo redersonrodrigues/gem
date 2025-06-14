@@ -10,6 +10,7 @@ import datetime
 from sqlalchemy.orm import joinedload
 from app.controllers.plantonista_controller import plantonista_bp
 from app.controllers.sobreaviso_controller import sobreaviso_bp
+from app.controllers.report_controller import report_bp
 
 
 # Decorator para exigir login
@@ -43,6 +44,7 @@ app = Flask(__name__, template_folder="app/views", static_folder="static")
 app.secret_key = "sua-chave-secreta"
 app.register_blueprint(plantonista_bp)
 app.register_blueprint(sobreaviso_bp)
+app.register_blueprint(report_bp)
 
 
 @app.before_request

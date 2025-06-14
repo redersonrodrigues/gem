@@ -24,8 +24,19 @@
                         <li><a class="dropdown-item" href="/sobreavisos">Sobreaviso</a></li>
                     </ul>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/reports">Relatórios</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="relatorioDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Relatórios
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="relatorioDropdown">
+                        <li><a class="dropdown-item" href="/reports/plantonistas">Escala Mensal Plantonistas</a></li>
+                        <li><a class="dropdown-item" href="/reports/sobreavisos">Escala Mensal Sobreaviso</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="/reports">Todos os Relatórios</a></li>
+                    </ul>
                 </li>
             </ul>
             <ul class="navbar-nav ms-auto">

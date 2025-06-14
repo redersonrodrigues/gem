@@ -35,7 +35,7 @@
 - [x] Implementar telas: inicial, cadastro de médicos, gestão de escalas, relatórios (básico)
 - [x] Implementar tela de login e controle de sessão
 - [ ] Implementar modo claro/escuro
-- [ ] Garantir layout responsivo e centralizado (Bootstrap)
+- [x] Garantir layout responsivo e centralizado (Bootstrap)
 - [ ] Padronizar fontes e tamanhos (Times New Roman 12, labels, caixas de texto, combobox)
 - [ ] Integrar interface gráfica (PyQt5) com backend Flask
 
@@ -75,7 +75,7 @@
 - [ ] Garantir senhas seguras e hash no banco
 
 ## 11. Usabilidade, Acessibilidade e Performance
-- [ ] Garantir navegação acessível e responsiva
+- [x] Garantir navegação acessível e responsiva
 - [ ] Testar em diferentes navegadores/dispositivos
 - [ ] Otimizar queries e criar índices para grandes volumes de dados
 
@@ -83,4 +83,4 @@
 - [ ] Implementar relatórios customizáveis e exportação (PDF, CSV)
 
 ## 13. Documentação de Fluxos de Uso
-- [ ] Adicionar exemplos de fluxos reais de uso do sistema
+- [x] Adicionar exemplos de fluxos reais de uso do sistema
