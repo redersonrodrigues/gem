@@ -3,12 +3,13 @@ from app.models.database import init_db, SessionLocal
 from app.models.user import User
 from app.models.doctor import Doctor
 from app.models.specialization import Specialization
-from app.models.schedule import Schedule
 from app.models.log import Log
 from app.config import Config
 from werkzeug.security import generate_password_hash, check_password_hash
 import datetime
 from sqlalchemy.orm import joinedload
+from app.controllers.plantonista_controller import plantonista_bp
+from app.controllers.sobreaviso_controller import sobreaviso_bp
 
 
 # Decorator para exigir login
@@ -40,6 +41,8 @@ def admin_required(f):
 
 app = Flask(__name__, template_folder="app/views", static_folder="static")
 app.secret_key = "sua-chave-secreta"
+app.register_blueprint(plantonista_bp)
+app.register_blueprint(sobreaviso_bp)
 
 
 @app.before_request
