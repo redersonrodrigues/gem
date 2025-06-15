@@ -15,8 +15,6 @@
 - [x] Implementar e validar CRUD completo para Médicos (com testes)
 - [x] Implementar e validar CRUD completo para Especializações (com testes)
 - [x] Implementar e validar CRUD completo para Escalas (plantonistas, sobreaviso ortopedia, sobreaviso demais especialidades) (com testes)
-- [x] Implementar e validar Relatórios (com testes)
-- [x] Implementar e validar CRUD completo para Usuários (admin e comum, com autenticação, permissões e testes)
 - [x] Otimizar consultas SQL para eficiência no SQLite (índices, chaves estrangeiras, queries otimizadas, views SQL se necessário)
 - [ ] Implementar rollback e testes de rollback para operações críticas
 - [ ] Implementar log de alterações (data, usuário, ação) em todas as entidades (com testes)
@@ -39,13 +37,13 @@
 - [ ] Integrar interface gráfica (PyQt5) com backend Flask
 
 ## 5. Funcionalidades Específicas de Escalas
-- [x] Implementar lógica de escalas de plantonistas (turnos de 12h, dois médicos por turno, registro único por dia)
+- [x] Implementar lógica de escalas de plantonistas (turnos de 12h, dois médicos por turno, registro único por dia, validação de médicos não repetidos no mesmo turno)
 - [x] Implementar lógica de escalas de sobreaviso ortopedia (quinzenal)
 - [x] Implementar lógica de escalas de sobreaviso demais especialidades (semanal, 5 períodos de 7 dias)
 - [x] Refatorar lógica de escalas usando Template Method (classe abstrata Escala e concretas Plantonista/Sobreaviso)
 - [x] Permitir múltiplas escalas por dia (ajuste no modelo Schedule)
 - [x] Popular 100 médicos e 100+ escalas para testes de performance e usabilidade
-- [ ] Otimizar armazenamento das escalas conforme requisitos
+- [x] Otimizar armazenamento das escalas conforme requisitos
 
 ## 6. Testes e Validação
 - [x] Implementar testes unitários para modelos e scripts de popularização
@@ -70,16 +68,57 @@
 ## 10. Logs, Auditoria e Segurança
 - [ ] Logar todas as alterações relevantes em entidades críticas
 - [ ] Implementar visualização de logs para auditoria
-- [ ] Proteger contra SQL Injection, XSS, CSRF
+- [ ] Proteger contra SQL Injection, XSS, CSRF, etc
 - [ ] Garantir senhas seguras e hash no banco
 
 ## 11. Usabilidade, Acessibilidade e Performance
 - [x] Garantir navegação acessível e responsiva
-- [ ] Testar em diferentes navegadores/dispositivos
+- [x] Testar em diferentes navegadores/dispositivos
 - [x] Otimizar queries e criar índices para grandes volumes de dados
 
 ## 12. Relatórios e Exportação
-- [x] Implementar relatórios customizáveis e exportação (PDF, CSV)
+- [ ] Implementar relatórios customizáveis e exportação (PDF, CSV)
 
 ## 13. Documentação de Fluxos de Uso
 - [x] Adicionar exemplos de fluxos reais de uso do sistema
+
+## 14. Melhorias e Ajustes Pendentes
+- [ ] Ajustar escala de sobreaviso conforme regras de negócio da aplicação
+- [ ] Ajustar layout de sobreaviso nos relatórios de sobreaviso
+- [ ] Ajustar layout de sobreaviso no Relatório de Impressão
+- [ ] Revisar validações da aplicação conforme o tipo de usuário
+- [ ] Revisar o controle de registro de alterações da aplicação: logs, gatilhos, etc e permitir que o usuário administrador tenha acesso a essas informações
+- [ ] Ocultar do layout do usuário comum aquilo que ele não pode usar
+
+## 15. Estratégia e Governança (Prioridade Alta)
+- [ ] Implementar rotina de backup automático do banco de dados e testes de restauração
+- [ ] Garantir conformidade com LGPD e/ou outras normas aplicáveis
+- [ ] Registrar logs de login/logout e atividades sensíveis dos usuários
+- [ ] Proteger contra SQL Injection, XSS, CSRF (reforçar testes e validação)
+- [ ] Implementar política de expiração e complexidade de senhas
+- [ ] Permitir redefinição de senha via email seguro
+- [ ] Implementar autenticação em dois fatores (2FA) para administradores
+
+## 16. Monitoramento, Auditoria e Suporte (Prioridade Média)
+- [ ] Implementar monitoramento de erros críticos e alertas para administradores
+- [ ] Registrar tentativas de acesso não autorizado
+- [ ] Implementar visualização de logs para auditoria
+- [ ] Criar documentação para suporte técnico e FAQ para usuários finais
+- [ ] Definir e documentar SLAs (Service Level Agreements) para suporte
+
+## 17. Performance, Escalabilidade e Atualização (Prioridade Média)
+- [ ] Planejar e testar o sistema para uso simultâneo por múltiplos usuários
+- [ ] Monitorar e otimizar uso de memória e CPU em produção
+- [ ] Planejar e documentar procedimentos de atualização de versão do sistema e do banco de dados
+- [ ] Implementar scripts de migração de dados para futuras versões
+
+## 18. Usabilidade, Acessibilidade e Testes Finais (Prioridade Média)
+- [ ] Garantir acessibilidade para pessoas com deficiência (WCAG), incluindo navegação por teclado e leitores de tela
+- [ ] Realizar sessões de teste com usuários reais (médicos, administrativos) e coletar feedback
+- [ ] Testar em diferentes navegadores/dispositivos
+
+## 19. Integração e Futuro (Prioridade Baixa)
+- [ ] Planejar integração futura com sistemas hospitalares, prontuário eletrônico ou APIs externas
+- [ ] Implementar anonimização/máscara de dados sensíveis em relatórios e logs, quando necessário
+- [ ] Integrar testes automatizados em pipeline CI/CD (ex: GitHub Actions, GitLab CI)
+- [ ] Validar builds automáticos antes de deploy
