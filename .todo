@@ -15,8 +15,8 @@
 - [x] Implementar e validar CRUD completo para Médicos (com testes)
 - [x] Implementar e validar CRUD completo para Especializações (com testes)
 - [x] Implementar e validar CRUD completo para Escalas (plantonistas, sobreaviso ortopedia, sobreaviso demais especialidades) (com testes)
-- [ ] Implementar e validar Relatórios (com testes)
-- [ ] Implementar e validar CRUD completo para Usuários (admin e comum, com autenticação, permissões e testes)
+- [x] Implementar e validar Relatórios (com testes)
+- [x] Implementar e validar CRUD completo para Usuários (admin e comum, com autenticação, permissões e testes)
 - [x] Otimizar consultas SQL para eficiência no SQLite (índices, chaves estrangeiras, queries otimizadas, views SQL se necessário)
 - [ ] Implementar rollback e testes de rollback para operações críticas
 - [ ] Implementar log de alterações (data, usuário, ação) em todas as entidades (com testes)
@@ -25,8 +25,8 @@
 
 ## 3. Backend e Lógica de Negócio
 - [x] Implementar regras de negócio para escalas (turnos, regimes, validações, restrições de datas para usuários comuns)
-- [ ] Implementar regras de negócio para relatórios e consultas
-- [ ] Implementar controle de permissões: admin (acesso total), usuário comum (restrito a escalas até o dia 15 do mês seguinte)
+- [x] Implementar regras de negócio para relatórios e consultas
+- [x] Implementar controle de permissões: admin (acesso total), usuário comum (restrito a escalas até o dia 15 do mês seguinte)
 - [x] Implementar autenticação e sessão de usuários
 
 ## 4. Interface Gráfica e Web
@@ -76,10 +76,10 @@
 ## 11. Usabilidade, Acessibilidade e Performance
 - [x] Garantir navegação acessível e responsiva
 - [ ] Testar em diferentes navegadores/dispositivos
-- [ ] Otimizar queries e criar índices para grandes volumes de dados
+- [x] Otimizar queries e criar índices para grandes volumes de dados
 
 ## 12. Relatórios e Exportação
-- [ ] Implementar relatórios customizáveis e exportação (PDF, CSV)
+- [x] Implementar relatórios customizáveis e exportação (PDF, CSV)
 
 ## 13. Documentação de Fluxos de Uso
 - [x] Adicionar exemplos de fluxos reais de uso do sistema

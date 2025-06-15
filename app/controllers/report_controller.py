@@ -12,14 +12,6 @@ from datetime import datetime
 report_bp = Blueprint("reports", __name__, url_prefix="/reports")
 
 
-@report_bp.route("/")
-def list_reports():
-    session_db = SessionLocal()
-    reports = session_db.query(Report).all()
-    session_db.close()
-    return render_template("reports/list.html", reports=reports)
-
-
 @report_bp.route("/novo", methods=["GET", "POST"])
 def create_report():
     session_db = SessionLocal()
@@ -146,4 +138,44 @@ def report_doctors():
         especialidades=especialidades,
         especialidade_id=especialidade_id,
         busca_nome=busca_nome
+    )
+
+
+@report_bp.route("/imprimir", methods=["GET"])
+def imprimir_relatorio():
+    session_db = SessionLocal()
+    mes = request.args.get("mes", default=datetime.now().month, type=int)
+    ano = request.args.get("ano", default=datetime.now().year, type=int)
+    plantonistas = (
+        session_db.query(Plantonista)
+        .options(
+            joinedload(Plantonista.diurno_medico1),
+            joinedload(Plantonista.diurno_medico2),
+            joinedload(Plantonista.noturno_medico1),
+            joinedload(Plantonista.noturno_medico2),
+        )
+        .filter(
+            func.extract('month', Plantonista.data) == mes,
+            func.extract('year', Plantonista.data) == ano
+        )
+        .order_by(Plantonista.data)
+        .all()
+    )
+    sobreavisos = (
+        session_db.query(Sobreaviso)
+        .options(joinedload(Sobreaviso.medico))
+        .filter(
+            func.extract('month', Sobreaviso.data) == mes,
+            func.extract('year', Sobreaviso.data) == ano
+        )
+        .order_by(Sobreaviso.data)
+        .all()
+    )
+    session_db.close()
+    return render_template(
+        "reports/list.html",
+        plantonistas=plantonistas,
+        sobreavisos=sobreavisos,
+        mes=mes,
+        ano=ano
     )
