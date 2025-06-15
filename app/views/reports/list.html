@@ -1,92 +1,167 @@
 {% extends 'base.html' %}
 {% block content %}
 <div id="relatorio-impressao">
-  <div class="text-center mb-4">
-    <h2>Relatório Consolidado de Escalas</h2>
-    <form method="get" class="row g-2 mb-3 justify-content-center">
-      <div class="col-auto">
-        <label for="mes" class="form-label">Mês</label>
-        <select name="mes" id="mes" class="form-select" onchange="this.form.submit()">
-          {% for m in range(1, 13) %}
-            <option value="{{ m }}" {% if m == mes %}selected{% endif %}>{{ '%02d' % m }}</option>
-          {% endfor %}
-        </select>
-      </div>
-      <div class="col-auto">
-        <label for="ano" class="form-label">Ano</label>
-        <input type="number" name="ano" id="ano" class="form-control" value="{{ ano }}" min="2020" max="2100" onchange="this.form.submit()">
-      </div>
-    </form>
-    <hr>
-  </div>
-
-  <h4>Plantonistas</h4>
-  <table class="table table-bordered table-sm">
-    <thead>
-      <tr>
-        <th>Data</th>
-        <th>Diurno 1</th>
-        <th>Diurno 2</th>
-        <th>Noturno 1</th>
-        <th>Noturno 2</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for p in plantonistas %}
-      <tr>
-        <td>{{ p.data.strftime('%d/%m/%Y') }}</td>
-        <td>{{ p.diurno_medico1.name }}</td>
-        <td>{{ p.diurno_medico2.name }}</td>
-        <td>{{ p.noturno_medico1.name }}</td>
-        <td>{{ p.noturno_medico2.name }}</td>
-      </tr>
-      {% else %}
-      <tr><td colspan="5" class="text-center">Nenhum plantonista encontrado para o período.</td></tr>
-      {% endfor %}
-    </tbody>
-  </table>
-
-  <h4>Sobreavisos</h4>
-  <table class="table table-bordered table-sm">
-    <thead>
-      <tr>
-        <th>Data</th>
-        <th>Especialidade</th>
-        <th>Médico</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for s in sobreavisos %}
-      <tr>
-        <td>{{ s.data.strftime('%d/%m/%Y') }}</td>
-        <td>{{ s.especialidade }}</td>
-        <td>{{ s.medico.name }}</td>
-      </tr>
-      {% else %}
-      <tr><td colspan="3" class="text-center">Nenhum sobreaviso encontrado para o período.</td></tr>
-      {% endfor %}
-    </tbody>
-  </table>
-
-  <div class="row mt-5">
-    <div class="col text-center">
-      <p>_________________________<br>Coordenador Administrativo</p>
+    <div class="text-center mb-4">
+        <h2>Relatório Consolidado de Escalas</h2>
+        <form method="get" class="row g-2 mb-3 justify-content-center">
+            <div class="col-auto">
+                <label for="mes" class="form-label">Mês</label>
+                <select name="mes" id="mes" class="form-select" onchange="this.form.submit()">
+                    {% for m in range(1, 13) %}
+                    <option value="{{ m }}" {% if m==mes %}selected{% endif %}>{{ '%02d' % m }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-auto">
+                <label for="ano" class="form-label">Ano</label>
+                <input type="number" name="ano" id="ano" class="form-control" value="{{ ano }}" min="2020" max="2100"
+                    onchange="this.form.submit()">
+            </div>
+        </form>
+        <hr>
     </div>
-    <div class="col text-center">
-      <p>_________________________<br>Diretor Técnico</p>
-    </div>
-    <div class="col text-center">
-      <p>_________________________<br>Anestesista</p>
-    </div>
-  </div>
 
-  <div class="mt-4 text-center">
-    <button class="btn btn-success" onclick="window.print()">Imprimir</button>
-  </div>
+    {% set semana = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'] %}
 
-  <footer class="mt-5 text-center">
-    <hr>
-    <small>Cabeçalho e rodapé personalizáveis</small>
-  </footer>
+    <h4>Plantonistas (1 a 16)</h4>
+    <table class="table table-bordered table-sm text-center align-middle">
+        <thead>
+            <tr>
+                <th rowspan="2" class="align-middle">Turno</th>
+                {% for dt in datas_plantao if dt.day <= 16 %} <th>{{ semana[dt.weekday()] }}</th>
+                    {% endfor %}
+            </tr>
+            <tr>
+                {% for dt in datas_plantao if dt.day <= 16 %} <th>{{ dt.day }}</th>
+                    {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>Diurno 1</th>
+                {% for dt in datas_plantao if dt.day <= 16 %} {% set p=(plantonistas|selectattr('data', 'equalto' ,
+                    dt)|list)[0] if (plantonistas|selectattr('data', 'equalto' , dt)|list) else None %} <td>{{
+                    p.diurno_medico1.name if p else '-' }}</td>
+                    {% endfor %}
+            </tr>
+            <tr>
+                <th>Diurno 2</th>
+                {% for dt in datas_plantao if dt.day <= 16 %} {% set p=(plantonistas|selectattr('data', 'equalto' ,
+                    dt)|list)[0] if (plantonistas|selectattr('data', 'equalto' , dt)|list) else None %} <td>{{
+                    p.diurno_medico2.name if p else '-' }}</td>
+                    {% endfor %}
+            </tr>
+            <tr>
+                <th>Noturno 1</th>
+                {% for dt in datas_plantao if dt.day <= 16 %} {% set p=(plantonistas|selectattr('data', 'equalto' ,
+                    dt)|list)[0] if (plantonistas|selectattr('data', 'equalto' , dt)|list) else None %} <td>{{
+                    p.noturno_medico1.name if p else '-' }}</td>
+                    {% endfor %}
+            </tr>
+            <tr>
+                <th>Noturno 2</th>
+                {% for dt in datas_plantao if dt.day <= 16 %} {% set p=(plantonistas|selectattr('data', 'equalto' ,
+                    dt)|list)[0] if (plantonistas|selectattr('data', 'equalto' , dt)|list) else None %} <td>{{
+                    p.noturno_medico2.name if p else '-' }}</td>
+                    {% endfor %}
+            </tr>
+        </tbody>
+    </table>
+
+    <h4>Plantonistas (17 ao fim do mês)</h4>
+    <table class="table table-bordered table-sm text-center align-middle">
+        <thead>
+            <tr>
+                <th rowspan="2" class="align-middle">Turno</th>
+                {% for dt in datas_plantao if dt.day >= 17 %}
+                <th>{{ semana[dt.weekday()] }}</th>
+                {% endfor %}
+            </tr>
+            <tr>
+                {% for dt in datas_plantao if dt.day >= 17 %}
+                <th>{{ dt.day }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>Diurno 1</th>
+                {% for dt in datas_plantao if dt.day >= 17 %}
+                {% set p = (plantonistas|selectattr('data', 'equalto', dt)|list)[0] if (plantonistas|selectattr('data',
+                'equalto', dt)|list) else None %}
+                <td>{{ p.diurno_medico1.name if p else '-' }}</td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <th>Diurno 2</th>
+                {% for dt in datas_plantao if dt.day >= 17 %}
+                {% set p = (plantonistas|selectattr('data', 'equalto', dt)|list)[0] if (plantonistas|selectattr('data',
+                'equalto', dt)|list) else None %}
+                <td>{{ p.diurno_medico2.name if p else '-' }}</td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <th>Noturno 1</th>
+                {% for dt in datas_plantao if dt.day >= 17 %}
+                {% set p = (plantonistas|selectattr('data', 'equalto', dt)|list)[0] if (plantonistas|selectattr('data',
+                'equalto', dt)|list) else None %}
+                <td>{{ p.noturno_medico1.name if p else '-' }}</td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <th>Noturno 2</th>
+                {% for dt in datas_plantao if dt.day >= 17 %}
+                {% set p = (plantonistas|selectattr('data', 'equalto', dt)|list)[0] if (plantonistas|selectattr('data',
+                'equalto', dt)|list) else None %}
+                <td>{{ p.noturno_medico2.name if p else '-' }}</td>
+                {% endfor %}
+            </tr>
+        </tbody>
+    </table>
+
+    <h4>Sobreavisos</h4>
+    <table class="table table-bordered table-sm">
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Especialidade</th>
+                <th>Médico</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for s in sobreavisos %}
+            <tr>
+                <td>{{ s.data.strftime('%d/%m/%Y') }}</td>
+                <td>{{ s.especialidade }}</td>
+                <td>{{ s.medico.name }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="3" class="text-center">Nenhum sobreaviso encontrado para o período.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="row mt-5">
+        <div class="col text-center">
+            <p>_________________________<br>Coordenador Administrativo</p>
+        </div>
+        <div class="col text-center">
+            <p>_________________________<br>Diretor Técnico</p>
+        </div>
+        <div class="col text-center">
+            <p>_________________________<br>Anestesista</p>
+        </div>
+    </div>
+
+    <div class="mt-4 text-center">
+        <button class="btn btn-success" onclick="window.print()">Imprimir</button>
+    </div>
+
+    <footer class="mt-5 text-center">
+        <hr>
+        <small>Cabeçalho e rodapé personalizáveis</small>
+    </footer>
 </div>
 {% endblock %}

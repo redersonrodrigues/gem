@@ -8,6 +8,7 @@ from app.models.specialization import Specialization
 from sqlalchemy.orm import joinedload
 from sqlalchemy import func
 from datetime import datetime
+from collections import OrderedDict
 
 report_bp = Blueprint("reports", __name__, url_prefix="/reports")
 
@@ -79,14 +80,16 @@ def report_plantonistas():
             joinedload(Plantonista.noturno_medico2),
         )
         .filter(
-            func.extract('month', Plantonista.data) == mes,
-            func.extract('year', Plantonista.data) == ano
+            func.extract("month", Plantonista.data) == mes,
+            func.extract("year", Plantonista.data) == ano,
         )
         .order_by(Plantonista.data)
         .all()
     )
     session_db.close()
-    return render_template("reports/plantonistas.html", plantonistas=plantonistas, mes=mes, ano=ano)
+    return render_template(
+        "reports/plantonistas.html", plantonistas=plantonistas, mes=mes, ano=ano
+    )
 
 
 @report_bp.route("/sobreavisos", methods=["GET"])
@@ -98,14 +101,16 @@ def report_sobreavisos():
         session_db.query(Sobreaviso)
         .options(joinedload(Sobreaviso.medico))
         .filter(
-            func.extract('month', Sobreaviso.data) == mes,
-            func.extract('year', Sobreaviso.data) == ano
+            func.extract("month", Sobreaviso.data) == mes,
+            func.extract("year", Sobreaviso.data) == ano,
         )
         .order_by(Sobreaviso.data)
         .all()
     )
     session_db.close()
-    return render_template("reports/sobreavisos.html", sobreavisos=sobreavisos, mes=mes, ano=ano)
+    return render_template(
+        "reports/sobreavisos.html", sobreavisos=sobreavisos, mes=mes, ano=ano
+    )
 
 
 @report_bp.route("/doctors", methods=["GET"])
@@ -114,7 +119,9 @@ def report_doctors():
     especialidade_id = request.args.get("especialidade_id", type=int)
     busca_nome = request.args.get("busca_nome", default="", type=str).strip()
 
-    especialidades = session_db.query(Specialization).order_by(Specialization.name).all()
+    especialidades = (
+        session_db.query(Specialization).order_by(Specialization.name).all()
+    )
     medicos_por_especialidade = {}
 
     for esp in especialidades:
@@ -137,7 +144,7 @@ def report_doctors():
         medicos_por_especialidade=medicos_por_especialidade,
         especialidades=especialidades,
         especialidade_id=especialidade_id,
-        busca_nome=busca_nome
+        busca_nome=busca_nome,
     )
 
 
@@ -155,8 +162,8 @@ def imprimir_relatorio():
             joinedload(Plantonista.noturno_medico2),
         )
         .filter(
-            func.extract('month', Plantonista.data) == mes,
-            func.extract('year', Plantonista.data) == ano
+            func.extract("month", Plantonista.data) == mes,
+            func.extract("year", Plantonista.data) == ano,
         )
         .order_by(Plantonista.data)
         .all()
@@ -165,17 +172,21 @@ def imprimir_relatorio():
         session_db.query(Sobreaviso)
         .options(joinedload(Sobreaviso.medico))
         .filter(
-            func.extract('month', Sobreaviso.data) == mes,
-            func.extract('year', Sobreaviso.data) == ano
+            func.extract("month", Sobreaviso.data) == mes,
+            func.extract("year", Sobreaviso.data) == ano,
         )
         .order_by(Sobreaviso.data)
         .all()
     )
+    # Gera lista de datas únicas ordenadas do mês com plantonistas
+    datas_plantao = sorted({p.data for p in plantonistas})
+
     session_db.close()
     return render_template(
         "reports/list.html",
         plantonistas=plantonistas,
         sobreavisos=sobreavisos,
         mes=mes,
-        ano=ano
+        ano=ano,
+        datas_plantao=datas_plantao,
     )
