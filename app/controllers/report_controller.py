@@ -3,6 +3,8 @@ from app.models.report import Report
 from app.models.database import SessionLocal
 from app.models.plantonista import Plantonista
 from app.models.sobreaviso import Sobreaviso
+from app.models.doctor import Doctor
+from app.models.specialization import Specialization
 from sqlalchemy.orm import joinedload
 from sqlalchemy import func
 from datetime import datetime
@@ -112,3 +114,36 @@ def report_sobreavisos():
     )
     session_db.close()
     return render_template("reports/sobreavisos.html", sobreavisos=sobreavisos, mes=mes, ano=ano)
+
+
+@report_bp.route("/doctors", methods=["GET"])
+def report_doctors():
+    session_db = SessionLocal()
+    especialidade_id = request.args.get("especialidade_id", type=int)
+    busca_nome = request.args.get("busca_nome", default="", type=str).strip()
+
+    especialidades = session_db.query(Specialization).order_by(Specialization.name).all()
+    medicos_por_especialidade = {}
+
+    for esp in especialidades:
+        if especialidade_id and esp.id != especialidade_id:
+            continue
+        query = (
+            session_db.query(Doctor)
+            .join(Doctor.specializations)
+            .filter(Specialization.id == esp.id)
+        )
+        if busca_nome:
+            query = query.filter(Doctor.name.ilike(f"%{busca_nome}%"))
+        medicos = query.order_by(Doctor.name).all()
+        if medicos:
+            medicos_por_especialidade[esp.name] = medicos
+
+    session_db.close()
+    return render_template(
+        "reports/doctors.html",
+        medicos_por_especialidade=medicos_por_especialidade,
+        especialidades=especialidades,
+        especialidade_id=especialidade_id,
+        busca_nome=busca_nome
+    )

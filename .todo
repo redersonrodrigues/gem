@@ -15,8 +15,7 @@
 - [x] Implementar e validar CRUD completo para Médicos (com testes)
 - [x] Implementar e validar CRUD completo para Especializações (com testes)
 - [x] Implementar e validar CRUD completo para Escalas (plantonistas, sobreaviso ortopedia, sobreaviso demais especialidades) (com testes)
-- [ ] Implementar e validar CRUD completo para Relatórios (com testes)
-- [ ] Implementar e validar CRUD completo para Consultas (com testes)
+- [ ] Implementar e validar Relatórios (com testes)
 - [ ] Implementar e validar CRUD completo para Usuários (admin e comum, com autenticação, permissões e testes)
 - [x] Otimizar consultas SQL para eficiência no SQLite (índices, chaves estrangeiras, queries otimizadas, views SQL se necessário)
 - [ ] Implementar rollback e testes de rollback para operações críticas

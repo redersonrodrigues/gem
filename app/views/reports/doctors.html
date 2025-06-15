@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- debug aqui -->
+<!-- <p>DEBUG: {{ medicos_por_especialidade|length }} especialidades encontradas.</p>-->
+
+<!-- resto do template -->
+<form method="get" class="row g-2 mb-4">
+  <div class="col-md-4">
+    <select name="especialidade_id" class="form-select" onchange="this.form.submit()">
+      <option value="">Todas as especialidades</option>
+      {% for esp in especialidades %}
+        <option value="{{ esp.id }}" {% if esp.id == especialidade_id %}selected{% endif %}>{{ esp.name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="col-md-4">
+    <input type="text" name="busca_nome" class="form-control" placeholder="BUSCAR MÉDICO POR NOME" value="{{ busca_nome or '' }}" style="text-transform:uppercase;" oninput="this.value = this.value.toUpperCase()">
+  </div>
+  <div class="col-md-2">
+    <button type="submit" class="btn btn-primary w-100">Filtrar</button>
+  </div>
+</form>
+
+{% for especialidade, medicos in medicos_por_especialidade.items() %}
+<h4>{{ especialidade }}</h4>
+<table class="table table-bordered table-sm">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Nome de PJ</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for medico in medicos %}
+        <tr>
+            <td>{{ medico.name }}</td>
+            <td>{{ medico.fantasy_name }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endfor %}
+{% endblock %}
