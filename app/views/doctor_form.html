@@ -1,71 +1,64 @@
 {% extends 'base.html' %}
+{% block title %}Cadastro de Médicos{% endblock %}
 {% block content %}
-<div class="container mt-4">
-    <h2>{% if edit_doctor %}Editar Médico{% else %}Cadastrar Médico{% endif %}</h2>
-    <form method="POST" class="mb-4">
-        <div class="mb-3">
-            <label for="name" class="form-label">Nome do Médico</label>
-            <input type="text" class="form-control text-uppercase" id="name" name="name" required
-                style="text-transform:uppercase;" value="{{ edit_doctor.name if edit_doctor else '' }}">
-        </div>
-        <div class="mb-3">
-            <label for="fantasy_name" class="form-label">Nome Fantasia (PJ)</label>
-            <input type="text" class="form-control text-uppercase" id="fantasy_name" name="fantasy_name" required
-                style="text-transform:uppercase;" value="{{ edit_doctor.fantasy_name if edit_doctor else '' }}">
-        </div>
-        <div class="mb-3">
-            <label for="specializations" class="form-label">Especializações</label>
-            <select class="form-select text-uppercase" id="specializations" name="specializations" multiple required
-                style="text-transform:uppercase;">
-                {% for specialization in specializations %}
-                <option value="{{ specialization.id }}" {% if edit_doctor and specialization in
-                    edit_doctor.specializations %}selected{% endif %}>
-                    {{ specialization.name }}
-                </option>
-                {% endfor %}
-            </select>
-            <small class="form-text text-muted">Segure Ctrl para selecionar múltiplas especializações.</small>
-        </div>
-        <button type="submit" class="btn btn-primary">
-            <i class="fas fa-user-md"></i>
-            {% if edit_doctor %}Salvar Alterações{% else %}Cadastrar{% endif %}
-        </button>
-        {% if edit_doctor %}
-        <a href="{{ url_for('doctors') }}" class="btn btn-secondary ms-2">Cancelar</a>
-        {% endif %}
-    </form>
-    <h3>Médicos Cadastrados</h3>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Nome Fantasia</th>
-                <th>Especializações</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for doctor in doctors %}
-            <tr>
-                <td>{{ doctor.name }}</td>
-                <td>{{ doctor.fantasy_name }}</td>
-                <td>
-                    {% for spec in doctor.specializations %}
-                    {{ spec.name }}{% if not loop.last %}, {% endif %}
-                    {% endfor %}
-                </td>
-                <td>
-                    <a href="{{ url_for('edit_doctor', doctor_id=doctor.id) }}"
-                        class="btn btn-sm btn-warning">Editar</a>
-                    <form action="{{ url_for('delete_doctor', doctor_id=doctor.id) }}" method="post"
-                        style="display:inline;">
-                        <button type="submit" class="btn btn-sm btn-danger"
-                            onclick="return confirm('Tem certeza que deseja excluir este médico?');">Excluir</button>
-                    </form>
-                </td>
-            </tr>
+<h2>Cadastro de Médicos</h2>
+<form method="POST" action="/doctors">
+    <div class="form-group">
+        <label for="doctorName">Nome do Médico</label>
+        <input type="text" class="form-control" id="doctorName" name="name" placeholder="Digite o nome do médico" required style="text-transform: uppercase;">
+    </div>
+    <div class="form-group">
+        <label for="fantasyName">Nome Fantasia</label>
+        <input type="text" class="form-control" id="fantasyName" name="fantasy_name" placeholder="Digite o nome fantasia" required style="text-transform: uppercase;">
+    </div>
+    <div class="form-group">
+        <label for="specializations">Especializações</label>
+        <select class="form-control" id="specializations" name="specializations" multiple required>
+            {% for specialization in specializations %}
+            <option value="{{ specialization.id }}">{{ specialization.name }}</option>
             {% endfor %}
-        </tbody>
-    </table>
-</div>
+        </select>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Salvar</button>
+        <a href="/" class="btn btn-secondary">Voltar</a>
+    </div>
+</form>
+
+<!-- Tabela de Médicos -->
+<table class="table table-bordered table-striped">
+    <thead class="bg-primary text-white">
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Nome Fantasia</th>
+            <th>Especializações</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for doctor in doctors %}
+        <tr>
+            <td>{{ doctor.id }}</td>
+            <td>{{ doctor.name }}</td>
+            <td>{{ doctor.fantasy_name }}</td>
+            <td>
+                {% for specialization in doctor.specializations %}
+                {{ specialization.name }}{% if not loop.last %}, {% endif %}
+                {% endfor %}
+            </td>
+            <td>
+                <a href="/doctors/edit/{{ doctor.id }}" class="btn btn-warning btn-sm">
+                    <i class="fas fa-edit"></i>
+                </a>
+                <form action="/doctors/delete/{{ doctor.id }}" method="POST" style="display:inline;">
+                    <button type="submit" class="btn btn-danger btn-sm">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

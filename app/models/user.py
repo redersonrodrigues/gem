@@ -10,5 +10,6 @@ class User(Base):
     username = Column(String, unique=True, nullable=False)
     password_hash = Column(String, nullable=False)
     is_admin = Column(Boolean, default=False)
-    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+    created_at = Column(
+        DateTime, default=lambda: datetime.datetime.now(datetime.UTC))
     logs = relationship("Log", back_populates="user")

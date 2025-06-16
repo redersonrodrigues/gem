@@ -14,16 +14,19 @@
 - [x] Popular especializações iniciais via script
 - [x] Implementar e validar CRUD completo para Médicos (com testes)
 - [x] Implementar e validar CRUD completo para Especializações (com testes)
+- [x] Ajustar templates e componentes para Especializações, incluindo botões e tabelas
+- [x] Validar funcionalidades de Cadastrar, Voltar, Editar e Excluir para Especializações
 - [x] Implementar e validar CRUD completo para Escalas (plantonistas, sobreaviso ortopedia, sobreaviso demais especialidades) (com testes)
 - [x] Otimizar consultas SQL para eficiência no SQLite (índices, chaves estrangeiras, queries otimizadas, views SQL se necessário)
+- [x] Implementar validação para evitar registros duplicados na mesma data para escalas de plantonistas.
+- [x] Implementar validação para evitar médicos com nomes iguais no mesmo turno (diurno ou noturno) ao registrar uma nova escala de plantonistas.
+- [x] Implementar validação para evitar médicos com nomes iguais no mesmo turno (diurno ou noturno) ao editar uma escala de plantonistas.
 - [ ] Implementar rollback e testes de rollback para operações críticas
 - [ ] Implementar log de alterações (data, usuário, ação) em todas as entidades (com testes)
-- [ ] Implementar validação de dados e rastreabilidade de alterações em todas as entidades
 - [ ] Garantir operações atômicas e tratamento de exceções em todas as operações CRUD
 
 ## 3. Backend e Lógica de Negócio
 - [x] Implementar regras de negócio para escalas (turnos, regimes, validações, restrições de datas para usuários comuns)
-- [x] Implementar regras de negócio para relatórios e consultas
 - [x] Implementar controle de permissões: admin (acesso total), usuário comum (restrito a escalas até o dia 15 do mês seguinte)
 - [x] Implementar autenticação e sessão de usuários
 
@@ -122,3 +125,37 @@
 - [ ] Implementar anonimização/máscara de dados sensíveis em relatórios e logs, quando necessário
 - [ ] Integrar testes automatizados em pipeline CI/CD (ex: GitHub Actions, GitLab CI)
 - [ ] Validar builds automáticos antes de deploy
+
+## 20. Melhorias e Planejamento Adicional
+
+### Design Patterns
+- [ ] Implementar Factory Method para criação de instâncias de modelos (Doctor, Specialization, Plantonista).
+- [ ] Adicionar Observer para monitorar alterações em entidades críticas.
+- [ ] Utilizar Strategy para encapsular regras de negócio específicas.
+- [ ] Garantir que a configuração do banco de dados seja gerenciada por um Singleton.
+
+### Testes
+- [ ] Garantir cobertura de testes de pelo menos 90% do código.
+- [ ] Implementar testes de carga para simular múltiplos usuários simultâneos.
+- [ ] Validar proteção contra SQL Injection, XSS, CSRF, e outras vulnerabilidades.
+
+### Documentação
+- [ ] Adicionar diagramas UML para ilustrar relacionamentos entre classes e padrões de design.
+- [ ] Criar um guia detalhado para configuração do ambiente de desenvolvimento e produção.
+
+### Usabilidade
+- [ ] Garantir conformidade com WCAG para navegação por teclado e leitores de tela.
+- [ ] Implementar alternância entre modo claro e escuro.
+
+### Governança e Segurança
+- [ ] Implementar rotinas automáticas de backup e restauração do banco de dados.
+- [ ] Adicionar autenticação em dois fatores (2FA) para administradores.
+- [ ] Garantir complexidade mínima e expiração periódica de senhas.
+
+### Integração
+- [ ] Planejar integração futura com sistemas hospitalares e APIs externas.
+- [ ] Configurar pipelines de integração contínua e entrega contínua (CI/CD).
+
+### Performance
+- [ ] Revisar todas as queries SQL para garantir eficiência máxima.
+- [ ] Implementar cache para reduzir o tempo de resposta em consultas frequentes.

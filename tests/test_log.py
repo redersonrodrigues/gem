@@ -3,6 +3,7 @@ from app.models.database import init_db, SessionLocal
 from app.models.user import User
 from app.models.log import Log
 import datetime
+from datetime import timezone
 
 
 def test_create_log():
@@ -16,11 +17,12 @@ def test_create_log():
         action="CREATE",
         entity="Doctor",
         entity_id=1,
-        timestamp=datetime.datetime.utcnow(),
+        timestamp=datetime.datetime.now(timezone.utc),
     )
     session.add(log)
     session.commit()
-    found = session.query(Log).filter_by(user_id=user.id, action="CREATE").first()
+    found = session.query(Log).filter_by(
+        user_id=user.id, action="CREATE").first()
     assert found is not None
     assert found.entity == "Doctor"
     session.delete(found)

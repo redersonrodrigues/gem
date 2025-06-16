@@ -5,6 +5,8 @@ from app.models.specialization import Specialization
 from app.models.user import User
 from app.models.log import Log
 from datetime import datetime
+import datetime
+from datetime import timezone
 
 
 def test_crud_doctor():
@@ -34,7 +36,7 @@ def test_crud_doctor():
         action="CREATE",
         entity="Doctor",
         entity_id=doctor.id,
-        timestamp=datetime.utcnow(),
+        timestamp=datetime.datetime.now(timezone.utc),
     )
     session.add(log)
     session.commit()
@@ -48,11 +50,12 @@ def test_crud_doctor():
         action="UPDATE",
         entity="Doctor",
         entity_id=found.id,
-        timestamp=datetime.utcnow(),
+        timestamp=datetime.datetime.now(timezone.utc),
     )
     session.add(log)
     session.commit()
-    found2 = session.query(Doctor).filter_by(name="MEDICO TESTE EDITADO").first()
+    found2 = session.query(Doctor).filter_by(
+        name="MEDICO TESTE EDITADO").first()
     assert found2 is not None
     # DELETE
     session.delete(found2)
@@ -62,11 +65,12 @@ def test_crud_doctor():
         action="DELETE",
         entity="Doctor",
         entity_id=found2.id,
-        timestamp=datetime.utcnow(),
+        timestamp=datetime.datetime.now(timezone.utc),
     )
     session.add(log)
     session.commit()
-    assert session.query(Doctor).filter_by(name="MEDICO TESTE EDITADO").first() is None
+    assert session.query(Doctor).filter_by(
+        name="MEDICO TESTE EDITADO").first() is None
     # Limpeza
     session.delete(user)
     session.delete(spec)

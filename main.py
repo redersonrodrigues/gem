@@ -4,9 +4,11 @@ from app.models.user import User
 from app.models.doctor import Doctor
 from app.models.specialization import Specialization
 from app.models.log import Log
+from app.models.schedule import Schedule
 from app.config import Config
 from werkzeug.security import generate_password_hash, check_password_hash
 import datetime
+from datetime import timezone
 from sqlalchemy.orm import joinedload
 from app.controllers.plantonista_controller import plantonista_bp
 from app.controllers.sobreaviso_controller import sobreaviso_bp
@@ -86,13 +88,14 @@ def doctors():
                 action="CREATE",
                 entity="Doctor",
                 entity_id=doctor.id,
-                timestamp=datetime.datetime.utcnow(),
+                timestamp=datetime.datetime.now(timezone.utc),
             )
             session_db.add(log)
             session_db.commit()
             flash("Médico cadastrado com sucesso!", "success")
         return redirect(url_for("doctors"))
-    doctors = session_db.query(Doctor).options(joinedload(Doctor.specializations)).all()
+    doctors = session_db.query(Doctor).options(
+        joinedload(Doctor.specializations)).all()
     specializations = session_db.query(Specialization).all()
     session_db.close()
     return render_template(
@@ -115,7 +118,7 @@ def delete_doctor(doctor_id):
             action="DELETE",
             entity="Doctor",
             entity_id=doctor_id,
-            timestamp=datetime.datetime.utcnow(),
+            timestamp=datetime.datetime.now(timezone.utc),
         )
         session_db.add(log)
         session_db.commit()
@@ -164,7 +167,7 @@ def edit_doctor(doctor_id):
                 action="UPDATE",
                 entity="Doctor",
                 entity_id=doctor.id,
-                timestamp=datetime.datetime.utcnow(),
+                timestamp=datetime.datetime.now(timezone.utc),
             )
             session_db.add(log)
             session_db.commit()
@@ -183,29 +186,38 @@ def edit_doctor(doctor_id):
 def specializations():
     session_db = SessionLocal()
     if request.method == "POST":
-        name = request.form["name"].strip().upper()
-        # Verifica nome único
-        if session_db.query(Specialization).filter_by(name=name).first():
-            flash("Já existe uma especialização com esse nome.", "danger")
-        else:
-            specialization = Specialization(name=name)
-            session_db.add(specialization)
-            session_db.commit()
-            # Log da ação
-            log = Log(
-                user_id=session["user_id"],
-                action="CREATE",
-                entity="Specialization",
-                entity_id=specialization.id,
-                timestamp=datetime.datetime.utcnow(),
-            )
-            session_db.add(log)
-            session_db.commit()
-            flash("Especialização cadastrada com sucesso!", "success")
+        try:
+            name = request.form["name"].strip().upper()
+            # Verifica nome único
+            if session_db.query(Specialization).filter_by(name=name).first():
+                flash("Já existe uma especialização com esse nome.", "danger")
+            else:
+                specialization = Specialization(name=name)
+                session_db.add(specialization)
+                session_db.commit()
+                # Log da ação
+                log = Log(
+                    user_id=session["user_id"],
+                    action="CREATE",
+                    entity="Specialization",
+                    entity_id=specialization.id,
+                    timestamp=datetime.datetime.now(timezone.utc),
+                )
+                session_db.add(log)
+                session_db.commit()
+                flash("Especialização cadastrada com sucesso!", "success")
+        except Exception as e:
+            flash(f"Erro ao cadastrar especialização: {str(e)}", "danger")
+        finally:
+            session_db.close()
         return redirect(url_for("specializations"))
     specializations = session_db.query(Specialization).all()
     session_db.close()
-    return render_template("specialization_form.html", specializations=specializations)
+    # Transformar objetos em uma lista de listas
+    specializations_data = [
+        [spec.id, spec.name] for spec in specializations
+    ]
+    return render_template("specialization_form.html", specializations=specializations_data)
 
 
 @app.route("/specializations/delete/<int:spec_id>", methods=["POST"])
@@ -223,7 +235,7 @@ def delete_specialization(spec_id):
             action="DELETE",
             entity="Specialization",
             entity_id=spec_id,
-            timestamp=datetime.datetime.utcnow(),
+            timestamp=datetime.datetime.now(timezone.utc),
         )
         session_db.add(log)
         session_db.commit()
@@ -262,7 +274,7 @@ def edit_specialization(spec_id):
                 action="UPDATE",
                 entity="Specialization",
                 entity_id=spec.id,
-                timestamp=datetime.datetime.utcnow(),
+                timestamp=datetime.datetime.now(timezone.utc),
             )
             session_db.add(log)
             session_db.commit()
@@ -329,13 +341,14 @@ def schedules():
                     action="CREATE",
                     entity="Schedule",
                     entity_id=escala.id,
-                    timestamp=datetime.datetime.utcnow(),
+                    timestamp=datetime.datetime.now(timezone.utc),
                 )
                 session_db.add(log)
                 session_db.commit()
                 flash("Escala cadastrada com sucesso!", "success")
         elif tipo == "SOBREAVISO":
-            especialidade = request.form["especialidade_sobreaviso"].strip().upper()
+            especialidade = request.form["especialidade_sobreaviso"].strip(
+            ).upper()
             data_inicio = request.form["data_inicio"]
             periodo = request.form["periodo"]
             medico_id = request.form["medico_sobreaviso"]

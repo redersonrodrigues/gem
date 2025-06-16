@@ -4,6 +4,8 @@ from app.models.specialization import Specialization
 from app.models.user import User
 from app.models.log import Log
 from datetime import datetime
+import datetime
+from datetime import timezone
 
 
 def test_crud_specialization():
@@ -11,7 +13,8 @@ def test_crud_specialization():
     session = SessionLocal()
     # Remove usuário e especialização se já existirem
     session.query(Specialization).filter_by(name="ESPECIAL TESTE").delete()
-    session.query(Specialization).filter_by(name="ESPECIAL TESTE EDITADO").delete()
+    session.query(Specialization).filter_by(
+        name="ESPECIAL TESTE EDITADO").delete()
     session.query(User).filter_by(username="admin_spec").delete()
     session.commit()
     # Cria usuário admin
@@ -27,11 +30,12 @@ def test_crud_specialization():
         action="CREATE",
         entity="Specialization",
         entity_id=spec.id,
-        timestamp=datetime.utcnow(),
+        timestamp=datetime.datetime.now(timezone.utc),
     )
     session.add(log)
     session.commit()
-    found = session.query(Specialization).filter_by(name="ESPECIAL TESTE").first()
+    found = session.query(Specialization).filter_by(
+        name="ESPECIAL TESTE").first()
     assert found is not None
     # UPDATE
     found.name = "ESPECIAL TESTE EDITADO"
@@ -41,12 +45,13 @@ def test_crud_specialization():
         action="UPDATE",
         entity="Specialization",
         entity_id=found.id,
-        timestamp=datetime.utcnow(),
+        timestamp=datetime.datetime.now(timezone.utc),
     )
     session.add(log)
     session.commit()
     found2 = (
-        session.query(Specialization).filter_by(name="ESPECIAL TESTE EDITADO").first()
+        session.query(Specialization).filter_by(
+            name="ESPECIAL TESTE EDITADO").first()
     )
     assert found2 is not None
     # DELETE
@@ -57,12 +62,13 @@ def test_crud_specialization():
         action="DELETE",
         entity="Specialization",
         entity_id=found2.id,
-        timestamp=datetime.utcnow(),
+        timestamp=datetime.datetime.now(timezone.utc),
     )
     session.add(log)
     session.commit()
     assert (
-        session.query(Specialization).filter_by(name="ESPECIAL TESTE EDITADO").first()
+        session.query(Specialization).filter_by(
+            name="ESPECIAL TESTE EDITADO").first()
         is None
     )
     # Limpeza

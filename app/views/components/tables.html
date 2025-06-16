@@ -1,0 +1,28 @@
+<!-- Tabelas dinâmicas baseadas no AdminLTE -->
+<table class="table table-bordered table-striped">
+    <thead class="bg-primary text-white">
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in rows %}
+        <tr>
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}</td>
+            <td>
+                <a href="/specializations/edit/{{ row[0] }}" class="btn btn-warning btn-sm">
+                    <i class="fas fa-edit"></i> Editar
+                </a>
+                <form method="POST" action="/specializations/delete/{{ row[0] }}" style="display:inline;">
+                    <button type="submit" class="btn btn-danger btn-sm">
+                        <i class="fas fa-trash"></i> Excluir
+                    </button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

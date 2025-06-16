@@ -8,6 +8,8 @@ class Report(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
     description = Column(Text)
-    created_at = Column(DateTime, default=datetime.datetime.utcnow)
-    type = Column(String, nullable=False)  # Ex: 'plantonista', 'sobreaviso', 'custom'
+    created_at = Column(
+        DateTime, default=lambda: datetime.datetime.now(datetime.UTC))
+    # Ex: 'plantonista', 'sobreaviso', 'custom'
+    type = Column(String, nullable=False)
     filters = Column(Text)  # JSON string com filtros aplicados
