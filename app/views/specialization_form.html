@@ -1,20 +1,28 @@
-{% extends 'base.html' %}
-{% block title %}Gestão de Especializações{% endblock %}
-{% block content %}
-<h2>Gestão de Especializações</h2>
-<form method="POST" action="{% if edit_specialization %}/specializations/edit/{{ edit_specialization.id }}{% else %}/specializations{% endif %}">
-    <div class="form-group">
-        <label for="specializationName">Nome da Especialização</label>
-        <!-- Campo de entrada de texto com letras maiúsculas -->
-        <input type="text" class="form-control" id="specializationName" name="name" placeholder="Digite o nome da especialização" required style="text-transform: uppercase;" value="{% if edit_specialization %}{{ edit_specialization.name }}{% endif %}">
-    </div>
-    <div class="form-group">
-        {% include 'components/buttons.html' %}
-    </div>
+{% extends 'base.html' %} {% block title %}Gestão de Especializações{% endblock
+%} {% block content %} {% set subtitle = 'Gestão de Especializações' %} {%
+include 'components/subtitle.html' %}
+
+<form
+  method="POST"
+  action="{% if edit_specialization %}/specializations/edit/{{ edit_specialization.id }}{% else %}/specializations{% endif %}"
+>
+  <div class="form-group">
+    <label for="specializationName">Nome da Especialização</label>
+    <!-- Campo de entrada de texto com letras maiúsculas -->
+    <input
+      type="text"
+      class="form-control"
+      id="specializationName"
+      name="name"
+      placeholder="Digite o nome da especialização"
+      required
+      style="text-transform: uppercase"
+      value="{% if edit_specialization %}{{ edit_specialization.name }}{% endif %}"
+    />
+  </div>
+  <div class="form-group">{% include 'components/buttons.html' %}</div>
 </form>
 
 <!-- Tabela de Especializações -->
-{% with headers=['ID', 'Nome', 'Ações'], rows=specializations %}
-{% include 'components/tables.html' %}
-{% endwith %}
-{% endblock %}
+{% with headers=['ID', 'Nome', 'Ações'], rows=specializations %} {% include
+'components/tables.html' %} {% endwith %} {% endblock %}

@@ -1,0 +1,19 @@
+<div class="form-group">
+  <label for="specialization">Especialização</label>
+  <select
+    class="form-control"
+    id="specialization"
+    name="specializations"
+    multiple
+    required
+  >
+    {% for specialization in specializations|sort(attribute='name') %}
+      <option
+        value="{{ specialization.id }}"
+        {% if edit_doctor and specialization in edit_doctor.specializations %}selected{% endif %}
+      >
+        {{ specialization.name }}
+      </option>
+    {% endfor %}
+  </select>
+</div>
