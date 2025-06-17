@@ -223,10 +223,25 @@ def consolidated_report():
         .order_by(Sobreaviso.data)
         .all()
     )
+    # Ajustar headers e rows para refletir os nomes corretos do banco de dados
+    plantonistas_headers = ["Data", "Diurno Médico 1",
+                            "Diurno Médico 2", "Noturno Médico 1", "Noturno Médico 2"]
+    plantonistas_data = [
+        [
+            p.data.strftime("%d/%m/%Y"),
+            p.diurno_medico1.name if p.diurno_medico1 else "",
+            p.diurno_medico2.name if p.diurno_medico2 else "",
+            p.noturno_medico1.name if p.noturno_medico1 else "",
+            p.noturno_medico2.name if p.noturno_medico2 else "",
+        ]
+        for p in plantonistas
+    ]
+
     session_db.close()
     return render_template(
         "reports/consolidated_schedule.html",
-        plantonistas=plantonistas,
+        plantonistas_headers=plantonistas_headers,
+        plantonistas_data=plantonistas_data,
         sobreavisos=sobreavisos,
         mes=mes,
         ano=ano,

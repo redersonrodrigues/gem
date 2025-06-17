@@ -35,28 +35,9 @@
   </form>
 
   <h3>Plantonistas</h3>
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>Data</th>
-        <th>Diurno Médico 1</th>
-        <th>Diurno Médico 2</th>
-        <th>Noturno Médico 1</th>
-        <th>Noturno Médico 2</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for plantonista in plantonistas %}
-      <tr>
-        <td>{{ plantonista.data }}</td>
-        <td>{{ plantonista.diurno_medico1.name }}</td>
-        <td>{{ plantonista.diurno_medico2.name }}</td>
-        <td>{{ plantonista.noturno_medico1.name }}</td>
-        <td>{{ plantonista.noturno_medico2.name }}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+  {% set headers = plantonistas_headers %}
+  {% set rows = plantonistas_data %}
+  {% include 'components/table_duty_doctor_reports.html' %}
 
   <h3>Sobreavisos</h3>
   <table class="table table-bordered">
