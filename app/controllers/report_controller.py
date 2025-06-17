@@ -236,6 +236,21 @@ def consolidated_report():
         ]
         for p in plantonistas
     ]
+    # Criar a variável days_and_weekdays com os dias e dias da semana
+    days_and_weekdays = [
+        (p.data.strftime("%d"), p.data.strftime("%A")) for p in plantonistas
+    ]
+
+    # Criar as variáveis diurno_rows e noturno_rows com os médicos escalados
+    diurno_rows = [
+        f"{p.diurno_medico1.name if p.diurno_medico1 else ''}, {p.diurno_medico2.name if p.diurno_medico2 else ''}"
+        for p in plantonistas
+    ]
+
+    noturno_rows = [
+        f"{p.noturno_medico1.name if p.noturno_medico1 else ''}, {p.noturno_medico2.name if p.noturno_medico2 else ''}"
+        for p in plantonistas
+    ]
 
     session_db.close()
     return render_template(
@@ -243,6 +258,9 @@ def consolidated_report():
         plantonistas_headers=plantonistas_headers,
         plantonistas_data=plantonistas_data,
         sobreavisos=sobreavisos,
+        days_and_weekdays=days_and_weekdays,
+        diurno_rows=diurno_rows,
+        noturno_rows=noturno_rows,
         mes=mes,
         ano=ano,
     )
