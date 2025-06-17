@@ -184,7 +184,7 @@ def imprimir_relatorio():
 
     session_db.close()
     return render_template(
-        "reports/list.html",
+        "reports/consolidated_schedule.html",
         plantonistas=plantonistas,
         sobreavisos=sobreavisos,
         mes=mes,
@@ -225,7 +225,7 @@ def consolidated_report():
     )
     session_db.close()
     return render_template(
-        "reports/list.html",
+        "reports/consolidated_schedule.html",
         plantonistas=plantonistas,
         sobreavisos=sobreavisos,
         mes=mes,
