@@ -1,167 +1,79 @@
 {% extends 'base.html' %}
+{% block title %}Relatório Consolidado de Escalas{% endblock %}
 {% block content %}
-<div id="relatorio-impressao">
-    <div class="text-center mb-4">
-        <h2>Relatório Consolidado de Escalas</h2>
-        <form method="get" class="row g-2 mb-3 justify-content-center">
-            <div class="col-auto">
-                <label for="mes" class="form-label">Mês</label>
-                <select name="mes" id="mes" class="form-select" onchange="this.form.submit()">
-                    {% for m in range(1, 13) %}
-                    <option value="{{ m }}" {% if m==mes %}selected{% endif %}>{{ '%02d' % m }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-            <div class="col-auto">
-                <label for="ano" class="form-label">Ano</label>
-                <input type="number" name="ano" id="ano" class="form-control" value="{{ ano }}" min="2020" max="2100"
-                    onchange="this.form.submit()">
-            </div>
-        </form>
-        <hr>
+<h2 class="text-center">Relatório Consolidado de Escalas</h2>
+
+<div class="container mt-4">
+  <form method="GET" class="row g-3 mb-4">
+    <div class="col-md-3">
+      <label for="mes" class="form-label">Mês</label>
+      <select class="form-select" id="mes" name="mes">
+        {% for i in range(1, 13) %}
+        <option value="{{ i }}" {% if i == mes %}selected{% endif %}>
+          {{ i }}
+        </option>
+        {% endfor %}
+      </select>
     </div>
-
-    {% set semana = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'] %}
-
-    <h4>Plantonistas (1 a 16)</h4>
-    <table class="table table-bordered table-sm text-center align-middle">
-        <thead>
-            <tr>
-                <th rowspan="2" class="align-middle">Turno</th>
-                {% for dt in datas_plantao if dt.day <= 16 %} <th>{{ semana[dt.weekday()] }}</th>
-                    {% endfor %}
-            </tr>
-            <tr>
-                {% for dt in datas_plantao if dt.day <= 16 %} <th>{{ dt.day }}</th>
-                    {% endfor %}
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th>Diurno 1</th>
-                {% for dt in datas_plantao if dt.day <= 16 %} {% set p=(plantonistas|selectattr('data', 'equalto' ,
-                    dt)|list)[0] if (plantonistas|selectattr('data', 'equalto' , dt)|list) else None %} <td>{{
-                    p.diurno_medico1.name if p else '-' }}</td>
-                    {% endfor %}
-            </tr>
-            <tr>
-                <th>Diurno 2</th>
-                {% for dt in datas_plantao if dt.day <= 16 %} {% set p=(plantonistas|selectattr('data', 'equalto' ,
-                    dt)|list)[0] if (plantonistas|selectattr('data', 'equalto' , dt)|list) else None %} <td>{{
-                    p.diurno_medico2.name if p else '-' }}</td>
-                    {% endfor %}
-            </tr>
-            <tr>
-                <th>Noturno 1</th>
-                {% for dt in datas_plantao if dt.day <= 16 %} {% set p=(plantonistas|selectattr('data', 'equalto' ,
-                    dt)|list)[0] if (plantonistas|selectattr('data', 'equalto' , dt)|list) else None %} <td>{{
-                    p.noturno_medico1.name if p else '-' }}</td>
-                    {% endfor %}
-            </tr>
-            <tr>
-                <th>Noturno 2</th>
-                {% for dt in datas_plantao if dt.day <= 16 %} {% set p=(plantonistas|selectattr('data', 'equalto' ,
-                    dt)|list)[0] if (plantonistas|selectattr('data', 'equalto' , dt)|list) else None %} <td>{{
-                    p.noturno_medico2.name if p else '-' }}</td>
-                    {% endfor %}
-            </tr>
-        </tbody>
-    </table>
-
-    <h4>Plantonistas (17 ao fim do mês)</h4>
-    <table class="table table-bordered table-sm text-center align-middle">
-        <thead>
-            <tr>
-                <th rowspan="2" class="align-middle">Turno</th>
-                {% for dt in datas_plantao if dt.day >= 17 %}
-                <th>{{ semana[dt.weekday()] }}</th>
-                {% endfor %}
-            </tr>
-            <tr>
-                {% for dt in datas_plantao if dt.day >= 17 %}
-                <th>{{ dt.day }}</th>
-                {% endfor %}
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th>Diurno 1</th>
-                {% for dt in datas_plantao if dt.day >= 17 %}
-                {% set p = (plantonistas|selectattr('data', 'equalto', dt)|list)[0] if (plantonistas|selectattr('data',
-                'equalto', dt)|list) else None %}
-                <td>{{ p.diurno_medico1.name if p else '-' }}</td>
-                {% endfor %}
-            </tr>
-            <tr>
-                <th>Diurno 2</th>
-                {% for dt in datas_plantao if dt.day >= 17 %}
-                {% set p = (plantonistas|selectattr('data', 'equalto', dt)|list)[0] if (plantonistas|selectattr('data',
-                'equalto', dt)|list) else None %}
-                <td>{{ p.diurno_medico2.name if p else '-' }}</td>
-                {% endfor %}
-            </tr>
-            <tr>
-                <th>Noturno 1</th>
-                {% for dt in datas_plantao if dt.day >= 17 %}
-                {% set p = (plantonistas|selectattr('data', 'equalto', dt)|list)[0] if (plantonistas|selectattr('data',
-                'equalto', dt)|list) else None %}
-                <td>{{ p.noturno_medico1.name if p else '-' }}</td>
-                {% endfor %}
-            </tr>
-            <tr>
-                <th>Noturno 2</th>
-                {% for dt in datas_plantao if dt.day >= 17 %}
-                {% set p = (plantonistas|selectattr('data', 'equalto', dt)|list)[0] if (plantonistas|selectattr('data',
-                'equalto', dt)|list) else None %}
-                <td>{{ p.noturno_medico2.name if p else '-' }}</td>
-                {% endfor %}
-            </tr>
-        </tbody>
-    </table>
-
-    <h4>Sobreavisos</h4>
-    <table class="table table-bordered table-sm">
-        <thead>
-            <tr>
-                <th>Data</th>
-                <th>Especialidade</th>
-                <th>Médico</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for s in sobreavisos %}
-            <tr>
-                <td>{{ s.data.strftime('%d/%m/%Y') }}</td>
-                <td>{{ s.especialidade }}</td>
-                <td>{{ s.medico.name }}</td>
-            </tr>
-            {% else %}
-            <tr>
-                <td colspan="3" class="text-center">Nenhum sobreaviso encontrado para o período.</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
-    <div class="row mt-5">
-        <div class="col text-center">
-            <p>_________________________<br>Coordenador Administrativo</p>
-        </div>
-        <div class="col text-center">
-            <p>_________________________<br>Diretor Técnico</p>
-        </div>
-        <div class="col text-center">
-            <p>_________________________<br>Anestesista</p>
-        </div>
+    <div class="col-md-3">
+      <label for="ano" class="form-label">Ano</label>
+      <select class="form-select" id="ano" name="ano">
+        {% for i in range(2020, 2031) %}
+        <option value="{{ i }}" {% if i == ano %}selected{% endif %}>
+          {{ i }}
+        </option>
+        {% endfor %}
+      </select>
     </div>
-
-    <div class="mt-4 text-center">
-        <button class="btn btn-success" onclick="window.print()">Imprimir</button>
+    <div class="col-md-3 align-self-end">
+      <button type="submit" class="btn btn-primary">
+        <i class="fas fa-filter"></i> Filtrar
+      </button>
     </div>
+  </form>
 
-    <footer class="mt-5 text-center">
-        <hr>
-        <small>Cabeçalho e rodapé personalizáveis</small>
-    </footer>
+  <h3>Plantonistas</h3>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Data</th>
+        <th>Diurno Médico 1</th>
+        <th>Diurno Médico 2</th>
+        <th>Noturno Médico 1</th>
+        <th>Noturno Médico 2</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for plantonista in plantonistas %}
+      <tr>
+        <td>{{ plantonista.data }}</td>
+        <td>{{ plantonista.diurno_medico1.name }}</td>
+        <td>{{ plantonista.diurno_medico2.name }}</td>
+        <td>{{ plantonista.noturno_medico1.name }}</td>
+        <td>{{ plantonista.noturno_medico2.name }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h3>Sobreavisos</h3>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Data</th>
+        <th>Médico</th>
+        <th>Especialidade</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for sobreaviso in sobreavisos %}
+      <tr>
+        <td>{{ sobreaviso.data }}</td>
+        <td>{{ sobreaviso.medico.name }}</td>
+        <td>{{ sobreaviso.especialidade }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </div>
 {% endblock %}

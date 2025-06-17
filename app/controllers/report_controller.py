@@ -21,7 +21,8 @@ def create_report():
         description = request.form["description"]
         type = request.form["type"]
         filters = request.form["filters"]
-        report = Report(name=name, description=description, type=type, filters=filters)
+        report = Report(name=name, description=description,
+                        type=type, filters=filters)
         session_db.add(report)
         session_db.commit()
         flash("Relatório criado com sucesso!", "success")
@@ -189,4 +190,44 @@ def imprimir_relatorio():
         mes=mes,
         ano=ano,
         datas_plantao=datas_plantao,
+    )
+
+
+@report_bp.route("/list", methods=["GET"])
+def consolidated_report():
+    session_db = SessionLocal()
+    mes = request.args.get("mes", default=datetime.now().month, type=int)
+    ano = request.args.get("ano", default=datetime.now().year, type=int)
+    plantonistas = (
+        session_db.query(Plantonista)
+        .options(
+            joinedload(Plantonista.diurno_medico1),
+            joinedload(Plantonista.diurno_medico2),
+            joinedload(Plantonista.noturno_medico1),
+            joinedload(Plantonista.noturno_medico2),
+        )
+        .filter(
+            func.extract("month", Plantonista.data) == mes,
+            func.extract("year", Plantonista.data) == ano,
+        )
+        .order_by(Plantonista.data)
+        .all()
+    )
+    sobreavisos = (
+        session_db.query(Sobreaviso)
+        .options(joinedload(Sobreaviso.medico))
+        .filter(
+            func.extract("month", Sobreaviso.data) == mes,
+            func.extract("year", Sobreaviso.data) == ano,
+        )
+        .order_by(Sobreaviso.data)
+        .all()
+    )
+    session_db.close()
+    return render_template(
+        "reports/list.html",
+        plantonistas=plantonistas,
+        sobreavisos=sobreavisos,
+        mes=mes,
+        ano=ano,
     )

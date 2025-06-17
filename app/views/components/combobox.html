@@ -8,12 +8,25 @@
     required
   >
     {% for specialization in specializations|sort(attribute='name') %}
-      <option
-        value="{{ specialization.id }}"
-        {% if edit_doctor and specialization in edit_doctor.specializations %}selected{% endif %}
-      >
-        {{ specialization.name }}
-      </option>
+    <option
+      value="{{ specialization.id }}"
+      {%
+      if
+      edit_doctor
+      and
+      specialization
+      in
+      edit_doctor.specializations
+      %}selected{%
+      endif
+      %}
+    >
+      {{ specialization.name }}
+    </option>
     {% endfor %}
   </select>
+  <div class="form-text text-muted" style="padding-top: 2px">
+    Para escolher múltiplas especializações, mantenha a tecla CTRL pressionada
+    enquanto seleciona.
+  </div>
 </div>
