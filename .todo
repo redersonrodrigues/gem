@@ -1,10 +1,11 @@
 # TODO - Checklist de Tarefas do Projeto GEM
 
-## 1. Ambiente e Estrutura Inicial
+## 1. Configuração Inicial
 - [x] Criar ambiente virtual Python (.venv) e ativar
 - [x] Gerar e revisar o arquivo requirements.txt com todas as dependências
 - [x] Configurar o arquivo .gitignore para ignorar arquivos/pastas sensíveis e desnecessários
 - [x] Estruturar o projeto em pastas: app/, static/, templates/, tests/, docs/
+- [ ] Revisar a estrutura completa do projeto para garantir que todos os arquivos e pastas estão organizados e documentados adequadamente.
 
 ## 2. Banco de Dados e Modelagem
 - [x] Criar database.py com configuração do SQLite e SQLAlchemy
@@ -159,3 +160,15 @@
 ### Performance
 - [ ] Revisar todas as queries SQL para garantir eficiência máxima.
 - [ ] Implementar cache para reduzir o tempo de resposta em consultas frequentes.
+
+## 21. Migração para PyQt
+- [x] Migrar toda a aplicação para PyQt, substituindo o Flask.
+- [ ] Adaptar todas as rotas e templates para janelas e diálogos do PyQt.
+- [x] Atualizar o NotificationManager para exibir mensagens em janelas modais do PyQt.
+- [ ] Criar janelas para funcionalidades como cadastro, listagem e edição de plantonistas.
+- [ ] Testar todas as funcionalidades para garantir que a transição para PyQt foi bem-sucedida.
+- [x] Atualizar a documentação para refletir a mudança para PyQt.
+- [ ] Remover dependências relacionadas ao Flask e adicionar dependências do PyQt no requirements.txt.
+- [ ] Preservar o sistema de templates e componentes na aplicação, mesmo com a migração para PyQt.
+- [ ] Utilizar Jinja2 para renderizar templates HTML e exibi-los em widgets do PyQt, como QWebEngineView ou QTextBrowser.
+- [ ] Adaptar interações do usuário no PyQt para atualizar os templates renderizados dinamicamente.

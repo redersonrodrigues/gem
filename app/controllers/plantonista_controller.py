@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from sqlalchemy.orm import joinedload
 from sqlalchemy import func
+from sqlalchemy.sql import extract
 
 from app.models.plantonista import Plantonista
 from app.models.doctor import Doctor
@@ -8,6 +9,7 @@ from app.models.database import SessionLocal
 from datetime import datetime
 from app.models.plantonista_factory import PlantonistaFactory
 from app.models.validation_strategy import ValidationStrategy
+from app.models.notification_manager import NotificationManager
 
 plantonista_bp = Blueprint("plantonistas", __name__,
                            url_prefix="/plantonistas")
@@ -24,7 +26,7 @@ def list_plantonistas():
         joinedload(Plantonista.noturno_medico2),
     )
     if mes:
-        query = query.filter(func.extract("month", Plantonista.data) == mes)
+        query = query.filter(extract("month", Plantonista.data) == mes)
     plantonistas = query.order_by(Plantonista.data.asc()).all()
 
     doctors = session_db.query(Doctor).all()
@@ -50,7 +52,7 @@ def create_plantonista():
         validation_strategy = ValidationStrategy(session_db)
         validation_message = validation_strategy.validate(request_data)
         if validation_message:
-            flash(validation_message, "danger")
+            NotificationManager.error(validation_message)
             return render_template(
                 "plantonistas/form.html",
                 doctors=doctors,
@@ -68,8 +70,22 @@ def create_plantonista():
             if isinstance(request_data["data"], str):
                 request_data["data"] = datetime.strptime(
                     request_data["data"], "%Y-%m-%d").date()
-        except ValueError:
-            flash("Data inválida. Use o formato YYYY-MM-DD.", "danger")
+        except ValueError as ve:
+            NotificationManager.error("Erro de valor: " + str(ve))
+            return render_template(
+                "plantonistas/form.html",
+                doctors=doctors,
+                plantonista={
+                    "data": request_data["data"],
+                    "diurno_medico1_id": request_data["diurno_medico1_id"],
+                    "diurno_medico2_id": request_data["diurno_medico2_id"],
+                    "noturno_medico1_id": request_data["noturno_medico1_id"],
+                    "noturno_medico2_id": request_data["noturno_medico2_id"],
+                },
+                is_edit=False
+            )
+        except Exception as e:
+            NotificationManager.error("Erro inesperado: " + str(e))
             return render_template(
                 "plantonistas/form.html",
                 doctors=doctors,
@@ -88,10 +104,10 @@ def create_plantonista():
             plantonista = PlantonistaFactory.create(request_data, session_db)
             session_db.add(plantonista)
             session_db.commit()
-            flash("Escala de plantonista criada com sucesso!", "success")
+            NotificationManager.success("Plantonista cadastrado com sucesso!")
         except Exception as e:
             session_db.rollback()
-            flash(f"Erro ao criar escala: {str(e)}", "danger")
+            NotificationManager.error(f"Erro ao criar escala: {str(e)}")
         finally:
             session_db.close()
         return redirect(url_for("plantonistas.list_plantonistas"))

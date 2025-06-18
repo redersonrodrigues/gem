@@ -36,3 +36,21 @@
 - O sistema impede cadastros duplicados e valida regras de escalas.
 - Apenas administradores podem cadastrar/editar médicos e especializações.
 - O sistema está pronto para validação no ambiente real.
+
+# Uso e Testes da Aplicação com PyQt
+
+## Uso
+A aplicação agora utiliza PyQt para a interface gráfica. Para iniciar a aplicação, execute o arquivo `main.py`.
+
+### Funcionalidades principais:
+- Cadastro de plantonistas.
+- Listagem de plantonistas.
+- Edição e exclusão de plantonistas.
+
+## Testes
+Os testes existentes continuam válidos para a lógica de backend. Para testar a interface gráfica, utilize ferramentas específicas para testes de GUI, como `pytest-qt` ou `PyQtTest`.
+
+### Executando testes de backend:
+```bash
+pytest tests/
+```

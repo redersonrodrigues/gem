@@ -13,6 +13,8 @@ from sqlalchemy.orm import joinedload
 from app.controllers.plantonista_controller import plantonista_bp
 from app.controllers.sobreaviso_controller import sobreaviso_bp
 from app.controllers.report_controller import report_bp
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget
+from app.models.notification_manager import NotificationManager
 
 
 # Decorator para exigir login
@@ -441,6 +443,37 @@ def logout():
     session.clear()
     flash("Logout realizado com sucesso!", "success")
     return redirect(url_for("login"))
+
+
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("Gestão de Escalas de Plantonistas")
+
+        # Layout principal
+        layout = QVBoxLayout()
+
+        # Botões de exemplo
+        btn_create = QPushButton("Cadastrar Plantonista")
+        btn_create.clicked.connect(self.create_plantonista)
+        layout.addWidget(btn_create)
+
+        btn_list = QPushButton("Listar Plantonistas")
+        btn_list.clicked.connect(self.list_plantonistas)
+        layout.addWidget(btn_list)
+
+        # Configurar o widget central
+        container = QWidget()
+        container.setLayout(layout)
+        self.setCentralWidget(container)
+
+    def create_plantonista(self):
+        NotificationManager.success(
+            "Funcionalidade de cadastro em desenvolvimento.")
+
+    def list_plantonistas(self):
+        NotificationManager.info(
+            "Funcionalidade de listagem em desenvolvimento.")
 
 
 # Remover a função create_app e rodar diretamente o app já configurado

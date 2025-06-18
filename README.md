@@ -1,7 +1,7 @@
 # GEM - Gestão de Escalas Médicas
 
 ## Descrição
-O GEM é um sistema para gestão de escalas médicas, cadastro de profissionais, especializações e relatórios, desenvolvido em Python com Flask, SQLite, SQLAlchemy, Bootstrap e PyQt5. O sistema é multiplataforma, responsivo e pode ser executado localmente, sem necessidade de internet.
+O GEM é um sistema para gestão de escalas médicas, cadastro de profissionais, especializações e relatórios, desenvolvido em Python com PyQt5. O sistema é multiplataforma, responsivo e pode ser executado localmente, sem necessidade de internet.
 
 ## Funcionalidades
 - Cadastro, edição e exclusão de médicos, com vínculo a múltiplas especializações
@@ -63,12 +63,24 @@ O GEM é um sistema para gestão de escalas médicas, cadastro de profissionais,
 - Atualize o checklist `.todo` e este README.md a cada etapa
 - Documente código e funcionalidades
 
-## Otimizações e Boas Práticas Recentes
+## Atualização para PyQt
 
-- Adicionados índices nos campos de chave estrangeira e datas nos models Plantonista e Sobreaviso para acelerar consultas e filtros.
-- Ativado PRAGMA de chaves estrangeiras no SQLite para garantir integridade referencial.
-- Garantido uso de joinedload nos controllers para evitar N+1 queries e otimizar carregamento de dados.
-- Todas as alterações seguem boas práticas de design patterns e SQLAlchemy.
+A aplicação foi migrada de Flask para PyQt. Agora, todas as funcionalidades são acessadas por meio de uma interface gráfica desktop.
+
+### Principais mudanças:
+- Substituição de rotas e templates por janelas e diálogos do PyQt.
+- Uso do NotificationManager para exibir mensagens em janelas modais.
+- Dependência do PyQt5 adicionada ao projeto.
+
+### Como executar:
+1. Instale as dependências:
+   ```bash
+   pip install -r requirements.txt
+   ```
+2. Execute o arquivo principal:
+   ```bash
+   python main.py
+   ```
 
 ---
 

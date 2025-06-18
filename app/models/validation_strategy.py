@@ -1,5 +1,6 @@
 from app.models.plantonista import Plantonista
 from app.models.doctor import Doctor
+from app.models.notification_manager import NotificationManager
 
 
 class ValidationStrategy:
@@ -9,7 +10,9 @@ class ValidationStrategy:
     def validate(self, data):
         # Validação: não permitir registro na mesma data
         if self.session.query(Plantonista).filter_by(data=data["data"]).first():
-            return "Já existe uma escala registrada para esta data."
+            NotificationManager.error(
+                "Já existe uma escala registrada para esta data.")
+            return False
 
         # Validação: não permitir médicos com nomes iguais no mesmo turno
         diurno_medicos = [
@@ -21,8 +24,13 @@ class ValidationStrategy:
             self.session.query(Doctor).get(data["noturno_medico2_id"]).name,
         ]
         if len(set(diurno_medicos)) < len(diurno_medicos):
-            return "Médicos no turno diurno devem ter nomes diferentes."
+            NotificationManager.error(
+                "Médicos no turno diurno devem ter nomes diferentes.")
+            return False
         if len(set(noturno_medicos)) < len(noturno_medicos):
-            return "Médicos no turno noturno devem ter nomes diferentes."
+            NotificationManager.error(
+                "Médicos no turno noturno devem ter nomes diferentes.")
+            return False
 
-        return None
+        NotificationManager.success("Validação concluída com sucesso.")
+        return True
