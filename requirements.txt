@@ -1,1 +1,8 @@
-PyQt5
+# Dependências principais do projeto GEM
+Flask==2.1.3
+PyQt5==5.15.9
+SQLAlchemy==1.4.41
+pytest==7.1.2
+ReportLab==3.6.12
+PyPDF2==3.0.1
+Flask-Migrate==4.0.4

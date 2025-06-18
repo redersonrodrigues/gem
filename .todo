@@ -1,10 +1,24 @@
-# TODO - Checklist de Tarefas do Projeto GEM
+# PRÉ-REQUISITOS INDISPENSÁVEIS DA APLICAÇÃO
+- Aplicação em Python, orientada a objeto, Desktop
+- Estrutura MVC com uso de Components, Templates e Módulo Administrativo para a aplicação
+- Ambiente Virtual venv de desenvolvimento Python
+- SQLite para banco de dados, com nome de gem.db
+- Uso obrigatório de design patterns e boas práticas de programação para o desenvolvimento do software
+- Uso obrigatório de boas práticas na criação de código SQL
+- Uso obrigatório de Gatilhos, Views e scripts para facilitar e otimizar a aplicação
+- Obrigatoriamente o layout da aplicação deve ser responsivo para todos os tamanhos de tela, inclusive celulares
+- Utilize ícones FontAwesome
+- Controle de versão obrigatório no GitHub
+- Obrigatório testes gradativos da aplicação (unit e integration) com pytest em tudo que formos implementando e salvando estas implementações no GitHub bem descritas
+- Obrigatoriamente atualize o requirements.txt sempre que tiver necessidade de implementar algo no programa
+
+# TODO - Checklist de Tarefas do Projeto GEM (Reorganizado por Prioridade e Dependência)
 
 ## 1. Configuração Inicial
-- [x] Criar ambiente virtual Python (.venv) e ativar
-- [x] Gerar e revisar o arquivo requirements.txt com todas as dependências
-- [x] Configurar o arquivo .gitignore para ignorar arquivos/pastas sensíveis e desnecessários
-- [x] Estruturar o projeto em pastas: app/, static/, templates/, tests/, docs/
+- [ ] Criar ambiente virtual Python (.venv) e ativar
+- [ ] Gerar e revisar o arquivo requirements.txt com todas as dependências
+- [ ] Configurar o arquivo .gitignore para ignorar arquivos/pastas sensíveis e desnecessários
+- [ ] Estruturar o projeto em pastas: app/, static/, templates/, tests/, docs/
 - [ ] Revisar a estrutura completa do projeto para garantir que todos os arquivos e pastas estão organizados e documentados adequadamente.
 
 ## 2. Banco de Dados e Modelagem
@@ -15,160 +29,80 @@
 - [x] Popular especializações iniciais via script
 - [x] Implementar e validar CRUD completo para Médicos (com testes)
 - [x] Implementar e validar CRUD completo para Especializações (com testes)
-- [x] Ajustar templates e componentes para Especializações, incluindo botões e tabelas
-- [x] Validar funcionalidades de Cadastrar, Voltar, Editar e Excluir para Especializações
-- [x] Implementar e validar CRUD completo para Escalas (plantonistas, sobreaviso ortopedia, sobreaviso demais especialidades) (com testes)
-- [x] Otimizar consultas SQL para eficiência no SQLite (índices, chaves estrangeiras, queries otimizadas, views SQL se necessário)
-- [x] Implementar validação para evitar registros duplicados na mesma data para escalas de plantonistas.
-- [x] Implementar validação para evitar médicos com nomes iguais no mesmo turno (diurno ou noturno) ao registrar uma nova escala de plantonistas.
-- [x] Implementar validação para evitar médicos com nomes iguais no mesmo turno (diurno ou noturno) ao editar uma escala de plantonistas.
+- [ ] Ajustar templates e componentes para Especializações, incluindo botões e tabelas
+- [ ] Validar funcionalidades de Cadastrar, Voltar, Editar e Excluir para Especializações
+- [ ] Implementar e validar CRUD completo para Escalas (plantonistas, sobreaviso ortopedia, sobreaviso demais especialidades) (com testes)
+  - [ ] Implementar lógica para escalas de plantonistas com dois turnos (diurno e noturno), permitindo dois médicos distintos por turno.
+  - [ ] Implementar lógica para escalas de sobreaviso:
+    - [ ] Especialidades clínicas (médica, cirúrgica, pediatria, anestesista, G.O.): escalas semanais com data de início e fim, podendo atravessar meses.
+    - [ ] Especialidade ortopedia: escalas quinzenais divididas em duas semanas por quinzena, sem ultrapassar o último dia do mês.
+- [ ] Otimizar consultas SQL para eficiência no SQLite (índices, chaves estrangeiras, queries otimizadas, views SQL se necessário)
+- [ ] Implementar validação para evitar registros duplicados na mesma data para escalas de plantonistas.
+- [ ] Implementar validação para evitar médicos com nomes iguais no mesmo turno (diurno ou noturno) ao registrar uma nova escala de plantonistas.
+- [ ] Implementar validação para evitar médicos com nomes iguais no mesmo turno (diurno ou noturno) ao editar uma escala de plantonistas.
 - [ ] Implementar rollback e testes de rollback para operações críticas
 - [ ] Implementar log de alterações (data, usuário, ação) em todas as entidades (com testes)
 - [ ] Garantir operações atômicas e tratamento de exceções em todas as operações CRUD
 
 ## 3. Backend e Lógica de Negócio
-- [x] Implementar regras de negócio para escalas (turnos, regimes, validações, restrições de datas para usuários comuns)
-- [x] Implementar controle de permissões: admin (acesso total), usuário comum (restrito a escalas até o dia 15 do mês seguinte)
-- [x] Implementar autenticação e sessão de usuários
+- [ ] Implementar regras de negócio para escalas (turnos, regimes, validações, restrições de datas para usuários comuns)
+- [ ] Implementar controle de permissões: admin (acesso total), usuário comum (restrito a escalas até o dia 15 do mês seguinte)
+- [ ] Implementar autenticação e sessão de usuários
 
-## 4. Interface Gráfica e Web
-- [x] Criar templates base e componentes reutilizáveis (navbar, footer)
-- [x] Implementar telas: inicial, cadastro de médicos, gestão de escalas, relatórios (básico)
-- [x] Implementar tela de login e controle de sessão
-- [ ] Implementar modo claro/escuro
-- [x] Garantir layout responsivo e centralizado (Bootstrap)
-- [ ] Padronizar fontes e tamanhos (Times New Roman 12, labels, caixas de texto, combobox)
-- [ ] Integrar interface gráfica (PyQt5) com backend Flask
+## 4. Interface Gráfica Desktop com PyQt5
+### 4.1. Tarefas Prioritárias
+- [ ] Implementar modo claro/escuro (prioridade alta)
+- [ ] Usar sistema de Componentes na aplicação para uso nos Templates (prioridade alta)
+- [ ] Usar ícones FontAwesome (prioridade alta)
+- [ ] Integrar interface gráfica (PyQt5) com backend Flask (prioridade alta)
+- [ ] Garantir um sistema para impressão das escalas personalizadas (prioridade média)
+- [ ] Utilizar ReportLab para gerar PDFs personalizados (prioridade média)
+- [ ] Utilizar PyPDF2 para manipulação de PDFs, incluindo mesclagem e extração de páginas (prioridade média)
 
-## 5. Funcionalidades Específicas de Escalas
-- [x] Implementar lógica de escalas de plantonistas (turnos de 12h, dois médicos por turno, registro único por dia, validação de médicos não repetidos no mesmo turno)
-- [x] Implementar lógica de escalas de sobreaviso ortopedia (quinzenal)
-- [x] Implementar lógica de escalas de sobreaviso demais especialidades (semanal, 5 períodos de 7 dias)
-- [x] Refatorar lógica de escalas usando Template Method (classe abstrata Escala e concretas Plantonista/Sobreaviso)
-- [x] Permitir múltiplas escalas por dia (ajuste no modelo Schedule)
-- [x] Popular 100 médicos e 100+ escalas para testes de performance e usabilidade
-- [x] Otimizar armazenamento das escalas conforme requisitos
+### 4.2. Tarefas Concluídas
+- [ ] Criar templates base e componentes reutilizáveis (navbar, footer)
+- [ ] Implementar telas: ambiente administrativo, Tela inicial da Aplicação, Tela de Gestão de médicos, Tela de Gestão de Especialidades, Tela de Gestão de Escalas de Plantonistas, Tela de Gestão de Escalas de Sobreaviso, Relatórios de: Médicos, Especialidades, Plantonistas, Sobreaviso, etc
+- [ ] Implementar tela de login e controle de sessão
+- [ ] Garantir layout responsivo e centralizado
 
-## 6. Testes e Validação
-- [x] Implementar testes unitários para modelos e scripts de popularização
-- [x] Implementar testes para rotas e operações CRUD de todas as entidades
-- [x] Implementar testes para autenticação, permissões e logs
-- [ ] Implementar testes de rollback e exceções
-- [ ] Implementar testes de integração (Pytest)
-- [ ] Realizar testes no ambiente do hospital
+## 5. Testes e Validação
+### 5.1. Tarefas Prioritárias
+- [ ] Implementar testes de rollback e exceções (prioridade alta)
+- [ ] Implementar testes de integração (Pytest) (prioridade alta)
+- [ ] Realizar testes no ambiente do hospital (prioridade alta)
 
-## 7. Documentação
-- [ ] Documentar código e relacionamentos entre classes (docstrings)
-- [x] Gerar documentação técnica com Sphinx
-- [x] Documentar fluxos de uso e requisitos
+### 5.2. Tarefas Concluídas
+- [ ] Implementar testes unitários para modelos e scripts de popularização
+- [ ] Implementar testes para rotas e operações CRUD de todas as entidades
+- [ ] Implementar testes para autenticação, permissões e logs
 
-## 8. Versionamento e Deploy
-- [x] Versionar cada etapa no GitHub (commits claros e frequentes)
-- [ ] Validar versão final no Hospital Estadual Porto Primavera
+## 6. Documentação
+### 6.1. Tarefas Prioritárias
+- [ ] Documentar código e relacionamentos entre classes (docstrings) (prioridade alta)
+- [ ] Adicionar diagramas UML para ilustrar relacionamentos entre classes e padrões de design (prioridade média)
 
-## 9. Dados Fictícios e Testes de Volume
-- [x] Popular 100 médicos e 100 escalas para testes de performance e usabilidade
+### 6.2. Tarefas Concluídas
+- [ ] Gerar documentação técnica com Sphinx
+- [ ] Documentar fluxos de uso e requisitos
 
-## 10. Logs, Auditoria e Segurança
-- [ ] Logar todas as alterações relevantes em entidades críticas
-- [ ] Implementar visualização de logs para auditoria
-- [ ] Proteger contra SQL Injection, XSS, CSRF, etc
-- [ ] Garantir senhas seguras e hash no banco
+## 7. Segurança e Governança
+- [ ] Proteger contra SQL Injection, XSS, CSRF, etc (prioridade alta)
+- [ ] Garantir senhas seguras e hash no banco (prioridade alta)
+- [ ] Implementar autenticação em dois fatores (2FA) para administradores (prioridade média)
 
-## 11. Usabilidade, Acessibilidade e Performance
-- [x] Garantir navegação acessível e responsiva
-- [x] Testar em diferentes navegadores/dispositivos
-- [x] Otimizar queries e criar índices para grandes volumes de dados
+## 8. Melhorias e Ajustes Pendentes
+- [ ] Ajustar escala de sobreaviso conforme regras de negócio da aplicação (prioridade média)
+- [ ] Revisar validações da aplicação conforme o tipo de usuário (prioridade média)
+- [ ] Ocultar do layout do usuário comum aquilo que ele não pode usar (prioridade média)
 
-## 12. Relatórios e Exportação
-- [ ] Implementar relatórios customizáveis e exportação (PDF, CSV)
+## 9. Integração e Futuro
+- [ ] Planejar integração futura com sistemas hospitalares, prontuário eletrônico ou APIs externas (prioridade baixa)
+- [ ] Configurar pipelines de integração contínua e entrega contínua (CI/CD) (prioridade baixa)
 
-## 13. Documentação de Fluxos de Uso
-- [x] Adicionar exemplos de fluxos reais de uso do sistema
+## 10. Performance e Escalabilidade
+- [ ] Planejar e testar o sistema para uso simultâneo por múltiplos usuários (prioridade média)
+- [ ] Implementar cache para reduzir o tempo de resposta em consultas frequentes (prioridade média)
 
-## 14. Melhorias e Ajustes Pendentes
-- [ ] Ajustar escala de sobreaviso conforme regras de negócio da aplicação
-- [ ] Ajustar layout de sobreaviso nos relatórios de sobreaviso
-- [ ] Ajustar layout de sobreaviso no Relatório de Impressão
-- [ ] Revisar validações da aplicação conforme o tipo de usuário
-- [ ] Revisar o controle de registro de alterações da aplicação: logs, gatilhos, etc e permitir que o usuário administrador tenha acesso a essas informações
-- [ ] Ocultar do layout do usuário comum aquilo que ele não pode usar
-
-## 15. Estratégia e Governança (Prioridade Alta)
-- [ ] Implementar rotina de backup automático do banco de dados e testes de restauração
-- [ ] Garantir conformidade com LGPD e/ou outras normas aplicáveis
-- [ ] Registrar logs de login/logout e atividades sensíveis dos usuários
-- [ ] Proteger contra SQL Injection, XSS, CSRF (reforçar testes e validação)
-- [ ] Implementar política de expiração e complexidade de senhas
-- [ ] Permitir redefinição de senha via email seguro
-- [ ] Implementar autenticação em dois fatores (2FA) para administradores
-
-## 16. Monitoramento, Auditoria e Suporte (Prioridade Média)
-- [ ] Implementar monitoramento de erros críticos e alertas para administradores
-- [ ] Registrar tentativas de acesso não autorizado
-- [ ] Implementar visualização de logs para auditoria
-- [ ] Criar documentação para suporte técnico e FAQ para usuários finais
-- [ ] Definir e documentar SLAs (Service Level Agreements) para suporte
-
-## 17. Performance, Escalabilidade e Atualização (Prioridade Média)
-- [ ] Planejar e testar o sistema para uso simultâneo por múltiplos usuários
-- [ ] Monitorar e otimizar uso de memória e CPU em produção
-- [ ] Planejar e documentar procedimentos de atualização de versão do sistema e do banco de dados
-- [ ] Implementar scripts de migração de dados para futuras versões
-
-## 18. Usabilidade, Acessibilidade e Testes Finais (Prioridade Média)
-- [ ] Garantir acessibilidade para pessoas com deficiência (WCAG), incluindo navegação por teclado e leitores de tela
-- [ ] Realizar sessões de teste com usuários reais (médicos, administrativos) e coletar feedback
-- [ ] Testar em diferentes navegadores/dispositivos
-
-## 19. Integração e Futuro (Prioridade Baixa)
-- [ ] Planejar integração futura com sistemas hospitalares, prontuário eletrônico ou APIs externas
-- [ ] Implementar anonimização/máscara de dados sensíveis em relatórios e logs, quando necessário
-- [ ] Integrar testes automatizados em pipeline CI/CD (ex: GitHub Actions, GitLab CI)
-- [ ] Validar builds automáticos antes de deploy
-
-## 20. Melhorias e Planejamento Adicional
-
-### Design Patterns
-- [ ] Implementar Factory Method para criação de instâncias de modelos (Doctor, Specialization, Plantonista).
-- [ ] Adicionar Observer para monitorar alterações em entidades críticas.
-- [ ] Utilizar Strategy para encapsular regras de negócio específicas.
-- [ ] Garantir que a configuração do banco de dados seja gerenciada por um Singleton.
-
-### Testes
-- [ ] Garantir cobertura de testes de pelo menos 90% do código.
-- [ ] Implementar testes de carga para simular múltiplos usuários simultâneos.
-- [ ] Validar proteção contra SQL Injection, XSS, CSRF, e outras vulnerabilidades.
-
-### Documentação
-- [ ] Adicionar diagramas UML para ilustrar relacionamentos entre classes e padrões de design.
-- [ ] Criar um guia detalhado para configuração do ambiente de desenvolvimento e produção.
-
-### Usabilidade
-- [ ] Garantir conformidade com WCAG para navegação por teclado e leitores de tela.
-- [ ] Implementar alternância entre modo claro e escuro.
-
-### Governança e Segurança
-- [ ] Implementar rotinas automáticas de backup e restauração do banco de dados.
-- [ ] Adicionar autenticação em dois fatores (2FA) para administradores.
-- [ ] Garantir complexidade mínima e expiração periódica de senhas.
-
-### Integração
-- [ ] Planejar integração futura com sistemas hospitalares e APIs externas.
-- [ ] Configurar pipelines de integração contínua e entrega contínua (CI/CD).
-
-### Performance
-- [ ] Revisar todas as queries SQL para garantir eficiência máxima.
-- [ ] Implementar cache para reduzir o tempo de resposta em consultas frequentes.
-
-## 21. Migração para PyQt
-- [x] Migrar toda a aplicação para PyQt, substituindo o Flask.
-- [ ] Adaptar todas as rotas e templates para janelas e diálogos do PyQt.
-- [x] Atualizar o NotificationManager para exibir mensagens em janelas modais do PyQt.
-- [ ] Criar janelas para funcionalidades como cadastro, listagem e edição de plantonistas.
-- [ ] Testar todas as funcionalidades para garantir que a transição para PyQt foi bem-sucedida.
-- [x] Atualizar a documentação para refletir a mudança para PyQt.
-- [ ] Remover dependências relacionadas ao Flask e adicionar dependências do PyQt no requirements.txt.
-- [ ] Preservar o sistema de templates e componentes na aplicação, mesmo com a migração para PyQt.
-- [ ] Utilizar Jinja2 para renderizar templates HTML e exibi-los em widgets do PyQt, como QWebEngineView ou QTextBrowser.
-- [ ] Adaptar interações do usuário no PyQt para atualizar os templates renderizados dinamicamente.
+## 11. Usabilidade e Acessibilidade
+- [ ] Garantir acessibilidade para pessoas com deficiência (WCAG), incluindo navegação por teclado e leitores de tela (prioridade média)
+- [ ] Realizar sessões de teste com usuários reais (médicos, administrativos) e coletar feedback (prioridade média)

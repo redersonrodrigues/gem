@@ -18,6 +18,24 @@ mysql_206
 .env
 aula207_ola_django/static_files
 
+# Ignorar o ambiente virtual
+.venv/
+
+# Ignorar arquivos temporários
+*.pyc
+__pycache__/
+
+# Ignorar banco de dados local
+gem.db
+
+# Ignorar logs e arquivos de saída
+*.log
+*.out
+
+# Ignorar configurações do editor
+.vscode/
+.idea/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
