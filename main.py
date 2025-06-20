@@ -3,6 +3,7 @@
 
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow
+from app.core.database import init_db
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -12,6 +13,8 @@ class MainWindow(QMainWindow):
         # Aqui você pode adicionar widgets e lógica inicial
 
 if __name__ == '__main__':
+    init_db()
+    print("Banco de dados inicializado com sucesso!")
     app = QApplication(sys.argv)
     window = MainWindow()
     window.show()

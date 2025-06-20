@@ -3,6 +3,7 @@
 ## Setup Inicial
 
 1. Crie e ative o ambiente virtual Python:
+
    ```bash
    python -m venv .venv
    # Ative o venv conforme seu sistema operacional
@@ -13,6 +14,7 @@
    ```
 
 2. Instale as dependências:
+
    ```bash
    pip install -r requirements.txt
    ```
@@ -33,6 +35,7 @@
 Consulte o arquivo `todo.todo` para o checklist completo do projeto.
 
 ## Principais Tecnologias
+
 - Python 3.8+
 - PyQt5 (interface gráfica)
 - SQLAlchemy (ORM)
@@ -42,7 +45,9 @@ Consulte o arquivo `todo.todo` para o checklist completo do projeto.
 - ReportLab, PyPDF2 (relatórios e PDFs)
 
 ## Contribuição
+
 Consulte o arquivo CONTRIBUTING.md para diretrizes de contribuição.
 
 ## Licença
+
 Este projeto está licenciado sob os termos da licença MIT.
