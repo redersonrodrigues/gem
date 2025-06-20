@@ -1,0 +1,17 @@
+# Ignorar ambiente virtual, arquivos temporários e banco de dados local
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.db
+*.sqlite3
+.env
+.DS_Store
+.vscode/
+.idea/
+# Arquivos de log e temporários
+*.log
+*.tmp
+temp/
+# Configurações de IDE
+*.code-workspace
