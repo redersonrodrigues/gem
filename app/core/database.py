@@ -3,13 +3,20 @@ from sqlalchemy.orm import sessionmaker
 from app.models.base import Base
 import os
 
-# Caminho absoluto para o banco de dados gem.db
-DB_PATH = r'F:\projetos\gem\gem.db'
-engine = create_engine(f'sqlite:///{DB_PATH}', echo=True)
-SessionLocal = sessionmaker(bind=engine)
+# Caminho padrão para o banco de dados gem.db
+DEFAULT_DB_PATH = os.path.abspath(os.getenv('GEM_DB_PATH', r'F:\projetos\gem\gem.db'))
 
-def init_db():
+def get_engine(db_path=None, echo=True):
+    path = db_path or DEFAULT_DB_PATH
+    return create_engine(f'sqlite:///{path}', echo=echo)
+
+def get_session_local(db_path=None, echo=True):
+    engine = get_engine(db_path, echo)
+    return sessionmaker(bind=engine)
+
+def init_db(db_path=None, echo=True):
+    engine = get_engine(db_path, echo)
     Base.metadata.create_all(bind=engine)
 
-# Exporta DB_PATH para importação externa
-__all__ = ['init_db', 'DB_PATH']
+# Exporta funções utilitárias e caminho padrão
+__all__ = ['init_db', 'get_engine', 'get_session_local', 'DEFAULT_DB_PATH']

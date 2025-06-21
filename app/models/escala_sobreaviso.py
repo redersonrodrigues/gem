@@ -32,6 +32,8 @@ class EscalaSobreaviso(Base):
     especializacao = relationship(
         'app.models.especializacao.Especializacao'
     )  # Relação ORM especialização
+    version = Column(Integer, nullable=False, default=1)
+    __mapper_args__ = {"version_id_col": version}
 
     def __repr__(self):
         """
@@ -42,3 +44,10 @@ class EscalaSobreaviso(Base):
             f"<EscalaSobreaviso(data_inicial={self.data_inicial}, "
             f"data_final={self.data_final})>"
         )
+
+    def duracao_horas(self):
+        """
+        Retorna a duração do sobreaviso em horas.
+        Por padrão, considera 12h para cada sobreaviso (ajuste conforme regra de negócio).
+        """
+        return 12

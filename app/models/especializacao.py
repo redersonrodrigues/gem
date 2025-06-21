@@ -16,6 +16,8 @@ class Especializacao(Base):
     nome = Column(
         String, unique=True, nullable=False
     )  # Nome da especialização (único)
+    version = Column(Integer, nullable=False, default=1)
+    __mapper_args__ = {"version_id_col": version}
 
     medicos = relationship(
         'Medico', back_populates='especializacao'

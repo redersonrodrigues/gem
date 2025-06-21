@@ -32,6 +32,8 @@ class EscalaPlantonista(Base):
     medico2 = relationship(
         'app.models.medico.Medico', foreign_keys=[medico2_id], back_populates='escalas_plantonista2'
     )  # Relação ORM médico 2
+    version = Column(Integer, nullable=False, default=1)
+    __mapper_args__ = {"version_id_col": version}
 
     def __repr__(self):
         """
@@ -39,3 +41,10 @@ class EscalaPlantonista(Base):
         debug/log.
         """
         return f"<EscalaPlantonista(data={self.data}, turno={self.turno})>"
+
+    def duracao_horas(self):
+        """
+        Retorna a duração do plantão em horas.
+        Por padrão, considera 12h para cada plantão (diurno ou noturno).
+        """
+        return 12

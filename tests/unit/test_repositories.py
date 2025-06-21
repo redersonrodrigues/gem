@@ -32,6 +32,14 @@ def test_medico_crud(session):
     medico = Medico(nome="Teste Médico", especializacao_id=esp.id)
     repo.create(medico)
     all_med = repo.get_all()
+    # Serializa todos os médicos usando .to_dict() para garantir compatibilidade JSON
+    import json
+    for m in all_med:
+        m_dict = m.to_dict()
+        try:
+            json.dumps(m_dict)
+        except TypeError as e:
+            pytest.fail(f"Medico .to_dict() não é serializável para JSON: {e}")
     assert any(m.nome == "Teste Médico" for m in all_med)
     session.delete(medico)
     session.delete(esp)
@@ -76,3 +84,43 @@ def test_update_delete_invalid(session):
     session.delete(medico)
     session.delete(esp)
     session.commit()
+
+def test_medico_to_dict_json_serializable(session):
+    import json
+    esp = Especializacao(nome="Esp JSON")
+    session.add(esp)
+    session.commit()
+    medico = Medico(nome="Med JSON", especializacao_id=esp.id)
+    session.add(medico)
+    session.commit()
+    # Serializa usando .to_dict()
+    medico_dict = medico.to_dict()
+    try:
+        json.dumps(medico_dict)
+    except TypeError as e:
+        pytest.fail(f"Medico .to_dict() não é serializável para JSON: {e}")
+    assert 'status' in medico_dict
+    assert isinstance(medico_dict['status'], str)
+
+def test_medico_optimistic_locking(session):
+    esp = Especializacao(nome="Esp Lock")
+    session.add(esp)
+    session.commit()
+    repo = MedicoRepository(session)
+    medico = Medico(nome="Med Lock", especializacao_id=esp.id)
+    repo.create(medico)
+    from sqlalchemy.orm import sessionmaker
+    from sqlalchemy.orm.exc import StaleDataError
+    Session = sessionmaker(bind=session.get_bind())
+    s1 = Session()
+    s2 = Session()
+    m1 = s1.query(Medico).get(medico.id)
+    m2 = s2.query(Medico).get(medico.id)
+    m1.nome = "Alteração S1"
+    s1.commit()
+    m2.nome = "Alteração S2"
+    repo2 = MedicoRepository(s2)
+    with pytest.raises((RuntimeError, StaleDataError)) as excinfo:
+        repo2.update(m2)
+    s1.close()
+    s2.close()

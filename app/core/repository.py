@@ -3,6 +3,7 @@ Implementação do padrão Repository para abstração de acesso ao banco de dad
 Cada entidade terá seu próprio repositório, facilitando testes, manutenção e futuras migrações.
 """
 from sqlalchemy.orm import Session
+from sqlalchemy.orm.exc import StaleDataError
 from typing import Generic, TypeVar, Type, List, Optional
 from app.models.medico import Medico
 from app.models.especializacao import Especializacao
@@ -28,8 +29,12 @@ class BaseRepository(Generic[T]):
         return obj
 
     def update(self, db: Session, obj: T) -> T:
-        db.commit()
-        db.refresh(obj)
+        try:
+            db.commit()
+            db.refresh(obj)
+        except StaleDataError:
+            db.rollback()
+            raise RuntimeError("Conflito de concorrência: o registro foi modificado por outro usuário.")
         return obj
 
     def delete(self, db: Session, obj: T) -> None:

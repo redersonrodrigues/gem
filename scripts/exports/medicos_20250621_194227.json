@@ -1,0 +1,10 @@
+[
+  {
+    "id": 1,
+    "nome": "Dr. Teste",
+    "nome_pj": "PJ Teste",
+    "especializacao_id": 1,
+    "status": "ativo",
+    "version": 1
+  }
+]

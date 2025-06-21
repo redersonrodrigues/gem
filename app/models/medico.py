@@ -7,6 +7,10 @@ from .base import Base
 class StatusMedicoEnum(enum.Enum):
     ATIVO = 'ativo'
     INATIVO = 'inativo'
+    AFASTADO = 'afastado'
+
+    def __str__(self):
+        return self.value
 
 
 class Medico(Base):
@@ -34,11 +38,11 @@ class Medico(Base):
             StatusMedicoEnum,
             name="status_medico_enum",
             values_callable=lambda x: [e.value for e in x],
-            native_enum=False
         ),
         nullable=False,
-        default=StatusMedicoEnum.ATIVO.value
-    )  # Status do médico: 'ativo' ou 'inativo', restrito por Enum
+    )
+    version = Column(Integer, nullable=False, default=1)
+    __mapper_args__ = {"version_id_col": version}
 
     especializacao = relationship(
         'Especializacao', back_populates='medicos'
@@ -53,8 +57,30 @@ class Medico(Base):
         'EscalaSobreaviso', foreign_keys='EscalaSobreaviso.medico1_id', back_populates='medico1'
     )  # Relação com EscalaSobreaviso
 
+    def __init__(self, nome, especializacao_id, nome_pj=None, status=StatusMedicoEnum.ATIVO.value):
+        self.nome = nome
+        self.nome_pj = nome_pj
+        self.especializacao_id = especializacao_id
+        # Garante que status sempre seja string
+        if isinstance(status, StatusMedicoEnum):
+            self.status = status.value
+        else:
+            self.status = str(status)
+
     def __repr__(self):
         """
         Retorna uma representação legível do médico para debug/log.
         """
         return f"<Medico(nome={self.nome}, status={self.status})>"
+
+    def to_dict(self):
+        """
+        Serializa o médico para dicionário, convertendo status para string (valor do Enum).
+        """
+        return {
+            'id': self.id,
+            'nome': self.nome,
+            'nome_pj': self.nome_pj,
+            'especializacao_id': self.especializacao_id,
+            'status': self.status.value if hasattr(self.status, 'value') else str(self.status)
+        }

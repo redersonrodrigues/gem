@@ -162,16 +162,26 @@ O projeto utiliza o padrão Repository para abstrair o acesso ao banco de dados,
 - Testes: `tests/unit/test_repositories.py`
 - Documentação detalhada: [`docs/repository.md`](docs/repository.md)
 
-**Exemplo de uso:**
+## Padrão Dinâmico de Caminho do Banco de Dados (SQLite)
+
+Toda a aplicação, scripts e testes suportam o uso dinâmico do caminho do banco de dados SQLite.
+
+- O core (`app/core/database.py`) permite informar o caminho do banco via argumento `db_path` em todas as funções principais.
+- Todos os scripts aceitam o argumento `--db-path` para operar sobre qualquer arquivo de banco.
+- Os testes automatizados utilizam bancos temporários, garantindo isolamento.
+- O padrão é retrocompatível: se não informado, utiliza `gem.db` na raiz do projeto.
+- Consulte a documentação detalhada em [`docs/sql/padrao_db_dinamico.md`](docs/sql/padrao_db_dinamico.md).
+
+**Exemplo de uso em script:**
+
+```sh
+python scripts/export_db.py --db-path tests/tmp/teste.db
+```
+
+**Exemplo de uso no core:**
 
 ```python
-from app.core.database import SessionLocal
-from app.core.repositories import MedicoRepository
-from app.models.medico import Medico
-
-with SessionLocal() as db:
-    repo = MedicoRepository(db)
-    medico = Medico(nome="Exemplo", crm="12345", especialidade_id=1)
-    repo.create(medico)
-    todos = repo.get_all()
+from app.core.database import get_engine, init_db
+engine = get_engine(db_path='tests/tmp/teste.db')
+init_db(db_path='tests/tmp/teste.db')
 ```
