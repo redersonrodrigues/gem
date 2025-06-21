@@ -151,3 +151,27 @@ Consulte o arquivo CONTRIBUTING.md para diretrizes de contribuição.
 Este projeto está licenciado sob os termos da licença MIT.
 
 [Repositório no GitHub](https://github.com/seu-usuario/gem)
+
+## Padrão Repository
+
+O projeto utiliza o padrão Repository para abstrair o acesso ao banco de dados, centralizando operações CRUD e regras de validação em classes específicas. Isso facilita manutenção, testes e futuras migrações de banco.
+
+- Implementação genérica: `app/core/repository.py`
+- Repositórios específicos: `app/core/repositories.py`
+- Funções CRUD refatoradas: `app/crud.py`
+- Testes: `tests/unit/test_repositories.py`
+- Documentação detalhada: [`docs/repository.md`](docs/repository.md)
+
+**Exemplo de uso:**
+
+```python
+from app.core.database import SessionLocal
+from app.core.repositories import MedicoRepository
+from app.models.medico import Medico
+
+with SessionLocal() as db:
+    repo = MedicoRepository(db)
+    medico = Medico(nome="Exemplo", crm="12345", especialidade_id=1)
+    repo.create(medico)
+    todos = repo.get_all()
+```

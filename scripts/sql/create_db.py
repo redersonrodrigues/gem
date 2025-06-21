@@ -10,15 +10,21 @@ Este script pode ser executado manualmente ou via setup inicial.
 import sqlite3
 import os
 
-DB_PATH = os.path.join(os.path.dirname(__file__), '../..', 'gem.db')
+DB_PATH = r'F:\projetos\gem\gem.db'
 
 def create_tables():
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
 
+    # Dropa as tabelas se existirem (ordem importa por causa das FKs)
+    cursor.execute('DROP TABLE IF EXISTS escalas_sobreaviso;')
+    cursor.execute('DROP TABLE IF EXISTS escalas_plantonistas;')
+    cursor.execute('DROP TABLE IF EXISTS medicos;')
+    cursor.execute('DROP TABLE IF EXISTS especializacoes;')
+
     # Tabela de especializações
     cursor.execute('''
-    CREATE TABLE IF NOT EXISTS especializacoes (
+    CREATE TABLE especializacoes (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         nome TEXT NOT NULL UNIQUE
     );
@@ -26,7 +32,7 @@ def create_tables():
 
     # Tabela de médicos
     cursor.execute('''
-    CREATE TABLE IF NOT EXISTS medicos (
+    CREATE TABLE medicos (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         nome TEXT NOT NULL,
         nome_pj TEXT,
@@ -38,7 +44,7 @@ def create_tables():
 
     # Tabela de escalas de plantonistas
     cursor.execute('''
-    CREATE TABLE IF NOT EXISTS escalas_plantonistas (
+    CREATE TABLE escalas_plantonistas (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         data DATE NOT NULL,
         turno TEXT NOT NULL CHECK(turno IN ('diurno', 'noturno')),
@@ -51,7 +57,7 @@ def create_tables():
 
     # Tabela de escalas de sobreaviso
     cursor.execute('''
-    CREATE TABLE IF NOT EXISTS escalas_sobreaviso (
+    CREATE TABLE escalas_sobreaviso (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         data_inicial DATE NOT NULL,
         data_final DATE NOT NULL,

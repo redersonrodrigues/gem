@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, Date, String, ForeignKey
+from sqlalchemy import Column, Integer, Date, String, ForeignKey, UniqueConstraint
 from sqlalchemy.orm import relationship
 from .base import Base
 
@@ -13,17 +13,29 @@ class EscalaPlantonista(Base):
     - dois médicos (referências para Medico)
     """
     __tablename__ = 'escalas_plantonistas'
+    __table_args__ = (
+        UniqueConstraint('data', 'turno', name='uix_data_turno'),
+    )
     id = Column(Integer, primary_key=True)
     data = Column(Date, nullable=False)  # Data do plantão
     turno = Column(String, nullable=False)  # Turno: 'diurno' ou 'noturno'
-    medico1_id = Column(Integer, ForeignKey('medicos.id'), nullable=False)  # FK médico 1
-    medico2_id = Column(Integer, ForeignKey('medicos.id'), nullable=True)   # FK médico 2 (opcional)
+    medico1_id = Column(
+        Integer, ForeignKey('medicos.id'), nullable=False
+    )  # FK médico 1
+    medico2_id = Column(
+        Integer, ForeignKey('medicos.id'), nullable=True
+    )  # FK médico 2 (opcional)
 
-    medico1 = relationship('app.models.medico.Medico', foreign_keys=[medico1_id])  # Relação ORM médico 1
-    medico2 = relationship('app.models.medico.Medico', foreign_keys=[medico2_id])  # Relação ORM médico 2
+    medico1 = relationship(
+        'app.models.medico.Medico', foreign_keys=[medico1_id], back_populates='escalas_plantonista1'
+    )  # Relação ORM médico 1
+    medico2 = relationship(
+        'app.models.medico.Medico', foreign_keys=[medico2_id], back_populates='escalas_plantonista2'
+    )  # Relação ORM médico 2
 
     def __repr__(self):
         """
-        Retorna uma representação legível da escala de plantonista para debug/log.
+        Retorna uma representação legível da escala de plantonista para
+        debug/log.
         """
         return f"<EscalaPlantonista(data={self.data}, turno={self.turno})>"

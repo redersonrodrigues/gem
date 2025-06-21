@@ -2,6 +2,7 @@ from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
 from .base import Base
 
+
 class Especializacao(Base):
     """
     Modelo ORM para especializações médicas.
@@ -12,9 +13,13 @@ class Especializacao(Base):
     """
     __tablename__ = 'especializacoes'
     id = Column(Integer, primary_key=True)
-    nome = Column(String, unique=True, nullable=False)  # Nome da especialização
+    nome = Column(
+        String, unique=True, nullable=False
+    )  # Nome da especialização (único)
 
-    medicos = relationship('Medico', back_populates='especializacao')  # Médicos desta especialização
+    medicos = relationship(
+        'Medico', back_populates='especializacao'
+    )  # Médicos desta especialização
 
     def __repr__(self):
         """

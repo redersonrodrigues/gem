@@ -1,87 +1,85 @@
 # Operações CRUD para os modelos
-from .models import db, Hospital, Medico, Especializacao
-
-
-def create_hospital(nome, endereco):
-    hospital = Hospital(nome=nome, endereco=endereco)
-    db.session.add(hospital)
-    db.session.commit()
-    return hospital
-
-
-def get_hospitals():
-    return Hospital.query.all()
-
-
-def update_hospital(hospital_id, nome=None, endereco=None):
-    hospital = Hospital.query.get(hospital_id)
-    if hospital:
-        if nome:
-            hospital.nome = nome
-        if endereco:
-            hospital.endereco = endereco
-        db.session.commit()
-    return hospital
-
-
-def delete_hospital(hospital_id):
-    hospital = Hospital.query.get(hospital_id)
-    if hospital:
-        db.session.delete(hospital)
-        db.session.commit()
+from app.core.database import SessionLocal
+from app.core.repositories import MedicoRepository, EspecializacaoRepository
+from app.models.medico import Medico
+from app.models.especializacao import Especializacao
 
 # CRUD para Medico
 
 
-def create_medico(nome):
-    medico = Medico(nome=nome)
-    db.session.add(medico)
-    db.session.commit()
-    return medico
+def create_medico(nome, nome_pj=None, especializacao_id=None, status=None):
+    with SessionLocal() as db:
+        repo = MedicoRepository(db)
+        medico = Medico(
+            nome=nome,
+            nome_pj=nome_pj,
+            especializacao_id=especializacao_id,
+            status=status
+        )
+        return repo.create(medico)
 
 
 def get_medicos():
-    return Medico.query.all()
+    with SessionLocal() as db:
+        repo = MedicoRepository(db)
+        return repo.get_all()
 
 
-def update_medico(medico_id, nome=None):
-    medico = Medico.query.get(medico_id)
-    if medico and nome:
-        medico.nome = nome
-        db.session.commit()
-    return medico
+def update_medico(
+    medico_id, nome=None, nome_pj=None, especializacao_id=None, status=None
+):
+    with SessionLocal() as db:
+        repo = MedicoRepository(db)
+        medico = repo.get_by_id(medico_id)
+        if medico:
+            if nome:
+                medico.nome = nome
+            if nome_pj:
+                medico.nome_pj = nome_pj
+            if especializacao_id:
+                medico.especializacao_id = especializacao_id
+            if status:
+                medico.status = status
+            return repo.update(medico)
+        return None
 
 
 def delete_medico(medico_id):
-    medico = Medico.query.get(medico_id)
-    if medico:
-        db.session.delete(medico)
-        db.session.commit()
+    with SessionLocal() as db:
+        repo = MedicoRepository(db)
+        medico = repo.get_by_id(medico_id)
+        if medico:
+            repo.delete(medico)
 
 # CRUD para Especializacao
 
 
 def create_especializacao(nome):
-    especializacao = Especializacao(nome=nome)
-    db.session.add(especializacao)
-    db.session.commit()
-    return especializacao
+    with SessionLocal() as db:
+        repo = EspecializacaoRepository(db)
+        especializacao = Especializacao(nome=nome)
+        return repo.create(especializacao)
 
 
 def get_especializacoes():
-    return Especializacao.query.all()
+    with SessionLocal() as db:
+        repo = EspecializacaoRepository(db)
+        return repo.get_all()
 
 
 def update_especializacao(especializacao_id, nome=None):
-    especializacao = Especializacao.query.get(especializacao_id)
-    if especializacao and nome:
-        especializacao.nome = nome
-        db.session.commit()
-    return especializacao
+    with SessionLocal() as db:
+        repo = EspecializacaoRepository(db)
+        especializacao = repo.get_by_id(especializacao_id)
+        if especializacao and nome:
+            especializacao.nome = nome
+            return repo.update(especializacao)
+        return None
 
 
 def delete_especializacao(especializacao_id):
-    especializacao = Especializacao.query.get(especializacao_id)
-    if especializacao:
-        db.session.delete(especializacao)
-        db.session.commit()
+    with SessionLocal() as db:
+        repo = EspecializacaoRepository(db)
+        especializacao = repo.get_by_id(especializacao_id)
+        if especializacao:
+            repo.delete(especializacao)

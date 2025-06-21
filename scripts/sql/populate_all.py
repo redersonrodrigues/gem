@@ -8,7 +8,7 @@ Script Python para popular o banco de dados gem.db com os dados de exemplo das t
 import sqlite3
 import os
 
-DB_PATH = os.path.join(os.path.dirname(__file__), '../..', 'gem.db')
+DB_PATH = r'F:\projetos\gem\gem.db'
 SCRIPTS = [
     'populate_especializacoes.sql',
     'populate_medicos.sql',

@@ -39,7 +39,7 @@ def test_medico_criacao(session):
     session.commit()
     assert medico.id is not None
     assert medico.nome == "Dr. João"
-    assert medico.status == "ativo"
+    assert medico.status.value == "ativo"
     assert medico.especializacao_id == espec.id
 
 def test_escala_plantonista_criacao(session):
