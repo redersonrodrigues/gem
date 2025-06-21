@@ -3,6 +3,7 @@ from sqlalchemy.orm import relationship
 from .base import Base
 
 class Medico(Base):
+    """Modelo ORM para médicos, contendo nome, nome pessoa jurídica, especialização e status."""
     __tablename__ = 'medicos'
     id = Column(Integer, primary_key=True)
     nome = Column(String, nullable=False)
@@ -13,4 +14,5 @@ class Medico(Base):
     especializacao = relationship('Especializacao', back_populates='medicos')
 
     def __repr__(self):
+        """Retorna representação legível do médico."""
         return f"<Medico(nome={self.nome}, status={'Ativo' if self.status else 'Inativo'})>"

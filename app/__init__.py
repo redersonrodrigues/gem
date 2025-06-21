@@ -1,8 +1,6 @@
 # Inicialização do pacote app
 from flask import Flask
 from .database import init_db
-from flask_migrate import Migrate
-from .models import db
 
 
 def create_app():
@@ -12,9 +10,6 @@ def create_app():
 
     # Inicializar o banco de dados
     init_db(app)
-
-    # Configurar Flask-Migrate
-    migrate = Migrate(app, db)
 
     return app
 # Aqui ficará o código principal da aplicação (MVC, controllers, serviços, etc)

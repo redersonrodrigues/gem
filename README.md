@@ -1,12 +1,48 @@
 # GEM - Gestão de Escalas Médicas
 
+[![GitHub](https://img.shields.io/badge/GitHub-gem-blue?logo=github)](https://github.com/seu-usuario/gem)
+[![Build Status](https://github.com/seu-usuario/gem/actions/workflows/ci.yml/badge.svg)](https://github.com/seu-usuario/gem/actions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
+## Sumário
+
+- [Visão Geral](#visão-geral)
+- [Funcionalidades](#funcionalidades)
+- [Setup Inicial](#setup-inicial)
+- [Estrutura do Projeto](#estrutura-do-projeto)
+- [Testes](#testes)
+- [Roadmap](#roadmap)
+- [Ambiente](#ambiente)
+- [Documentação](#documentação)
+- [Contribuição](#contribuição)
+- [Segurança](#segurança)
+- [Suporte](#suporte)
+- [Licença](#licença)
+
+## Visão Geral
+
+Aplicação desktop para gestão de escalas médicas (plantonistas e sobreaviso), desenvolvida em Python, arquitetura MVC, com foco em qualidade, segurança, usabilidade e integração.
+
+## Funcionalidades
+
+- Cadastro e gestão de médicos, especializações e escalas
+- Interface gráfica responsiva (PyQt5)
+- Modo claro/escuro com comutador
+- Relatórios e exportação em PDF (ReportLab, PyPDF2)
+- Testes automatizados (pytest, pytest-cov, pytest-qt)
+- Integração com banco SQLite (SQLAlchemy)
+- Controle de acesso e permissões (admin/usuário)
+- Geração de logs e auditoria
+- Integração futura com APIs externas
+- Layout adaptado para diferentes tamanhos de tela
+- Uso local de ícones FontAwesome
+
 ## Setup Inicial
 
 1. Crie e ative o ambiente virtual Python:
 
    ```bash
    python -m venv .venv
-   # Ative o venv conforme seu sistema operacional
    # Windows:
    .venv\Scripts\activate
    # Linux/Mac:
@@ -19,7 +55,10 @@
    pip install -r requirements.txt
    ```
 
-3. Execute a aplicação:
+3. Copie o arquivo `.env.example` para `.env` e configure as variáveis sensíveis (se necessário).
+
+4. Execute a aplicação:
+
    ```bash
    python main.py
    ```
@@ -30,9 +69,46 @@
 - static/: Arquivos estáticos (ícones, css, imagens)
 - tests/: Testes automatizados
 - scripts/: Scripts auxiliares e SQL
-- docs/: Documentação técnica
+- docs/: Documentação técnica (consulte `docs/` para detalhes, diagramas e guias)
+- todo.todo: Checklist detalhado do projeto
 
-Consulte o arquivo `todo.todo` para o checklist completo do projeto.
+## Testes
+
+- Para rodar todos os testes:
+
+  ```bash
+  pytest
+  ```
+
+- Para gerar relatório de cobertura:
+
+  ```bash
+  pytest --cov=app
+  ```
+
+- Para testar interface gráfica:
+
+  ```bash
+  pytest --qt-log-level=INFO
+  ```
+
+## Roadmap
+
+- [x] Estrutura inicial, ambiente, dependências, CI/CD
+- [x] README, LICENSE, CONTRIBUTING.md
+- [x] Estrutura de documentação e setup
+- [ ] Modelagem do banco de dados e scripts SQL
+- [ ] Implementação dos modelos e repositórios
+- [ ] CRUDs, regras de negócio e interface gráfica
+- [ ] Controle de acesso, logs, relatórios e integrações
+- [ ] Testes completos e cobertura
+- [ ] Otimizações, segurança, deploy e melhorias contínuas
+
+## Ambiente
+
+- Python 3.8+ (recomendado: 3.13)
+- Testado em Windows 10/11
+- Requer VSCode ou editor compatível
 
 ## Principais Tecnologias
 
@@ -44,10 +120,34 @@ Consulte o arquivo `todo.todo` para o checklist completo do projeto.
 - pytest, pytest-cov, pytest-qt (testes)
 - ReportLab, PyPDF2 (relatórios e PDFs)
 
+## Documentação
+
+A documentação técnica detalhada está disponível na pasta `docs/`.
+
+## Segurança
+
+- Variáveis sensíveis em `.env` (não versionado)
+- Uso de boas práticas PEP8/PEP257
+- Estrutura para controle de acesso, logs e auditoria
+- Planejamento para criptografia de dados sensíveis
+
+## Suporte
+
+- Para dúvidas, sugestões ou reporte de bugs, abra uma issue no GitHub ou envie e-mail para: [contato@seudominio.com](mailto:contato@seudominio.com)
+
 ## Contribuição
 
 Consulte o arquivo CONTRIBUTING.md para diretrizes de contribuição.
 
+## Screenshots
+
+<!-- Adicione imagens reais da interface quando disponível -->
+
+![Tela principal](static/assets/demo1.png)
+![Cadastro de médico](static/assets/demo2.png)
+
 ## Licença
 
 Este projeto está licenciado sob os termos da licença MIT.
+
+[Repositório no GitHub](https://github.com/seu-usuario/gem)

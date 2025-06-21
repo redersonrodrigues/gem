@@ -3,6 +3,7 @@ from sqlalchemy.orm import relationship
 from .base import Base
 
 class Escala(Base):
+    """Modelo ORM para escalas médicas (plantonista e sobreaviso)."""
     __tablename__ = 'escalas'
     id = Column(Integer, primary_key=True)
     tipo = Column(String, nullable=False)  # plantonista ou sobreaviso
