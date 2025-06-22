@@ -9,40 +9,51 @@ from app.models.medico import Medico
 from app.models.especializacao import Especializacao
 from datetime import date
 from app.models import audit_listener  # Garante listeners ativos nos testes
+import uuid
+import logging
+import shutil
+
+logging.basicConfig(level=logging.WARNING, format='%(levelname)s:%(message)s')
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="function")
 def banco_temp_integracao():
     """
-    Cria um banco SQLite temporário para a sessão de testes de integração,
+    Cria um banco SQLite temporário para cada teste de integração,
     aplica as migrations Alembic e retorna o caminho do banco.
     """
-    with tempfile.NamedTemporaryFile(suffix='.db', delete=False) as tmpfile:
-        db_path = tmpfile.name
+    tmp_dir = os.path.join(os.path.dirname(__file__), "tmp")
+    # Garante que o diretório tmp/ exista e esteja limpo
+    if os.path.exists(tmp_dir):
+        try:
+            shutil.rmtree(tmp_dir)
+        except Exception as e:
+            logging.warning(f"[TEST] Falha ao limpar tmp/: {e}")
+    os.makedirs(tmp_dir, exist_ok=True)
+    db_path = os.path.join(tmp_dir, f"test_{uuid.uuid4().hex}.db")
     db_url = f"sqlite:///{db_path}"
     os.environ["DATABASE_URL"] = db_url
-    subprocess.run(["alembic", "upgrade", "head"], check=True)
-    yield db_path
-    # Fecha conexões do SQLAlchemy e aguarda antes de remover o arquivo
-    import time
-    from sqlalchemy import create_engine
-    import gc
+    logging.warning(f"[TEST] [INTEGRACAO] Criando banco temporário: {db_path}")
+    # Garante que o arquivo não existe antes
+    if os.path.exists(db_path):
+        try:
+            os.unlink(db_path)
+        except Exception as e:
+            logging.warning(f"[TEST] Falha ao remover banco antigo: {e}")
+    logging.warning(f"[TEST] [INTEGRACAO] Executando Alembic para {db_url}")
     try:
-        engine = create_engine(f"sqlite:///{db_path}")
-        engine.dispose()
-    except Exception:
-        pass
-    try:
-        import sqlite3
-        sqlite3.connect(db_path).close()
-    except Exception:
-        pass
-    gc.collect()  # Força liberação de recursos pendentes
-    time.sleep(2)  # Aguarda liberação do arquivo
-    os.unlink(db_path)
+        result = subprocess.run(["alembic", "upgrade", "head"], check=True, env=os.environ.copy(), capture_output=True, text=True)
+        logging.warning(f"[TEST] [INTEGRACAO] Alembic stdout: {result.stdout}")
+        logging.warning(f"[TEST] [INTEGRACAO] Alembic stderr: {result.stderr}")
+    except Exception as e:
+        logging.error(f"[TEST] Erro ao rodar Alembic: {e}")
+        raise
+    logging.warning(f"[TEST] [INTEGRACAO] Banco existe após Alembic? {os.path.exists(db_path)}")
+    assert os.path.exists(db_path), f"Banco temporário não foi criado: {db_path}"
+    return db_path
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="function")
 def session_factory(banco_temp_integracao):
     """
     Retorna uma factory de sessões SQLAlchemy para o banco temporário de integração.
@@ -56,13 +67,34 @@ def session_factory(banco_temp_integracao):
     return factory
 
 
-@pytest.fixture
-def session(session_factory):
+@pytest.fixture(scope="function")
+def session(session_factory, banco_temp_integracao):
+    assert os.path.exists(banco_temp_integracao), f"Banco não existe: {banco_temp_integracao}"
     db = session_factory()
     try:
         yield db
     finally:
         db.close()
+        import time
+        from sqlalchemy import create_engine
+        import gc
+        try:
+            engine = create_engine(f"sqlite:///{banco_temp_integracao}")
+            engine.dispose()
+        except Exception:
+            pass
+        try:
+            import sqlite3
+            sqlite3.connect(banco_temp_integracao).close()
+        except Exception:
+            pass
+        gc.collect()
+        time.sleep(1)
+        if os.path.exists(banco_temp_integracao):
+            logging.warning(f"[TEST] Removendo banco temporário: {banco_temp_integracao}")
+            os.unlink(banco_temp_integracao)
+        else:
+            logging.warning(f"[TEST] Banco temporário já removido: {banco_temp_integracao}")
 
 
 @pytest.fixture

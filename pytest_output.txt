@@ -1,0 +1,2662 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.0, pytest-8.4.1, pluggy-1.6.0 -- f:\projetos\gem\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: F:\projetos\gem
+configfile: pytest.ini
+collecting ... collected 70 items
+
+tests/integration/test_auth.py::test_login_valido_admin PASSED           [  1%]
+tests/integration/test_auth.py::test_login_invalido PASSED               [  2%]
+tests/integration/test_auth.py::test_login_valido_usuario_comum PASSED   [  4%]
+tests/integration/test_auth.py::test_permissoes_admin PASSED             [  5%]
+tests/integration/test_auth.py::test_permissoes_usuario_comum PASSED     [  7%]
+tests/integration/test_backup_export_import.py::test_backup_and_restore FAILED [  8%]
+tests/integration/test_backup_export_import.py::test_export_and_import PASSED [ 10%]
+tests/integration/test_consultas.py::test_medicos_disponiveis_sem_escalas ERROR [ 11%]
+tests/integration/test_consultas.py::test_medicos_disponiveis_com_plantao ERROR [ 12%]
+tests/integration/test_consultas.py::test_medicos_disponiveis_com_sobreaviso ERROR [ 14%]
+tests/integration/test_consultas.py::test_medicos_disponiveis_todos_escalados ERROR [ 15%]
+tests/integration/test_consultas.py::test_consultar_escalas_mes ERROR    [ 17%]
+tests/integration/test_consultas.py::test_medicos_mais_plantao ERROR     [ 18%]
+tests/integration/test_consultas.py::test_medicos_sem_escalas ERROR      [ 20%]
+tests/integration/test_consultas.py::test_cobertura_especialidades_por_turno ERROR [ 21%]
+tests/integration/test_consultas.py::test_consulta_historico_escalas ERROR [ 22%]
+tests/integration/test_consultas.py::test_medicos_inativos_afastados ERROR [ 24%]
+tests/integration/test_consultas.py::test_escalas_com_conflitos ERROR    [ 25%]
+tests/integration/test_consultas.py::test_relatorio_escala_plantonistas_csv_pdf ERROR [ 27%]
+tests/integration/test_consultas.py::test_relatorio_escala_sobreaviso_csv_pdf ERROR [ 28%]
+tests/integration/test_consultas.py::test_relatorio_escalas_por_especializacao ERROR [ 30%]
+tests/integration/test_consultas.py::test_relatorio_escalas_por_especializacao_exportacao ERROR [ 31%]
+tests/integration/test_consultas.py::test_relatorio_carga_horaria_medico_csv_pdf ERROR [ 32%]
+tests/integration/test_consultas.py::test_relatorio_escalas_futuras_csv_pdf ERROR [ 34%]
+tests/integration/test_consultas.py::test_relatorio_medicos_por_status_csv_pdf ERROR [ 35%]
+tests/integration/test_migration.py::test_migrate_medicos_especializacoes FAILED [ 37%]
+tests/integration/test_migration.py::test_migrate_all_tables FAILED      [ 38%]
+tests/integration/test_postgres_connection.py::test_postgres_connection PASSED [ 40%]
+tests/integration/test_relatorio_auditoria.py::test_consultar_auditoria_insercao_medico PASSED [ 41%]
+tests/integration/test_relatorio_auditoria.py::test_exportar_auditoria_csv PASSED [ 42%]
+tests/integration/test_relatorio_cobertura_minima.py::test_relatorio_cobertura_minima_lacuna PASSED [ 44%]
+tests/integration/test_relatorio_cobertura_minima.py::test_relatorio_cobertura_minima_com_plantao PASSED [ 45%]
+tests/integration/test_relatorio_cobertura_minima.py::test_exportar_cobertura_minima_csv PASSED [ 47%]
+tests/integration/test_relatorio_distribuicao_plantoes.py::test_relatorio_distribuicao_basico PASSED [ 48%]
+tests/integration/test_relatorio_distribuicao_plantoes.py::test_relatorio_distribuicao_csv PASSED [ 50%]
+tests/integration/test_relatorio_distribuicao_plantoes.py::test_relatorio_distribuicao_pdf PASSED [ 51%]
+tests/integration/test_relatorio_escala_sobreaviso.py::test_consultar_sobreaviso_periodo_limpo ERROR [ 52%]
+tests/integration/test_relatorio_escalas_por_data_turno.py::test_listar_escalas_por_data_turno ERROR [ 54%]
+tests/integration/test_relatorio_escalas_por_data_turno.py::test_exportar_escalas_por_data_turno_csv ERROR [ 55%]
+tests/integration/test_relatorio_escalas_por_data_turno.py::test_exportar_escalas_por_data_turno_pdf ERROR [ 57%]
+tests/integration/test_relatorio_folha_pagamento.py::test_consultar_escalas_folha_pagamento PASSED [ 58%]
+tests/integration/test_relatorio_folha_pagamento.py::test_exportar_folha_pagamento_csv PASSED [ 60%]
+tests/integration/test_relatorio_folha_pagamento.py::test_exportar_folha_pagamento_pdf PASSED [ 61%]
+tests/integration/test_relatorio_medicos_pendentes.py::test_consultar_medicos_pendentes ERROR [ 62%]
+tests/integration/test_relatorio_medicos_por_especializacao.py::test_listar_medicos_por_especializacao PASSED [ 64%]
+tests/integration/test_relatorio_medicos_por_especializacao.py::test_exportar_medicos_por_especializacao_csv PASSED [ 65%]
+tests/integration/test_relatorio_medicos_por_especializacao.py::test_exportar_medicos_por_especializacao_pdf PASSED [ 67%]
+tests/unit/test_cache.py::test_cache_set_get_invalidate PASSED           [ 68%]
+tests/unit/test_cache.py::test_cache_clear PASSED                        [ 70%]
+tests/unit/test_maintenance.py::test_check_integrity_ok PASSED           [ 71%]
+tests/unit/test_maintenance.py::test_vacuum_runs PASSED                  [ 72%]
+tests/unit/test_maintenance.py::test_orphan_cleanup_removes PASSED       [ 74%]
+tests/unit/test_models.py::test_especializacao_criacao PASSED            [ 75%]
+tests/unit/test_models.py::test_medico_criacao PASSED                    [ 77%]
+tests/unit/test_models.py::test_escala_plantonista_criacao PASSED        [ 78%]
+tests/unit/test_models.py::test_escala_sobreaviso_criacao PASSED         [ 80%]
+tests/unit/test_repositories.py::test_especializacao_crud PASSED         [ 81%]
+tests/unit/test_repositories.py::test_medico_crud PASSED                 [ 82%]
+tests/unit/test_repositories.py::test_especializacao_crud_erro PASSED    [ 84%]
+tests/unit/test_repositories.py::test_medico_crud_erro_campos_obrigatorios PASSED [ 85%]
+tests/unit/test_repositories.py::test_medico_crud_erro_especialidade_inexistente PASSED [ 87%]
+tests/unit/test_repositories.py::test_update_delete_invalid PASSED       [ 88%]
+tests/unit/test_repositories.py::test_medico_to_dict_json_serializable PASSED [ 90%]
+tests/unit/test_repositories.py::test_medico_optimistic_locking PASSED   [ 91%]
+tests/unit/test_validacao_repositories.py::test_medico_validacao_nome_vazio FAILED [ 92%]
+tests/unit/test_validacao_repositories.py::test_medico_validacao_status_invalido FAILED [ 94%]
+tests/unit/test_validacao_repositories.py::test_medico_validacao_especializacao_inexistente FAILED [ 95%]
+tests/unit/test_validacao_repositories.py::test_especializacao_validacao_nome_vazio PASSED [ 97%]
+tests/unit/test_validacao_repositories.py::test_medico_validacao_sucesso FAILED [ 98%]
+tests/unit/test_versionamento.py::test_versionamento_medico PASSED       [100%]
+
+=================================== ERRORS ====================================
+___________ ERROR at setup of test_medicos_disponiveis_sem_escalas ____________
+
+session_factory = <function session_factory.<locals>.factory at 0x00000219E830B7E0>
+banco_temp_integracao = 'F:\\projetos\\gem\\tests\\integration\\tmp\\test_df4a3b11af6d42ab923ea9d91a34817b.db'
+
+    @pytest.fixture(scope="function")
+    def session(session_factory, banco_temp_integracao):
+>       assert os.path.exists(banco_temp_integracao), f"Banco não existe: {banco_temp_integracao}"
+E       AssertionError: Banco não existe: F:\projetos\gem\tests\integration\tmp\test_df4a3b11af6d42ab923ea9d91a34817b.db
+E       assert False
+E        +  where False = <built-in function _path_exists>('F:\\projetos\\gem\\tests\\integration\\tmp\\test_df4a3b11af6d42ab923ea9d91a34817b.db')
+E        +    where <built-in function _path_exists> = <module 'ntpath' (frozen)>.exists
+E        +      where <module 'ntpath' (frozen)> = os.path
+
+tests\integration\conftest.py:55: AssertionError
+----------------------------- Captured log setup ------------------------------
+WARNING  root:conftest.py:27 [TEST] [INTEGRACAO] Criando banco temporário: F:\projetos\gem\tests\integration\tmp\test_df4a3b11af6d42ab923ea9d91a34817b.db
+WARNING  root:conftest.py:31 [TEST] [INTEGRACAO] Executando Alembic para sqlite:///F:\projetos\gem\tests\integration\tmp\test_df4a3b11af6d42ab923ea9d91a34817b.db
+WARNING  root:conftest.py:33 [TEST] [INTEGRACAO] Alembic stdout: 
+WARNING  root:conftest.py:34 [TEST] [INTEGRACAO] Alembic stderr: INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+
+WARNING  root:conftest.py:35 [TEST] [INTEGRACAO] Banco existe após Alembic? False
+___________ ERROR at setup of test_medicos_disponiveis_com_plantao ____________
+
+session_factory = <function session_factory.<locals>.factory at 0x00000219E83B0680>
+banco_temp_integracao = 'F:\\projetos\\gem\\tests\\integration\\tmp\\test_1bd1f384d7d541ac84fa9bdf1317378a.db'
+
+    @pytest.fixture(scope="function")
+    def session(session_factory, banco_temp_integracao):
+>       assert os.path.exists(banco_temp_integracao), f"Banco não existe: {banco_temp_integracao}"
+E       AssertionError: Banco não existe: F:\projetos\gem\tests\integration\tmp\test_1bd1f384d7d541ac84fa9bdf1317378a.db
+E       assert False
+E        +  where False = <built-in function _path_exists>('F:\\projetos\\gem\\tests\\integration\\tmp\\test_1bd1f384d7d541ac84fa9bdf1317378a.db')
+E        +    where <built-in function _path_exists> = <module 'ntpath' (frozen)>.exists
+E        +      where <module 'ntpath' (frozen)> = os.path
+
+tests\integration\conftest.py:55: AssertionError
+----------------------------- Captured log setup ------------------------------
+WARNING  root:conftest.py:27 [TEST] [INTEGRACAO] Criando banco temporário: F:\projetos\gem\tests\integration\tmp\test_1bd1f384d7d541ac84fa9bdf1317378a.db
+WARNING  root:conftest.py:31 [TEST] [INTEGRACAO] Executando Alembic para sqlite:///F:\projetos\gem\tests\integration\tmp\test_1bd1f384d7d541ac84fa9bdf1317378a.db
+WARNING  root:conftest.py:33 [TEST] [INTEGRACAO] Alembic stdout: 
+WARNING  root:conftest.py:34 [TEST] [INTEGRACAO] Alembic stderr: INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+
+WARNING  root:conftest.py:35 [TEST] [INTEGRACAO] Banco existe após Alembic? False
+__________ ERROR at setup of test_medicos_disponiveis_com_sobreaviso __________
+
+session_factory = <function session_factory.<locals>.factory at 0x00000219E830AA20>
+banco_temp_integracao = 'F:\\projetos\\gem\\tests\\integration\\tmp\\test_188e0e33f4f8427a8654a493d7407efc.db'
+
+    @pytest.fixture(scope="function")
+    def session(session_factory, banco_temp_integracao):
+>       assert os.path.exists(banco_temp_integracao), f"Banco não existe: {banco_temp_integracao}"
+E       AssertionError: Banco não existe: F:\projetos\gem\tests\integration\tmp\test_188e0e33f4f8427a8654a493d7407efc.db
+E       assert False
+E        +  where False = <built-in function _path_exists>('F:\\projetos\\gem\\tests\\integration\\tmp\\test_188e0e33f4f8427a8654a493d7407efc.db')
+E        +    where <built-in function _path_exists> = <module 'ntpath' (frozen)>.exists
+E        +      where <module 'ntpath' (frozen)> = os.path
+
+tests\integration\conftest.py:55: AssertionError
+----------------------------- Captured log setup ------------------------------
+WARNING  root:conftest.py:27 [TEST] [INTEGRACAO] Criando banco temporário: F:\projetos\gem\tests\integration\tmp\test_188e0e33f4f8427a8654a493d7407efc.db
+WARNING  root:conftest.py:31 [TEST] [INTEGRACAO] Executando Alembic para sqlite:///F:\projetos\gem\tests\integration\tmp\test_188e0e33f4f8427a8654a493d7407efc.db
+WARNING  root:conftest.py:33 [TEST] [INTEGRACAO] Alembic stdout: 
+WARNING  root:conftest.py:34 [TEST] [INTEGRACAO] Alembic stderr: INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+
+WARNING  root:conftest.py:35 [TEST] [INTEGRACAO] Banco existe após Alembic? False
+_________ ERROR at setup of test_medicos_disponiveis_todos_escalados __________
+
+session_factory = <function session_factory.<locals>.factory at 0x00000219E830B920>
+banco_temp_integracao = 'F:\\projetos\\gem\\tests\\integration\\tmp\\test_7ba5bb13dc6b4c2b856a452b6dfa2652.db'
+
+    @pytest.fixture(scope="function")
+    def session(session_factory, banco_temp_integracao):
+>       assert os.path.exists(banco_temp_integracao), f"Banco não existe: {banco_temp_integracao}"
+E       AssertionError: Banco não existe: F:\projetos\gem\tests\integration\tmp\test_7ba5bb13dc6b4c2b856a452b6dfa2652.db
+E       assert False
+E        +  where False = <built-in function _path_exists>('F:\\projetos\\gem\\tests\\integration\\tmp\\test_7ba5bb13dc6b4c2b856a452b6dfa2652.db')
+E        +    where <built-in function _path_exists> = <module 'ntpath' (frozen)>.exists
+E        +      where <module 'ntpath' (frozen)> = os.path
+
+tests\integration\conftest.py:55: AssertionError
+----------------------------- Captured log setup ------------------------------
+WARNING  root:conftest.py:27 [TEST] [INTEGRACAO] Criando banco temporário: F:\projetos\gem\tests\integration\tmp\test_7ba5bb13dc6b4c2b856a452b6dfa2652.db
+WARNING  root:conftest.py:31 [TEST] [INTEGRACAO] Executando Alembic para sqlite:///F:\projetos\gem\tests\integration\tmp\test_7ba5bb13dc6b4c2b856a452b6dfa2652.db
+WARNING  root:conftest.py:33 [TEST] [INTEGRACAO] Alembic stdout: 
+WARNING  root:conftest.py:34 [TEST] [INTEGRACAO] Alembic stderr: INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+
+WARNING  root:conftest.py:35 [TEST] [INTEGRACAO] Banco existe após Alembic? False
+________________ ERROR at setup of test_consultar_escalas_mes _________________
+
+session_factory = <function session_factory.<locals>.factory at 0x00000219E83B0860>
+banco_temp_integracao = 'F:\\projetos\\gem\\tests\\integration\\tmp\\test_eaa83a345f28400e9614c4f5c41b2e73.db'
+
+    @pytest.fixture(scope="function")
+    def session(session_factory, banco_temp_integracao):
+>       assert os.path.exists(banco_temp_integracao), f"Banco não existe: {banco_temp_integracao}"
+E       AssertionError: Banco não existe: F:\projetos\gem\tests\integration\tmp\test_eaa83a345f28400e9614c4f5c41b2e73.db
+E       assert False
+E        +  where False = <built-in function _path_exists>('F:\\projetos\\gem\\tests\\integration\\tmp\\test_eaa83a345f28400e9614c4f5c41b2e73.db')
+E        +    where <built-in function _path_exists> = <module 'ntpath' (frozen)>.exists
+E        +      where <module 'ntpath' (frozen)> = os.path
+
+tests\integration\conftest.py:55: AssertionError
+----------------------------- Captured log setup ------------------------------
+WARNING  root:conftest.py:27 [TEST] [INTEGRACAO] Criando banco temporário: F:\projetos\gem\tests\integration\tmp\test_eaa83a345f28400e9614c4f5c41b2e73.db
+WARNING  root:conftest.py:31 [TEST] [INTEGRACAO] Executando Alembic para sqlite:///F:\projetos\gem\tests\integration\tmp\test_eaa83a345f28400e9614c4f5c41b2e73.db
+WARNING  root:conftest.py:33 [TEST] [INTEGRACAO] Alembic stdout: 
+WARNING  root:conftest.py:34 [TEST] [INTEGRACAO] Alembic stderr: INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+
+WARNING  root:conftest.py:35 [TEST] [INTEGRACAO] Banco existe após Alembic? False
+_________________ ERROR at setup of test_medicos_mais_plantao _________________
+
+session_factory = <function session_factory.<locals>.factory at 0x00000219E830B240>
+banco_temp_integracao = 'F:\\projetos\\gem\\tests\\integration\\tmp\\test_53b028dbc11b404b85d6ccb2c556e8b3.db'
+
+    @pytest.fixture(scope="function")
+    def session(session_factory, banco_temp_integracao):
+>       assert os.path.exists(banco_temp_integracao), f"Banco não existe: {banco_temp_integracao}"
+E       AssertionError: Banco não existe: F:\projetos\gem\tests\integration\tmp\test_53b028dbc11b404b85d6ccb2c556e8b3.db
+E       assert False
+E        +  where False = <built-in function _path_exists>('F:\\projetos\\gem\\tests\\integration\\tmp\\test_53b028dbc11b404b85d6ccb2c556e8b3.db')
+E        +    where <built-in function _path_exists> = <module 'ntpath' (frozen)>.exists
+E        +      where <module 'ntpath' (frozen)> = os.path
+
+tests\integration\conftest.py:55: AssertionError
+----------------------------- Captured log setup ------------------------------
+WARNING  root:conftest.py:27 [TEST] [INTEGRACAO] Criando banco temporário: F:\projetos\gem\tests\integration\tmp\test_53b028dbc11b404b85d6ccb2c556e8b3.db
+WARNING  root:conftest.py:31 [TEST] [INTEGRACAO] Executando Alembic para sqlite:///F:\projetos\gem\tests\integration\tmp\test_53b028dbc11b404b85d6ccb2c556e8b3.db
+WARNING  root:conftest.py:33 [TEST] [INTEGRACAO] Alembic stdout: 
+WARNING  root:conftest.py:34 [TEST] [INTEGRACAO] Alembic stderr: INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+
+WARNING  root:conftest.py:35 [TEST] [INTEGRACAO] Banco existe após Alembic? False
+_________________ ERROR at setup of test_medicos_sem_escalas __________________
+
+session_factory = <function session_factory.<locals>.factory at 0x00000219E83B37E0>
+banco_temp_integracao = 'F:\\projetos\\gem\\tests\\integration\\tmp\\test_c8091eaddfd94c568dc023b2515dd130.db'
+
+    @pytest.fixture(scope="function")
+    def session(session_factory, banco_temp_integracao):
+>       assert os.path.exists(banco_temp_integracao), f"Banco não existe: {banco_temp_integracao}"
+E       AssertionError: Banco não existe: F:\projetos\gem\tests\integration\tmp\test_c8091eaddfd94c568dc023b2515dd130.db
+E       assert False
+E        +  where False = <built-in function _path_exists>('F:\\projetos\\gem\\tests\\integration\\tmp\\test_c8091eaddfd94c568dc023b2515dd130.db')
+E        +    where <built-in function _path_exists> = <module 'ntpath' (frozen)>.exists
+E        +      where <module 'ntpath' (frozen)> = os.path
+
+tests\integration\conftest.py:55: AssertionError
+----------------------------- Captured log setup ------------------------------
+WARNING  root:conftest.py:27 [TEST] [INTEGRACAO] Criando banco temporário: F:\projetos\gem\tests\integration\tmp\test_c8091eaddfd94c568dc023b2515dd130.db
+WARNING  root:conftest.py:31 [TEST] [INTEGRACAO] Executando Alembic para sqlite:///F:\projetos\gem\tests\integration\tmp\test_c8091eaddfd94c568dc023b2515dd130.db
+WARNING  root:conftest.py:33 [TEST] [INTEGRACAO] Alembic stdout: 
+WARNING  root:conftest.py:34 [TEST] [INTEGRACAO] Alembic stderr: INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+
+WARNING  root:conftest.py:35 [TEST] [INTEGRACAO] Banco existe após Alembic? False
+__________ ERROR at setup of test_cobertura_especialidades_por_turno __________
+
+session_factory = <function session_factory.<locals>.factory at 0x00000219E83B3E20>
+banco_temp_integracao = 'F:\\projetos\\gem\\tests\\integration\\tmp\\test_0c5e2e2a629749ff91089d24809d1cf3.db'
+
+    @pytest.fixture(scope="function")
+    def session(session_factory, banco_temp_integracao):
+>       assert os.path.exists(banco_temp_integracao), f"Banco não existe: {banco_temp_integracao}"
+E       AssertionError: Banco não existe: F:\projetos\gem\tests\integration\tmp\test_0c5e2e2a629749ff91089d24809d1cf3.db
+E       assert False
+E        +  where False = <built-in function _path_exists>('F:\\projetos\\gem\\tests\\integration\\tmp\\test_0c5e2e2a629749ff91089d24809d1cf3.db')
+E        +    where <built-in function _path_exists> = <module 'ntpath' (frozen)>.exists
+E        +      where <module 'ntpath' (frozen)> = os.path
+
+tests\integration\conftest.py:55: AssertionError
+----------------------------- Captured log setup ------------------------------
+WARNING  root:conftest.py:27 [TEST] [INTEGRACAO] Criando banco temporário: F:\projetos\gem\tests\integration\tmp\test_0c5e2e2a629749ff91089d24809d1cf3.db
+WARNING  root:conftest.py:31 [TEST] [INTEGRACAO] Executando Alembic para sqlite:///F:\projetos\gem\tests\integration\tmp\test_0c5e2e2a629749ff91089d24809d1cf3.db
+WARNING  root:conftest.py:33 [TEST] [INTEGRACAO] Alembic stdout: 
+WARNING  root:conftest.py:34 [TEST] [INTEGRACAO] Alembic stderr: INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+
+WARNING  root:conftest.py:35 [TEST] [INTEGRACAO] Banco existe após Alembic? False
+______________ ERROR at setup of test_consulta_historico_escalas ______________
+
+session_factory = <function session_factory.<locals>.factory at 0x00000219E83B0A40>
+banco_temp_integracao = 'F:\\projetos\\gem\\tests\\integration\\tmp\\test_cf020a36dd484ced831f344811e971be.db'
+
+    @pytest.fixture(scope="function")
+    def session(session_factory, banco_temp_integracao):
+>       assert os.path.exists(banco_temp_integracao), f"Banco não existe: {banco_temp_integracao}"
+E       AssertionError: Banco não existe: F:\projetos\gem\tests\integration\tmp\test_cf020a36dd484ced831f344811e971be.db
+E       assert False
+E        +  where False = <built-in function _path_exists>('F:\\projetos\\gem\\tests\\integration\\tmp\\test_cf020a36dd484ced831f344811e971be.db')
+E        +    where <built-in function _path_exists> = <module 'ntpath' (frozen)>.exists
+E        +      where <module 'ntpath' (frozen)> = os.path
+
+tests\integration\conftest.py:55: AssertionError
+----------------------------- Captured log setup ------------------------------
+WARNING  root:conftest.py:27 [TEST] [INTEGRACAO] Criando banco temporário: F:\projetos\gem\tests\integration\tmp\test_cf020a36dd484ced831f344811e971be.db
+WARNING  root:conftest.py:31 [TEST] [INTEGRACAO] Executando Alembic para sqlite:///F:\projetos\gem\tests\integration\tmp\test_cf020a36dd484ced831f344811e971be.db
+WARNING  root:conftest.py:33 [TEST] [INTEGRACAO] Alembic stdout: 
+WARNING  root:conftest.py:34 [TEST] [INTEGRACAO] Alembic stderr: INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+
+WARNING  root:conftest.py:35 [TEST] [INTEGRACAO] Banco existe após Alembic? False
+______________ ERROR at setup of test_medicos_inativos_afastados ______________
+
+session_factory = <function session_factory.<locals>.factory at 0x00000219E83B0860>
+banco_temp_integracao = 'F:\\projetos\\gem\\tests\\integration\\tmp\\test_4be9e5be9a9549eba1ed080cd006e55b.db'
+
+    @pytest.fixture(scope="function")
+    def session(session_factory, banco_temp_integracao):
+>       assert os.path.exists(banco_temp_integracao), f"Banco não existe: {banco_temp_integracao}"
+E       AssertionError: Banco não existe: F:\projetos\gem\tests\integration\tmp\test_4be9e5be9a9549eba1ed080cd006e55b.db
+E       assert False
+E        +  where False = <built-in function _path_exists>('F:\\projetos\\gem\\tests\\integration\\tmp\\test_4be9e5be9a9549eba1ed080cd006e55b.db')
+E        +    where <built-in function _path_exists> = <module 'ntpath' (frozen)>.exists
+E        +      where <module 'ntpath' (frozen)> = os.path
+
+tests\integration\conftest.py:55: AssertionError
+----------------------------- Captured log setup ------------------------------
+WARNING  root:conftest.py:27 [TEST] [INTEGRACAO] Criando banco temporário: F:\projetos\gem\tests\integration\tmp\test_4be9e5be9a9549eba1ed080cd006e55b.db
+WARNING  root:conftest.py:31 [TEST] [INTEGRACAO] Executando Alembic para sqlite:///F:\projetos\gem\tests\integration\tmp\test_4be9e5be9a9549eba1ed080cd006e55b.db
+WARNING  root:conftest.py:33 [TEST] [INTEGRACAO] Alembic stdout: 
+WARNING  root:conftest.py:34 [TEST] [INTEGRACAO] Alembic stderr: INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+
+WARNING  root:conftest.py:35 [TEST] [INTEGRACAO] Banco existe após Alembic? False
+________________ ERROR at setup of test_escalas_com_conflitos _________________
+
+session_factory = <function session_factory.<locals>.factory at 0x00000219E83B2AC0>
+banco_temp_integracao = 'F:\\projetos\\gem\\tests\\integration\\tmp\\test_e21c394f5eab4a609dffbc1990d0be9d.db'
+
+    @pytest.fixture(scope="function")
+    def session(session_factory, banco_temp_integracao):
+>       assert os.path.exists(banco_temp_integracao), f"Banco não existe: {banco_temp_integracao}"
+E       AssertionError: Banco não existe: F:\projetos\gem\tests\integration\tmp\test_e21c394f5eab4a609dffbc1990d0be9d.db
+E       assert False
+E        +  where False = <built-in function _path_exists>('F:\\projetos\\gem\\tests\\integration\\tmp\\test_e21c394f5eab4a609dffbc1990d0be9d.db')
+E        +    where <built-in function _path_exists> = <module 'ntpath' (frozen)>.exists
+E        +      where <module 'ntpath' (frozen)> = os.path
+
+tests\integration\conftest.py:55: AssertionError
+----------------------------- Captured log setup ------------------------------
+WARNING  root:conftest.py:27 [TEST] [INTEGRACAO] Criando banco temporário: F:\projetos\gem\tests\integration\tmp\test_e21c394f5eab4a609dffbc1990d0be9d.db
+WARNING  root:conftest.py:31 [TEST] [INTEGRACAO] Executando Alembic para sqlite:///F:\projetos\gem\tests\integration\tmp\test_e21c394f5eab4a609dffbc1990d0be9d.db
+WARNING  root:conftest.py:33 [TEST] [INTEGRACAO] Alembic stdout: 
+WARNING  root:conftest.py:34 [TEST] [INTEGRACAO] Alembic stderr: INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+
+WARNING  root:conftest.py:35 [TEST] [INTEGRACAO] Banco existe após Alembic? False
+________ ERROR at setup of test_relatorio_escala_plantonistas_csv_pdf _________
+
+session_factory = <function session_factory.<locals>.factory at 0x00000219E7D7EAC0>
+banco_temp_integracao = 'F:\\projetos\\gem\\tests\\integration\\tmp\\test_6fdddf47d8f142d88fb4f1674fc373b2.db'
+
+    @pytest.fixture(scope="function")
+    def session(session_factory, banco_temp_integracao):
+>       assert os.path.exists(banco_temp_integracao), f"Banco não existe: {banco_temp_integracao}"
+E       AssertionError: Banco não existe: F:\projetos\gem\tests\integration\tmp\test_6fdddf47d8f142d88fb4f1674fc373b2.db
+E       assert False
+E        +  where False = <built-in function _path_exists>('F:\\projetos\\gem\\tests\\integration\\tmp\\test_6fdddf47d8f142d88fb4f1674fc373b2.db')
+E        +    where <built-in function _path_exists> = <module 'ntpath' (frozen)>.exists
+E        +      where <module 'ntpath' (frozen)> = os.path
+
+tests\integration\conftest.py:55: AssertionError
+----------------------------- Captured log setup ------------------------------
+WARNING  root:conftest.py:27 [TEST] [INTEGRACAO] Criando banco temporário: F:\projetos\gem\tests\integration\tmp\test_6fdddf47d8f142d88fb4f1674fc373b2.db
+WARNING  root:conftest.py:31 [TEST] [INTEGRACAO] Executando Alembic para sqlite:///F:\projetos\gem\tests\integration\tmp\test_6fdddf47d8f142d88fb4f1674fc373b2.db
+WARNING  root:conftest.py:33 [TEST] [INTEGRACAO] Alembic stdout: 
+WARNING  root:conftest.py:34 [TEST] [INTEGRACAO] Alembic stderr: INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+
+WARNING  root:conftest.py:35 [TEST] [INTEGRACAO] Banco existe após Alembic? False
+_________ ERROR at setup of test_relatorio_escala_sobreaviso_csv_pdf __________
+
+session_factory = <function session_factory.<locals>.factory at 0x00000219E8458180>
+banco_temp_integracao = 'F:\\projetos\\gem\\tests\\integration\\tmp\\test_b68224d8f20249749e3feeb9ce1c8121.db'
+
+    @pytest.fixture(scope="function")
+    def session(session_factory, banco_temp_integracao):
+>       assert os.path.exists(banco_temp_integracao), f"Banco não existe: {banco_temp_integracao}"
+E       AssertionError: Banco não existe: F:\projetos\gem\tests\integration\tmp\test_b68224d8f20249749e3feeb9ce1c8121.db
+E       assert False
+E        +  where False = <built-in function _path_exists>('F:\\projetos\\gem\\tests\\integration\\tmp\\test_b68224d8f20249749e3feeb9ce1c8121.db')
+E        +    where <built-in function _path_exists> = <module 'ntpath' (frozen)>.exists
+E        +      where <module 'ntpath' (frozen)> = os.path
+
+tests\integration\conftest.py:55: AssertionError
+----------------------------- Captured log setup ------------------------------
+WARNING  root:conftest.py:27 [TEST] [INTEGRACAO] Criando banco temporário: F:\projetos\gem\tests\integration\tmp\test_b68224d8f20249749e3feeb9ce1c8121.db
+WARNING  root:conftest.py:31 [TEST] [INTEGRACAO] Executando Alembic para sqlite:///F:\projetos\gem\tests\integration\tmp\test_b68224d8f20249749e3feeb9ce1c8121.db
+WARNING  root:conftest.py:33 [TEST] [INTEGRACAO] Alembic stdout: 
+WARNING  root:conftest.py:34 [TEST] [INTEGRACAO] Alembic stderr: INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+
+WARNING  root:conftest.py:35 [TEST] [INTEGRACAO] Banco existe após Alembic? False
+_________ ERROR at setup of test_relatorio_escalas_por_especializacao _________
+
+session_factory = <function session_factory.<locals>.factory at 0x00000219E830B920>
+banco_temp_integracao = 'F:\\projetos\\gem\\tests\\integration\\tmp\\test_67442469f0f34e7086335c6b03382aa5.db'
+
+    @pytest.fixture(scope="function")
+    def session(session_factory, banco_temp_integracao):
+>       assert os.path.exists(banco_temp_integracao), f"Banco não existe: {banco_temp_integracao}"
+E       AssertionError: Banco não existe: F:\projetos\gem\tests\integration\tmp\test_67442469f0f34e7086335c6b03382aa5.db
+E       assert False
+E        +  where False = <built-in function _path_exists>('F:\\projetos\\gem\\tests\\integration\\tmp\\test_67442469f0f34e7086335c6b03382aa5.db')
+E        +    where <built-in function _path_exists> = <module 'ntpath' (frozen)>.exists
+E        +      where <module 'ntpath' (frozen)> = os.path
+
+tests\integration\conftest.py:55: AssertionError
+----------------------------- Captured log setup ------------------------------
+WARNING  root:conftest.py:27 [TEST] [INTEGRACAO] Criando banco temporário: F:\projetos\gem\tests\integration\tmp\test_67442469f0f34e7086335c6b03382aa5.db
+WARNING  root:conftest.py:31 [TEST] [INTEGRACAO] Executando Alembic para sqlite:///F:\projetos\gem\tests\integration\tmp\test_67442469f0f34e7086335c6b03382aa5.db
+WARNING  root:conftest.py:33 [TEST] [INTEGRACAO] Alembic stdout: 
+WARNING  root:conftest.py:34 [TEST] [INTEGRACAO] Alembic stderr: INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+
+WARNING  root:conftest.py:35 [TEST] [INTEGRACAO] Banco existe após Alembic? False
+___ ERROR at setup of test_relatorio_escalas_por_especializacao_exportacao ____
+
+session_factory = <function session_factory.<locals>.factory at 0x00000219E830A020>
+banco_temp_integracao = 'F:\\projetos\\gem\\tests\\integration\\tmp\\test_fa9b46936f424a8e9cd5869b65ee9c2a.db'
+
+    @pytest.fixture(scope="function")
+    def session(session_factory, banco_temp_integracao):
+>       assert os.path.exists(banco_temp_integracao), f"Banco não existe: {banco_temp_integracao}"
+E       AssertionError: Banco não existe: F:\projetos\gem\tests\integration\tmp\test_fa9b46936f424a8e9cd5869b65ee9c2a.db
+E       assert False
+E        +  where False = <built-in function _path_exists>('F:\\projetos\\gem\\tests\\integration\\tmp\\test_fa9b46936f424a8e9cd5869b65ee9c2a.db')
+E        +    where <built-in function _path_exists> = <module 'ntpath' (frozen)>.exists
+E        +      where <module 'ntpath' (frozen)> = os.path
+
+tests\integration\conftest.py:55: AssertionError
+----------------------------- Captured log setup ------------------------------
+WARNING  root:conftest.py:27 [TEST] [INTEGRACAO] Criando banco temporário: F:\projetos\gem\tests\integration\tmp\test_fa9b46936f424a8e9cd5869b65ee9c2a.db
+WARNING  root:conftest.py:31 [TEST] [INTEGRACAO] Executando Alembic para sqlite:///F:\projetos\gem\tests\integration\tmp\test_fa9b46936f424a8e9cd5869b65ee9c2a.db
+WARNING  root:conftest.py:33 [TEST] [INTEGRACAO] Alembic stdout: 
+WARNING  root:conftest.py:34 [TEST] [INTEGRACAO] Alembic stderr: INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+
+WARNING  root:conftest.py:35 [TEST] [INTEGRACAO] Banco existe após Alembic? False
+________ ERROR at setup of test_relatorio_carga_horaria_medico_csv_pdf ________
+
+session_factory = <function session_factory.<locals>.factory at 0x00000219E83B2AC0>
+banco_temp_integracao = 'F:\\projetos\\gem\\tests\\integration\\tmp\\test_8bfef4b77b7c422fba2931bbaf81cc5f.db'
+
+    @pytest.fixture(scope="function")
+    def session(session_factory, banco_temp_integracao):
+>       assert os.path.exists(banco_temp_integracao), f"Banco não existe: {banco_temp_integracao}"
+E       AssertionError: Banco não existe: F:\projetos\gem\tests\integration\tmp\test_8bfef4b77b7c422fba2931bbaf81cc5f.db
+E       assert False
+E        +  where False = <built-in function _path_exists>('F:\\projetos\\gem\\tests\\integration\\tmp\\test_8bfef4b77b7c422fba2931bbaf81cc5f.db')
+E        +    where <built-in function _path_exists> = <module 'ntpath' (frozen)>.exists
+E        +      where <module 'ntpath' (frozen)> = os.path
+
+tests\integration\conftest.py:55: AssertionError
+----------------------------- Captured log setup ------------------------------
+WARNING  root:conftest.py:27 [TEST] [INTEGRACAO] Criando banco temporário: F:\projetos\gem\tests\integration\tmp\test_8bfef4b77b7c422fba2931bbaf81cc5f.db
+WARNING  root:conftest.py:31 [TEST] [INTEGRACAO] Executando Alembic para sqlite:///F:\projetos\gem\tests\integration\tmp\test_8bfef4b77b7c422fba2931bbaf81cc5f.db
+WARNING  root:conftest.py:33 [TEST] [INTEGRACAO] Alembic stdout: 
+WARNING  root:conftest.py:34 [TEST] [INTEGRACAO] Alembic stderr: INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+
+WARNING  root:conftest.py:35 [TEST] [INTEGRACAO] Banco existe após Alembic? False
+__________ ERROR at setup of test_relatorio_escalas_futuras_csv_pdf ___________
+
+session_factory = <function session_factory.<locals>.factory at 0x00000219E8458680>
+banco_temp_integracao = 'F:\\projetos\\gem\\tests\\integration\\tmp\\test_8e1c376164d74dd1b8c86683f10b2632.db'
+
+    @pytest.fixture(scope="function")
+    def session(session_factory, banco_temp_integracao):
+>       assert os.path.exists(banco_temp_integracao), f"Banco não existe: {banco_temp_integracao}"
+E       AssertionError: Banco não existe: F:\projetos\gem\tests\integration\tmp\test_8e1c376164d74dd1b8c86683f10b2632.db
+E       assert False
+E        +  where False = <built-in function _path_exists>('F:\\projetos\\gem\\tests\\integration\\tmp\\test_8e1c376164d74dd1b8c86683f10b2632.db')
+E        +    where <built-in function _path_exists> = <module 'ntpath' (frozen)>.exists
+E        +      where <module 'ntpath' (frozen)> = os.path
+
+tests\integration\conftest.py:55: AssertionError
+----------------------------- Captured log setup ------------------------------
+WARNING  root:conftest.py:27 [TEST] [INTEGRACAO] Criando banco temporário: F:\projetos\gem\tests\integration\tmp\test_8e1c376164d74dd1b8c86683f10b2632.db
+WARNING  root:conftest.py:31 [TEST] [INTEGRACAO] Executando Alembic para sqlite:///F:\projetos\gem\tests\integration\tmp\test_8e1c376164d74dd1b8c86683f10b2632.db
+WARNING  root:conftest.py:33 [TEST] [INTEGRACAO] Alembic stdout: 
+WARNING  root:conftest.py:34 [TEST] [INTEGRACAO] Alembic stderr: INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+
+WARNING  root:conftest.py:35 [TEST] [INTEGRACAO] Banco existe após Alembic? False
+_________ ERROR at setup of test_relatorio_medicos_por_status_csv_pdf _________
+
+session_factory = <function session_factory.<locals>.factory at 0x00000219E84589A0>
+banco_temp_integracao = 'F:\\projetos\\gem\\tests\\integration\\tmp\\test_77a5f88d81994d99b9d51426bf576ed0.db'
+
+    @pytest.fixture(scope="function")
+    def session(session_factory, banco_temp_integracao):
+>       assert os.path.exists(banco_temp_integracao), f"Banco não existe: {banco_temp_integracao}"
+E       AssertionError: Banco não existe: F:\projetos\gem\tests\integration\tmp\test_77a5f88d81994d99b9d51426bf576ed0.db
+E       assert False
+E        +  where False = <built-in function _path_exists>('F:\\projetos\\gem\\tests\\integration\\tmp\\test_77a5f88d81994d99b9d51426bf576ed0.db')
+E        +    where <built-in function _path_exists> = <module 'ntpath' (frozen)>.exists
+E        +      where <module 'ntpath' (frozen)> = os.path
+
+tests\integration\conftest.py:55: AssertionError
+----------------------------- Captured log setup ------------------------------
+WARNING  root:conftest.py:27 [TEST] [INTEGRACAO] Criando banco temporário: F:\projetos\gem\tests\integration\tmp\test_77a5f88d81994d99b9d51426bf576ed0.db
+WARNING  root:conftest.py:31 [TEST] [INTEGRACAO] Executando Alembic para sqlite:///F:\projetos\gem\tests\integration\tmp\test_77a5f88d81994d99b9d51426bf576ed0.db
+WARNING  root:conftest.py:33 [TEST] [INTEGRACAO] Alembic stdout: 
+WARNING  root:conftest.py:34 [TEST] [INTEGRACAO] Alembic stderr: INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+
+WARNING  root:conftest.py:35 [TEST] [INTEGRACAO] Banco existe após Alembic? False
+__________ ERROR at setup of test_consultar_sobreaviso_periodo_limpo __________
+
+session_factory = <function session_factory.<locals>.factory at 0x00000219E845A200>
+banco_temp_integracao = 'F:\\projetos\\gem\\tests\\integration\\tmp\\test_7e7476b0383e4f3681809a10ea511b0b.db'
+
+    @pytest.fixture(scope="function")
+    def session(session_factory, banco_temp_integracao):
+>       assert os.path.exists(banco_temp_integracao), f"Banco não existe: {banco_temp_integracao}"
+E       AssertionError: Banco não existe: F:\projetos\gem\tests\integration\tmp\test_7e7476b0383e4f3681809a10ea511b0b.db
+E       assert False
+E        +  where False = <built-in function _path_exists>('F:\\projetos\\gem\\tests\\integration\\tmp\\test_7e7476b0383e4f3681809a10ea511b0b.db')
+E        +    where <built-in function _path_exists> = <module 'ntpath' (frozen)>.exists
+E        +      where <module 'ntpath' (frozen)> = os.path
+
+tests\integration\conftest.py:55: AssertionError
+----------------------------- Captured log setup ------------------------------
+WARNING  root:conftest.py:27 [TEST] [INTEGRACAO] Criando banco temporário: F:\projetos\gem\tests\integration\tmp\test_7e7476b0383e4f3681809a10ea511b0b.db
+WARNING  root:conftest.py:31 [TEST] [INTEGRACAO] Executando Alembic para sqlite:///F:\projetos\gem\tests\integration\tmp\test_7e7476b0383e4f3681809a10ea511b0b.db
+WARNING  root:conftest.py:33 [TEST] [INTEGRACAO] Alembic stdout: 
+WARNING  root:conftest.py:34 [TEST] [INTEGRACAO] Alembic stderr: INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+
+WARNING  root:conftest.py:35 [TEST] [INTEGRACAO] Banco existe após Alembic? False
+____________ ERROR at setup of test_listar_escalas_por_data_turno _____________
+
+session_factory = <function session_factory.<locals>.factory at 0x00000219E9542DE0>
+banco_temp_integracao = 'F:\\projetos\\gem\\tests\\integration\\tmp\\test_63970905684241ef846291ecfeeaf1d7.db'
+
+    @pytest.fixture(scope="function")
+    def session(session_factory, banco_temp_integracao):
+>       assert os.path.exists(banco_temp_integracao), f"Banco não existe: {banco_temp_integracao}"
+E       AssertionError: Banco não existe: F:\projetos\gem\tests\integration\tmp\test_63970905684241ef846291ecfeeaf1d7.db
+E       assert False
+E        +  where False = <built-in function _path_exists>('F:\\projetos\\gem\\tests\\integration\\tmp\\test_63970905684241ef846291ecfeeaf1d7.db')
+E        +    where <built-in function _path_exists> = <module 'ntpath' (frozen)>.exists
+E        +      where <module 'ntpath' (frozen)> = os.path
+
+tests\integration\conftest.py:55: AssertionError
+----------------------------- Captured log setup ------------------------------
+WARNING  root:conftest.py:27 [TEST] [INTEGRACAO] Criando banco temporário: F:\projetos\gem\tests\integration\tmp\test_63970905684241ef846291ecfeeaf1d7.db
+WARNING  root:conftest.py:31 [TEST] [INTEGRACAO] Executando Alembic para sqlite:///F:\projetos\gem\tests\integration\tmp\test_63970905684241ef846291ecfeeaf1d7.db
+WARNING  root:conftest.py:33 [TEST] [INTEGRACAO] Alembic stdout: 
+WARNING  root:conftest.py:34 [TEST] [INTEGRACAO] Alembic stderr: INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+
+WARNING  root:conftest.py:35 [TEST] [INTEGRACAO] Banco existe após Alembic? False
+_________ ERROR at setup of test_exportar_escalas_por_data_turno_csv __________
+
+session_factory = <function session_factory.<locals>.factory at 0x00000219E9542FC0>
+banco_temp_integracao = 'F:\\projetos\\gem\\tests\\integration\\tmp\\test_876d3696ab43458498799e1226c0dbc5.db'
+
+    @pytest.fixture(scope="function")
+    def session(session_factory, banco_temp_integracao):
+>       assert os.path.exists(banco_temp_integracao), f"Banco não existe: {banco_temp_integracao}"
+E       AssertionError: Banco não existe: F:\projetos\gem\tests\integration\tmp\test_876d3696ab43458498799e1226c0dbc5.db
+E       assert False
+E        +  where False = <built-in function _path_exists>('F:\\projetos\\gem\\tests\\integration\\tmp\\test_876d3696ab43458498799e1226c0dbc5.db')
+E        +    where <built-in function _path_exists> = <module 'ntpath' (frozen)>.exists
+E        +      where <module 'ntpath' (frozen)> = os.path
+
+tests\integration\conftest.py:55: AssertionError
+----------------------------- Captured log setup ------------------------------
+WARNING  root:conftest.py:27 [TEST] [INTEGRACAO] Criando banco temporário: F:\projetos\gem\tests\integration\tmp\test_876d3696ab43458498799e1226c0dbc5.db
+WARNING  root:conftest.py:31 [TEST] [INTEGRACAO] Executando Alembic para sqlite:///F:\projetos\gem\tests\integration\tmp\test_876d3696ab43458498799e1226c0dbc5.db
+WARNING  root:conftest.py:33 [TEST] [INTEGRACAO] Alembic stdout: 
+WARNING  root:conftest.py:34 [TEST] [INTEGRACAO] Alembic stderr: INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+
+WARNING  root:conftest.py:35 [TEST] [INTEGRACAO] Banco existe após Alembic? False
+_________ ERROR at setup of test_exportar_escalas_por_data_turno_pdf __________
+
+session_factory = <function session_factory.<locals>.factory at 0x00000219E9515B20>
+banco_temp_integracao = 'F:\\projetos\\gem\\tests\\integration\\tmp\\test_92510834a4f447a39b634d7ba9f6e8fe.db'
+
+    @pytest.fixture(scope="function")
+    def session(session_factory, banco_temp_integracao):
+>       assert os.path.exists(banco_temp_integracao), f"Banco não existe: {banco_temp_integracao}"
+E       AssertionError: Banco não existe: F:\projetos\gem\tests\integration\tmp\test_92510834a4f447a39b634d7ba9f6e8fe.db
+E       assert False
+E        +  where False = <built-in function _path_exists>('F:\\projetos\\gem\\tests\\integration\\tmp\\test_92510834a4f447a39b634d7ba9f6e8fe.db')
+E        +    where <built-in function _path_exists> = <module 'ntpath' (frozen)>.exists
+E        +      where <module 'ntpath' (frozen)> = os.path
+
+tests\integration\conftest.py:55: AssertionError
+----------------------------- Captured log setup ------------------------------
+WARNING  root:conftest.py:27 [TEST] [INTEGRACAO] Criando banco temporário: F:\projetos\gem\tests\integration\tmp\test_92510834a4f447a39b634d7ba9f6e8fe.db
+WARNING  root:conftest.py:31 [TEST] [INTEGRACAO] Executando Alembic para sqlite:///F:\projetos\gem\tests\integration\tmp\test_92510834a4f447a39b634d7ba9f6e8fe.db
+WARNING  root:conftest.py:33 [TEST] [INTEGRACAO] Alembic stdout: 
+WARNING  root:conftest.py:34 [TEST] [INTEGRACAO] Alembic stderr: INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+
+WARNING  root:conftest.py:35 [TEST] [INTEGRACAO] Banco existe após Alembic? False
+_____________ ERROR at setup of test_consultar_medicos_pendentes ______________
+
+session_factory = <function session_factory.<locals>.factory at 0x00000219E9629580>
+banco_temp_integracao = 'F:\\projetos\\gem\\tests\\integration\\tmp\\test_0fc55e4fb32e4ec69b880cfe0a04044c.db'
+
+    @pytest.fixture(scope="function")
+    def session(session_factory, banco_temp_integracao):
+>       assert os.path.exists(banco_temp_integracao), f"Banco não existe: {banco_temp_integracao}"
+E       AssertionError: Banco não existe: F:\projetos\gem\tests\integration\tmp\test_0fc55e4fb32e4ec69b880cfe0a04044c.db
+E       assert False
+E        +  where False = <built-in function _path_exists>('F:\\projetos\\gem\\tests\\integration\\tmp\\test_0fc55e4fb32e4ec69b880cfe0a04044c.db')
+E        +    where <built-in function _path_exists> = <module 'ntpath' (frozen)>.exists
+E        +      where <module 'ntpath' (frozen)> = os.path
+
+tests\integration\conftest.py:55: AssertionError
+----------------------------- Captured log setup ------------------------------
+WARNING  root:conftest.py:27 [TEST] [INTEGRACAO] Criando banco temporário: F:\projetos\gem\tests\integration\tmp\test_0fc55e4fb32e4ec69b880cfe0a04044c.db
+WARNING  root:conftest.py:31 [TEST] [INTEGRACAO] Executando Alembic para sqlite:///F:\projetos\gem\tests\integration\tmp\test_0fc55e4fb32e4ec69b880cfe0a04044c.db
+WARNING  root:conftest.py:33 [TEST] [INTEGRACAO] Alembic stdout: 
+WARNING  root:conftest.py:34 [TEST] [INTEGRACAO] Alembic stderr: INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+
+WARNING  root:conftest.py:35 [TEST] [INTEGRACAO] Banco existe após Alembic? False
+================================== FAILURES ===================================
+___________________________ test_backup_and_restore ___________________________
+
+tmp_path = WindowsPath('C:/Users/ratal/AppData/Local/Temp/pytest-of-ratal/pytest-99/test_backup_and_restore0')
+db_path = 'F:\\projetos\\gem\\tests\\integration\\tmp\\test_ace7e51c9f53418f953b42f53fb5e442.db'
+
+    def test_backup_and_restore(tmp_path, db_path):
+        # Cria backup
+>       run_script(BACKUP_SCRIPT, f'--db-path "{db_path}"')
+
+tests\integration\test_backup_export_import.py:36: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+script_path = 'F:\\projetos\\gem\\tests\\integration\\../../scripts/backup_db.py'
+args = '--db-path "F:\\projetos\\gem\\tests\\integration\\tmp\\test_ace7e51c9f53418f953b42f53fb5e442.db"'
+
+    def run_script(script_path, args=None):
+        cmd = f'python "{script_path}"'
+        if args:
+            cmd += f' {args}'
+>       assert os.system(cmd) == 0
+E       assert 1 == 0
+E        +  where 1 = <built-in function system>('python "F:\\projetos\\gem\\tests\\integration\\../../scripts/backup_db.py" --db-path "F:\\projetos\\gem\\tests\\integration\\tmp\\test_ace7e51c9f53418f953b42f53fb5e442.db"')
+E        +    where <built-in function system> = os.system
+
+tests\integration\test_backup_export_import.py:32: AssertionError
+----------------------------- Captured log setup ------------------------------
+WARNING  root:conftest.py:27 [TEST] [INTEGRACAO] Criando banco temporário: F:\projetos\gem\tests\integration\tmp\test_ace7e51c9f53418f953b42f53fb5e442.db
+WARNING  root:conftest.py:31 [TEST] [INTEGRACAO] Executando Alembic para sqlite:///F:\projetos\gem\tests\integration\tmp\test_ace7e51c9f53418f953b42f53fb5e442.db
+WARNING  root:conftest.py:33 [TEST] [INTEGRACAO] Alembic stdout: 
+WARNING  root:conftest.py:34 [TEST] [INTEGRACAO] Alembic stderr: INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+
+WARNING  root:conftest.py:35 [TEST] [INTEGRACAO] Banco existe após Alembic? False
+---------------------------- Captured stderr call -----------------------------
+Traceback (most recent call last):\r\n  File "F:\\projetos\\gem\\tests\\integration\\../../scripts/backup_db.py", line 32, in <module>\r\n    main()\r\n    ~~~~^^\r\n  File "F:\\projetos\\gem\\tests\\integration\\../../scripts/backup_db.py", line 29, in main\r\n    backup_db(db_path)\r\n    ~~~~~~~~~^^^^^^^^^\r\n  File "F:\\projetos\\gem\\tests\\integration\\../../scripts/backup_db.py", line 21, in backup_db\r\n    shutil.copy2(db_path, backup_file)\r\n    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^\r\n  File "C:\\Users\\ratal\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\shutil.py", line 453, in copy2\r\n    _winapi.CopyFile2(src_, dst_, flags)\r\n    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^\r\nFileNotFoundError: [WinError 2] O sistema n\ufffdo pode encontrar o arquivo especificado\r
+____________________ test_migrate_medicos_especializacoes _____________________
+
+src_db_path = 'C:\\Users\\ratal\\AppData\\Local\\Temp\\pytest-of-ratal\\pytest-99\\test_migrate_medicos_especiali0\\src.db'
+dst_db_path = 'C:\\Users\\ratal\\AppData\\Local\\Temp\\pytest-of-ratal\\pytest-99\\test_migrate_medicos_especiali0\\dst.db'
+
+    def test_migrate_medicos_especializacoes(src_db_path, dst_db_path):
+        # Executa migração apenas das tabelas medicos e especializacoes
+        result = subprocess.run([
+            'python', 'scripts/migrate_db.py',
+            '--src-db', src_db_path,
+            '--dst-db', dst_db_path,
+            '--tables', 'medicos,especializacoes'
+        ], capture_output=True, text=True)
+>       assert result.returncode == 0, result.stderr
+E       AssertionError: Traceback (most recent call last):
+E           File "F:\projetos\gem\scripts\migrate_db.py", line 68, in <module>
+E             main()
+E             ~~~~^^
+E           File "F:\projetos\gem\scripts\migrate_db.py", line 54, in main
+E             src_meta = MetaData(bind=src_engine)
+E         TypeError: MetaData.__init__() got an unexpected keyword argument 'bind'
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['python', 'scripts/migrate_db.py', '--src-db', 'C:\\Users\\ratal\\AppData\\Local\\Temp\\pytest-of-ratal\\pytest-99\\test_migrate_medicos_especiali0\\src.db', '--dst-db', 'C:\\Users\\ratal\\AppData\\Local\\Temp\\pytest-of-ratal\\pytest-99\\test_migrate_medicos_especiali0\\dst.db', '--tables', 'medicos,especializacoes'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "F:\\projetos\\gem\\scripts\\migrate_db.py", line 68, in <module>\n    main()\n    ~~~~^^\n  File "F:\\projetos\\gem\\scripts\\migrate_db.py", line 54, in main\n    src_meta = MetaData(bind=src_engine)\nTypeError: MetaData.__init__() got an unexpected keyword argument \'bind\'\n').returncode
+
+tests\integration\test_migration.py:36: AssertionError
+---------------------------- Captured stdout setup ----------------------------
+2025-06-21 21:43:48,757 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2025-06-21 21:43:48,757 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("medicos")
+2025-06-21 21:43:48,757 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:48,758 INFO sqlalchemy.engine.Engine PRAGMA temp.table_info("medicos")
+2025-06-21 21:43:48,758 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:48,758 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("especializacoes")
+2025-06-21 21:43:48,758 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:48,758 INFO sqlalchemy.engine.Engine PRAGMA temp.table_info("especializacoes")
+2025-06-21 21:43:48,758 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:48,759 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("escalas_plantonistas")
+2025-06-21 21:43:48,759 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:48,759 INFO sqlalchemy.engine.Engine PRAGMA temp.table_info("escalas_plantonistas")
+2025-06-21 21:43:48,759 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:48,759 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("escalas_sobreaviso")
+2025-06-21 21:43:48,759 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:48,759 INFO sqlalchemy.engine.Engine PRAGMA temp.table_info("escalas_sobreaviso")
+2025-06-21 21:43:48,759 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:48,760 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("historico_versao")
+2025-06-21 21:43:48,760 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:48,760 INFO sqlalchemy.engine.Engine PRAGMA temp.table_info("historico_versao")
+2025-06-21 21:43:48,760 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:48,760 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("audit_log")
+2025-06-21 21:43:48,760 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:48,760 INFO sqlalchemy.engine.Engine PRAGMA temp.table_info("audit_log")
+2025-06-21 21:43:48,760 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:48,761 INFO sqlalchemy.engine.Engine 
+CREATE TABLE especializacoes (
+	id INTEGER NOT NULL, 
+	nome VARCHAR NOT NULL, 
+	version INTEGER NOT NULL, 
+	PRIMARY KEY (id), 
+	UNIQUE (nome)
+)
+
+
+2025-06-21 21:43:48,761 INFO sqlalchemy.engine.Engine [no key 0.00010s] ()
+2025-06-21 21:43:48,770 INFO sqlalchemy.engine.Engine 
+CREATE TABLE historico_versao (
+	id INTEGER NOT NULL, 
+	tabela VARCHAR NOT NULL, 
+	registro_id INTEGER NOT NULL, 
+	versao INTEGER NOT NULL, 
+	usuario VARCHAR, 
+	data_hora DATETIME, 
+	dados TEXT, 
+	PRIMARY KEY (id)
+)
+
+
+2025-06-21 21:43:48,770 INFO sqlalchemy.engine.Engine [no key 0.00028s] ()
+2025-06-21 21:43:48,776 INFO sqlalchemy.engine.Engine 
+CREATE TABLE audit_log (
+	id INTEGER NOT NULL, 
+	usuario VARCHAR, 
+	data_hora VARCHAR, 
+	operacao VARCHAR, 
+	tabela VARCHAR, 
+	registro_id INTEGER, 
+	dados_anteriores TEXT, 
+	dados_novos TEXT, 
+	PRIMARY KEY (id)
+)
+
+
+2025-06-21 21:43:48,776 INFO sqlalchemy.engine.Engine [no key 0.00026s] ()
+2025-06-21 21:43:48,781 INFO sqlalchemy.engine.Engine 
+CREATE TABLE medicos (
+	id INTEGER NOT NULL, 
+	nome VARCHAR NOT NULL, 
+	nome_pj VARCHAR, 
+	especializacao_id INTEGER NOT NULL, 
+	status VARCHAR(8) NOT NULL, 
+	version INTEGER NOT NULL, 
+	PRIMARY KEY (id), 
+	CONSTRAINT uix_nome_especializacao UNIQUE (nome, especializacao_id), 
+	FOREIGN KEY(especializacao_id) REFERENCES especializacoes (id)
+)
+
+
+2025-06-21 21:43:48,782 INFO sqlalchemy.engine.Engine [no key 0.00025s] ()
+2025-06-21 21:43:48,787 INFO sqlalchemy.engine.Engine 
+CREATE TABLE escalas_plantonistas (
+	id INTEGER NOT NULL, 
+	data DATE NOT NULL, 
+	turno VARCHAR NOT NULL, 
+	medico1_id INTEGER NOT NULL, 
+	medico2_id INTEGER, 
+	version INTEGER NOT NULL, 
+	PRIMARY KEY (id), 
+	CONSTRAINT uix_data_turno UNIQUE (data, turno), 
+	FOREIGN KEY(medico1_id) REFERENCES medicos (id), 
+	FOREIGN KEY(medico2_id) REFERENCES medicos (id)
+)
+
+
+2025-06-21 21:43:48,788 INFO sqlalchemy.engine.Engine [no key 0.00035s] ()
+2025-06-21 21:43:48,793 INFO sqlalchemy.engine.Engine 
+CREATE TABLE escalas_sobreaviso (
+	id INTEGER NOT NULL, 
+	data_inicial DATE NOT NULL, 
+	data_final DATE NOT NULL, 
+	medico1_id INTEGER NOT NULL, 
+	especializacao_id INTEGER NOT NULL, 
+	version INTEGER NOT NULL, 
+	PRIMARY KEY (id), 
+	CONSTRAINT uix_sobreaviso_periodo_medico_especializacao UNIQUE (data_inicial, data_final, medico1_id, especializacao_id), 
+	FOREIGN KEY(medico1_id) REFERENCES medicos (id), 
+	FOREIGN KEY(especializacao_id) REFERENCES especializacoes (id)
+)
+
+
+2025-06-21 21:43:48,793 INFO sqlalchemy.engine.Engine [no key 0.00018s] ()
+2025-06-21 21:43:48,798 INFO sqlalchemy.engine.Engine COMMIT
+2025-06-21 21:43:48,806 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2025-06-21 21:43:48,807 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("medicos")
+2025-06-21 21:43:48,807 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:48,807 INFO sqlalchemy.engine.Engine PRAGMA temp.table_info("medicos")
+2025-06-21 21:43:48,807 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:48,807 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("especializacoes")
+2025-06-21 21:43:48,808 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:48,808 INFO sqlalchemy.engine.Engine PRAGMA temp.table_info("especializacoes")
+2025-06-21 21:43:48,808 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:48,808 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("escalas_plantonistas")
+2025-06-21 21:43:48,808 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:48,808 INFO sqlalchemy.engine.Engine PRAGMA temp.table_info("escalas_plantonistas")
+2025-06-21 21:43:48,809 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:48,809 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("escalas_sobreaviso")
+2025-06-21 21:43:48,809 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:48,809 INFO sqlalchemy.engine.Engine PRAGMA temp.table_info("escalas_sobreaviso")
+2025-06-21 21:43:48,809 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:48,809 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("historico_versao")
+2025-06-21 21:43:48,809 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:48,810 INFO sqlalchemy.engine.Engine PRAGMA temp.table_info("historico_versao")
+2025-06-21 21:43:48,810 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:48,810 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("audit_log")
+2025-06-21 21:43:48,810 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:48,810 INFO sqlalchemy.engine.Engine PRAGMA temp.table_info("audit_log")
+2025-06-21 21:43:48,810 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:48,811 INFO sqlalchemy.engine.Engine 
+CREATE TABLE especializacoes (
+	id INTEGER NOT NULL, 
+	nome VARCHAR NOT NULL, 
+	version INTEGER NOT NULL, 
+	PRIMARY KEY (id), 
+	UNIQUE (nome)
+)
+
+
+2025-06-21 21:43:48,811 INFO sqlalchemy.engine.Engine [no key 0.00014s] ()
+2025-06-21 21:43:48,819 INFO sqlalchemy.engine.Engine 
+CREATE TABLE historico_versao (
+	id INTEGER NOT NULL, 
+	tabela VARCHAR NOT NULL, 
+	registro_id INTEGER NOT NULL, 
+	versao INTEGER NOT NULL, 
+	usuario VARCHAR, 
+	data_hora DATETIME, 
+	dados TEXT, 
+	PRIMARY KEY (id)
+)
+
+
+2025-06-21 21:43:48,819 INFO sqlalchemy.engine.Engine [no key 0.00030s] ()
+2025-06-21 21:43:48,825 INFO sqlalchemy.engine.Engine 
+CREATE TABLE audit_log (
+	id INTEGER NOT NULL, 
+	usuario VARCHAR, 
+	data_hora VARCHAR, 
+	operacao VARCHAR, 
+	tabela VARCHAR, 
+	registro_id INTEGER, 
+	dados_anteriores TEXT, 
+	dados_novos TEXT, 
+	PRIMARY KEY (id)
+)
+
+
+2025-06-21 21:43:48,825 INFO sqlalchemy.engine.Engine [no key 0.00024s] ()
+2025-06-21 21:43:48,830 INFO sqlalchemy.engine.Engine 
+CREATE TABLE medicos (
+	id INTEGER NOT NULL, 
+	nome VARCHAR NOT NULL, 
+	nome_pj VARCHAR, 
+	especializacao_id INTEGER NOT NULL, 
+	status VARCHAR(8) NOT NULL, 
+	version INTEGER NOT NULL, 
+	PRIMARY KEY (id), 
+	CONSTRAINT uix_nome_especializacao UNIQUE (nome, especializacao_id), 
+	FOREIGN KEY(especializacao_id) REFERENCES especializacoes (id)
+)
+
+
+2025-06-21 21:43:48,830 INFO sqlalchemy.engine.Engine [no key 0.00025s] ()
+2025-06-21 21:43:48,839 INFO sqlalchemy.engine.Engine 
+CREATE TABLE escalas_plantonistas (
+	id INTEGER NOT NULL, 
+	data DATE NOT NULL, 
+	turno VARCHAR NOT NULL, 
+	medico1_id INTEGER NOT NULL, 
+	medico2_id INTEGER, 
+	version INTEGER NOT NULL, 
+	PRIMARY KEY (id), 
+	CONSTRAINT uix_data_turno UNIQUE (data, turno), 
+	FOREIGN KEY(medico1_id) REFERENCES medicos (id), 
+	FOREIGN KEY(medico2_id) REFERENCES medicos (id)
+)
+
+
+2025-06-21 21:43:48,839 INFO sqlalchemy.engine.Engine [no key 0.00023s] ()
+2025-06-21 21:43:48,844 INFO sqlalchemy.engine.Engine 
+CREATE TABLE escalas_sobreaviso (
+	id INTEGER NOT NULL, 
+	data_inicial DATE NOT NULL, 
+	data_final DATE NOT NULL, 
+	medico1_id INTEGER NOT NULL, 
+	especializacao_id INTEGER NOT NULL, 
+	version INTEGER NOT NULL, 
+	PRIMARY KEY (id), 
+	CONSTRAINT uix_sobreaviso_periodo_medico_especializacao UNIQUE (data_inicial, data_final, medico1_id, especializacao_id), 
+	FOREIGN KEY(medico1_id) REFERENCES medicos (id), 
+	FOREIGN KEY(especializacao_id) REFERENCES especializacoes (id)
+)
+
+
+2025-06-21 21:43:48,845 INFO sqlalchemy.engine.Engine [no key 0.00022s] ()
+2025-06-21 21:43:48,849 INFO sqlalchemy.engine.Engine COMMIT
+----------------------------- Captured log setup ------------------------------
+INFO     sqlalchemy.engine.Engine:base.py:2698 BEGIN (implicit)
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA main.table_info("medicos")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA temp.table_info("medicos")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA main.table_info("especializacoes")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA temp.table_info("especializacoes")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA main.table_info("escalas_plantonistas")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA temp.table_info("escalas_plantonistas")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA main.table_info("escalas_sobreaviso")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA temp.table_info("escalas_sobreaviso")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA main.table_info("historico_versao")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA temp.table_info("historico_versao")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA main.table_info("audit_log")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA temp.table_info("audit_log")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 
+CREATE TABLE especializacoes (
+	id INTEGER NOT NULL, 
+	nome VARCHAR NOT NULL, 
+	version INTEGER NOT NULL, 
+	PRIMARY KEY (id), 
+	UNIQUE (nome)
+)
+
+
+INFO     sqlalchemy.engine.Engine:base.py:1842 [no key 0.00010s] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 
+CREATE TABLE historico_versao (
+	id INTEGER NOT NULL, 
+	tabela VARCHAR NOT NULL, 
+	registro_id INTEGER NOT NULL, 
+	versao INTEGER NOT NULL, 
+	usuario VARCHAR, 
+	data_hora DATETIME, 
+	dados TEXT, 
+	PRIMARY KEY (id)
+)
+
+
+INFO     sqlalchemy.engine.Engine:base.py:1842 [no key 0.00028s] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 
+CREATE TABLE audit_log (
+	id INTEGER NOT NULL, 
+	usuario VARCHAR, 
+	data_hora VARCHAR, 
+	operacao VARCHAR, 
+	tabela VARCHAR, 
+	registro_id INTEGER, 
+	dados_anteriores TEXT, 
+	dados_novos TEXT, 
+	PRIMARY KEY (id)
+)
+
+
+INFO     sqlalchemy.engine.Engine:base.py:1842 [no key 0.00026s] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 
+CREATE TABLE medicos (
+	id INTEGER NOT NULL, 
+	nome VARCHAR NOT NULL, 
+	nome_pj VARCHAR, 
+	especializacao_id INTEGER NOT NULL, 
+	status VARCHAR(8) NOT NULL, 
+	version INTEGER NOT NULL, 
+	PRIMARY KEY (id), 
+	CONSTRAINT uix_nome_especializacao UNIQUE (nome, especializacao_id), 
+	FOREIGN KEY(especializacao_id) REFERENCES especializacoes (id)
+)
+
+
+INFO     sqlalchemy.engine.Engine:base.py:1842 [no key 0.00025s] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 
+CREATE TABLE escalas_plantonistas (
+	id INTEGER NOT NULL, 
+	data DATE NOT NULL, 
+	turno VARCHAR NOT NULL, 
+	medico1_id INTEGER NOT NULL, 
+	medico2_id INTEGER, 
+	version INTEGER NOT NULL, 
+	PRIMARY KEY (id), 
+	CONSTRAINT uix_data_turno UNIQUE (data, turno), 
+	FOREIGN KEY(medico1_id) REFERENCES medicos (id), 
+	FOREIGN KEY(medico2_id) REFERENCES medicos (id)
+)
+
+
+INFO     sqlalchemy.engine.Engine:base.py:1842 [no key 0.00035s] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 
+CREATE TABLE escalas_sobreaviso (
+	id INTEGER NOT NULL, 
+	data_inicial DATE NOT NULL, 
+	data_final DATE NOT NULL, 
+	medico1_id INTEGER NOT NULL, 
+	especializacao_id INTEGER NOT NULL, 
+	version INTEGER NOT NULL, 
+	PRIMARY KEY (id), 
+	CONSTRAINT uix_sobreaviso_periodo_medico_especializacao UNIQUE (data_inicial, data_final, medico1_id, especializacao_id), 
+	FOREIGN KEY(medico1_id) REFERENCES medicos (id), 
+	FOREIGN KEY(especializacao_id) REFERENCES especializacoes (id)
+)
+
+
+INFO     sqlalchemy.engine.Engine:base.py:1842 [no key 0.00018s] ()
+INFO     sqlalchemy.engine.Engine:base.py:2704 COMMIT
+INFO     sqlalchemy.engine.Engine:base.py:2698 BEGIN (implicit)
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA main.table_info("medicos")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA temp.table_info("medicos")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA main.table_info("especializacoes")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA temp.table_info("especializacoes")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA main.table_info("escalas_plantonistas")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA temp.table_info("escalas_plantonistas")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA main.table_info("escalas_sobreaviso")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA temp.table_info("escalas_sobreaviso")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA main.table_info("historico_versao")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA temp.table_info("historico_versao")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA main.table_info("audit_log")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA temp.table_info("audit_log")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 
+CREATE TABLE especializacoes (
+	id INTEGER NOT NULL, 
+	nome VARCHAR NOT NULL, 
+	version INTEGER NOT NULL, 
+	PRIMARY KEY (id), 
+	UNIQUE (nome)
+)
+
+
+INFO     sqlalchemy.engine.Engine:base.py:1842 [no key 0.00014s] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 
+CREATE TABLE historico_versao (
+	id INTEGER NOT NULL, 
+	tabela VARCHAR NOT NULL, 
+	registro_id INTEGER NOT NULL, 
+	versao INTEGER NOT NULL, 
+	usuario VARCHAR, 
+	data_hora DATETIME, 
+	dados TEXT, 
+	PRIMARY KEY (id)
+)
+
+
+INFO     sqlalchemy.engine.Engine:base.py:1842 [no key 0.00030s] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 
+CREATE TABLE audit_log (
+	id INTEGER NOT NULL, 
+	usuario VARCHAR, 
+	data_hora VARCHAR, 
+	operacao VARCHAR, 
+	tabela VARCHAR, 
+	registro_id INTEGER, 
+	dados_anteriores TEXT, 
+	dados_novos TEXT, 
+	PRIMARY KEY (id)
+)
+
+
+INFO     sqlalchemy.engine.Engine:base.py:1842 [no key 0.00024s] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 
+CREATE TABLE medicos (
+	id INTEGER NOT NULL, 
+	nome VARCHAR NOT NULL, 
+	nome_pj VARCHAR, 
+	especializacao_id INTEGER NOT NULL, 
+	status VARCHAR(8) NOT NULL, 
+	version INTEGER NOT NULL, 
+	PRIMARY KEY (id), 
+	CONSTRAINT uix_nome_especializacao UNIQUE (nome, especializacao_id), 
+	FOREIGN KEY(especializacao_id) REFERENCES especializacoes (id)
+)
+
+
+INFO     sqlalchemy.engine.Engine:base.py:1842 [no key 0.00025s] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 
+CREATE TABLE escalas_plantonistas (
+	id INTEGER NOT NULL, 
+	data DATE NOT NULL, 
+	turno VARCHAR NOT NULL, 
+	medico1_id INTEGER NOT NULL, 
+	medico2_id INTEGER, 
+	version INTEGER NOT NULL, 
+	PRIMARY KEY (id), 
+	CONSTRAINT uix_data_turno UNIQUE (data, turno), 
+	FOREIGN KEY(medico1_id) REFERENCES medicos (id), 
+	FOREIGN KEY(medico2_id) REFERENCES medicos (id)
+)
+
+
+INFO     sqlalchemy.engine.Engine:base.py:1842 [no key 0.00023s] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 
+CREATE TABLE escalas_sobreaviso (
+	id INTEGER NOT NULL, 
+	data_inicial DATE NOT NULL, 
+	data_final DATE NOT NULL, 
+	medico1_id INTEGER NOT NULL, 
+	especializacao_id INTEGER NOT NULL, 
+	version INTEGER NOT NULL, 
+	PRIMARY KEY (id), 
+	CONSTRAINT uix_sobreaviso_periodo_medico_especializacao UNIQUE (data_inicial, data_final, medico1_id, especializacao_id), 
+	FOREIGN KEY(medico1_id) REFERENCES medicos (id), 
+	FOREIGN KEY(especializacao_id) REFERENCES especializacoes (id)
+)
+
+
+INFO     sqlalchemy.engine.Engine:base.py:1842 [no key 0.00022s] ()
+INFO     sqlalchemy.engine.Engine:base.py:2704 COMMIT
+___________________________ test_migrate_all_tables ___________________________
+
+src_db_path = 'C:\\Users\\ratal\\AppData\\Local\\Temp\\pytest-of-ratal\\pytest-99\\test_migrate_all_tables0\\src.db'
+dst_db_path = 'C:\\Users\\ratal\\AppData\\Local\\Temp\\pytest-of-ratal\\pytest-99\\test_migrate_all_tables0\\dst.db'
+
+    def test_migrate_all_tables(src_db_path, dst_db_path):
+        # Executa migração de todas as tabelas
+        result = subprocess.run([
+            'python', 'scripts/migrate_db.py',
+            '--src-db', src_db_path,
+            '--dst-db', dst_db_path
+        ], capture_output=True, text=True)
+>       assert result.returncode == 0, result.stderr
+E       AssertionError: Traceback (most recent call last):
+E           File "F:\projetos\gem\scripts\migrate_db.py", line 68, in <module>
+E             main()
+E             ~~~~^^
+E           File "F:\projetos\gem\scripts\migrate_db.py", line 54, in main
+E             src_meta = MetaData(bind=src_engine)
+E         TypeError: MetaData.__init__() got an unexpected keyword argument 'bind'
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['python', 'scripts/migrate_db.py', '--src-db', 'C:\\Users\\ratal\\AppData\\Local\\Temp\\pytest-of-ratal\\pytest-99\\test_migrate_all_tables0\\src.db', '--dst-db', 'C:\\Users\\ratal\\AppData\\Local\\Temp\\pytest-of-ratal\\pytest-99\\test_migrate_all_tables0\\dst.db'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "F:\\projetos\\gem\\scripts\\migrate_db.py", line 68, in <module>\n    main()\n    ~~~~^^\n  File "F:\\projetos\\gem\\scripts\\migrate_db.py", line 54, in main\n    src_meta = MetaData(bind=src_engine)\nTypeError: MetaData.__init__() got an unexpected keyword argument \'bind\'\n').returncode
+
+tests\integration\test_migration.py:52: AssertionError
+---------------------------- Captured stdout setup ----------------------------
+2025-06-21 21:43:49,391 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2025-06-21 21:43:49,391 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("medicos")
+2025-06-21 21:43:49,391 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:49,391 INFO sqlalchemy.engine.Engine PRAGMA temp.table_info("medicos")
+2025-06-21 21:43:49,391 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:49,391 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("especializacoes")
+2025-06-21 21:43:49,391 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:49,392 INFO sqlalchemy.engine.Engine PRAGMA temp.table_info("especializacoes")
+2025-06-21 21:43:49,392 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:49,392 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("escalas_plantonistas")
+2025-06-21 21:43:49,392 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:49,392 INFO sqlalchemy.engine.Engine PRAGMA temp.table_info("escalas_plantonistas")
+2025-06-21 21:43:49,392 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:49,392 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("escalas_sobreaviso")
+2025-06-21 21:43:49,392 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:49,393 INFO sqlalchemy.engine.Engine PRAGMA temp.table_info("escalas_sobreaviso")
+2025-06-21 21:43:49,393 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:49,393 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("historico_versao")
+2025-06-21 21:43:49,393 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:49,393 INFO sqlalchemy.engine.Engine PRAGMA temp.table_info("historico_versao")
+2025-06-21 21:43:49,393 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:49,393 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("audit_log")
+2025-06-21 21:43:49,393 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:49,393 INFO sqlalchemy.engine.Engine PRAGMA temp.table_info("audit_log")
+2025-06-21 21:43:49,394 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:49,394 INFO sqlalchemy.engine.Engine 
+CREATE TABLE especializacoes (
+	id INTEGER NOT NULL, 
+	nome VARCHAR NOT NULL, 
+	version INTEGER NOT NULL, 
+	PRIMARY KEY (id), 
+	UNIQUE (nome)
+)
+
+
+2025-06-21 21:43:49,394 INFO sqlalchemy.engine.Engine [no key 0.00010s] ()
+2025-06-21 21:43:49,404 INFO sqlalchemy.engine.Engine 
+CREATE TABLE historico_versao (
+	id INTEGER NOT NULL, 
+	tabela VARCHAR NOT NULL, 
+	registro_id INTEGER NOT NULL, 
+	versao INTEGER NOT NULL, 
+	usuario VARCHAR, 
+	data_hora DATETIME, 
+	dados TEXT, 
+	PRIMARY KEY (id)
+)
+
+
+2025-06-21 21:43:49,405 INFO sqlalchemy.engine.Engine [no key 0.00019s] ()
+2025-06-21 21:43:49,410 INFO sqlalchemy.engine.Engine 
+CREATE TABLE audit_log (
+	id INTEGER NOT NULL, 
+	usuario VARCHAR, 
+	data_hora VARCHAR, 
+	operacao VARCHAR, 
+	tabela VARCHAR, 
+	registro_id INTEGER, 
+	dados_anteriores TEXT, 
+	dados_novos TEXT, 
+	PRIMARY KEY (id)
+)
+
+
+2025-06-21 21:43:49,410 INFO sqlalchemy.engine.Engine [no key 0.00014s] ()
+2025-06-21 21:43:49,415 INFO sqlalchemy.engine.Engine 
+CREATE TABLE medicos (
+	id INTEGER NOT NULL, 
+	nome VARCHAR NOT NULL, 
+	nome_pj VARCHAR, 
+	especializacao_id INTEGER NOT NULL, 
+	status VARCHAR(8) NOT NULL, 
+	version INTEGER NOT NULL, 
+	PRIMARY KEY (id), 
+	CONSTRAINT uix_nome_especializacao UNIQUE (nome, especializacao_id), 
+	FOREIGN KEY(especializacao_id) REFERENCES especializacoes (id)
+)
+
+
+2025-06-21 21:43:49,415 INFO sqlalchemy.engine.Engine [no key 0.00011s] ()
+2025-06-21 21:43:49,420 INFO sqlalchemy.engine.Engine 
+CREATE TABLE escalas_plantonistas (
+	id INTEGER NOT NULL, 
+	data DATE NOT NULL, 
+	turno VARCHAR NOT NULL, 
+	medico1_id INTEGER NOT NULL, 
+	medico2_id INTEGER, 
+	version INTEGER NOT NULL, 
+	PRIMARY KEY (id), 
+	CONSTRAINT uix_data_turno UNIQUE (data, turno), 
+	FOREIGN KEY(medico1_id) REFERENCES medicos (id), 
+	FOREIGN KEY(medico2_id) REFERENCES medicos (id)
+)
+
+
+2025-06-21 21:43:49,420 INFO sqlalchemy.engine.Engine [no key 0.00018s] ()
+2025-06-21 21:43:49,425 INFO sqlalchemy.engine.Engine 
+CREATE TABLE escalas_sobreaviso (
+	id INTEGER NOT NULL, 
+	data_inicial DATE NOT NULL, 
+	data_final DATE NOT NULL, 
+	medico1_id INTEGER NOT NULL, 
+	especializacao_id INTEGER NOT NULL, 
+	version INTEGER NOT NULL, 
+	PRIMARY KEY (id), 
+	CONSTRAINT uix_sobreaviso_periodo_medico_especializacao UNIQUE (data_inicial, data_final, medico1_id, especializacao_id), 
+	FOREIGN KEY(medico1_id) REFERENCES medicos (id), 
+	FOREIGN KEY(especializacao_id) REFERENCES especializacoes (id)
+)
+
+
+2025-06-21 21:43:49,425 INFO sqlalchemy.engine.Engine [no key 0.00015s] ()
+2025-06-21 21:43:49,430 INFO sqlalchemy.engine.Engine COMMIT
+2025-06-21 21:43:49,437 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2025-06-21 21:43:49,437 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("medicos")
+2025-06-21 21:43:49,437 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:49,438 INFO sqlalchemy.engine.Engine PRAGMA temp.table_info("medicos")
+2025-06-21 21:43:49,438 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:49,438 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("especializacoes")
+2025-06-21 21:43:49,438 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:49,438 INFO sqlalchemy.engine.Engine PRAGMA temp.table_info("especializacoes")
+2025-06-21 21:43:49,438 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:49,438 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("escalas_plantonistas")
+2025-06-21 21:43:49,438 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:49,439 INFO sqlalchemy.engine.Engine PRAGMA temp.table_info("escalas_plantonistas")
+2025-06-21 21:43:49,439 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:49,439 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("escalas_sobreaviso")
+2025-06-21 21:43:49,439 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:49,439 INFO sqlalchemy.engine.Engine PRAGMA temp.table_info("escalas_sobreaviso")
+2025-06-21 21:43:49,439 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:49,439 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("historico_versao")
+2025-06-21 21:43:49,439 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:49,439 INFO sqlalchemy.engine.Engine PRAGMA temp.table_info("historico_versao")
+2025-06-21 21:43:49,440 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:49,440 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("audit_log")
+2025-06-21 21:43:49,440 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:49,440 INFO sqlalchemy.engine.Engine PRAGMA temp.table_info("audit_log")
+2025-06-21 21:43:49,440 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-06-21 21:43:49,440 INFO sqlalchemy.engine.Engine 
+CREATE TABLE especializacoes (
+	id INTEGER NOT NULL, 
+	nome VARCHAR NOT NULL, 
+	version INTEGER NOT NULL, 
+	PRIMARY KEY (id), 
+	UNIQUE (nome)
+)
+
+
+2025-06-21 21:43:49,440 INFO sqlalchemy.engine.Engine [no key 0.00010s] ()
+2025-06-21 21:43:49,447 INFO sqlalchemy.engine.Engine 
+CREATE TABLE historico_versao (
+	id INTEGER NOT NULL, 
+	tabela VARCHAR NOT NULL, 
+	registro_id INTEGER NOT NULL, 
+	versao INTEGER NOT NULL, 
+	usuario VARCHAR, 
+	data_hora DATETIME, 
+	dados TEXT, 
+	PRIMARY KEY (id)
+)
+
+
+2025-06-21 21:43:49,447 INFO sqlalchemy.engine.Engine [no key 0.00012s] ()
+2025-06-21 21:43:49,452 INFO sqlalchemy.engine.Engine 
+CREATE TABLE audit_log (
+	id INTEGER NOT NULL, 
+	usuario VARCHAR, 
+	data_hora VARCHAR, 
+	operacao VARCHAR, 
+	tabela VARCHAR, 
+	registro_id INTEGER, 
+	dados_anteriores TEXT, 
+	dados_novos TEXT, 
+	PRIMARY KEY (id)
+)
+
+
+2025-06-21 21:43:49,452 INFO sqlalchemy.engine.Engine [no key 0.00016s] ()
+2025-06-21 21:43:49,457 INFO sqlalchemy.engine.Engine 
+CREATE TABLE medicos (
+	id INTEGER NOT NULL, 
+	nome VARCHAR NOT NULL, 
+	nome_pj VARCHAR, 
+	especializacao_id INTEGER NOT NULL, 
+	status VARCHAR(8) NOT NULL, 
+	version INTEGER NOT NULL, 
+	PRIMARY KEY (id), 
+	CONSTRAINT uix_nome_especializacao UNIQUE (nome, especializacao_id), 
+	FOREIGN KEY(especializacao_id) REFERENCES especializacoes (id)
+)
+
+
+2025-06-21 21:43:49,457 INFO sqlalchemy.engine.Engine [no key 0.00016s] ()
+2025-06-21 21:43:49,462 INFO sqlalchemy.engine.Engine 
+CREATE TABLE escalas_plantonistas (
+	id INTEGER NOT NULL, 
+	data DATE NOT NULL, 
+	turno VARCHAR NOT NULL, 
+	medico1_id INTEGER NOT NULL, 
+	medico2_id INTEGER, 
+	version INTEGER NOT NULL, 
+	PRIMARY KEY (id), 
+	CONSTRAINT uix_data_turno UNIQUE (data, turno), 
+	FOREIGN KEY(medico1_id) REFERENCES medicos (id), 
+	FOREIGN KEY(medico2_id) REFERENCES medicos (id)
+)
+
+
+2025-06-21 21:43:49,462 INFO sqlalchemy.engine.Engine [no key 0.00012s] ()
+2025-06-21 21:43:49,467 INFO sqlalchemy.engine.Engine 
+CREATE TABLE escalas_sobreaviso (
+	id INTEGER NOT NULL, 
+	data_inicial DATE NOT NULL, 
+	data_final DATE NOT NULL, 
+	medico1_id INTEGER NOT NULL, 
+	especializacao_id INTEGER NOT NULL, 
+	version INTEGER NOT NULL, 
+	PRIMARY KEY (id), 
+	CONSTRAINT uix_sobreaviso_periodo_medico_especializacao UNIQUE (data_inicial, data_final, medico1_id, especializacao_id), 
+	FOREIGN KEY(medico1_id) REFERENCES medicos (id), 
+	FOREIGN KEY(especializacao_id) REFERENCES especializacoes (id)
+)
+
+
+2025-06-21 21:43:49,467 INFO sqlalchemy.engine.Engine [no key 0.00011s] ()
+2025-06-21 21:43:49,472 INFO sqlalchemy.engine.Engine COMMIT
+----------------------------- Captured log setup ------------------------------
+INFO     sqlalchemy.engine.Engine:base.py:2698 BEGIN (implicit)
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA main.table_info("medicos")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA temp.table_info("medicos")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA main.table_info("especializacoes")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA temp.table_info("especializacoes")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA main.table_info("escalas_plantonistas")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA temp.table_info("escalas_plantonistas")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA main.table_info("escalas_sobreaviso")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA temp.table_info("escalas_sobreaviso")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA main.table_info("historico_versao")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA temp.table_info("historico_versao")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA main.table_info("audit_log")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA temp.table_info("audit_log")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 
+CREATE TABLE especializacoes (
+	id INTEGER NOT NULL, 
+	nome VARCHAR NOT NULL, 
+	version INTEGER NOT NULL, 
+	PRIMARY KEY (id), 
+	UNIQUE (nome)
+)
+
+
+INFO     sqlalchemy.engine.Engine:base.py:1842 [no key 0.00010s] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 
+CREATE TABLE historico_versao (
+	id INTEGER NOT NULL, 
+	tabela VARCHAR NOT NULL, 
+	registro_id INTEGER NOT NULL, 
+	versao INTEGER NOT NULL, 
+	usuario VARCHAR, 
+	data_hora DATETIME, 
+	dados TEXT, 
+	PRIMARY KEY (id)
+)
+
+
+INFO     sqlalchemy.engine.Engine:base.py:1842 [no key 0.00019s] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 
+CREATE TABLE audit_log (
+	id INTEGER NOT NULL, 
+	usuario VARCHAR, 
+	data_hora VARCHAR, 
+	operacao VARCHAR, 
+	tabela VARCHAR, 
+	registro_id INTEGER, 
+	dados_anteriores TEXT, 
+	dados_novos TEXT, 
+	PRIMARY KEY (id)
+)
+
+
+INFO     sqlalchemy.engine.Engine:base.py:1842 [no key 0.00014s] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 
+CREATE TABLE medicos (
+	id INTEGER NOT NULL, 
+	nome VARCHAR NOT NULL, 
+	nome_pj VARCHAR, 
+	especializacao_id INTEGER NOT NULL, 
+	status VARCHAR(8) NOT NULL, 
+	version INTEGER NOT NULL, 
+	PRIMARY KEY (id), 
+	CONSTRAINT uix_nome_especializacao UNIQUE (nome, especializacao_id), 
+	FOREIGN KEY(especializacao_id) REFERENCES especializacoes (id)
+)
+
+
+INFO     sqlalchemy.engine.Engine:base.py:1842 [no key 0.00011s] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 
+CREATE TABLE escalas_plantonistas (
+	id INTEGER NOT NULL, 
+	data DATE NOT NULL, 
+	turno VARCHAR NOT NULL, 
+	medico1_id INTEGER NOT NULL, 
+	medico2_id INTEGER, 
+	version INTEGER NOT NULL, 
+	PRIMARY KEY (id), 
+	CONSTRAINT uix_data_turno UNIQUE (data, turno), 
+	FOREIGN KEY(medico1_id) REFERENCES medicos (id), 
+	FOREIGN KEY(medico2_id) REFERENCES medicos (id)
+)
+
+
+INFO     sqlalchemy.engine.Engine:base.py:1842 [no key 0.00018s] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 
+CREATE TABLE escalas_sobreaviso (
+	id INTEGER NOT NULL, 
+	data_inicial DATE NOT NULL, 
+	data_final DATE NOT NULL, 
+	medico1_id INTEGER NOT NULL, 
+	especializacao_id INTEGER NOT NULL, 
+	version INTEGER NOT NULL, 
+	PRIMARY KEY (id), 
+	CONSTRAINT uix_sobreaviso_periodo_medico_especializacao UNIQUE (data_inicial, data_final, medico1_id, especializacao_id), 
+	FOREIGN KEY(medico1_id) REFERENCES medicos (id), 
+	FOREIGN KEY(especializacao_id) REFERENCES especializacoes (id)
+)
+
+
+INFO     sqlalchemy.engine.Engine:base.py:1842 [no key 0.00015s] ()
+INFO     sqlalchemy.engine.Engine:base.py:2704 COMMIT
+INFO     sqlalchemy.engine.Engine:base.py:2698 BEGIN (implicit)
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA main.table_info("medicos")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA temp.table_info("medicos")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA main.table_info("especializacoes")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA temp.table_info("especializacoes")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA main.table_info("escalas_plantonistas")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA temp.table_info("escalas_plantonistas")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA main.table_info("escalas_sobreaviso")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA temp.table_info("escalas_sobreaviso")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA main.table_info("historico_versao")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA temp.table_info("historico_versao")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA main.table_info("audit_log")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 PRAGMA temp.table_info("audit_log")
+INFO     sqlalchemy.engine.Engine:base.py:1842 [raw sql] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 
+CREATE TABLE especializacoes (
+	id INTEGER NOT NULL, 
+	nome VARCHAR NOT NULL, 
+	version INTEGER NOT NULL, 
+	PRIMARY KEY (id), 
+	UNIQUE (nome)
+)
+
+
+INFO     sqlalchemy.engine.Engine:base.py:1842 [no key 0.00010s] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 
+CREATE TABLE historico_versao (
+	id INTEGER NOT NULL, 
+	tabela VARCHAR NOT NULL, 
+	registro_id INTEGER NOT NULL, 
+	versao INTEGER NOT NULL, 
+	usuario VARCHAR, 
+	data_hora DATETIME, 
+	dados TEXT, 
+	PRIMARY KEY (id)
+)
+
+
+INFO     sqlalchemy.engine.Engine:base.py:1842 [no key 0.00012s] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 
+CREATE TABLE audit_log (
+	id INTEGER NOT NULL, 
+	usuario VARCHAR, 
+	data_hora VARCHAR, 
+	operacao VARCHAR, 
+	tabela VARCHAR, 
+	registro_id INTEGER, 
+	dados_anteriores TEXT, 
+	dados_novos TEXT, 
+	PRIMARY KEY (id)
+)
+
+
+INFO     sqlalchemy.engine.Engine:base.py:1842 [no key 0.00016s] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 
+CREATE TABLE medicos (
+	id INTEGER NOT NULL, 
+	nome VARCHAR NOT NULL, 
+	nome_pj VARCHAR, 
+	especializacao_id INTEGER NOT NULL, 
+	status VARCHAR(8) NOT NULL, 
+	version INTEGER NOT NULL, 
+	PRIMARY KEY (id), 
+	CONSTRAINT uix_nome_especializacao UNIQUE (nome, especializacao_id), 
+	FOREIGN KEY(especializacao_id) REFERENCES especializacoes (id)
+)
+
+
+INFO     sqlalchemy.engine.Engine:base.py:1842 [no key 0.00016s] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 
+CREATE TABLE escalas_plantonistas (
+	id INTEGER NOT NULL, 
+	data DATE NOT NULL, 
+	turno VARCHAR NOT NULL, 
+	medico1_id INTEGER NOT NULL, 
+	medico2_id INTEGER, 
+	version INTEGER NOT NULL, 
+	PRIMARY KEY (id), 
+	CONSTRAINT uix_data_turno UNIQUE (data, turno), 
+	FOREIGN KEY(medico1_id) REFERENCES medicos (id), 
+	FOREIGN KEY(medico2_id) REFERENCES medicos (id)
+)
+
+
+INFO     sqlalchemy.engine.Engine:base.py:1842 [no key 0.00012s] ()
+INFO     sqlalchemy.engine.Engine:base.py:1842 
+CREATE TABLE escalas_sobreaviso (
+	id INTEGER NOT NULL, 
+	data_inicial DATE NOT NULL, 
+	data_final DATE NOT NULL, 
+	medico1_id INTEGER NOT NULL, 
+	especializacao_id INTEGER NOT NULL, 
+	version INTEGER NOT NULL, 
+	PRIMARY KEY (id), 
+	CONSTRAINT uix_sobreaviso_periodo_medico_especializacao UNIQUE (data_inicial, data_final, medico1_id, especializacao_id), 
+	FOREIGN KEY(medico1_id) REFERENCES medicos (id), 
+	FOREIGN KEY(especializacao_id) REFERENCES especializacoes (id)
+)
+
+
+INFO     sqlalchemy.engine.Engine:base.py:1842 [no key 0.00011s] ()
+INFO     sqlalchemy.engine.Engine:base.py:2704 COMMIT
+______________________ test_medico_validacao_nome_vazio _______________________
+
+self = <sqlalchemy.engine.base.Connection object at 0x00000219E9598B90>
+dialect = <sqlalchemy.dialects.sqlite.pysqlite.SQLiteDialect_pysqlite object at 0x00000219E970D090>
+context = <sqlalchemy.dialects.sqlite.base.SQLiteExecutionContext object at 0x00000219E8435E00>
+statement = <sqlalchemy.dialects.sqlite.base.SQLiteCompiler object at 0x00000219E970CF50>
+parameters = [('Validação', 1)]
+
+    def _exec_single_context(
+        self,
+        dialect: Dialect,
+        context: ExecutionContext,
+        statement: Union[str, Compiled],
+        parameters: Optional[_AnyMultiExecuteParams],
+    ) -> CursorResult[Any]:
+        """continue the _execute_context() method for a single DBAPI
+        cursor.execute() or cursor.executemany() call.
+    
+        """
+        if dialect.bind_typing is BindTyping.SETINPUTSIZES:
+            generic_setinputsizes = context._prepare_set_input_sizes()
+    
+            if generic_setinputsizes:
+                try:
+                    dialect.do_set_input_sizes(
+                        context.cursor, generic_setinputsizes, context
+                    )
+                except BaseException as e:
+                    self._handle_dbapi_exception(
+                        e, str(statement), parameters, None, context
+                    )
+    
+        cursor, str_statement, parameters = (
+            context.cursor,
+            context.statement,
+            context.parameters,
+        )
+    
+        effective_parameters: Optional[_AnyExecuteParams]
+    
+        if not context.executemany:
+            effective_parameters = parameters[0]
+        else:
+            effective_parameters = parameters
+    
+        if self._has_events or self.engine._has_events:
+            for fn in self.dispatch.before_cursor_execute:
+                str_statement, effective_parameters = fn(
+                    self,
+                    cursor,
+                    str_statement,
+                    effective_parameters,
+                    context,
+                    context.executemany,
+                )
+    
+        if self._echo:
+            self._log_info(str_statement)
+    
+            stats = context._get_cache_stats()
+    
+            if not self.engine.hide_parameters:
+                self._log_info(
+                    "[%s] %r",
+                    stats,
+                    sql_util._repr_params(
+                        effective_parameters,
+                        batches=10,
+                        ismulti=context.executemany,
+                    ),
+                )
+            else:
+                self._log_info(
+                    "[%s] [SQL parameters hidden due to hide_parameters=True]",
+                    stats,
+                )
+    
+        evt_handled: bool = False
+        try:
+            if context.execute_style is ExecuteStyle.EXECUTEMANY:
+                effective_parameters = cast(
+                    "_CoreMultiExecuteParams", effective_parameters
+                )
+                if self.dialect._has_events:
+                    for fn in self.dialect.dispatch.do_executemany:
+                        if fn(
+                            cursor,
+                            str_statement,
+                            effective_parameters,
+                            context,
+                        ):
+                            evt_handled = True
+                            break
+                if not evt_handled:
+                    self.dialect.do_executemany(
+                        cursor,
+                        str_statement,
+                        effective_parameters,
+                        context,
+                    )
+            elif not effective_parameters and context.no_parameters:
+                if self.dialect._has_events:
+                    for fn in self.dialect.dispatch.do_execute_no_params:
+                        if fn(cursor, str_statement, context):
+                            evt_handled = True
+                            break
+                if not evt_handled:
+                    self.dialect.do_execute_no_params(
+                        cursor, str_statement, context
+                    )
+            else:
+                effective_parameters = cast(
+                    "_CoreSingleExecuteParams", effective_parameters
+                )
+                if self.dialect._has_events:
+                    for fn in self.dialect.dispatch.do_execute:
+                        if fn(
+                            cursor,
+                            str_statement,
+                            effective_parameters,
+                            context,
+                        ):
+                            evt_handled = True
+                            break
+                if not evt_handled:
+>                   self.dialect.do_execute(
+                        cursor, str_statement, effective_parameters, context
+                    )
+
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1963: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <sqlalchemy.dialects.sqlite.pysqlite.SQLiteDialect_pysqlite object at 0x00000219E970D090>
+cursor = <sqlite3.Cursor object at 0x00000219E97313C0>
+statement = 'INSERT INTO especializacoes (nome, version) VALUES (?, ?) RETURNING id'
+parameters = ('Validação', 1)
+context = <sqlalchemy.dialects.sqlite.base.SQLiteExecutionContext object at 0x00000219E8435E00>
+
+    def do_execute(self, cursor, statement, parameters, context=None):
+>       cursor.execute(statement, parameters)
+E       sqlite3.OperationalError: no such table: especializacoes
+
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:943: OperationalError
+
+The above exception was the direct cause of the following exception:
+
+session = <sqlalchemy.orm.session.Session object at 0x00000219E8238D70>
+
+    def test_medico_validacao_nome_vazio(session):
+        repo = MedicoRepository(session)
+        esp = Especializacao(nome="Validação")
+        session.add(esp)
+>       session.commit()
+
+tests\unit\test_validacao_repositories.py:16: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:2032: in commit
+    trans.commit(_to_root=True)
+<string>:2: in commit
+    ???
+.venv\Lib\site-packages\sqlalchemy\orm\state_changes.py:139: in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:1313: in commit
+    self._prepare_impl()
+<string>:2: in _prepare_impl
+    ???
+.venv\Lib\site-packages\sqlalchemy\orm\state_changes.py:139: in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:1288: in _prepare_impl
+    self.session.flush()
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4345: in flush
+    self._flush(objects)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4480: in _flush
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py:224: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4441: in _flush
+    flush_context.execute()
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:466: in execute
+    rec.execute(self)
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:642: in execute
+    util.preloaded.orm_persistence.save_obj(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:93: in save_obj
+    _emit_insert_statements(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:1233: in _emit_insert_statements
+    result = connection.execute(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1415: in execute
+    return meth(
+.venv\Lib\site-packages\sqlalchemy\sql\elements.py:523: in _execute_on_connection
+    return connection._execute_clauseelement(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1637: in _execute_clauseelement
+    ret = self._execute_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1842: in _execute_context
+    return self._exec_single_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1982: in _exec_single_context
+    self._handle_dbapi_exception(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:2351: in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1963: in _exec_single_context
+    self.dialect.do_execute(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <sqlalchemy.dialects.sqlite.pysqlite.SQLiteDialect_pysqlite object at 0x00000219E970D090>
+cursor = <sqlite3.Cursor object at 0x00000219E97313C0>
+statement = 'INSERT INTO especializacoes (nome, version) VALUES (?, ?) RETURNING id'
+parameters = ('Validação', 1)
+context = <sqlalchemy.dialects.sqlite.base.SQLiteExecutionContext object at 0x00000219E8435E00>
+
+    def do_execute(self, cursor, statement, parameters, context=None):
+>       cursor.execute(statement, parameters)
+E       sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: especializacoes
+E       [SQL: INSERT INTO especializacoes (nome, version) VALUES (?, ?) RETURNING id]
+E       [parameters: ('Validação', 1)]
+E       (Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:943: OperationalError
+----------------------------- Captured log setup ------------------------------
+WARNING  root:conftest.py:21 [TEST] [UNIT] Criando banco temporário unitário: C:\Users\ratal\AppData\Local\Temp\tmpg76g1z1_.db
+WARNING  root:conftest.py:22 [TEST] [UNIT] Executando Alembic para sqlite:///C:\Users\ratal\AppData\Local\Temp\tmpg76g1z1_.db
+WARNING  root:conftest.py:24 [TEST] [UNIT] Alembic stdout: 
+WARNING  root:conftest.py:25 [TEST] [UNIT] Alembic stderr: INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+
+WARNING  root:conftest.py:26 [TEST] [UNIT] Banco existe após Alembic? True
+---------------------------- Captured log teardown ----------------------------
+WARNING  root:conftest.py:37 [TEST] [UNIT] Removendo banco temporário unitário: C:\Users\ratal\AppData\Local\Temp\tmpg76g1z1_.db
+____________________ test_medico_validacao_status_invalido ____________________
+
+self = <sqlalchemy.engine.base.Connection object at 0x00000219E8107650>
+dialect = <sqlalchemy.dialects.sqlite.pysqlite.SQLiteDialect_pysqlite object at 0x00000219E963AC10>
+context = <sqlalchemy.dialects.sqlite.base.SQLiteExecutionContext object at 0x00000219E8435480>
+statement = <sqlalchemy.dialects.sqlite.base.SQLiteCompiler object at 0x00000219E963B110>
+parameters = [('Validação', 1)]
+
+    def _exec_single_context(
+        self,
+        dialect: Dialect,
+        context: ExecutionContext,
+        statement: Union[str, Compiled],
+        parameters: Optional[_AnyMultiExecuteParams],
+    ) -> CursorResult[Any]:
+        """continue the _execute_context() method for a single DBAPI
+        cursor.execute() or cursor.executemany() call.
+    
+        """
+        if dialect.bind_typing is BindTyping.SETINPUTSIZES:
+            generic_setinputsizes = context._prepare_set_input_sizes()
+    
+            if generic_setinputsizes:
+                try:
+                    dialect.do_set_input_sizes(
+                        context.cursor, generic_setinputsizes, context
+                    )
+                except BaseException as e:
+                    self._handle_dbapi_exception(
+                        e, str(statement), parameters, None, context
+                    )
+    
+        cursor, str_statement, parameters = (
+            context.cursor,
+            context.statement,
+            context.parameters,
+        )
+    
+        effective_parameters: Optional[_AnyExecuteParams]
+    
+        if not context.executemany:
+            effective_parameters = parameters[0]
+        else:
+            effective_parameters = parameters
+    
+        if self._has_events or self.engine._has_events:
+            for fn in self.dispatch.before_cursor_execute:
+                str_statement, effective_parameters = fn(
+                    self,
+                    cursor,
+                    str_statement,
+                    effective_parameters,
+                    context,
+                    context.executemany,
+                )
+    
+        if self._echo:
+            self._log_info(str_statement)
+    
+            stats = context._get_cache_stats()
+    
+            if not self.engine.hide_parameters:
+                self._log_info(
+                    "[%s] %r",
+                    stats,
+                    sql_util._repr_params(
+                        effective_parameters,
+                        batches=10,
+                        ismulti=context.executemany,
+                    ),
+                )
+            else:
+                self._log_info(
+                    "[%s] [SQL parameters hidden due to hide_parameters=True]",
+                    stats,
+                )
+    
+        evt_handled: bool = False
+        try:
+            if context.execute_style is ExecuteStyle.EXECUTEMANY:
+                effective_parameters = cast(
+                    "_CoreMultiExecuteParams", effective_parameters
+                )
+                if self.dialect._has_events:
+                    for fn in self.dialect.dispatch.do_executemany:
+                        if fn(
+                            cursor,
+                            str_statement,
+                            effective_parameters,
+                            context,
+                        ):
+                            evt_handled = True
+                            break
+                if not evt_handled:
+                    self.dialect.do_executemany(
+                        cursor,
+                        str_statement,
+                        effective_parameters,
+                        context,
+                    )
+            elif not effective_parameters and context.no_parameters:
+                if self.dialect._has_events:
+                    for fn in self.dialect.dispatch.do_execute_no_params:
+                        if fn(cursor, str_statement, context):
+                            evt_handled = True
+                            break
+                if not evt_handled:
+                    self.dialect.do_execute_no_params(
+                        cursor, str_statement, context
+                    )
+            else:
+                effective_parameters = cast(
+                    "_CoreSingleExecuteParams", effective_parameters
+                )
+                if self.dialect._has_events:
+                    for fn in self.dialect.dispatch.do_execute:
+                        if fn(
+                            cursor,
+                            str_statement,
+                            effective_parameters,
+                            context,
+                        ):
+                            evt_handled = True
+                            break
+                if not evt_handled:
+>                   self.dialect.do_execute(
+                        cursor, str_statement, effective_parameters, context
+                    )
+
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1963: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <sqlalchemy.dialects.sqlite.pysqlite.SQLiteDialect_pysqlite object at 0x00000219E963AC10>
+cursor = <sqlite3.Cursor object at 0x00000219EA4133C0>
+statement = 'INSERT INTO especializacoes (nome, version) VALUES (?, ?) RETURNING id'
+parameters = ('Validação', 1)
+context = <sqlalchemy.dialects.sqlite.base.SQLiteExecutionContext object at 0x00000219E8435480>
+
+    def do_execute(self, cursor, statement, parameters, context=None):
+>       cursor.execute(statement, parameters)
+E       sqlite3.OperationalError: no such table: especializacoes
+
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:943: OperationalError
+
+The above exception was the direct cause of the following exception:
+
+session = <sqlalchemy.orm.session.Session object at 0x00000219E823A3C0>
+
+    def test_medico_validacao_status_invalido(session):
+        repo = MedicoRepository(session)
+        esp = Especializacao(nome="Validação")
+        session.add(esp)
+>       session.commit()
+
+tests\unit\test_validacao_repositories.py:25: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:2032: in commit
+    trans.commit(_to_root=True)
+<string>:2: in commit
+    ???
+.venv\Lib\site-packages\sqlalchemy\orm\state_changes.py:139: in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:1313: in commit
+    self._prepare_impl()
+<string>:2: in _prepare_impl
+    ???
+.venv\Lib\site-packages\sqlalchemy\orm\state_changes.py:139: in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:1288: in _prepare_impl
+    self.session.flush()
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4345: in flush
+    self._flush(objects)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4480: in _flush
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py:224: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4441: in _flush
+    flush_context.execute()
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:466: in execute
+    rec.execute(self)
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:642: in execute
+    util.preloaded.orm_persistence.save_obj(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:93: in save_obj
+    _emit_insert_statements(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:1233: in _emit_insert_statements
+    result = connection.execute(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1415: in execute
+    return meth(
+.venv\Lib\site-packages\sqlalchemy\sql\elements.py:523: in _execute_on_connection
+    return connection._execute_clauseelement(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1637: in _execute_clauseelement
+    ret = self._execute_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1842: in _execute_context
+    return self._exec_single_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1982: in _exec_single_context
+    self._handle_dbapi_exception(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:2351: in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1963: in _exec_single_context
+    self.dialect.do_execute(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <sqlalchemy.dialects.sqlite.pysqlite.SQLiteDialect_pysqlite object at 0x00000219E963AC10>
+cursor = <sqlite3.Cursor object at 0x00000219EA4133C0>
+statement = 'INSERT INTO especializacoes (nome, version) VALUES (?, ?) RETURNING id'
+parameters = ('Validação', 1)
+context = <sqlalchemy.dialects.sqlite.base.SQLiteExecutionContext object at 0x00000219E8435480>
+
+    def do_execute(self, cursor, statement, parameters, context=None):
+>       cursor.execute(statement, parameters)
+E       sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: especializacoes
+E       [SQL: INSERT INTO especializacoes (nome, version) VALUES (?, ?) RETURNING id]
+E       [parameters: ('Validação', 1)]
+E       (Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:943: OperationalError
+----------------------------- Captured log setup ------------------------------
+WARNING  root:conftest.py:21 [TEST] [UNIT] Criando banco temporário unitário: C:\Users\ratal\AppData\Local\Temp\tmpqy57n6ri.db
+WARNING  root:conftest.py:22 [TEST] [UNIT] Executando Alembic para sqlite:///C:\Users\ratal\AppData\Local\Temp\tmpqy57n6ri.db
+WARNING  root:conftest.py:24 [TEST] [UNIT] Alembic stdout: 
+WARNING  root:conftest.py:25 [TEST] [UNIT] Alembic stderr: INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+
+WARNING  root:conftest.py:26 [TEST] [UNIT] Banco existe após Alembic? True
+---------------------------- Captured log teardown ----------------------------
+WARNING  root:conftest.py:37 [TEST] [UNIT] Removendo banco temporário unitário: C:\Users\ratal\AppData\Local\Temp\tmpqy57n6ri.db
+______________ test_medico_validacao_especializacao_inexistente _______________
+
+self = <sqlalchemy.engine.base.Connection object at 0x00000219E83F4D10>
+dialect = <sqlalchemy.dialects.sqlite.pysqlite.SQLiteDialect_pysqlite object at 0x00000219E9639810>
+context = <sqlalchemy.dialects.sqlite.base.SQLiteExecutionContext object at 0x00000219E8436FD0>
+statement = <sqlalchemy.dialects.sqlite.base.SQLiteCompiler object at 0x00000219E9638050>
+parameters = [(9999, 1, 0)]
+
+    def _exec_single_context(
+        self,
+        dialect: Dialect,
+        context: ExecutionContext,
+        statement: Union[str, Compiled],
+        parameters: Optional[_AnyMultiExecuteParams],
+    ) -> CursorResult[Any]:
+        """continue the _execute_context() method for a single DBAPI
+        cursor.execute() or cursor.executemany() call.
+    
+        """
+        if dialect.bind_typing is BindTyping.SETINPUTSIZES:
+            generic_setinputsizes = context._prepare_set_input_sizes()
+    
+            if generic_setinputsizes:
+                try:
+                    dialect.do_set_input_sizes(
+                        context.cursor, generic_setinputsizes, context
+                    )
+                except BaseException as e:
+                    self._handle_dbapi_exception(
+                        e, str(statement), parameters, None, context
+                    )
+    
+        cursor, str_statement, parameters = (
+            context.cursor,
+            context.statement,
+            context.parameters,
+        )
+    
+        effective_parameters: Optional[_AnyExecuteParams]
+    
+        if not context.executemany:
+            effective_parameters = parameters[0]
+        else:
+            effective_parameters = parameters
+    
+        if self._has_events or self.engine._has_events:
+            for fn in self.dispatch.before_cursor_execute:
+                str_statement, effective_parameters = fn(
+                    self,
+                    cursor,
+                    str_statement,
+                    effective_parameters,
+                    context,
+                    context.executemany,
+                )
+    
+        if self._echo:
+            self._log_info(str_statement)
+    
+            stats = context._get_cache_stats()
+    
+            if not self.engine.hide_parameters:
+                self._log_info(
+                    "[%s] %r",
+                    stats,
+                    sql_util._repr_params(
+                        effective_parameters,
+                        batches=10,
+                        ismulti=context.executemany,
+                    ),
+                )
+            else:
+                self._log_info(
+                    "[%s] [SQL parameters hidden due to hide_parameters=True]",
+                    stats,
+                )
+    
+        evt_handled: bool = False
+        try:
+            if context.execute_style is ExecuteStyle.EXECUTEMANY:
+                effective_parameters = cast(
+                    "_CoreMultiExecuteParams", effective_parameters
+                )
+                if self.dialect._has_events:
+                    for fn in self.dialect.dispatch.do_executemany:
+                        if fn(
+                            cursor,
+                            str_statement,
+                            effective_parameters,
+                            context,
+                        ):
+                            evt_handled = True
+                            break
+                if not evt_handled:
+                    self.dialect.do_executemany(
+                        cursor,
+                        str_statement,
+                        effective_parameters,
+                        context,
+                    )
+            elif not effective_parameters and context.no_parameters:
+                if self.dialect._has_events:
+                    for fn in self.dialect.dispatch.do_execute_no_params:
+                        if fn(cursor, str_statement, context):
+                            evt_handled = True
+                            break
+                if not evt_handled:
+                    self.dialect.do_execute_no_params(
+                        cursor, str_statement, context
+                    )
+            else:
+                effective_parameters = cast(
+                    "_CoreSingleExecuteParams", effective_parameters
+                )
+                if self.dialect._has_events:
+                    for fn in self.dialect.dispatch.do_execute:
+                        if fn(
+                            cursor,
+                            str_statement,
+                            effective_parameters,
+                            context,
+                        ):
+                            evt_handled = True
+                            break
+                if not evt_handled:
+>                   self.dialect.do_execute(
+                        cursor, str_statement, effective_parameters, context
+                    )
+
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1963: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <sqlalchemy.dialects.sqlite.pysqlite.SQLiteDialect_pysqlite object at 0x00000219E9639810>
+cursor = <sqlite3.Cursor object at 0x00000219EA33CEC0>
+statement = 'SELECT especializacoes.id AS especializacoes_id, especializacoes.nome AS especializacoes_nome, especializacoes.version AS especializacoes_version \nFROM especializacoes \nWHERE especializacoes.id = ?\n LIMIT ? OFFSET ?'
+parameters = (9999, 1, 0)
+context = <sqlalchemy.dialects.sqlite.base.SQLiteExecutionContext object at 0x00000219E8436FD0>
+
+    def do_execute(self, cursor, statement, parameters, context=None):
+>       cursor.execute(statement, parameters)
+E       sqlite3.OperationalError: no such table: especializacoes
+
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:943: OperationalError
+
+The above exception was the direct cause of the following exception:
+
+session = <sqlalchemy.orm.session.Session object at 0x00000219E823A660>
+
+    def test_medico_validacao_especializacao_inexistente(session):
+        repo = MedicoRepository(session)
+        medico = Medico(nome="Dr. Teste", especializacao_id=9999, status=StatusMedicoEnum.ATIVO.value)
+        with pytest.raises(ValueError, match="Especialização não encontrada"):
+>           repo.create(medico)
+
+tests\unit\test_validacao_repositories.py:34: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+app\core\repositories.py:48: in create
+    self._validate(medico)
+app\core\repositories.py:38: in _validate
+    if not self.db.query(Especializacao).filter(Especializacao.id == medico.especializacao_id).first():
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\orm\query.py:2759: in first
+    return self.limit(1)._iter().first()  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\orm\query.py:2857: in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:2365: in execute
+    return self._execute_internal(
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:2251: in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+.venv\Lib\site-packages\sqlalchemy\orm\context.py:306: in orm_execute_statement
+    result = conn.execute(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1415: in execute
+    return meth(
+.venv\Lib\site-packages\sqlalchemy\sql\elements.py:523: in _execute_on_connection
+    return connection._execute_clauseelement(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1637: in _execute_clauseelement
+    ret = self._execute_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1842: in _execute_context
+    return self._exec_single_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1982: in _exec_single_context
+    self._handle_dbapi_exception(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:2351: in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1963: in _exec_single_context
+    self.dialect.do_execute(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <sqlalchemy.dialects.sqlite.pysqlite.SQLiteDialect_pysqlite object at 0x00000219E9639810>
+cursor = <sqlite3.Cursor object at 0x00000219EA33CEC0>
+statement = 'SELECT especializacoes.id AS especializacoes_id, especializacoes.nome AS especializacoes_nome, especializacoes.version AS especializacoes_version \nFROM especializacoes \nWHERE especializacoes.id = ?\n LIMIT ? OFFSET ?'
+parameters = (9999, 1, 0)
+context = <sqlalchemy.dialects.sqlite.base.SQLiteExecutionContext object at 0x00000219E8436FD0>
+
+    def do_execute(self, cursor, statement, parameters, context=None):
+>       cursor.execute(statement, parameters)
+E       sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: especializacoes
+E       [SQL: SELECT especializacoes.id AS especializacoes_id, especializacoes.nome AS especializacoes_nome, especializacoes.version AS especializacoes_version 
+E       FROM especializacoes 
+E       WHERE especializacoes.id = ?
+E        LIMIT ? OFFSET ?]
+E       [parameters: (9999, 1, 0)]
+E       (Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:943: OperationalError
+----------------------------- Captured log setup ------------------------------
+WARNING  root:conftest.py:21 [TEST] [UNIT] Criando banco temporário unitário: C:\Users\ratal\AppData\Local\Temp\tmpydb5m33g.db
+WARNING  root:conftest.py:22 [TEST] [UNIT] Executando Alembic para sqlite:///C:\Users\ratal\AppData\Local\Temp\tmpydb5m33g.db
+WARNING  root:conftest.py:24 [TEST] [UNIT] Alembic stdout: 
+WARNING  root:conftest.py:25 [TEST] [UNIT] Alembic stderr: INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+
+WARNING  root:conftest.py:26 [TEST] [UNIT] Banco existe após Alembic? True
+---------------------------- Captured log teardown ----------------------------
+WARNING  root:conftest.py:37 [TEST] [UNIT] Removendo banco temporário unitário: C:\Users\ratal\AppData\Local\Temp\tmpydb5m33g.db
+________________________ test_medico_validacao_sucesso ________________________
+
+self = <sqlalchemy.engine.base.Connection object at 0x00000219E8107650>
+dialect = <sqlalchemy.dialects.sqlite.pysqlite.SQLiteDialect_pysqlite object at 0x00000219E83902D0>
+context = <sqlalchemy.dialects.sqlite.base.SQLiteExecutionContext object at 0x00000219E8436060>
+statement = <sqlalchemy.dialects.sqlite.base.SQLiteCompiler object at 0x00000219E83907D0>
+parameters = [('Validação OK', 1)]
+
+    def _exec_single_context(
+        self,
+        dialect: Dialect,
+        context: ExecutionContext,
+        statement: Union[str, Compiled],
+        parameters: Optional[_AnyMultiExecuteParams],
+    ) -> CursorResult[Any]:
+        """continue the _execute_context() method for a single DBAPI
+        cursor.execute() or cursor.executemany() call.
+    
+        """
+        if dialect.bind_typing is BindTyping.SETINPUTSIZES:
+            generic_setinputsizes = context._prepare_set_input_sizes()
+    
+            if generic_setinputsizes:
+                try:
+                    dialect.do_set_input_sizes(
+                        context.cursor, generic_setinputsizes, context
+                    )
+                except BaseException as e:
+                    self._handle_dbapi_exception(
+                        e, str(statement), parameters, None, context
+                    )
+    
+        cursor, str_statement, parameters = (
+            context.cursor,
+            context.statement,
+            context.parameters,
+        )
+    
+        effective_parameters: Optional[_AnyExecuteParams]
+    
+        if not context.executemany:
+            effective_parameters = parameters[0]
+        else:
+            effective_parameters = parameters
+    
+        if self._has_events or self.engine._has_events:
+            for fn in self.dispatch.before_cursor_execute:
+                str_statement, effective_parameters = fn(
+                    self,
+                    cursor,
+                    str_statement,
+                    effective_parameters,
+                    context,
+                    context.executemany,
+                )
+    
+        if self._echo:
+            self._log_info(str_statement)
+    
+            stats = context._get_cache_stats()
+    
+            if not self.engine.hide_parameters:
+                self._log_info(
+                    "[%s] %r",
+                    stats,
+                    sql_util._repr_params(
+                        effective_parameters,
+                        batches=10,
+                        ismulti=context.executemany,
+                    ),
+                )
+            else:
+                self._log_info(
+                    "[%s] [SQL parameters hidden due to hide_parameters=True]",
+                    stats,
+                )
+    
+        evt_handled: bool = False
+        try:
+            if context.execute_style is ExecuteStyle.EXECUTEMANY:
+                effective_parameters = cast(
+                    "_CoreMultiExecuteParams", effective_parameters
+                )
+                if self.dialect._has_events:
+                    for fn in self.dialect.dispatch.do_executemany:
+                        if fn(
+                            cursor,
+                            str_statement,
+                            effective_parameters,
+                            context,
+                        ):
+                            evt_handled = True
+                            break
+                if not evt_handled:
+                    self.dialect.do_executemany(
+                        cursor,
+                        str_statement,
+                        effective_parameters,
+                        context,
+                    )
+            elif not effective_parameters and context.no_parameters:
+                if self.dialect._has_events:
+                    for fn in self.dialect.dispatch.do_execute_no_params:
+                        if fn(cursor, str_statement, context):
+                            evt_handled = True
+                            break
+                if not evt_handled:
+                    self.dialect.do_execute_no_params(
+                        cursor, str_statement, context
+                    )
+            else:
+                effective_parameters = cast(
+                    "_CoreSingleExecuteParams", effective_parameters
+                )
+                if self.dialect._has_events:
+                    for fn in self.dialect.dispatch.do_execute:
+                        if fn(
+                            cursor,
+                            str_statement,
+                            effective_parameters,
+                            context,
+                        ):
+                            evt_handled = True
+                            break
+                if not evt_handled:
+>                   self.dialect.do_execute(
+                        cursor, str_statement, effective_parameters, context
+                    )
+
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1963: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <sqlalchemy.dialects.sqlite.pysqlite.SQLiteDialect_pysqlite object at 0x00000219E83902D0>
+cursor = <sqlite3.Cursor object at 0x00000219EA1735C0>
+statement = 'INSERT INTO especializacoes (nome, version) VALUES (?, ?) RETURNING id'
+parameters = ('Validação OK', 1)
+context = <sqlalchemy.dialects.sqlite.base.SQLiteExecutionContext object at 0x00000219E8436060>
+
+    def do_execute(self, cursor, statement, parameters, context=None):
+>       cursor.execute(statement, parameters)
+E       sqlite3.OperationalError: no such table: especializacoes
+
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:943: OperationalError
+
+The above exception was the direct cause of the following exception:
+
+session = <sqlalchemy.orm.session.Session object at 0x00000219E823B8C0>
+
+    def test_medico_validacao_sucesso(session):
+        repo = MedicoRepository(session)
+        esp = Especializacao(nome="Validação OK")
+        session.add(esp)
+>       session.commit()
+
+tests\unit\test_validacao_repositories.py:46: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:2032: in commit
+    trans.commit(_to_root=True)
+<string>:2: in commit
+    ???
+.venv\Lib\site-packages\sqlalchemy\orm\state_changes.py:139: in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:1313: in commit
+    self._prepare_impl()
+<string>:2: in _prepare_impl
+    ???
+.venv\Lib\site-packages\sqlalchemy\orm\state_changes.py:139: in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:1288: in _prepare_impl
+    self.session.flush()
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4345: in flush
+    self._flush(objects)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4480: in _flush
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py:224: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4441: in _flush
+    flush_context.execute()
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:466: in execute
+    rec.execute(self)
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:642: in execute
+    util.preloaded.orm_persistence.save_obj(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:93: in save_obj
+    _emit_insert_statements(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:1233: in _emit_insert_statements
+    result = connection.execute(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1415: in execute
+    return meth(
+.venv\Lib\site-packages\sqlalchemy\sql\elements.py:523: in _execute_on_connection
+    return connection._execute_clauseelement(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1637: in _execute_clauseelement
+    ret = self._execute_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1842: in _execute_context
+    return self._exec_single_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1982: in _exec_single_context
+    self._handle_dbapi_exception(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:2351: in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1963: in _exec_single_context
+    self.dialect.do_execute(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <sqlalchemy.dialects.sqlite.pysqlite.SQLiteDialect_pysqlite object at 0x00000219E83902D0>
+cursor = <sqlite3.Cursor object at 0x00000219EA1735C0>
+statement = 'INSERT INTO especializacoes (nome, version) VALUES (?, ?) RETURNING id'
+parameters = ('Validação OK', 1)
+context = <sqlalchemy.dialects.sqlite.base.SQLiteExecutionContext object at 0x00000219E8436060>
+
+    def do_execute(self, cursor, statement, parameters, context=None):
+>       cursor.execute(statement, parameters)
+E       sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: especializacoes
+E       [SQL: INSERT INTO especializacoes (nome, version) VALUES (?, ?) RETURNING id]
+E       [parameters: ('Validação OK', 1)]
+E       (Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:943: OperationalError
+----------------------------- Captured log setup ------------------------------
+WARNING  root:conftest.py:21 [TEST] [UNIT] Criando banco temporário unitário: C:\Users\ratal\AppData\Local\Temp\tmpm_ufm9on.db
+WARNING  root:conftest.py:22 [TEST] [UNIT] Executando Alembic para sqlite:///C:\Users\ratal\AppData\Local\Temp\tmpm_ufm9on.db
+WARNING  root:conftest.py:24 [TEST] [UNIT] Alembic stdout: 
+WARNING  root:conftest.py:25 [TEST] [UNIT] Alembic stderr: INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+
+WARNING  root:conftest.py:26 [TEST] [UNIT] Banco existe após Alembic? True
+---------------------------- Captured log teardown ----------------------------
+WARNING  root:conftest.py:37 [TEST] [UNIT] Removendo banco temporário unitário: C:\Users\ratal\AppData\Local\Temp\tmpm_ufm9on.db
+============================== warnings summary ===============================
+tests\integration\test_postgres_connection.py:10
+  F:\projetos\gem\tests\integration\test_postgres_connection.py:10: PytestUnknownMarkWarning: Unknown pytest.mark.integration - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.integration
+
+tests/integration/test_auth.py: 5 warnings
+tests/integration/test_relatorio_auditoria.py: 4 warnings
+tests/integration/test_relatorio_cobertura_minima.py: 5 warnings
+tests/integration/test_relatorio_distribuicao_plantoes.py: 18 warnings
+tests/integration/test_relatorio_folha_pagamento.py: 15 warnings
+tests/integration/test_relatorio_medicos_por_especializacao.py: 15 warnings
+tests/unit/test_models.py: 10 warnings
+tests/unit/test_repositories.py: 15 warnings
+tests/unit/test_versionamento.py: 3 warnings
+  f:\projetos\gem\.venv\Lib\site-packages\sqlalchemy\sql\schema.py:3624: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    return util.wrap_callable(lambda ctx: fn(), fn)  # type: ignore
+
+tests/integration/test_relatorio_auditoria.py: 2 warnings
+tests/integration/test_relatorio_cobertura_minima.py: 3 warnings
+tests/integration/test_relatorio_distribuicao_plantoes.py: 3 warnings
+tests/integration/test_relatorio_folha_pagamento.py: 3 warnings
+tests/integration/test_relatorio_medicos_por_especializacao.py: 3 warnings
+tests/unit/test_models.py: 4 warnings
+tests/unit/test_repositories.py: 5 warnings
+tests/unit/test_versionamento.py: 1 warning
+  F:\projetos\gem\app\models\audit_listener.py:75: SAWarning: Usage of the 'Session.add()' operation is not currently supported within the execution stage of the flush process. Results may not be consistent.  Consider using alternative event listeners or connection-level operations instead.
+    session.add(audit)
+
+tests/integration/test_relatorio_auditoria.py: 2 warnings
+tests/integration/test_relatorio_cobertura_minima.py: 3 warnings
+tests/integration/test_relatorio_distribuicao_plantoes.py: 3 warnings
+tests/integration/test_relatorio_folha_pagamento.py: 3 warnings
+tests/integration/test_relatorio_medicos_por_especializacao.py: 3 warnings
+tests/unit/test_models.py: 4 warnings
+tests/unit/test_repositories.py: 5 warnings
+tests/unit/test_versionamento.py: 1 warning
+  F:\projetos\gem\app\models\audit_listener.py:56: SAWarning: Usage of the 'Session.add()' operation is not currently supported within the execution stage of the flush process. Results may not be consistent.  Consider using alternative event listeners or connection-level operations instead.
+    session.add(historico)
+
+tests/integration/test_relatorio_distribuicao_plantoes.py::test_relatorio_distribuicao_basico
+tests/integration/test_relatorio_distribuicao_plantoes.py::test_relatorio_distribuicao_csv
+  F:\projetos\gem\app\models\audit_listener.py:75: SAWarning: Usage of the 'Session.add()' operation is not currently supported within the execution stage of the flush process. Results may not be consistent.  Consider using alternative event listeners or connection-level operations instead. (This warning originated from the Session 'autoflush' process, which was invoked automatically in response to a user-initiated operation. Consider using ``no_autoflush`` context manager if this warning happended while initializing objects.)
+    session.add(audit)
+
+tests/integration/test_relatorio_distribuicao_plantoes.py::test_relatorio_distribuicao_basico
+tests/integration/test_relatorio_distribuicao_plantoes.py::test_relatorio_distribuicao_csv
+  F:\projetos\gem\app\models\audit_listener.py:56: SAWarning: Usage of the 'Session.add()' operation is not currently supported within the execution stage of the flush process. Results may not be consistent.  Consider using alternative event listeners or connection-level operations instead. (This warning originated from the Session 'autoflush' process, which was invoked automatically in response to a user-initiated operation. Consider using ``no_autoflush`` context manager if this warning happended while initializing objects.)
+    session.add(historico)
+
+tests/unit/test_repositories.py::test_especializacao_crud
+tests/unit/test_repositories.py::test_medico_crud
+tests/unit/test_repositories.py::test_update_delete_invalid
+  F:\projetos\gem\app\models\audit_listener.py:125: SAWarning: Usage of the 'Session.add()' operation is not currently supported within the execution stage of the flush process. Results may not be consistent.  Consider using alternative event listeners or connection-level operations instead.
+    session.add(audit)
+
+tests/unit/test_repositories.py::test_medico_optimistic_locking
+  F:\projetos\gem\tests\unit\test_repositories.py:117: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+    m1 = s1.query(Medico).get(medico.id)
+
+tests/unit/test_repositories.py::test_medico_optimistic_locking
+  F:\projetos\gem\tests\unit\test_repositories.py:118: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+    m2 = s2.query(Medico).get(medico.id)
+
+tests/unit/test_repositories.py::test_medico_optimistic_locking
+tests/unit/test_versionamento.py::test_versionamento_medico
+  F:\projetos\gem\app\models\audit_listener.py:104: SAWarning: Usage of the 'Session.add()' operation is not currently supported within the execution stage of the flush process. Results may not be consistent.  Consider using alternative event listeners or connection-level operations instead.
+    session.add(audit)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/integration/test_backup_export_import.py::test_backup_and_restore
+FAILED tests/integration/test_migration.py::test_migrate_medicos_especializacoes
+FAILED tests/integration/test_migration.py::test_migrate_all_tables - Asserti...
+FAILED tests/unit/test_validacao_repositories.py::test_medico_validacao_nome_vazio
+FAILED tests/unit/test_validacao_repositories.py::test_medico_validacao_status_invalido
+FAILED tests/unit/test_validacao_repositories.py::test_medico_validacao_especializacao_inexistente
+FAILED tests/unit/test_validacao_repositories.py::test_medico_validacao_sucesso
+ERROR tests/integration/test_consultas.py::test_medicos_disponiveis_sem_escalas
+ERROR tests/integration/test_consultas.py::test_medicos_disponiveis_com_plantao
+ERROR tests/integration/test_consultas.py::test_medicos_disponiveis_com_sobreaviso
+ERROR tests/integration/test_consultas.py::test_medicos_disponiveis_todos_escalados
+ERROR tests/integration/test_consultas.py::test_consultar_escalas_mes - Asser...
+ERROR tests/integration/test_consultas.py::test_medicos_mais_plantao - Assert...
+ERROR tests/integration/test_consultas.py::test_medicos_sem_escalas - Asserti...
+ERROR tests/integration/test_consultas.py::test_cobertura_especialidades_por_turno
+ERROR tests/integration/test_consultas.py::test_consulta_historico_escalas - ...
+ERROR tests/integration/test_consultas.py::test_medicos_inativos_afastados - ...
+ERROR tests/integration/test_consultas.py::test_escalas_com_conflitos - Asser...
+ERROR tests/integration/test_consultas.py::test_relatorio_escala_plantonistas_csv_pdf
+ERROR tests/integration/test_consultas.py::test_relatorio_escala_sobreaviso_csv_pdf
+ERROR tests/integration/test_consultas.py::test_relatorio_escalas_por_especializacao
+ERROR tests/integration/test_consultas.py::test_relatorio_escalas_por_especializacao_exportacao
+ERROR tests/integration/test_consultas.py::test_relatorio_carga_horaria_medico_csv_pdf
+ERROR tests/integration/test_consultas.py::test_relatorio_escalas_futuras_csv_pdf
+ERROR tests/integration/test_consultas.py::test_relatorio_medicos_por_status_csv_pdf
+ERROR tests/integration/test_relatorio_escala_sobreaviso.py::test_consultar_sobreaviso_periodo_limpo
+ERROR tests/integration/test_relatorio_escalas_por_data_turno.py::test_listar_escalas_por_data_turno
+ERROR tests/integration/test_relatorio_escalas_por_data_turno.py::test_exportar_escalas_por_data_turno_csv
+ERROR tests/integration/test_relatorio_escalas_por_data_turno.py::test_exportar_escalas_por_data_turno_pdf
+ERROR tests/integration/test_relatorio_medicos_pendentes.py::test_consultar_medicos_pendentes
+=========== 7 failed, 40 passed, 150 warnings, 23 errors in 45.54s ============

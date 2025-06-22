@@ -9,7 +9,7 @@ import sqlalchemy as sa
 
 # Revisão e dependência
 revision = '001_create_usuario'
-down_revision = 'e26c95c996d8'
+down_revision = None
 branch_labels = None
 depends_on = None
 

@@ -1,0 +1,2 @@
+Removendo arquivos de testes de consultas conforme solicitado para rastreio:
+- test_consultas.py

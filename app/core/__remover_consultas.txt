@@ -1,0 +1,7 @@
+Removendo arquivos de consultas conforme solicitado para rastreio:
+- consulta_escalas_mes.py
+- consulta_medicos_sem_escalas.py
+- cobertura_especialidades_por_turno.py
+- consulta_historico_escalas.py
+- consulta_medicos_inativos_afastados.py
+- consulta_escalas_conflitos.py

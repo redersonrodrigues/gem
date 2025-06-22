@@ -1,3 +1,7 @@
+-- Limpeza de dados para evitar duplicidade e erros de constraint
+DELETE FROM escalas_plantonistas;
+DELETE FROM escalas_sobreaviso;
+
 -- Script para popular a tabela de escalas_plantonistas com dados fictícios
 -- Supondo IDs de médicos válidos de 1 a 7
 INSERT INTO escalas_plantonistas (data, turno, medico1_id, medico2_id) VALUES ('2025-06-21', 'diurno', 1, 2);

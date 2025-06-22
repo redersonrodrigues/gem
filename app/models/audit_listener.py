@@ -7,11 +7,15 @@ from .especializacao import Especializacao
 from .escala_plantonista import EscalaPlantonista
 from .escala_sobreaviso import EscalaSobreaviso
 from .audit_log import AuditLog
+from .historico_versao import HistoricoVersao
 
 def serializar_valores(dados):
+    import enum
     def serializar(obj):
         if isinstance(obj, (datetime, date)):
             return obj.isoformat()
+        if isinstance(obj, enum.Enum):
+            return obj.value
         return obj
     return {k: serializar(v) for k, v in dados.items()}
 
@@ -31,6 +35,26 @@ def obter_usuario_logado():
     # return SessaoUsuario.get_usuario_atual()
     return 'admin'  # TODO: integrar com autenticação real
 
+def registrar_versao(session, target, operacao):
+    """
+    Salva uma nova versão do registro no histórico de versões.
+    """
+    from sqlalchemy import inspect
+    import json
+    tabela = target.__tablename__
+    registro_id = getattr(target, 'id', None)
+    versao = getattr(target, 'version', 1) if hasattr(target, 'version') else 1
+    usuario = obter_usuario_logado()
+    dados = serializar_valores({c.name: getattr(target, c.name) for c in target.__table__.columns})
+    historico = HistoricoVersao(
+        tabela=tabela,
+        registro_id=registro_id,
+        versao=versao,
+        usuario=usuario,
+        dados=json.dumps(dados, ensure_ascii=False)
+    )
+    session.add(historico)
+
 def registrar_auditoria(mapper, connection, target):
     session = Session.object_session(target)
     usuario = obter_usuario_logado()
@@ -49,6 +73,9 @@ def registrar_auditoria(mapper, connection, target):
         dados_novos=json.dumps(dados_novos, ensure_ascii=False)
     )
     session.add(audit)
+    # Registrar versão também no INSERT
+    if session:
+        registrar_versao(session, target, 'INSERT')
 
 def registrar_auditoria_update(mapper, connection, target):
     session = Session.object_session(target)
@@ -75,6 +102,9 @@ def registrar_auditoria_update(mapper, connection, target):
         dados_novos=json.dumps(dados_novos, ensure_ascii=False)
     )
     session.add(audit)
+    # Registrar versão sempre que houver alteração
+    if session:
+        registrar_versao(session, target, 'UPDATE')
 
 def registrar_auditoria_delete(mapper, connection, target):
     session = Session.object_session(target)
@@ -93,6 +123,9 @@ def registrar_auditoria_delete(mapper, connection, target):
         dados_novos=None
     )
     session.add(audit)
+    # Registrar versão no histórico ao deletar registro
+    if session:
+        registrar_versao(session, target, 'DELETE')
 
 # Registrar listeners para os modelos Medico, Especializacao, EscalaPlantonista, EscalaSobreaviso
 for modelo in [Medico, Especializacao, EscalaPlantonista, EscalaSobreaviso]:

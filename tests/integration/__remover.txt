@@ -1,0 +1,7 @@
+Removendo arquivos de testes de relatórios e consultas conforme solicitado para rastreio:
+- test_relatorio_medicos_pendentes.py
+- test_relatorio_escalas_por_data_turno.py
+- test_relatorio_folha_pagamento.py
+- test_relatorio_distribuicao_plantoes.py
+- test_relatorio_cobertura_minima.py
+- test_consultas.py

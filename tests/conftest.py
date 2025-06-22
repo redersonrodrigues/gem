@@ -6,6 +6,9 @@ from app.core.database import get_session_local
 from app.models.base import Base
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+import logging
+
+logging.basicConfig(level=logging.WARNING, format='%(levelname)s:%(message)s')
 
 @pytest.fixture(scope="function")
 def db_session():
@@ -16,11 +19,13 @@ def db_session():
     """
     with tempfile.NamedTemporaryFile(suffix='.db', delete=False) as tmpfile:
         db_url = f"sqlite:///{tmpfile.name}"
-    # Define a variável de ambiente para o Alembic usar o banco correto
     os.environ["DATABASE_URL"] = db_url
-    # Executa as migrations Alembic no banco temporário
-    subprocess.run(["alembic", "upgrade", "head"], check=True)
-    # Cria engine e sessão para o banco temporário
+    logging.warning(f"[TEST] [UNIT] Criando banco temporário unitário: {tmpfile.name}")
+    logging.warning(f"[TEST] [UNIT] Executando Alembic para {db_url}")
+    result = subprocess.run(["alembic", "upgrade", "head"], check=True, env=os.environ.copy(), capture_output=True, text=True)
+    logging.warning(f"[TEST] [UNIT] Alembic stdout: {result.stdout}")
+    logging.warning(f"[TEST] [UNIT] Alembic stderr: {result.stderr}")
+    logging.warning(f"[TEST] [UNIT] Banco existe após Alembic? {os.path.exists(tmpfile.name)}")
     engine = create_engine(db_url)
     TestingSessionLocal = sessionmaker(bind=engine)
     session = TestingSessionLocal()
@@ -30,4 +35,8 @@ def db_session():
     finally:
         session.close()
         engine.dispose()
-        os.unlink(tmpfile.name)
+        if os.path.exists(tmpfile.name):
+            logging.warning(f"[TEST] [UNIT] Removendo banco temporário unitário: {tmpfile.name}")
+            os.unlink(tmpfile.name)
+        else:
+            logging.warning(f"[TEST] [UNIT] Banco temporário unitário já removido: {tmpfile.name}")

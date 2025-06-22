@@ -1,0 +1,4 @@
+-- Adicione aqui todos os índices customizados necessários para o projeto.
+-- Exemplo:
+-- CREATE INDEX IF NOT EXISTS idx_medicos_nome ON medicos(nome);
+-- CREATE INDEX IF NOT EXISTS idx_escalas_plantonistas_data ON escalas_plantonistas(data);

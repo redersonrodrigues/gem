@@ -185,3 +185,38 @@ from app.core.database import get_engine, init_db
 engine = get_engine(db_path='tests/tmp/teste.db')
 init_db(db_path='tests/tmp/teste.db')
 ```
+
+## Banco de Dados: SQLite (desenvolvimento) e PostgreSQL (produção)
+
+- O backend suporta tanto SQLite (padrão, para desenvolvimento/testes) quanto PostgreSQL (recomendado para produção).
+- Para produção, configure a string de conexão PostgreSQL conforme exemplo:
+
+  ```text
+  postgresql+psycopg2://usuario:senha@localhost:5432/gem
+  ```
+
+- Instale o driver com:
+
+  ```bash
+  pip install psycopg2-binary
+  ```
+
+- Veja instruções detalhadas e recomendações em `docs/sql/postgresql_producao.md`.
+
+## Migração de Dados entre Ambientes
+
+O projeto possui um script dedicado para migração de dados entre bancos de diferentes ambientes (desenvolvimento, teste, produção), suportando SQLite e PostgreSQL.
+
+- Script: `scripts/migrate_db.py`
+- Permite migrar todas as tabelas ou apenas selecionadas.
+- Suporta caminhos/URLs dinâmicos de banco.
+- Testado com bancos temporários e integração automatizada.
+- Documentação detalhada: [`docs/sql/migracao_dados.md`](docs/sql/migracao_dados.md)
+
+**Exemplo de uso:**
+
+```sh
+python scripts/migrate_db.py --src-db gem_dev.db --dst-db gem_prod.db --tables medicos,especializacoes
+```
+
+> Recomendações: sempre faça backup antes de migrar e valide os dados após a operação.

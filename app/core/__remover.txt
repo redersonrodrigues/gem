@@ -1,0 +1,15 @@
+Removendo arquivos de relatórios e consultas conforme solicitado para rastreio:
+- relatorio_medicos_pendentes.py
+- relatorio_escalas_por_data_turno.py
+- relatorio_folha_pagamento.py
+- relatorio_distribuicao_plantoes.py
+- relatorio_cobertura_minima.py
+- relatorio_escalas_futuras.py
+- relatorio_carga_horaria_medico.py
+- relatorio_escalas_por_especializacao.py
+- consulta_escalas_mes.py
+- consulta_medicos_sem_escalas.py
+- cobertura_especialidades_por_turno.py
+- consulta_historico_escalas.py
+- consulta_medicos_inativos_afastados.py
+- consulta_escalas_conflitos.py
