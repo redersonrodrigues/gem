@@ -4,6 +4,7 @@ from logging.config import fileConfig
 from sqlalchemy import engine_from_config, pool
 from alembic import context
 import sqlite3
+import logging
 
 # Adiciona o diretório raiz do projeto ao sys.path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -16,8 +17,14 @@ target_metadata = Base.metadata
 # Lê a variável de ambiente DATABASE_URL, se existir, e sobrescreve a configuração
 if "DATABASE_URL" in os.environ:
     db_url = os.environ["DATABASE_URL"]
+    print(f"[ALEMBIC][DEBUG] DATABASE_URL detectada: {db_url}", flush=True)
+    logging.warning(f"[Alembic][DEBUG] DATABASE_URL detectada: {db_url}")
     config.set_main_option("sqlalchemy.url", db_url)
+else:
+    print(f"[ALEMBIC][DEBUG] DATABASE_URL não detectada. Usando sqlalchemy.url padrão: {config.get_main_option('sqlalchemy.url')}", flush=True)
+    logging.warning(f"[Alembic][DEBUG] DATABASE_URL não detectada. Usando sqlalchemy.url padrão: {config.get_main_option('sqlalchemy.url')}")
 
+print(f"[ALEMBIC][DEBUG] Iniciando processo de migration. Modo offline: {context.is_offline_mode()}", flush=True)
 
 def run_migrations_offline():
     """Run migrations in 'offline' mode.
@@ -53,14 +60,26 @@ def run_migrations_online():
         prefix="sqlalchemy.",
         poolclass=pool.NullPool,
     )
-    with connectable.connect() as connection:
-        context.configure(
-            connection=connection, target_metadata=target_metadata
-        )
-
-        with context.begin_transaction():
-            context.run_migrations()
-        run_post_migration_sql_scripts()
+    db_url = config.get_main_option("sqlalchemy.url")
+    if db_url.startswith("sqlite:///"):
+        db_path = db_url.replace("sqlite:///", "")
+        print(f"[ALEMBIC][DEBUG] Caminho do banco SQLite: {db_path}", flush=True)
+    try:
+        with connectable.connect() as connection:
+            context.configure(
+                connection=connection, target_metadata=target_metadata
+            )
+            print("[ALEMBIC][DEBUG] Conexão estabelecida. Iniciando migrations...", flush=True)
+            with context.begin_transaction():
+                context.run_migrations()
+            print("[ALEMBIC][DEBUG] Migrations concluídas. Executando scripts pós-migration...", flush=True)
+            run_post_migration_sql_scripts()
+            print("[ALEMBIC][DEBUG] Scripts pós-migration concluídos.", flush=True)
+    except Exception as e:
+        import traceback
+        print(f"[ALEMBIC][ERRO] Exceção durante run_migrations_online: {e}", flush=True)
+        traceback.print_exc()
+        raise
 
 
 def run_post_migration_sql_scripts():
@@ -85,4 +104,11 @@ def run_post_migration_sql_scripts():
 if context.is_offline_mode():
     run_migrations_offline()
 else:
-    run_migrations_online()
+    try:
+        run_migrations_online()
+        print("[ALEMBIC][DEBUG] Processo de migration finalizado com sucesso.", flush=True)
+    except Exception as e:
+        import traceback
+        print(f"[ALEMBIC][ERRO] {e}", flush=True)
+        traceback.print_exc()
+        raise

@@ -1,5 +1,11 @@
-import subprocess
+import sys
 import os
+# Adiciona o diretório absoluto de gem/ ao sys.path para garantir importação do pacote app
+GEM_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+if GEM_PATH not in sys.path:
+    sys.path.insert(0, GEM_PATH)
+
+import subprocess
 import tempfile
 import pytest
 from app.core.database import get_session_local

@@ -195,3 +195,6 @@ cython_debug/
 # Ignorar banco de dados e requirements.txt na raiz do projeto
 /gem.db
 /requirements.txt
+
+# Ignorar todo o conteúdo da pasta 'todo/'
+todo/

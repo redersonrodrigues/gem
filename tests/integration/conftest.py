@@ -1,5 +1,11 @@
-import subprocess
+import sys
 import os
+# Adiciona o diretório absoluto de gem/ ao sys.path para garantir importação do pacote app
+GEM_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+if GEM_PATH not in sys.path:
+    sys.path.insert(0, GEM_PATH)
+
+import subprocess
 import tempfile
 import pytest
 from app.core.database import get_session_local
@@ -12,6 +18,7 @@ from app.models import audit_listener  # Garante listeners ativos nos testes
 import uuid
 import logging
 import shutil
+import time
 
 logging.basicConfig(level=logging.WARNING, format='%(levelname)s:%(message)s')
 
@@ -24,12 +31,21 @@ def banco_temp_integracao():
     """
     tmp_dir = os.path.join(os.path.dirname(__file__), "tmp")
     # Garante que o diretório tmp/ exista e esteja limpo
+    try:
+        os.makedirs(tmp_dir, exist_ok=True)
+    except Exception as e:
+        logging.error(f"[TEST] Erro ao criar pasta tmp/: {e}")
+        raise
     if os.path.exists(tmp_dir):
         try:
             shutil.rmtree(tmp_dir)
         except Exception as e:
             logging.warning(f"[TEST] Falha ao limpar tmp/: {e}")
-    os.makedirs(tmp_dir, exist_ok=True)
+        try:
+            os.makedirs(tmp_dir, exist_ok=True)
+        except Exception as e:
+            logging.error(f"[TEST] Erro ao recriar pasta tmp/: {e}")
+            raise
     db_path = os.path.join(tmp_dir, f"test_{uuid.uuid4().hex}.db")
     db_url = f"sqlite:///{db_path}"
     os.environ["DATABASE_URL"] = db_url
@@ -40,16 +56,31 @@ def banco_temp_integracao():
             os.unlink(db_path)
         except Exception as e:
             logging.warning(f"[TEST] Falha ao remover banco antigo: {e}")
+    # Cria o arquivo .db vazio antes de rodar o Alembic
+    alembic_log_path = os.path.join(tmp_dir, f"alembic_log_{uuid.uuid4().hex}.txt")
+    with open(db_path, 'wb') as f:
+        pass
+    print(f"[TEST][DEBUG] DATABASE_URL usada: {os.environ['DATABASE_URL']}")
+    logging.warning(f"[TEST] [INTEGRACAO] DATABASE_URL usada: {os.environ['DATABASE_URL']}")
     logging.warning(f"[TEST] [INTEGRACAO] Executando Alembic para {db_url}")
+    # Executa Alembic via API Python
+    from alembic.config import Config
+    from alembic import command
+    alembic_cfg = Config(os.path.join(os.path.dirname(__file__), '../../migrations/alembic.ini'))
+    alembic_cfg.set_main_option('script_location', os.path.join(os.path.dirname(__file__), '../../migrations'))
+    alembic_cfg.set_main_option('sqlalchemy.url', db_url)
+    print(f"[TEST][DEBUG] DATABASE_URL usada: {db_url}")
+    logging.warning(f"[TEST] [INTEGRACAO] DATABASE_URL usada: {db_url}")
+    logging.warning(f"[TEST] [INTEGRACAO] Executando Alembic via API para {db_url}")
     try:
-        result = subprocess.run(["alembic", "upgrade", "head"], check=True, env=os.environ.copy(), capture_output=True, text=True)
-        logging.warning(f"[TEST] [INTEGRACAO] Alembic stdout: {result.stdout}")
-        logging.warning(f"[TEST] [INTEGRACAO] Alembic stderr: {result.stderr}")
+        command.upgrade(alembic_cfg, 'head')
     except Exception as e:
-        logging.error(f"[TEST] Erro ao rodar Alembic: {e}")
+        logging.error(f"[TEST] Erro ao rodar Alembic via API: {e}")
         raise
     logging.warning(f"[TEST] [INTEGRACAO] Banco existe após Alembic? {os.path.exists(db_path)}")
-    assert os.path.exists(db_path), f"Banco temporário não foi criado: {db_path}"
+    if not os.path.exists(db_path):
+        logging.error(f"[TEST] Banco temporário não foi criado: {db_path}")
+        raise AssertionError(f"Banco temporário não foi criado: {db_path}")
     return db_path
 
 

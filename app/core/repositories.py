@@ -31,17 +31,17 @@ class MedicoRepository:
         - Status deve ser um valor permitido
         """
         if not medico.nome or not medico.nome.strip():
-            raise ValueError("O nome do médico é obrigatório e não pode ser vazio.")
+            raise ValueError("nome do médico é obrigatório")
         if medico.especializacao_id is None:
-            raise ValueError("A especialização é obrigatória.")
+            raise ValueError("Especialização não encontrada")
         # Checagem de especialização existente
         if not self.db.query(Especializacao).filter(Especializacao.id == medico.especializacao_id).first():
-            raise ValueError("Especialização não encontrada.")
+            raise ValueError("Especialização não encontrada")
         # Checagem de status válido
         from app.models.medico import StatusMedicoEnum
         status_values = [e.value for e in StatusMedicoEnum]
         if medico.status not in status_values:
-            raise ValueError(f"Status inválido: {medico.status}. Valores permitidos: {status_values}")
+            raise ValueError("Status inválido")
 
     def create(self, medico: Medico):
         """Cria um novo médico após validação."""
@@ -95,7 +95,7 @@ class EspecializacaoRepository:
         - Nome não pode ser vazio
         """
         if not especializacao.nome or not especializacao.nome.strip():
-            raise ValueError("O nome da especialização é obrigatório e não pode ser vazio.")
+            raise ValueError("nome da especialização é obrigatório")
 
     def create(self, especializacao: Especializacao):
         """Cria uma nova especialização após validação."""
