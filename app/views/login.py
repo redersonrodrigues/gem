@@ -30,17 +30,38 @@ class LoginWindow(QWidget):
         self.setLayout(layout)
 
     def try_login(self):
+        print('Iniciando login')
         username = self.input_user.text().strip()
         password = self.input_pass.text().strip()
+        print(f'Usuário digitado: {username}')
         if not username or not password:
+            print('Usuário ou senha em branco')
             QMessageBox.warning(self, 'Erro', 'Preencha usuário e senha.')
             return
         engine = get_engine()
-        with Session(engine) as session:
-            user = session.query(Usuario).filter_by(login=username).first()
-            if user and user.verificar_senha(password):
-                if self.on_login_success:
-                    self.on_login_success(user)
-                self.close()
-            else:
-                QMessageBox.critical(self, 'Erro', 'Usuário ou senha inválidos.')
+        try:
+            print('Abrindo sessão SQLAlchemy')
+            with Session(engine) as session:
+                print('Consultando usuário no banco')
+                user = session.query(Usuario).filter_by(login=username).first()
+                print(f'Usuário encontrado: {user}')
+                if user:
+                    print(f'Hash armazenado: {user.senha_hash}')
+                if user and user.verificar_senha(password):
+                    print('Senha verificada com sucesso')
+                    if self.on_login_success:
+                        try:
+                            print('Chamando on_login_success')
+                            self.on_login_success(user)
+                            print('on_login_success chamado com sucesso')
+                        except Exception as e:
+                            print('Erro ao chamar on_login_success:', e)
+                    self.close()
+                else:
+                    print('Usuário ou senha inválidos')
+                    QMessageBox.critical(self, 'Erro', 'Usuário ou senha inválidos.')
+        except Exception as e:
+            import traceback
+            print('Erro no login:', e)
+            print(traceback.format_exc())
+            QMessageBox.critical(self, 'Erro inesperado', f'Ocorreu um erro: {e}')

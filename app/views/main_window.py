@@ -46,7 +46,7 @@ class MainWindow(QMainWindow):
 
     def init_ui(self):
         # Menu lateral para navegação
-        from PyQt5.QtWidgets import QDockWidget, QListWidget
+        from PyQt5.QtWidgets import QDockWidget, QListWidget, QToolBar, QAction, QMessageBox
         dock = QDockWidget("Menu", self)
         menu = QListWidget()
         menu.addItem("Médicos")
@@ -76,13 +76,17 @@ class MainWindow(QMainWindow):
         self.central_widget.setCurrentWidget(self.medicos_view)
 
         # Botão de troca de tema
-        from PyQt5.QtWidgets import QToolBar, QAction
         toolbar = QToolBar("Temas", self)
         self.addToolBar(toolbar)
         self._action_tema = QAction("Modo Escuro", self)
         self._action_tema.setCheckable(True)
         self._action_tema.toggled.connect(self.toggle_tema)
         toolbar.addAction(self._action_tema)
+        # Botão de ação restrita (apenas admin)
+        if self.perfil == 'admin':
+            self._action_restrita = QAction("Ação Restrita (Admin)", self)
+            self._action_restrita.triggered.connect(self.acao_restrita_admin)
+            toolbar.addAction(self._action_restrita)
         self.apply_theme()
 
     def add_view(self, widget: QWidget, name: str):
@@ -117,6 +121,11 @@ class MainWindow(QMainWindow):
             self.setStyleSheet(DARK_THEME)
         else:
             self.setStyleSheet(LIGHT_THEME)
+
+    def acao_restrita_admin(self):
+        from PyQt5.QtWidgets import QMessageBox
+        QMessageBox.information(self, "Ação Restrita", "Ação exclusiva para administradores executada com sucesso!")
+        print("Ação restrita de admin executada.")
 
     def resizeEvent(self, event):
         # Garante que o central_widget ocupe todo o espaço disponível

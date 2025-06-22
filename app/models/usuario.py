@@ -21,6 +21,7 @@ class Usuario(Base):
 
     def verificar_senha(self, senha: str) -> bool:
         hash_digitado = hashlib.sha256(senha.encode('utf-8')).hexdigest()
+        print(f'verificar_senha: senha recebida="{senha}", hash_digitado={hash_digitado}, hash_armazenado={self.senha_hash}')
         return self.senha_hash == hash_digitado
 
     def is_admin(self) -> bool:

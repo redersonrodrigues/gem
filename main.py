@@ -46,16 +46,15 @@ if __name__ == '__main__':
     print("Banco de dados inicializado com sucesso!")
     app = QApplication(sys.argv)
 
-    usuario_autenticado = {'user': None}
+    # Referências globais para manter as janelas vivas
+    global login_window
+    global main_window
 
     def on_login_success(user):
-        usuario_autenticado['user'] = user
+        global main_window
+        main_window = MainWindow(usuario=user)
+        main_window.show()
 
     login_window = LoginWindow(on_login_success=on_login_success)
     login_window.show()
-    app.exec_()
-
-    if usuario_autenticado['user']:
-        window = MainWindow(usuario=usuario_autenticado['user'])
-        window.show()
-        sys.exit(app.exec_())
+    sys.exit(app.exec_())
