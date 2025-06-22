@@ -11,6 +11,7 @@ class LoginWindow(QWidget):
         self.setWindowTitle('Login - Gestão de Escalas Médicas')
         self.setFixedSize(350, 200)
         self.setup_ui()
+        self.setWindowModality(Qt.ApplicationModal)
 
     def setup_ui(self):
         layout = QVBoxLayout()
@@ -30,14 +31,14 @@ class LoginWindow(QWidget):
 
     def try_login(self):
         username = self.input_user.text().strip()
-        password = self.input_pass.text()
+        password = self.input_pass.text().strip()
         if not username or not password:
             QMessageBox.warning(self, 'Erro', 'Preencha usuário e senha.')
             return
         engine = get_engine()
         with Session(engine) as session:
-            user = session.query(Usuario).filter_by(username=username).first()
-            if user and user.verify_password(password):
+            user = session.query(Usuario).filter_by(login=username).first()
+            if user and user.verificar_senha(password):
                 if self.on_login_success:
                     self.on_login_success(user)
                 self.close()

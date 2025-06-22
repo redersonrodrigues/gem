@@ -20,7 +20,8 @@ class Usuario(Base):
         self.senha_hash = hashlib.sha256(senha.encode('utf-8')).hexdigest()
 
     def verificar_senha(self, senha: str) -> bool:
-        return self.senha_hash == hashlib.sha256(senha.encode('utf-8')).hexdigest()
+        hash_digitado = hashlib.sha256(senha.encode('utf-8')).hexdigest()
+        return self.senha_hash == hash_digitado
 
     def is_admin(self) -> bool:
         return self.perfil == 'admin'
