@@ -3,6 +3,7 @@ from sqlalchemy.exc import NoResultFound
 from sqlalchemy.orm.exc import StaleDataError
 from app.models import Medico, Especializacao
 from app.utils.cache import cache
+from app.utils.logger import Logger
 
 class MedicoRepository:
     """Repositório para operações CRUD e validação de médicos."""
@@ -43,32 +44,35 @@ class MedicoRepository:
         if medico.status not in status_values:
             raise ValueError("Status inválido")
 
-    def create(self, medico: Medico):
-        """Cria um novo médico após validação."""
+    def create(self, medico: Medico, user_id: int):
+        """Cria um novo médico após validação e registra log."""
         self._validate(medico)
         self.db.add(medico)
         self.db.commit()
         self.db.refresh(medico)
         cache.invalidate('medicos')
+        Logger(self.db).log(user_id, 'create_medico', f'Médico {medico.nome} criado')
         return medico
 
-    def update(self, medico: Medico):
-        """Atualiza um médico existente após validação."""
+    def update(self, medico: Medico, user_id: int):
+        """Atualiza um médico existente após validação e registra log."""
         self._validate(medico)
         try:
             self.db.commit()
             self.db.refresh(medico)
+            Logger(self.db).log(user_id, 'update_medico', f'Médico {medico.nome} atualizado')
         except StaleDataError:
             self.db.rollback()
             raise RuntimeError("Conflito de concorrência: o registro foi modificado por outro usuário.")
         cache.invalidate('medicos')
         return medico
 
-    def delete(self, medico: Medico):
-        """Remove um médico do banco de dados."""
+    def delete(self, medico: Medico, user_id: int):
+        """Remove um médico do banco de dados e registra log."""
         self.db.delete(medico)
         self.db.commit()
         cache.invalidate('medicos')
+        Logger(self.db).log(user_id, 'delete_medico', f'Médico {medico.nome} removido')
 
 class EspecializacaoRepository:
     """Repositório para operações CRUD e validação de especializações."""
@@ -97,29 +101,32 @@ class EspecializacaoRepository:
         if not especializacao.nome or not especializacao.nome.strip():
             raise ValueError("nome da especialização é obrigatório")
 
-    def create(self, especializacao: Especializacao):
-        """Cria uma nova especialização após validação."""
+    def create(self, especializacao: Especializacao, user_id: int):
+        """Cria uma nova especialização após validação e registra log."""
         self._validate(especializacao)
         self.db.add(especializacao)
         self.db.commit()
         self.db.refresh(especializacao)
         cache.invalidate('especializacoes')
+        Logger(self.db).log(user_id, 'create_especializacao', f'Especialização {especializacao.nome} criada')
         return especializacao
 
-    def update(self, especializacao: Especializacao):
-        """Atualiza uma especialização existente após validação."""
+    def update(self, especializacao: Especializacao, user_id: int):
+        """Atualiza uma especialização existente após validação e registra log."""
         self._validate(especializacao)
         try:
             self.db.commit()
             self.db.refresh(especializacao)
+            Logger(self.db).log(user_id, 'update_especializacao', f'Especialização {especializacao.nome} atualizada')
         except StaleDataError:
             self.db.rollback()
             raise RuntimeError("Conflito de concorrência: o registro foi modificado por outro usuário.")
         cache.invalidate('especializacoes')
         return especializacao
 
-    def delete(self, especializacao: Especializacao):
-        """Remove uma especialização do banco de dados."""
+    def delete(self, especializacao: Especializacao, user_id: int):
+        """Remove uma especialização do banco de dados e registra log."""
         self.db.delete(especializacao)
         self.db.commit()
         cache.invalidate('especializacoes')
+        Logger(self.db).log(user_id, 'delete_especializacao', f'Especialização {especializacao.nome} removida')
