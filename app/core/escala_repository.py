@@ -1,6 +1,5 @@
 from sqlalchemy.orm import Session
-from sqlalchemy.exc import NoResultFound, StaleDataError
-from app.models.escala import Escala
+from sqlalchemy.exc import NoResultFound, StatementError
 from app.models.escala_plantonista import EscalaPlantonista
 from app.models.escala_sobreaviso import EscalaSobreaviso
 from app.utils.logger import Logger
@@ -14,29 +13,29 @@ class EscalaRepository:
         self.db = db
 
     def get_all(self):
-        """Retorna todas as escalas cadastradas."""
-        return self.db.query(Escala).all()
+        """Retorna todas as escalas de plantonistas cadastradas."""
+        return self.db.query(EscalaPlantonista).all()
 
     def get_by_id(self, escala_id: int):
-        """Busca uma escala pelo ID."""
-        return self.db.query(Escala).filter(Escala.id == escala_id).first()
+        """Busca uma escala de plantonista pelo ID."""
+        return self.db.query(EscalaPlantonista).filter(EscalaPlantonista.id == escala_id).first()
 
-    def _validate(self, escala: Escala):
+    def _validate(self, escala):
         """
         Valida os dados da escala antes de inserir ou atualizar.
         - Datas obrigatórias
-        - Médico e especialização obrigatórios
-        - Regras específicas para plantonista/sobreaviso podem ser expandidas
+        - Médico 1 obrigatório
+        - Turno obrigatório
         """
         if not escala.data:
             raise ValueError("Data da escala é obrigatória")
-        if not escala.medico_id:
-            raise ValueError("Médico é obrigatório")
-        if not escala.especializacao_id:
-            raise ValueError("Especialização é obrigatória")
-        # Regras específicas podem ser expandidas aqui
+        if not escala.turno:
+            raise ValueError("Turno é obrigatório")
+        if not escala.medico1_id:
+            raise ValueError("Médico 1 é obrigatório")
+        # Médico 2 é opcional
 
-    def create(self, escala: Escala, user_id: int):
+    def create(self, escala, user_id: int):
         """Cria uma nova escala após validação e registra log."""
         self._validate(escala)
         self.db.add(escala)
@@ -45,19 +44,19 @@ class EscalaRepository:
         Logger(self.db).log(user_id, 'create_escala', f'Escala ID {escala.id} criada')
         return escala
 
-    def update(self, escala: Escala, user_id: int):
+    def update(self, escala, user_id: int):
         """Atualiza uma escala existente após validação e registra log."""
         self._validate(escala)
         try:
             self.db.commit()
             self.db.refresh(escala)
             Logger(self.db).log(user_id, 'update_escala', f'Escala ID {escala.id} atualizada')
-        except StaleDataError:
+        except StatementError:
             self.db.rollback()
             raise RuntimeError("Conflito de concorrência: o registro foi modificado por outro usuário.")
         return escala
 
-    def delete(self, escala: Escala, user_id: int):
+    def delete(self, escala, user_id: int):
         """Remove uma escala do banco de dados e registra log."""
         self.db.delete(escala)
         self.db.commit()

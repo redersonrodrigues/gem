@@ -2,7 +2,7 @@
 Modelo Log para registro de operações críticas no sistema.
 """
 from sqlalchemy import Column, Integer, String, DateTime, Text
-from app.database import Base
+from app.core.database import Base
 
 class Log(Base):
     __tablename__ = 'logs'

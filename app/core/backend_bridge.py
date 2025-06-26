@@ -25,6 +25,14 @@ class BackendBridge:
         response.raise_for_status()
         return response.json()
 
+    def get_medicos_by_especializacao(self, especializacao_id):
+        # Mock para desenvolvimento: sempre retorna lista vazia
+        return []
+
+    def get_escalas_by_medico(self, medico_id):
+        # TODO: Implementar busca real de escalas por médico se necessário
+        return []
+
     # Métodos POST/PUT/DELETE podem ser adicionados conforme necessário
     def update_medico(self, medico_id, data, versao):
         url = f"{self.base_url}/api/medicos/{medico_id}"

@@ -2,9 +2,8 @@ import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from app.models.base import Base
-from app.models.escala import Escala
 from app.models.medico import Medico
-from app.models.especializacao import Especializacao
+from app.models.escala_plantonista import EscalaPlantonista
 from app.core.escala_repository import EscalaRepository
 
 @pytest.fixture(scope="function")
@@ -17,29 +16,27 @@ def session():
     sess.close()
     Base.metadata.drop_all(engine)
 
-def test_crud_escala(session):
-    esp = Especializacao(nome="Clínica Geral")
-    session.add(esp)
-    session.commit()
-    medico = Medico(nome="Dr. Escala", especializacao_id=esp.id)
-    session.add(medico)
+def test_crud_escala_plantonista(session):
+    medico1 = Medico(nome="Dr. Plantonista 1")
+    medico2 = Medico(nome="Dr. Plantonista 2")
+    session.add_all([medico1, medico2])
     session.commit()
     repo = EscalaRepository(session)
-    escala = Escala(data="2025-06-22", medico_id=medico.id, especializacao_id=esp.id)
+    escala = EscalaPlantonista(data="2025-06-22", turno="diurno", medico1_id=medico1.id, medico2_id=medico2.id)
     result = repo.create(escala, user_id=1)
     assert result.id is not None
-    assert result.medico_id == medico.id
+    assert result.medico1_id == medico1.id
     # Testa update
     escala.data = "2025-06-23"
     updated = repo.update(escala, user_id=1)
-    assert updated.data == "2025-06-23"
+    assert str(updated.data) == "2025-06-23"
     # Testa delete
     repo.delete(escala, user_id=1)
-    assert session.query(Escala).count() == 0
+    assert session.query(EscalaPlantonista).count() == 0
 
-def test_escala_validacao_campos_obrigatorios(session):
+def test_escala_plantonista_validacao_campos_obrigatorios(session):
     repo = EscalaRepository(session)
-    escala = Escala(data=None, medico_id=None, especializacao_id=None)
+    escala = EscalaPlantonista(data=None, turno=None, medico1_id=None)
     with pytest.raises(ValueError):
         repo.create(escala, user_id=1)
     session.rollback()
