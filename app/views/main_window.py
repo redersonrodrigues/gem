@@ -18,6 +18,8 @@ from app.utils.integrity_checker import IntegrityChecker
 from PyQt5.QtWidgets import QDockWidget, QTreeWidget, QTreeWidgetItem, QToolBar, QAction, QMessageBox, QFrame, QLabel, QWidget, QVBoxLayout
 from PyQt5.QtGui import QPixmap
 import os
+from app.views.escalas.plantonistas.plantonistas_view import PlantonistasView
+from app.views.escalas.sobreavisos.sobreavisos_view import SobreavisosView
 
 
 class MainWindow(QMainWindow):
@@ -154,8 +156,8 @@ class MainWindow(QMainWindow):
         # Instanciar views com checker e perfil
         self.medicos_view = MedicosView(integrity_checker=self.integrity_checker, perfil=self.perfil)
         self.especializacoes_view = EspecializacoesView(integrity_checker=self.integrity_checker, perfil=self.perfil)
-        self.escalas_plantonista_view = EscalasView(integrity_checker=self.integrity_checker, perfil=self.perfil, tipo='Plantonista')
-        self.escalas_sobreaviso_view = EscalasView(integrity_checker=self.integrity_checker, perfil=self.perfil, tipo='Sobreaviso')
+        self.escalas_plantonista_view = PlantonistasView(integrity_checker=self.integrity_checker, perfil=self.perfil)
+        self.escalas_sobreaviso_view = SobreavisosView(integrity_checker=self.integrity_checker, perfil=self.perfil)
         self.logs_view = LogsView()
         self.ajuda_view = AjudaView()
         self.add_view(self.medicos_view, "Médicos")

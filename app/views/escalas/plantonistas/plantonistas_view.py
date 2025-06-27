@@ -1,87 +1,52 @@
-"""
-Tela de gestão de escalas - PyQt5
-"""
-from PyQt5.QtWidgets import (
-    QWidget, QVBoxLayout, QLabel, QHBoxLayout, QFormLayout, QSizePolicy, QSpacerItem
-)
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QFormLayout, QComboBox, QDateEdit, QPushButton, QHBoxLayout, QTableWidgetItem, QSizePolicy
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QTableWidgetItem, QPushButton, QDialog, QLineEdit, QComboBox, QDateEdit
-from app.components.ui_elements import PrimaryButton, SearchField
+from app.components.escalas_table import EscalasTable
+from app.components.escalas_action_buttons import EscalasActionButtons
 from app.components.notifier import Notifier
-from app.components.icon_helper import get_icon
-from app.utils.integrity_checker import IntegrityChecker
-from app.components.print_helper import gerar_pdf_relatorio
-from app.utils.data_io import export_to_csv, import_from_csv, export_to_json, import_from_json
-from app.components.ui_logger import log_action
 from app.core.escala_repository import EscalaRepository
 from app.models.escala_plantonista import EscalaPlantonista
 from app.models.medico import Medico, StatusMedicoEnum
 from app.database import db
 from sqlalchemy.orm import Session
 from datetime import datetime, timedelta
-import os
-from app.components.escalas_table import EscalasTable
-from app.components.escalas_action_buttons import EscalasActionButtons
-from app.core.services.escala_strategy import EscalaStrategy, PlantonistaStrategy, SobreavisoStrategy
 
-class EscalasView(QWidget):
-    def __init__(self, parent=None, integrity_checker: IntegrityChecker = None, perfil=None, tipo=None, db_session: Session = None, strategy: EscalaStrategy = None):
+class PlantonistasView(QWidget):
+    def __init__(self, parent=None, integrity_checker=None, perfil=None, db_session: Session = None):
         super().__init__(parent)
-        self.setObjectName("escalas_view")
+        self.setObjectName("plantonistas_view")
         self.layout = QVBoxLayout()
         self.setLayout(self.layout)
         self.integrity_checker = integrity_checker
         self.perfil = perfil
-        self.tipo = tipo  # Novo argumento para diferenciar Plantonista/Sobreaviso
-        self.db_session = db_session or db.session  # Usa sessão injetada ou padrão
+        self.db_session = db_session or db.session
         self.escala_repo = EscalaRepository(self.db_session)
-        # Definir a estratégia conforme o tipo, se não for passada explicitamente
-        if strategy:
-            self.strategy = strategy
-        elif self.tipo == 'Plantonista':
-            self.strategy = PlantonistaStrategy()
-        elif self.tipo == 'Sobreaviso':
-            self.strategy = SobreavisoStrategy()
-        else:
-            self.strategy = None
         self.init_ui()
 
     def init_ui(self):
-        titulo = "Gestão de Escalas"
-        if self.tipo == 'Plantonista':
-            titulo = "Gestão de Escalas de Plantonistas"
-        elif self.tipo == 'Sobreaviso':
-            titulo = "Gestão de Escalas de Sobreaviso"
-        title = QLabel(titulo)
+        title = QLabel("Gestão de Escalas de Plantonistas")
         title.setAlignment(Qt.AlignCenter)
         title.setStyleSheet("font-size: 22px; font-weight: bold;")
         self.layout.addWidget(title)
-        # Layout elegante para filtros
         filter_widget = QWidget()
         filter_layout = QFormLayout()
         filter_layout.setLabelAlignment(Qt.AlignRight)
         filter_layout.setFormAlignment(Qt.AlignHCenter | Qt.AlignTop)
         filter_layout.setHorizontalSpacing(18)
         filter_layout.setVerticalSpacing(8)
-        # Ano
         self.ano_combo = QComboBox()
         self.ano_combo.setFixedWidth(110)
         self.ano_combo.currentIndexChanged.connect(self.atualizar_dias)
         self.ano_combo.currentIndexChanged.connect(self.buscar_escala)
         filter_layout.addRow(QLabel("Ano:"), self.ano_combo)
-        # Mês
         self.mes_combo = QComboBox()
         self.mes_combo.setFixedWidth(130)
         self.mes_combo.currentIndexChanged.connect(self.atualizar_dias)
         self.mes_combo.currentIndexChanged.connect(self.buscar_escala)
         filter_layout.addRow(QLabel("Mês:"), self.mes_combo)
-        # Dia
         self.dia_combo = QComboBox()
         self.dia_combo.setFixedWidth(90)
         self.dia_combo.currentIndexChanged.connect(self.buscar_escala)
         filter_layout.addRow(QLabel("Dia:"), self.dia_combo)
-        # Médico
         self.medico_combo = QComboBox()
         self.medico_combo.setFixedWidth(220)
         self.popular_medicos()
@@ -89,15 +54,12 @@ class EscalasView(QWidget):
         filter_layout.addRow(QLabel("Médico:"), self.medico_combo)
         filter_widget.setLayout(filter_layout)
         self.layout.addWidget(filter_widget)
-        # Espaço entre filtros e tabela
         self.layout.addSpacing(8)
-        # Tabela de escalas (usando componente)
         self.table_widget = EscalasTable(on_edit=self.editar_escala, on_delete=self.excluir_escala_dialog)
         self.table_widget.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.table_widget.get_table().horizontalHeader().setStretchLastSection(True)
         self.table_widget.get_table().horizontalHeader().setSectionResizeMode(1)
         self.layout.addWidget(self.table_widget, stretch=1)
-        # Botões de ação (usando componente extraído)
         self.action_buttons = EscalasActionButtons(
             on_add=self.adicionar_escala,
             on_export=self.exportar_csv,
@@ -105,18 +67,14 @@ class EscalasView(QWidget):
             on_print=self.imprimir_relatorio
         )
         self.layout.addWidget(self.action_buttons)
-        # Carregar dados (mock)
         self.load_data()
-        # Popular ComboBoxes de ano e mês
         self.popular_ano_mes()
 
     def popular_ano_mes(self):
-        # Anos de 2019 até 2030
         anos = [str(ano) for ano in range(2019, 2031)]
         self.ano_combo.clear()
         self.ano_combo.addItem("Todos os anos", None)
         self.ano_combo.addItems(anos)
-        # Meses de janeiro a dezembro
         meses = [
             "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
             "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
@@ -132,13 +90,6 @@ class EscalasView(QWidget):
         self.mes_combo.setCurrentIndex(mes_atual)  # +1 por causa do item "Todos os meses"
         self.ano_combo.setCurrentText(str(datetime.now().year))
 
-    def popular_medicos(self):
-        self.medico_combo.clear()
-        self.medico_combo.addItem("Todos os médicos", None)
-        medicos_ativos = self.db_session.query(Medico).filter(Medico.status == StatusMedicoEnum.ATIVO.value).all()
-        for medico in medicos_ativos:
-            self.medico_combo.addItem(medico.nome, medico.id)
-
     def atualizar_dias(self):
         self.dia_combo.clear()
         self.dia_combo.addItem("Todos os dias", None)
@@ -147,7 +98,6 @@ class EscalasView(QWidget):
         if ano and ano != "Todos os anos" and mes:
             try:
                 ano = int(ano)
-                # Último dia do mês considerando bissexto
                 if mes == 2:
                     if (ano % 4 == 0 and ano % 100 != 0) or (ano % 400 == 0):
                         ultimo_dia = 29
@@ -179,6 +129,13 @@ class EscalasView(QWidget):
             })
         self.table_widget.set_data(dados)
 
+    def popular_medicos(self):
+        self.medico_combo.clear()
+        self.medico_combo.addItem("Todos os médicos", None)
+        medicos_ativos = self.db_session.query(Medico).filter(Medico.status == StatusMedicoEnum.ATIVO.value).all()
+        for medico in medicos_ativos:
+            self.medico_combo.addItem(medico.nome, medico.id)
+
     def buscar_escala(self):
         ano = self.ano_combo.currentText()
         mes = self.mes_combo.currentIndex() if self.mes_combo.currentIndex() > 0 else None
@@ -197,106 +154,12 @@ class EscalasView(QWidget):
         for escala in escalas:
             dados.append({
                 "id": escala.id,
-                "data": escala.data.strftime('%Y-%m-%d'),
+                "data": escala.data.strftime('%d/%m/%Y'),
                 "turno": getattr(escala, 'turno', ''),
                 "medico0": escala.medico1.nome if hasattr(escala, 'medico1') and escala.medico1 else '',
                 "medico1": escala.medico2.nome if hasattr(escala, 'medico2') and escala.medico2 else ''
             })
         self.table_widget.set_data(dados)
-
-    def buscar_escala_dialog(self):
-        from PyQt5.QtWidgets import QDialog, QVBoxLayout, QLabel, QComboBox, QPushButton
-        class EscalaDialog(QDialog):
-            def __init__(self, parent=None, medicos_ativos=None):
-                super().__init__(parent)
-                self.setWindowTitle('Buscar Escala')
-                self.setModal(True)
-                layout = QVBoxLayout()
-                # ComboBox para ano
-                self.ano_combo = QComboBox()
-                self.ano_combo.setPlaceholderText("Ano")
-                self.ano_combo.setFixedWidth(100)
-                self.ano_combo.currentIndexChanged.connect(self.atualizar_dias)
-                layout.addWidget(QLabel("Ano:"))
-                layout.addWidget(self.ano_combo)
-                # ComboBox para mês
-                self.mes_combo = QComboBox()
-                self.mes_combo.setPlaceholderText("Mês")
-                self.mes_combo.setFixedWidth(100)
-                self.mes_combo.currentIndexChanged.connect(self.atualizar_dias)
-                layout.addWidget(QLabel("Mês:"))
-                layout.addWidget(self.mes_combo)
-                # ComboBox para dia
-                self.dia_combo = QComboBox()
-                self.dia_combo.setPlaceholderText("Dia")
-                self.dia_combo.setFixedWidth(100)
-                layout.addWidget(QLabel("Dia:"))
-                layout.addWidget(self.dia_combo)
-                # ComboBox para médico
-                self.medico_combo = QComboBox()
-                self.medico_combo.setPlaceholderText("Médico")
-                self.medico_combo.setFixedWidth(150)
-                layout.addWidget(QLabel("Médico:"))
-                layout.addWidget(self.medico_combo)
-                # Botões de ação
-                btn_layout = QHBoxLayout()
-                btn_ok = QPushButton('Buscar')
-                btn_cancel = QPushButton('Cancelar')
-                btn_ok.setStyleSheet('background-color: #388e3c; color: white; font-weight: bold;')
-                btn_cancel.setStyleSheet('background-color: #d32f2f; color: white; font-weight: bold;')
-                btn_ok.clicked.connect(self.accept)
-                btn_cancel.clicked.connect(self.reject)
-                btn_layout.addWidget(btn_ok)
-                btn_layout.addWidget(btn_cancel)
-                layout.addLayout(btn_layout)
-                self.setLayout(layout)
-                # Popular médicos ativos
-                self.popular_medicos_ativos(medicos_ativos)
-
-            def popular_medicos_ativos(self, medicos_ativos):
-                self.medico_combo.clear()
-                for medico in medicos_ativos:
-                    self.medico_combo.addItem(medico.nome, medico.id)
-
-            def atualizar_dias(self):
-                # Limpar ComboBox de dia
-                self.dia_combo.clear()
-                ano = self.ano_combo.currentText()
-                mes = self.mes_combo.currentIndex() + 1 if self.mes_combo.currentIndex() != -1 else None
-                if ano and mes:
-                    # Obter o último dia do mês selecionado
-                    ultimo_dia = (datetime(int(ano), mes + 1, 1) - timedelta(days=1)).day
-                    dias = [str(dia) for dia in range(1, ultimo_dia + 1)]
-                    self.dia_combo.addItems(dias)
-
-        # Buscar médicos ativos
-        medicos_ativos = self.db_session.query(Medico).filter(Medico.status == StatusMedicoEnum.ATIVO.value).all()
-        dialog = EscalaDialog(self, medicos_ativos=medicos_ativos)
-        if dialog.exec_() == QDialog.Accepted:
-            ano = dialog.ano_combo.currentText()
-            mes = dialog.mes_combo.currentIndex() + 1 if dialog.mes_combo.currentIndex() != -1 else None
-            dia = dialog.dia_combo.currentText()
-            medico_id = dialog.medico_combo.currentData()
-            # Filtrar escalas pela data e médico selecionados
-            escalas = self.escala_repo.get_all()
-            if ano:
-                escalas = [e for e in escalas if e.data.year == int(ano)]
-            if mes:
-                escalas = [e for e in escalas if e.data.month == mes]
-            if dia:
-                escalas = [e for e in escalas if e.data.day == int(dia)]
-            if medico_id:
-                escalas = [e for e in escalas if e.medico1_id == medico_id or e.medico2_id == medico_id]
-            dados = []
-            for escala in escalas:
-                dados.append({
-                    "id": escala.id,
-                    "data": escala.data.strftime('%Y-%m-%d'),
-                    "turno": getattr(escala, 'turno', ''),
-                    "medico0": escala.medico1.nome if hasattr(escala, 'medico1') and escala.medico1 else '',
-                    "medico1": escala.medico2.nome if hasattr(escala, 'medico2') and escala.medico2 else ''
-                })
-            self.table_widget.set_data(dados)
 
     def adicionar_escala(self):
         from PyQt5.QtWidgets import QDialog, QVBoxLayout, QHBoxLayout, QLabel, QComboBox, QPushButton, QDateEdit
@@ -339,7 +202,6 @@ class EscalasView(QWidget):
                 btn_layout.addWidget(btn_cancel)
                 layout.addLayout(btn_layout)
                 self.setLayout(layout)
-        # Buscar médicos ativos
         medicos_ativos = self.db_session.query(Medico).filter(Medico.status == StatusMedicoEnum.ATIVO.value).all()
         dialog = EscalaDialog(self, medicos_ativos=medicos_ativos)
         if dialog.exec_() == QDialog.Accepted:
@@ -361,62 +223,10 @@ class EscalasView(QWidget):
                 nova_escala = EscalaPlantonista(data=data, turno=turno, medico1_id=medico1_id, medico2_id=medico2_id)
                 self.escala_repo.create(nova_escala, user_id=1)
                 self.load_data()
-                Notifier.info(self, "Sucesso", "Escala adicionada com sucesso. Caso não veja os botões de ação, feche e reabra a tela.")
+                from PyQt5.QtWidgets import QMessageBox
+                QMessageBox.information(None, "Sucesso", "Escala adicionada com sucesso. Caso não veja os botões de ação, feche e reabra a tela.")
             except Exception as e:
                 Notifier.error(self, "Erro", str(e))
-        if self.strategy:
-            pass
-
-    def imprimir_relatorio(self):
-        table = self.table_widget.get_table()
-        cabecalhos = [table.horizontalHeaderItem(i).text() for i in range(table.columnCount())]
-        dados = []
-        for row in range(table.rowCount()):
-            if table.isRowHidden(row):
-                continue
-            linha = [table.item(row, col).text() if table.item(row, col) else '' for col in range(table.columnCount())]
-            dados.append(linha)
-        nome_arquivo = os.path.expanduser("~\\relatorio_escalas.pdf")
-        gerar_pdf_relatorio(nome_arquivo, "Relatório de Escalas", cabecalhos, dados, rodape="GEM - Sistema de Escalas Médicas")
-        Notifier.info(self, "Impressão", f"Relatório gerado em {nome_arquivo}")
-
-    def exportar_csv(self):
-        table = self.table_widget.get_table()
-        headers = [table.horizontalHeaderItem(i).text() for i in range(table.columnCount())]
-        data = []
-        for row in range(table.rowCount()):
-            linha = [table.item(row, col).text() if table.item(row, col) else '' for col in range(table.columnCount())]
-            data.append(linha)
-        if export_to_csv(self, headers, data):
-            Notifier.info(self, "Exportação", "Escalas exportadas com sucesso.")
-            log_action(self.perfil, 'export', 'escala', details='exportação em lote', result='sucesso')
-
-    def importar_csv(self):
-        rows = import_from_csv(self)
-        if not rows:
-            return
-        import_ok = True
-        for row in rows[1:]:
-            if not all(row):
-                Notifier.error(self, "Importação", "Dados incompletos na linha: {}".format(row))
-                import_ok = False
-                continue
-            # Integridade: checar duplicidade de data/turno
-            for i in range(self.table_widget.get_table().rowCount()):
-                if self.table_widget.get_table().item(i, 0) and self.table_widget.get_table().item(i, 0).text() == row[0] and self.table_widget.get_table().item(i, 1) and self.table_widget.get_table().item(i, 1).text() == row[1]:
-                    Notifier.error(self, "Importação", f"Escala já existe para data/turno: {row[0]} {row[1]}")
-                    import_ok = False
-                    break
-            else:
-                row_idx = self.table_widget.get_table().rowCount()
-                self.table_widget.get_table().insertRow(row_idx)
-                for col, value in enumerate(row):
-                    self.table_widget.get_table().setItem(row_idx, col, QTableWidgetItem(value))
-        if import_ok:
-            Notifier.info(self, "Importação", "Escalas importadas com sucesso.")
-            log_action(self.perfil, 'import', 'escala', details='importação em lote', result='sucesso')
-        else:
-            log_action(self.perfil, 'import', 'escala', details='importação com erros', result='erro')
 
     def editar_escala(self, escala):
         from PyQt5.QtWidgets import QDialog, QVBoxLayout, QHBoxLayout, QLabel, QComboBox, QPushButton, QDateEdit
@@ -502,7 +312,8 @@ class EscalasView(QWidget):
                 escala_obj.medico2_id = medico2_id
                 self.escala_repo.update(escala_obj, user_id=1)
                 self.load_data()
-                Notifier.info(self, "Sucesso", "Escala editada com sucesso.")
+                from PyQt5.QtWidgets import QMessageBox
+                QMessageBox.information(None, "Sucesso", "Escala editada com sucesso.")
             except Exception as e:
                 Notifier.error(self, "Erro", str(e))
 
@@ -548,3 +359,53 @@ class EscalasView(QWidget):
             Notifier.info(self, "Exclusão", "Escala excluída com sucesso.")
         except Exception as e:
             Notifier.error(self, "Erro", str(e))
+
+    def imprimir_relatorio(self):
+        table = self.table_widget.get_table()
+        cabecalhos = [table.horizontalHeaderItem(i).text() for i in range(table.columnCount())]
+        dados = []
+        for row in range(table.rowCount()):
+            if table.isRowHidden(row):
+                continue
+            linha = [table.item(row, col).text() if table.item(row, col) else '' for col in range(table.columnCount())]
+            dados.append(linha)
+        nome_arquivo = os.path.expanduser("~\\relatorio_escalas.pdf")
+        gerar_pdf_relatorio(nome_arquivo, "Relatório de Escalas", cabecalhos, dados, rodape="GEM - Sistema de Escalas Médicas")
+        Notifier.info(self, "Impressão", f"Relatório gerado em {nome_arquivo}")
+
+    def exportar_csv(self):
+        table = self.table_widget.get_table()
+        headers = [table.horizontalHeaderItem(i).text() for i in range(table.columnCount())]
+        data = []
+        for row in range(table.rowCount()):
+            linha = [table.item(row, col).text() if table.item(row, col) else '' for col in range(table.columnCount())]
+            data.append(linha)
+        if export_to_csv(self, headers, data):
+            Notifier.info(self, "Exportação", "Escalas exportadas com sucesso.")
+            log_action(self.perfil, 'export', 'escala', details='exportação em lote', result='sucesso')
+
+    def importar_csv(self):
+        rows = import_from_csv(self)
+        if not rows:
+            return
+        import_ok = True
+        for row in rows[1:]:
+            if not all(row):
+                Notifier.error(self, "Importação", "Dados incompletos na linha: {}".format(row))
+                import_ok = False
+                continue
+            for i in range(self.table_widget.get_table().rowCount()):
+                if self.table_widget.get_table().item(i, 0) and self.table_widget.get_table().item(i, 0).text() == row[0] and self.table_widget.get_table().item(i, 1) and self.table_widget.get_table().item(i, 1).text() == row[1]:
+                    Notifier.error(self, "Importação", f"Escala já existe para data/turno: {row[0]} {row[1]}")
+                    import_ok = False
+                    break
+            else:
+                row_idx = self.table_widget.get_table().rowCount()
+                self.table_widget.get_table().insertRow(row_idx)
+                for col, value in enumerate(row):
+                    self.table_widget.get_table().setItem(row_idx, col, QTableWidgetItem(value))
+        if import_ok:
+            Notifier.info(self, "Importação", "Escalas importadas com sucesso.")
+            log_action(self.perfil, 'import', 'escala', details='importação em lote', result='sucesso')
+        else:
+            log_action(self.perfil, 'import', 'escala', details='importação com erros', result='erro')

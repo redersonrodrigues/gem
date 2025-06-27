@@ -189,7 +189,8 @@ class MedicosView(QWidget):
                 user_id = 1  # fallback para admin
             create_medico(nome, nome_pj, especializacao_id, status, user_id)
             self.load_data()
-            MessageManager.info(self, "Cadastro", "Médico adicionado com sucesso.")
+            from PyQt5.QtWidgets import QMessageBox
+            QMessageBox.information(self, "Cadastro", "Médico adicionado com sucesso.")
 
     def excluir_medico_dialog(self, medico):
         from PyQt5.QtWidgets import QDialog, QVBoxLayout, QLabel, QHBoxLayout, QPushButton
@@ -338,4 +339,5 @@ class MedicosView(QWidget):
                 user_id = 1  # fallback para admin
             update_medico(medico.id, nome, nome_pj, especializacao_id, status, user_id)
             self.load_data()
-            MessageManager.info(self, "Edição", "Médico editado com sucesso.")
+            from PyQt5.QtWidgets import QMessageBox
+            QMessageBox.information(self, "Edição", "Médico editado com sucesso.")
