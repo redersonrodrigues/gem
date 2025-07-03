@@ -206,4 +206,63 @@ if __name__ == "__main__":
 
 ---
 
-Consulte o cronograma_desenvolvimento.md para o roteiro incremental do projeto.
+## 6. Templates e Componentes de Interface
+
+### Templates (Layout Visual)
+
+- Os arquivos de template HTML, CSS, JS e imagens estão localizados em `app/Templates/`.
+- O arquivo principal é `template.html`, podendo ser utilizado para relatórios ou visualização híbrida.
+- O método `load_template` em `main.py` permite carregar templates HTML para uso futuro, como geração de relatórios ou visualização web.
+
+### Componentes de Interface (Widgets)
+
+- Componentes reutilizáveis de interface ficam em `Lib/Escala/Widgets/`, organizados por tipo (Form, Datagrid, Dialog, Container, etc).
+- Esses widgets são classes Python que facilitam a montagem de formulários, tabelas, diálogos e outros elementos de interface, seguindo o padrão modular.
+
+### Separação de Responsabilidades
+
+- O layout visual (HTML/CSS/JS) é mantido separado dos componentes de interface Python.
+- Isso permite flexibilidade para evoluir tanto a interface gráfica (Qt) quanto relatórios ou visualizações web, mantendo o código organizado e reutilizável.
+
+---
+
+## 7. Como usar o sistema de template para exibir telas da aplicação
+
+O sistema de template do GEM permite separar o layout visual do conteúdo dinâmico das telas, facilitando a manutenção e a evolução da interface.
+
+### Estrutura
+
+- O arquivo `app/Templates/template.html` contém o layout base, com um container central:
+  ```html
+  <div id="content-area">{content}</div>
+  ```
+- O marcador `{content}` é substituído pelo Python pelo conteúdo HTML da tela desejada.
+- O menu Qt (criado no Python) controla a navegação entre as telas.
+- O componente `QWebEngineView` exibe o template, aplicando todo o CSS/JS.
+
+### Como exibir o conteúdo das telas
+
+1. **Defina o conteúdo HTML de cada tela**
+   - No Python, crie strings HTML para cada tela (exemplo: `<h2>Cadastro de Médicos</h2>`, formulários, tabelas, etc).
+   - No método `show_in_template` da classe `MainWindow`, associe cada item do menu ao HTML correspondente usando um dicionário:
+     ```python
+     content_map = {
+         "medicos": "<h2>Cadastro e Gestão de Médicos</h2>",
+         "escalas": "<h2>Cadastro e Gestão de Escalas</h2>",
+         # ... outros itens ...
+     }
+     ```
+2. **Atualize o conteúdo dinamicamente**
+   - Ao clicar em um item do menu, o método `show_in_template` executa um JavaScript no template:
+     ```python
+     js = f"setContent(`{html_content}`);"
+     self.browser.page().runJavaScript(js)
+     ```
+   - Isso troca apenas o conteúdo do container, sem recarregar a página inteira.
+
+### Vantagens
+
+- Separação total entre layout (HTML/CSS/JS) e lógica de navegação (Python/Qt).
+- Facilidade para criar, modificar ou reaproveitar telas.
+- Interface estilizada e responsiva, aproveitando todo o poder do template HTML.
+- Navegação controlada pelo menu Qt, mantendo o padrão desktop e a arquitetura modular.
