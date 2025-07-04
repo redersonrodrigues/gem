@@ -16,32 +16,164 @@
       href="assets/css/light-bootstrap-dashboard.css?v=1.4.0"
       rel="stylesheet"
     />
-    <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
-    <script src="assets/js/Chart.bundle.min.js"></script>
+
     <script src="assets/js/jquery.3.2.1.min.js" type="text/javascript"></script>
     <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="assets/js/light-bootstrap-dashboard.js?v=1.4.0"></script>
+    <script src="assets/js/Chart.bundle.min.js"></script>
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
     <style>
       body {
         background: #f4f3ef;
       }
-      #content-area {
-        min-height: 400px;
-        background: #fff;
-        border-radius: 8px;
-        box-shadow: 0 2px 8px #ccc;
-        padding: 32px;
-        margin: 32px auto;
-        max-width: 900px;
+      .main-panel {
+        min-height: 100vh;
       }
     </style>
   </head>
   <body>
-    <div id="content-area">{content}</div>
+    <img src="assets/img/default_avatar.png" width="128" height="128">
+    <div class="wrapper">
+      <div class="sidebar">
+        <div class="sidebar-wrapper">
+          <div class="logo">
+            <a
+              target="_blank"
+              href="https://github.com/redersonrodrigues/gem"
+              class="simple-text"
+            >
+              GEM - Gestão de Escala Médica
+            </a>
+          </div>
+          <ul class="nav">
+            <li>
+              <a href="?class=Home"><i class="fa fa-home"></i> Início</a>
+            </li>
+            <li>
+              <a href="?class=MedicosList"
+                ><i class="fa fa-user-md"></i> Médicos</a
+              >
+            </li>
+            <li>
+              <a href="?class=EspecializacoesList"
+                ><i class="fa fa-stethoscope"></i> Especializações</a
+              >
+            </li>
+            <li>
+              <a href="?class=EscalasList"
+                ><i class="fa fa-calendar"></i> Escalas</a
+              >
+            </li>
+            <li>
+              <a href="?class=UsuarioList"
+                ><i class="fa fa-users"></i> Usuários</a
+              >
+            </li>
+            <li>
+              <a href="?class=RelatoriosView"
+                ><i class="fa fa-bar-chart"></i> Relatórios</a
+              >
+            </li>
+            <li>
+              <a href="?class=DashboardView"
+                ><i class="fa fa-tachometer"></i> Dashboard</a
+              >
+            </li>
+            <li>
+              <a href="?class=ConfigView"
+                ><i class="fa fa-cogs"></i> Configurações</a
+              >
+            </li>
+            <li>
+              <a href="?class=AjudaView"
+                ><i class="fa fa-question-circle"></i> Ajuda</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="main-panel">
+        <nav class="navbar navbar-default navbar-fixed">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <button
+                type="button"
+                class="navbar-toggle"
+                data-toggle="collapse"
+                data-target="#navigation-example-2"
+              >
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a
+                class="navbar-brand"
+                href="?class=ViewSource&method=onView&source={class}"
+              >
+                <i class="fa fa-code"></i> Código-fonte
+              </a>
+            </div>
+            <div class="collapse navbar-collapse">
+              <ul class="nav navbar-nav navbar-left">
+                <li>
+                  <a
+                    href="?class=DashboardView"
+                    class="dropdown-toggle"
+                    data-toggle="dropdown"
+                  >
+                    <i class="fa fa-dashboard"></i>
+                    <p class="hidden-lg hidden-md">Dashboard</p>
+                  </a>
+                </li>
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <p>
+                      Atalhos
+                      <b class="caret"></b>
+                    </p>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a href="?class=MedicosList">Médicos</a></li>
+                    <li><a href="?class=UsuarioList">Usuários</a></li>
+                    <li><a href="?class=EscalasList">Escalas</a></li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="?class=LoginForm&method=onLogout">
+                    <p>Log out</p>
+                  </a>
+                </li>
+                <li class="separator hidden-lg hidden-md"></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <div class="content">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-12">{content}</div>
+            </div>
+          </div>
+        </div>
+        <footer class="footer">
+          <div class="container-fluid">
+            <p class="copyright pull-right">
+              <a target="_blank" href="https://github.com/redersonrodrigues/gem"
+                >GEM - Gestão de Escala Médica</a
+              >
+            </p>
+          </div>
+        </footer>
+      </div>
+    </div>
     <script>
-      // Permite atualização dinâmica do conteúdo pelo Python
+      // Permite atualização dinâmica do conteúdo pelo Python (se necessário)
       function setContent(html) {
-        document.getElementById("content-area").innerHTML = html;
+        document.querySelector(".content .col-md-12").innerHTML = html;
       }
     </script>
   </body>

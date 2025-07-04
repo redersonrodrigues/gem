@@ -10,7 +10,7 @@ CREATE TABLE usuario (
     login TEXT NOT NULL UNIQUE,
     senha_hash TEXT NOT NULL,
     perfil TEXT NOT NULL CHECK (perfil IN ('admin', 'coordenador', 'diretor_tecnico', 'anestesista', 'usuario')),
-    status INTEGER NOT NULL DEFAULT 1 -- 1: ativo, 0: inativo
+    status INTEGER NOT NULL DEFAULT 2 -- 1: ativo, 0: inativo
 );
 
 -- 2. Tabela de especializações médicas
