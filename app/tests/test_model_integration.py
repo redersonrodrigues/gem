@@ -1,9 +1,14 @@
-from Lib.Escala.Database.transaction import Transaction
-from app.Model.escala_plantonista import EscalaPlantonista
-from app.Model.escala_sobreaviso import EscalaSobreaviso
-from app.Model.medico import Medico
+from app.Model.Usuario import Usuario
 from app.Model.especializacao import Especializacao
-from app.Model.usuario import Usuario
+from app.Model.medico import Medico
+from app.Model.escala_sobreaviso import EscalaSobreaviso
+from app.Model.escala_plantonista import EscalaPlantonista
+from Lib.Escala.Database.transaction import Transaction
+import sys
+import os
+sys.path.insert(0, os.path.abspath(
+    os.path.join(os.path.dirname(__file__), '../..')))
+
 
 def test_model_integracao():
     try:
@@ -19,7 +24,7 @@ def test_model_integracao():
             medico1 = Medico.find(escala.medico_1_id)
             print("Médico 0:", medico0.nome if medico0 else "Não encontrado")
             print("Médico 1:", medico1.nome if medico1 else "Não encontrado")
-        
+
         # Exemplo: buscar sobreaviso por id
         sobreaviso = EscalaSobreaviso.find(1)
         if sobreaviso:
@@ -29,7 +34,8 @@ def test_model_integracao():
             medico = Medico.find(sobreaviso.medico_id)
             especializacao = Especializacao.find(sobreaviso.especializacao_id)
             print("Médico:", medico.nome if medico else "Não encontrado")
-            print("Especialização:", especializacao.nome if especializacao else "Não encontrada")
+            print("Especialização:",
+                  especializacao.nome if especializacao else "Não encontrada")
 
         # Exemplo: buscar usuário por id
         usuario = Usuario.find(1)

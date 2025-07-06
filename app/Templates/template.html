@@ -11,163 +11,151 @@
     />
     <meta name="viewport" content="width=device-width" />
     <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="assets/css/animate.min.css" rel="stylesheet" />
-    <link
-      href="assets/css/light-bootstrap-dashboard.css?v=1.4.0"
-      rel="stylesheet"
-    />
+    <link href="assets/fontawesome/css/all.min.css" rel="stylesheet" />
+    <link href="assets/css/custom.css" rel="stylesheet" />
 
-    <script src="assets/js/jquery.3.2.1.min.js" type="text/javascript"></script>
-    <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="assets/js/light-bootstrap-dashboard.js?v=1.4.0"></script>
-    <script src="assets/js/Chart.bundle.min.js"></script>
-    <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
-    <style>
-      body {
-        background: #f4f3ef;
-      }
-      .main-panel {
-        min-height: 100vh;
-      }
-    </style>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <!-- estilos movidos para custom.css -->
   </head>
   <body>
-    <img src="assets/img/default_avatar.png" width="128" height="128">
-    <div class="wrapper">
-      <div class="sidebar">
-        <div class="sidebar-wrapper">
-          <div class="logo">
-            <a
-              target="_blank"
-              href="https://github.com/redersonrodrigues/gem"
-              class="simple-text"
-            >
-              GEM - Gestão de Escala Médica
-            </a>
-          </div>
-          <ul class="nav">
-            <li>
-              <a href="?class=Home"><i class="fa fa-home"></i> Início</a>
-            </li>
-            <li>
-              <a href="?class=MedicosList"
-                ><i class="fa fa-user-md"></i> Médicos</a
-              >
-            </li>
-            <li>
-              <a href="?class=EspecializacoesList"
-                ><i class="fa fa-stethoscope"></i> Especializações</a
-              >
-            </li>
-            <li>
-              <a href="?class=EscalasList"
-                ><i class="fa fa-calendar"></i> Escalas</a
-              >
-            </li>
-            <li>
-              <a href="?class=UsuarioList"
-                ><i class="fa fa-users"></i> Usuários</a
-              >
-            </li>
-            <li>
-              <a href="?class=RelatoriosView"
-                ><i class="fa fa-bar-chart"></i> Relatórios</a
-              >
-            </li>
-            <li>
-              <a href="?class=DashboardView"
-                ><i class="fa fa-tachometer"></i> Dashboard</a
-              >
-            </li>
-            <li>
-              <a href="?class=ConfigView"
-                ><i class="fa fa-cogs"></i> Configurações</a
-              >
-            </li>
-            <li>
-              <a href="?class=AjudaView"
-                ><i class="fa fa-question-circle"></i> Ajuda</a
-              >
-            </li>
-          </ul>
-        </div>
+    <!-- Cabeçalho -->
+    <header
+      class="bg-white border-bottom py-2 px-3 d-flex align-items-center justify-content-between"
+    >
+      <div class="d-flex align-items-center">
+        <img
+          src="assets/img/favicon.ico"
+          alt="Logo"
+          width="32"
+          height="32"
+          class="me-2"
+        />
+        <span class="fw-bold fs-4 text-primary"
+          >GEM - Gestão de Escala Médica</span
+        >
       </div>
-      <div class="main-panel">
-        <nav class="navbar navbar-default navbar-fixed">
-          <div class="container-fluid">
-            <div class="navbar-header">
-              <button
-                type="button"
-                class="navbar-toggle"
-                data-toggle="collapse"
-                data-target="#navigation-example-2"
-              >
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
+      <div class="dropdown">
+        <button
+          class="btn btn-outline-secondary dropdown-toggle d-flex align-items-center"
+          type="button"
+          id="userMenuButton"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <i class="fas fa-user-circle me-2"></i>
+          <span class="d-none d-md-inline">Opções</span>
+        </button>
+        <ul
+          class="dropdown-menu dropdown-menu-end"
+          aria-labelledby="userMenuButton"
+        >
+          <li>
+            <a class="dropdown-item" href="?class=LoginForm&method=onLoginAdmin"
+              ><i class="fas fa-user-shield me-2"></i>Logar como
+              Administrador</a
+            >
+          </li>
+          <li><hr class="dropdown-divider" /></li>
+          <li>
+            <a
+              class="dropdown-item text-danger"
+              href="?class=LoginForm&method=onLogout"
+              ><i class="fas fa-sign-out-alt me-2"></i>Sair</a
+            >
+          </li>
+        </ul>
+      </div>
+    </header>
+    <div class="container-fluid p-0">
+      <div class="row g-0 min-vh-100">
+        <!-- Sidebar -->
+        <nav class="col-md-2 d-none d-md-block bg-white border-end sidebar p-0">
+          <div class="sidebar-wrapper p-3">
+            <div class="logo mb-4 text-center">
               <a
-                class="navbar-brand"
-                href="?class=ViewSource&method=onView&source={class}"
+                target="_blank"
+                href="https://github.com/redersonrodrigues/gem"
+                class="fw-bold text-decoration-none text-primary fs-4"
               >
-                <i class="fa fa-code"></i> Código-fonte
+                <i class="fas fa-user-md me-2"></i>GEM
               </a>
             </div>
-            <div class="collapse navbar-collapse">
-              <ul class="nav navbar-nav navbar-left">
-                <li>
-                  <a
-                    href="?class=DashboardView"
-                    class="dropdown-toggle"
-                    data-toggle="dropdown"
-                  >
-                    <i class="fa fa-dashboard"></i>
-                    <p class="hidden-lg hidden-md">Dashboard</p>
-                  </a>
-                </li>
-              </ul>
-              <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <p>
-                      Atalhos
-                      <b class="caret"></b>
-                    </p>
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li><a href="?class=MedicosList">Médicos</a></li>
-                    <li><a href="?class=UsuarioList">Usuários</a></li>
-                    <li><a href="?class=EscalasList">Escalas</a></li>
-                  </ul>
-                </li>
-                <li>
-                  <a href="?class=LoginForm&method=onLogout">
-                    <p>Log out</p>
-                  </a>
-                </li>
-                <li class="separator hidden-lg hidden-md"></li>
-              </ul>
+            <div class="d-grid gap-3">
+              <a
+                class="btn btn-outline-primary btn-lg text-start"
+                href="?class=Home"
+              >
+                <i class="fas fa-home me-2"></i> Início
+              </a>
+              <a
+                class="btn btn-outline-primary btn-lg text-start"
+                href="?class=MedicosList"
+              >
+                <i class="fas fa-user-doctor me-2"></i> Médicos
+              </a>
+              <a
+                class="btn btn-outline-primary btn-lg text-start"
+                href="?class=EspecializacoesList"
+              >
+                <i class="fas fa-stethoscope me-2"></i> Especializações
+              </a>
+              <a
+                class="btn btn-outline-primary btn-lg text-start"
+                href="?class=EscalasList"
+              >
+                <i class="fas fa-calendar-days me-2"></i> Escalas
+              </a>
+              <a
+                class="btn btn-outline-primary btn-lg text-start"
+                href="?class=UsuarioList"
+              >
+                <i class="fas fa-users me-2"></i> Usuários
+              </a>
+              <a
+                class="btn btn-outline-primary btn-lg text-start"
+                href="?class=RelatoriosView"
+              >
+                <i class="fas fa-chart-bar me-2"></i> Relatórios
+              </a>
+              <a
+                class="btn btn-outline-primary btn-lg text-start"
+                href="?class=DashboardView"
+              >
+                <i class="fas fa-gauge-high me-2"></i> Dashboard
+              </a>
+              <a
+                class="btn btn-outline-primary btn-lg text-start"
+                href="?class=ConfigView"
+              >
+                <i class="fas fa-cogs me-2"></i> Configurações
+              </a>
+              <a
+                class="btn btn-outline-primary btn-lg text-start"
+                href="?class=AjudaView"
+              >
+                <i class="fas fa-circle-question me-2"></i> Ajuda
+              </a>
             </div>
           </div>
         </nav>
-        <div class="content">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-md-12">{content}</div>
+        <!-- Main content -->
+        <main class="col-md-10 ms-sm-auto px-4 d-flex flex-column min-vh-100">
+          <!-- Removido menu superior -->
+          <div class="flex-fill">
+            <div class="content-area p-4">{content}</div>
+          </div>
+          <footer class="footer mt-auto bg-light border-top py-3">
+            <div class="container-fluid">
+              <p class="mb-0 text-end">
+                <a
+                  target="_blank"
+                  href="https://github.com/redersonrodrigues/gem"
+                  >GEM - Gestão de Escala Médica</a
+                >
+              </p>
             </div>
-          </div>
-        </div>
-        <footer class="footer">
-          <div class="container-fluid">
-            <p class="copyright pull-right">
-              <a target="_blank" href="https://github.com/redersonrodrigues/gem"
-                >GEM - Gestão de Escala Médica</a
-              >
-            </p>
-          </div>
-        </footer>
+          </footer>
+        </main>
       </div>
     </div>
     <script>
@@ -178,3 +166,4 @@
     </script>
   </body>
 </html>
+<!-- Código legado removido: menu superior, painel principal e rodapé duplicados -->

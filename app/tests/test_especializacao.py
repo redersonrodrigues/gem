@@ -1,14 +1,20 @@
-import pytest
-from Lib.Escala.Database.transaction import Transaction
-from app.Model.especializacao import Especializacao
-from Lib.Escala.Database.repository import Repository
 from Lib.Escala.Database.criteria import Criteria
+from Lib.Escala.Database.repository import Repository
+from app.Model.especializacao import Especializacao
+from Lib.Escala.Database.transaction import Transaction
+import pytest
+import sys
+import os
+sys.path.insert(0, os.path.abspath(
+    os.path.join(os.path.dirname(__file__), '../..')))
+
 
 @pytest.fixture(autouse=True)
 def transacao():
     Transaction.open("escala")
     yield
     Transaction.close()
+
 
 def test_repository_criteria_especializacao():
     # Criação de especializações

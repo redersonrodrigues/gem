@@ -1,61 +1,71 @@
+from Lib.Escala.Control.Page import Page
+from Lib.Escala.Control.action import Action
+from Lib.Escala.Widgets.Form.Form import Form
+from Lib.Escala.Widgets.Form.Entry import Entry
+from Lib.Escala.Widgets.Form.Combo import Combo
+from Lib.Escala.Widgets.Dialog.Message import Message
 from Lib.Escala.Database.transaction import Transaction
-from app.Model.usuario import Usuario
+from Lib.Escala.Widgets.Container.Panel import Panel
+from Lib.Escala.Widgets.Wrapper.FormWrapper import FormWrapper
+from app.Model.Usuario import Usuario
 from app.Model.especializacao import Especializacao
-from Lib.Escala.Widgets.Form import Form
-from Lib.Escala.Widgets.Entry import Entry
-from Lib.Escala.Widgets.Combo import Combo
-from Lib.Escala.Widgets.Message import Message
-from Lib.Escala.Widgets.Panel import Panel
 
-class UsuarioForm:
+class UsuarioForm(Page):
     def __init__(self):
-        self.form = Form('form_usuario')
+        super().__init__()
+        # Use FormWrapper para padronizar
+        self.form = FormWrapper(Form('form_usuario'))
         self.form.set_title('Usuário')
 
         # Campos do formulário
-        self.id_entry = Entry('id')
-        self.nome_entry = Entry('nome')
-        self.login_entry = Entry('login')
-        self.senha_entry = Entry('senha')
-        self.perfil_combo = Combo('perfil')
-        self.especializacao_combo = Combo('especializacao_id')
+        codigo = Entry('id')
+        nome = Entry('nome')
+        login = Entry('login')
+        senha = Entry('senha')
+        perfil = Combo('perfil')
+        especializacao = Combo('especializacao_id')
 
         # Carregar opções dos combos
-        Transaction.open('escala')
-        perfis = {
-            'admin': 'Administrador',
-            'medico': 'Médico',
-            'secretaria': 'Secretaria'
-        }
-        self.perfil_combo.add_items(perfis)
+        try:
+            Transaction.open('escala')
+            perfis = {
+                'admin': 'Administrador',
+                'medico': 'Médico',
+                'secretaria': 'Secretaria'
+            }
+            perfil.add_items(perfis)
 
-        especializacoes = Especializacao.all()
-        espec_items = {str(e.id): e.nome for e in especializacoes}
-        self.especializacao_combo.add_items(espec_items)
-        Transaction.close()
+            especializacoes = Especializacao.all()
+            espec_items = {str(e.id): e.nome for e in especializacoes}
+            especializacao.add_items(espec_items)
+            Transaction.close()
+        except Exception as e:
+            Message('error', str(e))
+            Transaction.rollback()
 
         # Monta o formulário
-        self.form.add_field('ID', self.id_entry, '30%')
-        self.form.add_field('Nome', self.nome_entry, '70%')
-        self.form.add_field('Login', self.login_entry, '70%')
-        self.form.add_field('Senha', self.senha_entry, '70%')
-        self.form.add_field('Perfil', self.perfil_combo, '70%')
-        self.form.add_field('Especialização', self.especializacao_combo, '70%')
+        self.form.add_field('ID', codigo, '30%')
+        self.form.add_field('Nome', nome, '70%')
+        self.form.add_field('Login', login, '70%')
+        self.form.add_field('Senha', senha, '70%')
+        self.form.add_field('Perfil', perfil, '70%')
+        self.form.add_field('Especialização', especializacao, '70%')
 
-        self.id_entry.set_editable(False)
+        codigo.set_editable(False)
 
-        self.form.add_action('Salvar', self.on_save)
+        # Adiciona ação 'Salvar' usando Action
+        self.form.add_action('Salvar', Action(self.on_save))
 
-        self.panel = Panel()
-        self.panel.add(self.form)
+        # Adiciona o formulário na página/painel
+        super().add(self.form)
 
-    def on_save(self):
+    def on_save(self, param=None):
         try:
             Transaction.open('escala')
             dados = self.form.get_data()
             self.form.set_data(dados)
-            if dados.get('id'):
-                usuario = Usuario.find(dados['id'])
+            if hasattr(dados, 'id') and dados.id:
+                usuario = Usuario.find(dados.id)
                 if not usuario:
                     usuario = Usuario()
             else:
@@ -68,13 +78,15 @@ class UsuarioForm:
             Message('error', str(e))
             Transaction.rollback()
 
-    def on_edit(self, usuario_id):
+    def on_edit(self, param):
         try:
-            Transaction.open('escala')
-            usuario = Usuario.find(usuario_id)
-            if usuario:
-                self.form.set_data(usuario.to_dict())
-            Transaction.close()
+            if 'id' in param:
+                usuario_id = param['id']
+                Transaction.open('escala')
+                usuario = Usuario.find(usuario_id)
+                if usuario:
+                    self.form.set_data(usuario.to_dict())
+                Transaction.close()
         except Exception as e:
             Message('error', str(e))
             Transaction.rollback()

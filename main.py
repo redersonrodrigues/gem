@@ -1,15 +1,12 @@
+
 import sys
 import os
 from PySide6.QtWidgets import QApplication, QMainWindow
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtCore import QUrl
 
-# === Framework loaders (Pablo Dall'Oglio style) ===
 from Lib.Escala.Core.class_loader import ClassLoader
 from Lib.Escala.Core.app_loader import AppLoader
-
-# --- "Registra" os carregadores de classes (equivalente ao PHP spl_autoload_register) ---
-# (Em Python, podemos apenas garantir que estão disponíveis para uso; os métodos estáticos simulam o autoload)
 
 
 def load_template(path='app/Templates/template.html', context=None):
@@ -27,16 +24,17 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("GEM - Gestão de Escala Médica")
         self.browser = QWebEngineView()
         self.setCentralWidget(self.browser)
-        self.show_page('Home')
+        # Exemplo de requisição: exibe a listagem de usuários ao iniciar
+        self.show_page('ExemploPanelControl', {'method': 'listar'})
         self.showMaximized()
 
-    def show_page(self, class_name):
+    def show_page(self, class_name, params=None):
         try:
-            # Carrega dinamicamente o Page Controller da aplicação (Pablo Dall'Oglio style)
             controller_cls = AppLoader.load_app_class(
                 f"app.Control.{class_name}", class_name)
             controller = controller_cls()
-            content = controller.show()  # O Page Controller retorna o HTML
+            # show() da superclasse Page decide qual método chamar
+            content = controller.show(params)
         except Exception as e:
             content = f"<h2>Erro ao carregar página '{class_name}'</h2><pre>{e}</pre>"
         html = load_template(context={"content": content, "class": class_name})
