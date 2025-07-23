@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SpecialtyListForm</class>
+ <widget class="QWidget" name="SpecialtyListForm">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>900</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>800</width>
+    <height>500</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>GEM - Gerenciamento de Especialidades</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../../images/logo_hepp.png</normaloff>../../images/logo_hepp.png</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget {
+    background-color: #f5f5f5;
+    font-family: 'Segoe UI';
+}
+
+QGroupBox {
+    font-weight: bold;
+    font-size: 12px;
+    color: #2F3E46;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    margin-top: 10px;
+    padding-top: 10px;
+    background-color: white;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 10px;
+    padding: 0 8px 0 8px;
+    background-color: white;
+}
+
+QLabel {
+    color: #2F3E46;
+    font-weight: bold;
+    font-size: 11px;
+}
+
+QLineEdit {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 8px;
+    background-color: white;
+    font-size: 11px;
+    selection-background-color: #3D5A80;
+}
+
+QLineEdit:focus {
+    border: 2px solid #3D5A80;
+    background-color: #f8f9ff;
+}
+
+QComboBox {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 8px;
+    background-color: white;
+    font-size: 11px;
+    selection-background-color: #3D5A80;
+}
+
+QComboBox:focus {
+    border: 2px solid #3D5A80;
+}
+
+QComboBox::drop-down {
+    border: none;
+    width: 20px;
+}
+
+QComboBox::down-arrow {
+    image: url();
+    border: 1px solid #3D5A80;
+    width: 8px;
+    height: 8px;
+    background-color: #3D5A80;
+}
+
+QPushButton {
+    background-color: #3D5A80;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-weight: bold;
+    font-size: 11px;
+    min-width: 100px;
+}
+
+QPushButton:hover {
+    background-color: #2E4A66;
+}
+
+QPushButton:pressed {
+    background-color: #1D3557;
+}
+
+QPushButton#btnBuscar {
+    background-color: #17a2b8;
+}
+
+QPushButton#btnBuscar:hover {
+    background-color: #138496;
+}
+
+QPushButton#btnBuscar:pressed {
+    background-color: #0f6674;
+}
+
+QPushButton#btnNovo {
+    background-color: #28a745;
+}
+
+QPushButton#btnNovo:hover {
+    background-color: #218838;
+}
+
+QPushButton#btnNovo:pressed {
+    background-color: #1e7e34;
+}
+
+QPushButton#btnEditar {
+    background-color: #ffc107;
+    color: #212529;
+    min-width: 30px;
+    max-width: 30px;
+    min-height: 30px;
+    max-height: 30px;
+    padding: 5px;
+}
+
+QPushButton#btnEditar:hover {
+    background-color: #e0a800;
+}
+
+QPushButton#btnEditar:pressed {
+    background-color: #d39e00;
+}
+
+QPushButton#btnExcluir {
+    background-color: #dc3545;
+    min-width: 30px;
+    max-width: 30px;
+    min-height: 30px;
+    max-height: 30px;
+    padding: 5px;
+}
+
+QPushButton#btnExcluir:hover {
+    background-color: #c82333;
+}
+
+QPushButton#btnExcluir:pressed {
+    background-color: #bd2130;
+}
+
+QTableWidget {
+    background-color: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    gridline-color: #f0f0f0;
+    selection-background-color: #e3f2fd;
+}
+
+QHeaderView::section {
+    background-color: #3D5A80;
+    color: white;
+    padding: 10px;
+    border: none;
+    font-weight: bold;
+    font-size: 11px;
+}
+
+QTableWidget::item {
+    padding: 8px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+QTableWidget::item:selected {
+    background-color: #e3f2fd;
+    color: #1565c0;
+}
+
+QTableWidget::item:hover {
+    background-color: #f5f5f5;
+}
+
+QLabel#lblContador {
+    background-color: #e9ecef;
+    color: #495057;
+    padding: 8px;
+    border-radius: 6px;
+    font-weight: bold;
+}
+</string>
+  </property>
+  <layout class="QVBoxLayout" name="mainLayout">
+   <property name="spacing">
+    <number>16</number>
+   </property>
+   <property name="leftMargin">
+    <number>20</number>
+   </property>
+   <property name="topMargin">
+    <number>20</number>
+   </property>
+   <property name="rightMargin">
+    <number>20</number>
+   </property>
+   <property name="bottomMargin">
+    <number>20</number>
+   </property>
+   <item>
+    <widget class="QLabel" name="lblTitulo">
+     <property name="text">
+      <string>🩺 Gerenciamento de Especialidades</string>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel {
+    font-size: 18px;
+    font-weight: bold;
+    color: #2F3E46;
+    padding: 10px;
+    background-color: white;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupFiltros">
+     <property name="title">
+      <string>🔍 Filtros de Busca</string>
+     </property>
+     <layout class="QVBoxLayout" name="filtrosLayout">
+      <property name="spacing">
+       <number>12</number>
+      </property>
+      <property name="leftMargin">
+       <number>16</number>
+      </property>
+      <property name="topMargin">
+       <number>16</number>
+      </property>
+      <property name="rightMargin">
+       <number>16</number>
+      </property>
+      <property name="bottomMargin">
+       <number>16</number>
+      </property>
+      <item>
+       <layout class="QHBoxLayout" name="filtrosHorizontalLayout">
+        <property name="spacing">
+         <number>16</number>
+        </property>
+        <item>
+         <layout class="QVBoxLayout" name="filtroNomeLayout">
+          <item>
+           <widget class="QLabel" name="lblFiltroNome">
+            <property name="text">
+             <string>Nome da Especialidade:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="txtFiltroNome">
+            <property name="placeholderText">
+             <string>Digite parte do nome ou nome completo</string>
+            </property>
+            <property name="clearButtonEnabled">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="filtroCodigoLayout">
+          <item>
+           <widget class="QLabel" name="lblFiltroCodigo">
+            <property name="text">
+             <string>Código:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="txtFiltroCodigo">
+            <property name="placeholderText">
+             <string>Digite o código da especialidade</string>
+            </property>
+            <property name="clearButtonEnabled">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="filtroStatusLayout">
+          <item>
+           <widget class="QLabel" name="lblFiltroStatus">
+            <property name="text">
+             <string>Status:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="cmbFiltroStatus">
+            <item>
+             <property name="text">
+              <string>Todos</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Ativo</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Inativo</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_filtros">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="botoesLayout">
+        <property name="spacing">
+         <number>16</number>
+        </property>
+        <item>
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnLimpar">
+          <property name="text">
+           <string>🧹 Limpar</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnBuscar">
+          <property name="text">
+           <string>🔍 Buscar</string>
+          </property>
+          <property name="default">
+           <bool>true</bool>
+          </property>
+          <property name="shortcut">
+           <string>Return</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnNovo">
+          <property name="text">
+           <string>➕ Nova Especialidade</string>
+          </property>
+          <property name="shortcut">
+           <string>Ctrl+N</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="infoLayout">
+     <item>
+      <widget class="QLabel" name="lblContador">
+       <property name="text">
+        <string>📊 Total de especialidades: 0</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QTableWidget" name="tableEspecialidades">
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
+     <property name="selectionBehavior">
+      <enum>QAbstractItemView::SelectRows</enum>
+     </property>
+     <property name="showGrid">
+      <bool>true</bool>
+     </property>
+     <property name="sortingEnabled">
+      <bool>true</bool>
+     </property>
+     <property name="columnCount">
+      <number>5</number>
+     </property>
+     <property name="rowCount">
+      <number>0</number>
+     </property>
+     <column>
+      <property name="text">
+       <string>ID</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Nome</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Código</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Status</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Ações</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>txtFiltroNome</tabstop>
+  <tabstop>txtFiltroCodigo</tabstop>
+  <tabstop>cmbFiltroStatus</tabstop>
+  <tabstop>btnLimpar</tabstop>
+  <tabstop>btnBuscar</tabstop>
+  <tabstop>btnNovo</tabstop>
+  <tabstop>tableEspecialidades</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

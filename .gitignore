@@ -20,21 +20,31 @@ docs/
 
 # Ignorar o ambiente virtual
 .venv/
-
+venv/
+env/
+ENV/
 # Ignorar arquivos temporários
 *.pyc
 __pycache__/
 
 # Ignorar banco de dados local
 gem.db
+*.db
+*.sqlite
+*.sqlite3
+database.db
 
 # Ignorar logs e arquivos de saída
 *.log
 *.out
+logs/
 
 # Ignorar configurações do editor
 .vscode/
 .idea/
+*.swp
+*.swo
+*~
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

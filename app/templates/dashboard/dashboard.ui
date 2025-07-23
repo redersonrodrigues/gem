@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DashboardWindow</class>
+ <widget class="QMainWindow" name="DashboardWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1200</width>
+    <height>800</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dashboard Principal</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+   QMainWindow {
+       background-color: #f5f5f5;
+   }
+   QFrame#cardResumo {
+       background-color: white;
+       border: 1px solid #e0e0e0;
+       border-radius: 8px;
+       padding: 16px;
+       margin: 4px;
+   }
+   QLabel#tituloCard {
+       color: #666;
+       font-size: 12px;
+       font-weight: normal;
+   }
+   QLabel#valorCard {
+       color: #2E4A66;
+       font-size: 24px;
+       font-weight: bold;
+   }
+   </string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QSplitter" name="mainSplitter">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <widget class="QFrame" name="menuLateral">
+       <property name="minimumSize">
+        <size>
+         <width>200</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>250</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">
+        QFrame#menuLateral {
+            background-color: #2F3E46;
+        }
+        QPushButton {
+            background-color: #3D5A80;
+            color: white;
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-weight: bold;
+            text-align: left;
+            border: none;
+        }
+        QPushButton:hover {
+            background-color: #2E4A66;
+        }
+        QPushButton:pressed {
+            background-color: #1D3557;
+        }
+        </string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <layout class="QVBoxLayout" name="menuLayout">
+        <property name="spacing">
+         <number>8</number>
+        </property>
+        <property name="leftMargin">
+         <number>16</number>
+        </property>
+        <property name="topMargin">
+         <number>16</number>
+        </property>
+        <property name="rightMargin">
+         <number>16</number>
+        </property>
+        <property name="bottomMargin">
+         <number>16</number>
+        </property>
+        <item>
+         <widget class="QPushButton" name="btnHome">
+          <property name="text">
+           <string>🏠 Home</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnEscalas">
+          <property name="text">
+           <string>📅 Escalas</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnMedicos">
+          <property name="text">
+           <string>👨‍⚕️ Médicos</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnPlantoes">
+          <property name="text">
+           <string>🏥 Plantões</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnHospitais">
+          <property name="text">
+           <string>🏢 Hospitais</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnRelatorios">
+          <property name="text">
+           <string>📊 Relatórios</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="conteudoPrincipal">
+       <layout class="QVBoxLayout" name="conteudoLayout">
+        <property name="spacing">
+         <number>16</number>
+        </property>
+        <property name="leftMargin">
+         <number>16</number>
+        </property>
+        <property name="topMargin">
+         <number>16</number>
+        </property>
+        <property name="rightMargin">
+         <number>16</number>
+        </property>
+        <property name="bottomMargin">
+         <number>16</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="tituloPage">
+          <property name="styleSheet">
+           <string notr="true">
+           font-size: 24px;
+           font-weight: bold;
+           color: #2F3E46;
+           margin-bottom: 16px;
+           </string>
+          </property>
+          <property name="text">
+           <string>Dashboard - Gerenciamento de Escalas Médicas</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="cardsLayout">
+          <property name="spacing">
+           <number>16</number>
+          </property>
+          <item>
+           <widget class="QFrame" name="cardResumo">
+            <property name="minimumSize">
+             <size>
+              <width>150</width>
+              <height>100</height>
+             </size>
+            </property>
+            <layout class="QVBoxLayout" name="cardLayout1">
+             <item>
+              <widget class="QLabel" name="tituloCard">
+               <property name="text">
+                <string>Total de Escalas</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="valorCard">
+               <property name="text">
+                <string>12</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="cardResumo">
+            <property name="minimumSize">
+             <size>
+              <width>150</width>
+              <height>100</height>
+             </size>
+            </property>
+            <layout class="QVBoxLayout" name="cardLayout2">
+             <item>
+              <widget class="QLabel" name="tituloCard">
+               <property name="text">
+                <string>Médicos Ativos</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="valorCard">
+               <property name="text">
+                <string>5</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="cardResumo">
+            <property name="minimumSize">
+             <size>
+              <width>150</width>
+              <height>100</height>
+             </size>
+            </property>
+            <layout class="QVBoxLayout" name="cardLayout3">
+             <item>
+              <widget class="QLabel" name="tituloCard">
+               <property name="text">
+                <string>Plantões do Dia</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="valorCard">
+               <property name="text">
+                <string>3</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QTableWidget" name="tabelaEscalas">
+          <property name="styleSheet">
+           <string notr="true">
+           QTableWidget {
+               background-color: white;
+               border: 1px solid #e0e0e0;
+               border-radius: 8px;
+               gridline-color: #f0f0f0;
+           }
+           QHeaderView::section {
+               background-color: #3D5A80;
+               color: white;
+               padding: 8px;
+               border: none;
+               font-weight: bold;
+           }
+           QTableWidget::item {
+               padding: 8px;
+               border-bottom: 1px solid #f0f0f0;
+           }
+           QTableWidget::item:selected {
+               background-color: #e3f2fd;
+           }
+           </string>
+          </property>
+          <column>
+           <property name="text">
+            <string>Data</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Médico</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Hospital</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Turno</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Status</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="botoesLayout">
+          <property name="spacing">
+           <number>16</number>
+          </property>
+          <item>
+           <widget class="QPushButton" name="btnNovaEscala">
+            <property name="styleSheet">
+             <string notr="true">
+             QPushButton {
+                 background-color: #28a745;
+                 color: white;
+                 border-radius: 8px;
+                 padding: 10px 20px;
+                 font-weight: bold;
+                 border: none;
+             }
+             QPushButton:hover {
+                 background-color: #218838;
+             }
+             QPushButton:pressed {
+                 background-color: #1e7e34;
+             }
+             </string>
+            </property>
+            <property name="text">
+             <string>➕ Nova Escala</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btnExportarPDF">
+            <property name="styleSheet">
+             <string notr="true">
+             QPushButton {
+                 background-color: #17a2b8;
+                 color: white;
+                 border-radius: 8px;
+                 padding: 10px 20px;
+                 font-weight: bold;
+                 border: none;
+             }
+             QPushButton:hover {
+                 background-color: #138496;
+             }
+             QPushButton:pressed {
+                 background-color: #0f6674;
+             }
+             </string>
+            </property>
+            <property name="text">
+             <string>📄 Exportar PDF</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -1,0 +1,847 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>OnCallForm</class>
+ <widget class="QWidget" name="OnCallForm">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1000</width>
+    <height>800</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>900</width>
+    <height>700</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>GEM - Cadastro de Escala de Sobreaviso</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../../../images/logo_hepp.png</normaloff>../../../images/logo_hepp.png</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget {
+    background-color: #f5f5f5;
+    font-family: 'Segoe UI';
+}
+
+QGroupBox {
+    font-weight: bold;
+    font-size: 12px;
+    color: #2F3E46;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    margin-top: 10px;
+    padding-top: 10px;
+    background-color: white;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 10px;
+    padding: 0 8px 0 8px;
+    background-color: white;
+}
+
+QLabel {
+    color: #2F3E46;
+    font-weight: bold;
+    font-size: 11px;
+}
+
+QLabel#lblObrigatorio {
+    color: #dc3545;
+    font-size: 10px;
+    font-style: italic;
+}
+
+QLineEdit {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 8px;
+    background-color: white;
+    font-size: 11px;
+    selection-background-color: #3D5A80;
+}
+
+QLineEdit:focus {
+    border: 2px solid #3D5A80;
+    background-color: #f8f9ff;
+}
+
+QTextEdit {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 8px;
+    background-color: white;
+    font-size: 11px;
+    selection-background-color: #3D5A80;
+}
+
+QTextEdit:focus {
+    border: 2px solid #3D5A80;
+    background-color: #f8f9ff;
+}
+
+QDateEdit, QDateTimeEdit {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 8px;
+    background-color: white;
+    font-size: 11px;
+    selection-background-color: #3D5A80;
+}
+
+QDateEdit:focus, QDateTimeEdit:focus {
+    border: 2px solid #3D5A80;
+    background-color: #f8f9ff;
+}
+
+QComboBox {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 8px;
+    background-color: white;
+    font-size: 11px;
+    selection-background-color: #3D5A80;
+}
+
+QComboBox:focus {
+    border: 2px solid #3D5A80;
+}
+
+QComboBox::drop-down {
+    border: none;
+    width: 20px;
+}
+
+QComboBox::down-arrow {
+    image: url();
+    border: 1px solid #3D5A80;
+    width: 8px;
+    height: 8px;
+    background-color: #3D5A80;
+}
+
+QPushButton {
+    background-color: #3D5A80;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-weight: bold;
+    font-size: 11px;
+    min-width: 100px;
+}
+
+QPushButton:hover {
+    background-color: #2E4A66;
+}
+
+QPushButton:pressed {
+    background-color: #1D3557;
+}
+
+QPushButton#btnAdicionar {
+    background-color: #28a745;
+}
+
+QPushButton#btnAdicionar:hover {
+    background-color: #218838;
+}
+
+QPushButton#btnAdicionar:pressed {
+    background-color: #1e7e34;
+}
+
+QPushButton#btnRemover {
+    background-color: #dc3545;
+    min-width: 30px;
+    max-width: 30px;
+    min-height: 30px;
+    max-height: 30px;
+    padding: 5px;
+}
+
+QPushButton#btnRemover:hover {
+    background-color: #c82333;
+}
+
+QPushButton#btnRemover:pressed {
+    background-color: #bd2130;
+}
+
+QPushButton#btnSalvar {
+    background-color: #007bff;
+    min-width: 120px;
+}
+
+QPushButton#btnSalvar:hover {
+    background-color: #0056b3;
+}
+
+QPushButton#btnSalvar:pressed {
+    background-color: #004085;
+}
+
+QPushButton#btnCancelar {
+    background-color: #6c757d;
+}
+
+QPushButton#btnCancelar:hover {
+    background-color: #545b62;
+}
+
+QPushButton#btnCancelar:pressed {
+    background-color: #3d4142;
+}
+
+QTableWidget {
+    background-color: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    gridline-color: #f0f0f0;
+    selection-background-color: #e3f2fd;
+}
+
+QHeaderView::section {
+    background-color: #3D5A80;
+    color: white;
+    padding: 10px;
+    border: none;
+    font-weight: bold;
+    font-size: 11px;
+}
+
+QTableWidget::item {
+    padding: 8px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+QTableWidget::item:selected {
+    background-color: #e3f2fd;
+    color: #1565c0;
+}
+
+QTableWidget::item:hover {
+    background-color: #f5f5f5;
+}
+</string>
+  </property>
+  <layout class="QVBoxLayout" name="mainLayout">
+   <property name="spacing">
+    <number>16</number>
+   </property>
+   <property name="leftMargin">
+    <number>20</number>
+   </property>
+   <property name="topMargin">
+    <number>20</number>
+   </property>
+   <property name="rightMargin">
+    <number>20</number>
+   </property>
+   <property name="bottomMargin">
+    <number>20</number>
+   </property>
+   <item>
+    <widget class="QLabel" name="lblTitulo">
+     <property name="styleSheet">
+      <string notr="true">QLabel {
+    font-size: 18px;
+    font-weight: bold;
+    color: #2F3E46;
+    padding: 10px;
+    background-color: white;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}</string>
+     </property>
+     <property name="text">
+      <string>🏥 Cadastro de Escala de Sobreaviso</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QScrollArea" name="scrollArea">
+     <property name="styleSheet">
+      <string notr="true">QScrollArea {
+    border: none;
+    background-color: transparent;
+}</string>
+     </property>
+     <property name="widgetResizable">
+      <bool>true</bool>
+     </property>
+     <widget class="QWidget" name="scrollAreaWidgetContents">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>-213</y>
+        <width>943</width>
+        <height>857</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="scrollLayout">
+       <property name="spacing">
+        <number>16</number>
+       </property>
+       <item>
+        <widget class="QGroupBox" name="groupDadosEscala">
+         <property name="title">
+          <string>📋 Dados Gerais da Escala</string>
+         </property>
+         <layout class="QVBoxLayout" name="dadosEscalaLayout">
+          <property name="spacing">
+           <number>12</number>
+          </property>
+          <property name="leftMargin">
+           <number>16</number>
+          </property>
+          <property name="topMargin">
+           <number>16</number>
+          </property>
+          <property name="rightMargin">
+           <number>16</number>
+          </property>
+          <property name="bottomMargin">
+           <number>16</number>
+          </property>
+          <item>
+           <layout class="QHBoxLayout" name="linha1EscalaLayout">
+            <property name="spacing">
+             <number>16</number>
+            </property>
+            <item>
+             <layout class="QVBoxLayout" name="nomeEscalaLayout">
+              <item>
+               <widget class="QLabel" name="lblNomeEscala">
+                <property name="text">
+                 <string>Nome da Escala: *</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="txtNomeEscala">
+                <property name="placeholderText">
+                 <string>Digite o nome da escala de sobreaviso</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="statusEscalaLayout">
+              <item>
+               <widget class="QLabel" name="lblStatusEscala">
+                <property name="text">
+                 <string>Status: *</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QComboBox" name="cmbStatusEscala">
+                <item>
+                 <property name="text">
+                  <string>Agendado</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Em Andamento</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Finalizado</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Cancelado</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="linha2EscalaLayout">
+            <property name="spacing">
+             <number>16</number>
+            </property>
+            <item>
+             <layout class="QVBoxLayout" name="periodoInicioLayout">
+              <item>
+               <widget class="QLabel" name="lblPeriodoInicio">
+                <property name="text">
+                 <string>Período Início: *</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QDateEdit" name="dtePeriodoInicio">
+                <property name="displayFormat">
+                 <string>dd/MM/yyyy</string>
+                </property>
+                <property name="calendarPopup">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="periodoFimLayout">
+              <item>
+               <widget class="QLabel" name="lblPeriodoFim">
+                <property name="text">
+                 <string>Período Fim: *</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QDateEdit" name="dtePeriodoFim">
+                <property name="displayFormat">
+                 <string>dd/MM/yyyy</string>
+                </property>
+                <property name="calendarPopup">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="criadoPorLayout">
+              <item>
+               <widget class="QLabel" name="lblCriadoPor">
+                <property name="text">
+                 <string>Criado Por: *</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QComboBox" name="cmbCriadoPor">
+                <item>
+                 <property name="text">
+                  <string>Selecione o usuário</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupAdicionarSobreaviso">
+         <property name="title">
+          <string>➕ Adicionar Sobreaviso</string>
+         </property>
+         <layout class="QVBoxLayout" name="adicionarSobreavisoLayout">
+          <property name="spacing">
+           <number>12</number>
+          </property>
+          <property name="leftMargin">
+           <number>16</number>
+          </property>
+          <property name="topMargin">
+           <number>16</number>
+          </property>
+          <property name="rightMargin">
+           <number>16</number>
+          </property>
+          <property name="bottomMargin">
+           <number>16</number>
+          </property>
+          <item>
+           <layout class="QHBoxLayout" name="linha1SobreavisoLayout">
+            <property name="spacing">
+             <number>16</number>
+            </property>
+            <item>
+             <layout class="QVBoxLayout" name="medicoSobreavisoLayout">
+              <item>
+               <widget class="QLabel" name="lblMedicoSobreaviso">
+                <property name="text">
+                 <string>Médico: *</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QComboBox" name="cmbMedicoSobreaviso">
+                <item>
+                 <property name="text">
+                  <string>Selecione o médico</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="especialidadeLayout">
+              <item>
+               <widget class="QLabel" name="lblEspecialidade">
+                <property name="text">
+                 <string>Especialidade: *</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QComboBox" name="cmbEspecialidade">
+                <item>
+                 <property name="text">
+                  <string>Selecione a especialidade</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="linha2SobreavisoLayout">
+            <property name="spacing">
+             <number>16</number>
+            </property>
+            <item>
+             <layout class="QVBoxLayout" name="dataInicioSobreavisoLayout">
+              <item>
+               <widget class="QLabel" name="lblDataInicioSobreaviso">
+                <property name="text">
+                 <string>Data Início: *</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QDateTimeEdit" name="dteDataInicioSobreaviso">
+                <property name="displayFormat">
+                 <string>dd/MM/yyyy hh:mm</string>
+                </property>
+                <property name="calendarPopup">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="dataFimSobreavisoLayout">
+              <item>
+               <widget class="QLabel" name="lblDataFimSobreaviso">
+                <property name="text">
+                 <string>Data Fim: *</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QDateTimeEdit" name="dteDataFimSobreaviso">
+                <property name="displayFormat">
+                 <string>dd/MM/yyyy hh:mm</string>
+                </property>
+                <property name="calendarPopup">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="linha3SobreavisoLayout">
+            <property name="spacing">
+             <number>16</number>
+            </property>
+            <item>
+             <layout class="QVBoxLayout" name="statusSobreavisoLayout">
+              <item>
+               <widget class="QLabel" name="lblStatusSobreaviso">
+                <property name="text">
+                 <string>Status: *</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QComboBox" name="cmbStatusSobreaviso">
+                <item>
+                 <property name="text">
+                  <string>Agendado</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Em Andamento</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Finalizado</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Cancelado</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <spacer name="horizontalSpacerStatus">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="botaoAdicionarLayout">
+            <item>
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnLimparCampos">
+              <property name="text">
+               <string>🧹 Limpar</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnAdicionar">
+              <property name="text">
+               <string>➕ Adicionar à Lista</string>
+              </property>
+              <property name="shortcut">
+               <string>Ctrl+Return</string>
+              </property>
+              <property name="default">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupListaSobreavisos">
+         <property name="title">
+          <string>📋 Lista de Sobreavisos Cadastrados</string>
+         </property>
+         <layout class="QVBoxLayout" name="listaSobreavisosLayout">
+          <property name="spacing">
+           <number>12</number>
+          </property>
+          <property name="leftMargin">
+           <number>16</number>
+          </property>
+          <property name="topMargin">
+           <number>16</number>
+          </property>
+          <property name="rightMargin">
+           <number>16</number>
+          </property>
+          <property name="bottomMargin">
+           <number>16</number>
+          </property>
+          <item>
+           <layout class="QHBoxLayout" name="infoListaLayout">
+            <item>
+             <widget class="QLabel" name="lblContadorSobreavisos">
+              <property name="styleSheet">
+               <string notr="true">QLabel {
+    background-color: #e9ecef;
+    color: #495057;
+    padding: 8px;
+    border-radius: 6px;
+    font-weight: bold;
+}</string>
+              </property>
+              <property name="text">
+               <string>📊 Total de sobreavisos: 0</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_2">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QTableWidget" name="tableSobreavisos">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>200</height>
+             </size>
+            </property>
+            <property name="alternatingRowColors">
+             <bool>true</bool>
+            </property>
+            <property name="selectionBehavior">
+             <enum>QAbstractItemView::SelectRows</enum>
+            </property>
+            <property name="showGrid">
+             <bool>true</bool>
+            </property>
+            <property name="sortingEnabled">
+             <bool>true</bool>
+            </property>
+            <property name="rowCount">
+             <number>0</number>
+            </property>
+            <property name="columnCount">
+             <number>6</number>
+            </property>
+            <column>
+             <property name="text">
+              <string>Médico</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Especialidade</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Data/Hora Início</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Data/Hora Fim</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Status</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Ações</string>
+             </property>
+            </column>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lblObrigatorio">
+            <property name="text">
+             <string>* Campos obrigatórios</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="botoesFinaisLayout">
+     <property name="spacing">
+      <number>16</number>
+     </property>
+     <item>
+      <spacer name="horizontalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnCancelar">
+       <property name="text">
+        <string>❌ Cancelar</string>
+       </property>
+       <property name="shortcut">
+        <string>Esc</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnSalvar">
+       <property name="text">
+        <string>💾 Salvar Escala Completa</string>
+       </property>
+       <property name="shortcut">
+        <string>Ctrl+S</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>txtNomeEscala</tabstop>
+  <tabstop>cmbStatusEscala</tabstop>
+  <tabstop>dtePeriodoInicio</tabstop>
+  <tabstop>dtePeriodoFim</tabstop>
+  <tabstop>cmbCriadoPor</tabstop>
+  <tabstop>cmbMedicoSobreaviso</tabstop>
+  <tabstop>cmbEspecialidade</tabstop>
+  <tabstop>dteDataInicioSobreaviso</tabstop>
+  <tabstop>dteDataFimSobreaviso</tabstop>
+  <tabstop>btnLimparCampos</tabstop>
+  <tabstop>btnAdicionar</tabstop>
+  <tabstop>tableSobreavisos</tabstop>
+  <tabstop>btnCancelar</tabstop>
+  <tabstop>btnSalvar</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

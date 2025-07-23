@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CompanyForm</class>
+ <widget class="QDialog" name="CompanyForm">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>500</width>
+    <height>350</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>500</width>
+    <height>350</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>GEM - Cadastro de Empresa</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../../images/logo_hepp.png</normaloff>../../images/logo_hepp.png</iconset>
+  </property>
+  <property name="modal">
+   <bool>true</bool>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QDialog {
+    background-color: #f5f5f5;
+    font-family: 'Segoe UI';
+}
+
+QGroupBox {
+    font-weight: bold;
+    font-size: 12px;
+    color: #2F3E46;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    margin-top: 10px;
+    padding-top: 10px;
+    background-color: white;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 10px;
+    padding: 0 8px 0 8px;
+    background-color: white;
+}
+
+QLabel {
+    color: #2F3E46;
+    font-weight: bold;
+    font-size: 11px;
+}
+
+QLineEdit {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 8px;
+    background-color: white;
+    font-size: 11px;
+    selection-background-color: #3D5A80;
+}
+
+QLineEdit:focus {
+    border: 2px solid #3D5A80;
+    background-color: #f8f9ff;
+}
+
+QComboBox {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 8px;
+    background-color: white;
+    font-size: 11px;
+    selection-background-color: #3D5A80;
+}
+
+QComboBox:focus {
+    border: 2px solid #3D5A80;
+}
+
+QComboBox::drop-down {
+    border: none;
+    width: 20px;
+}
+
+QComboBox::down-arrow {
+    image: url();
+    border: 1px solid #3D5A80;
+    width: 8px;
+    height: 8px;
+    background-color: #3D5A80;
+}
+
+QPushButton {
+    background-color: #3D5A80;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-weight: bold;
+    font-size: 11px;
+    min-width: 100px;
+}
+
+QPushButton:hover {
+    background-color: #2E4A66;
+}
+
+QPushButton:pressed {
+    background-color: #1D3557;
+}
+
+QPushButton#btnSalvar {
+    background-color: #28a745;
+}
+
+QPushButton#btnSalvar:hover {
+    background-color: #218838;
+}
+
+QPushButton#btnSalvar:pressed {
+    background-color: #1e7e34;
+}
+
+QPushButton#btnCancelar {
+    background-color: #6c757d;
+}
+
+QPushButton#btnCancelar:hover {
+    background-color: #5a6268;
+}
+
+QPushButton#btnCancelar:pressed {
+    background-color: #4e555b;
+}
+
+QLabel#lblMensagem {
+    padding: 8px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+QLabel#lblMensagem[tipo="sucesso"] {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+QLabel#lblMensagem[tipo="erro"] {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+QLabel#lblMensagem[tipo="aviso"] {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeaa7;
+}
+</string>
+  </property>
+  <layout class="QVBoxLayout" name="mainLayout">
+   <property name="spacing">
+    <number>16</number>
+   </property>
+   <property name="leftMargin">
+    <number>20</number>
+   </property>
+   <property name="topMargin">
+    <number>20</number>
+   </property>
+   <property name="rightMargin">
+    <number>20</number>
+   </property>
+   <property name="bottomMargin">
+    <number>20</number>
+   </property>
+   <item>
+    <widget class="QLabel" name="lblTitulo">
+     <property name="text">
+      <string>🏢 Cadastro de Empresa</string>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel {
+    font-size: 18px;
+    font-weight: bold;
+    color: #2F3E46;
+    padding: 10px;
+    background-color: white;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="lblMensagem">
+     <property name="objectName">
+      <string>lblMensagem</string>
+     </property>
+     <property name="text">
+      <string></string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="visible">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupDadosEmpresa">
+     <property name="title">
+      <string>📋 Dados da Empresa</string>
+     </property>
+     <layout class="QFormLayout" name="formLayoutEmpresa">
+      <property name="horizontalSpacing">
+       <number>16</number>
+      </property>
+      <property name="verticalSpacing">
+       <number>12</number>
+      </property>
+      <property name="leftMargin">
+       <number>16</number>
+      </property>
+      <property name="topMargin">
+       <number>16</number>
+      </property>
+      <property name="rightMargin">
+       <number>16</number>
+      </property>
+      <property name="bottomMargin">
+       <number>16</number>
+      </property>
+      <item row="0" column="0">
+       <widget class="QLabel" name="lblNome">
+        <property name="text">
+         <string>Nome da Empresa: *</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="txtNome">
+        <property name="placeholderText">
+         <string>Digite o nome da empresa</string>
+        </property>
+        <property name="maxLength">
+         <number>150</number>
+        </property>
+        <property name="clearButtonEnabled">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="lblCnpj">
+        <property name="text">
+         <string>CNPJ: *</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="txtCnpj">
+        <property name="placeholderText">
+         <string>00.000.000/0000-00</string>
+        </property>
+        <property name="maxLength">
+         <number>18</number>
+        </property>
+        <property name="clearButtonEnabled">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="lblActive">
+        <property name="text">
+         <string>Ativo:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QComboBox" name="cmbActive">
+        <property name="editable">
+         <bool>false</bool>
+        </property>
+        <property name="currentIndex">
+         <number>1</number>
+        </property>
+        <item>
+         <property name="text">
+          <string>Não</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Sim</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="buttonsLayout">
+     <property name="spacing">
+      <number>16</number>
+     </property>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnCancelar">
+       <property name="text">
+        <string>❌ Cancelar</string>
+       </property>
+       <property name="shortcut">
+        <string>Esc</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnSalvar">
+       <property name="text">
+        <string>💾 Salvar</string>
+       </property>
+       <property name="default">
+        <bool>true</bool>
+       </property>
+       <property name="shortcut">
+        <string>Ctrl+S</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>txtNome</tabstop>
+  <tabstop>txtCnpj</tabstop>
+  <tabstop>cmbActive</tabstop>
+  <tabstop>btnSalvar</tabstop>
+  <tabstop>btnCancelar</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>
