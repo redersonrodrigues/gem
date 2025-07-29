@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>LogAdminList</class>
+ <widget class="QWidget" name="LogAdminList">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>952</width>
+    <height>577</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Logs e Auditoria</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+    QWidget {
+        background-color: #fff;
+        font-family: 'Segoe UI';
+    }
+    QLabel#titulo {
+        font-size: 20px;
+        font-weight: bold;
+        color: #2F3E46;
+        padding: 12px;
+        background-color: white;
+        border-radius: 8px;
+        border: 1px solid #e0e0e0;
+        margin-bottom: 16px;
+    }
+    QPushButton {
+        background-color: #3D5A80;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 20px;
+        font-weight: bold;
+        font-size: 12px;
+        min-width: 100px;
+    }
+    QPushButton:hover {
+        background-color: #2E4A66;
+    }
+    QPushButton:pressed {
+        background-color: #1D3557;
+    }
+    QTableWidget {
+        background-color: white;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        gridline-color: #f0f0f0;
+    }
+    QHeaderView::section {
+        background-color: #3D5A80;
+        color: white;
+        padding: 8px;
+        border: none;
+        font-weight: bold;
+    }
+    QTableWidget::item {
+        padding: 8px;
+        border-bottom: 1px solid #f0f0f0;
+    }
+    QTableWidget::item:selected {
+        background-color: #e3f2fd;
+        color: #1565c0;
+    }
+   </string>
+  </property>
+  <layout class="QVBoxLayout" name="mainLayout">
+   <property name="spacing">
+    <number>16</number>
+   </property>
+   <property name="leftMargin">
+    <number>8</number>
+   </property>
+   <property name="topMargin">
+    <number>8</number>
+   </property>
+   <property name="rightMargin">
+    <number>8</number>
+   </property>
+   <property name="bottomMargin">
+    <number>8</number>
+   </property>
+   <item>
+    <widget class="QLabel" name="titulo">
+     <property name="text">
+      <string>📝 Logs e Auditoria</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="filtrosLayout">
+     <property name="spacing">
+      <number>12</number>
+     </property>
+     <item>
+      <widget class="QLineEdit" name="txtFiltroUsuario">
+       <property name="placeholderText">
+        <string>Usuário</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="txtFiltroAcao">
+       <property name="placeholderText">
+        <string>Ação</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="txtFiltroTabela">
+       <property name="placeholderText">
+        <string>Tabela</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDateEdit" name="dateFiltroData">
+       <property name="displayFormat">
+        <string>dd/MM/yyyy</string>
+       </property>
+       <property name="calendarPopup">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnBuscar">
+       <property name="text">
+        <string>🔍 Buscar</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnExportar">
+       <property name="text">
+        <string>📤 Exportar</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QTableWidget" name="tableLogs">
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
+     <property name="selectionBehavior">
+      <enum>QAbstractItemView::SelectRows</enum>
+     </property>
+     <property name="showGrid">
+      <bool>true</bool>
+     </property>
+     <property name="sortingEnabled">
+      <bool>true</bool>
+     </property>
+     <property name="rowCount">
+      <number>0</number>
+     </property>
+     <property name="columnCount">
+      <number>9</number>
+     </property>
+     <column>
+      <property name="text">
+       <string>Data/Hora</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Usuário</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Ação</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Tabela</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Registro</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Resumo</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>IP</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Justificativa</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Detalhes</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="btnVerDetalhes">
+     <property name="text">
+      <string>Ver Detalhes do Log Selecionado</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

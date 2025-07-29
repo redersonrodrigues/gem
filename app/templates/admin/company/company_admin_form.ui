@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>CompanyForm</class>
- <widget class="QDialog" name="CompanyForm">
+ <class>CompanyAdminForm</class>
+ <widget class="QDialog" name="CompanyAdminForm">
   <property name="geometry">
    <rect>
     <x>0</x>

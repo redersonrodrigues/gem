@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>SpecialtyForm</class>
- <widget class="QDialog" name="SpecialtyForm">
+ <class>HospitalAdminForm</class>
+ <widget class="QDialog" name="HospitalAdminForm">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -17,7 +17,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>GEM - Cadastro de Especialidade</string>
+   <string>GEM - Cadastro de Hospital</string>
   </property>
   <property name="windowIcon">
    <iconset>
@@ -198,7 +198,7 @@ QLabel#lblMensagem[tipo="aviso"] {
    <item>
     <widget class="QLabel" name="lblTitulo">
      <property name="text">
-      <string>🩺 Cadastro de Especialidade</string>
+      <string>🏥 Cadastro de Hospital</string>
      </property>
      <property name="styleSheet">
       <string notr="true">QLabel {
@@ -233,11 +233,11 @@ QLabel#lblMensagem[tipo="aviso"] {
     </widget>
    </item>
    <item>
-    <widget class="QGroupBox" name="groupDadosEspecialidade">
+    <widget class="QGroupBox" name="groupDadosHospital">
      <property name="title">
-      <string>📋 Dados da Especialidade</string>
+      <string>🏥 Dados do Hospital</string>
      </property>
-     <layout class="QFormLayout" name="formLayoutEspecialidade">
+     <layout class="QFormLayout" name="formLayoutHospital">
       <property name="horizontalSpacing">
        <number>16</number>
       </property>
@@ -259,17 +259,17 @@ QLabel#lblMensagem[tipo="aviso"] {
       <item row="0" column="0">
        <widget class="QLabel" name="lblNome">
         <property name="text">
-         <string>Nome da Especialidade: *</string>
+         <string>Nome do Hospital: *</string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
        <widget class="QLineEdit" name="txtNome">
         <property name="placeholderText">
-         <string>Ex: Anestesiologia, Cardiologia, etc.</string>
+         <string>Digite o nome do hospital</string>
         </property>
         <property name="maxLength">
-         <number>100</number>
+         <number>200</number>
         </property>
         <property name="clearButtonEnabled">
          <bool>true</bool>
@@ -277,37 +277,14 @@ QLabel#lblMensagem[tipo="aviso"] {
        </widget>
       </item>
       <item row="1" column="0">
-       <widget class="QLabel" name="lblCodigo">
+       <widget class="QLabel" name="lblEndereco">
         <property name="text">
-         <string>Código: *</string>
+         <string>Endereço: *</string>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QLineEdit" name="txtCodigo">
-        <property name="placeholderText">
-         <string>Ex: ANEST, CARDIO, CIRGER</string>
-        </property>
-        <property name="maxLength">
-         <number>10</number>
-        </property>
-        <property name="clearButtonEnabled">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="lblDescricao">
-        <property name="text">
-         <string>Descrição:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QTextEdit" name="txtDescricao">
+       <widget class="QTextEdit" name="txtEndereco">
         <property name="maximumSize">
          <size>
           <width>16777215</width>
@@ -315,35 +292,28 @@ QLabel#lblMensagem[tipo="aviso"] {
          </size>
         </property>
         <property name="placeholderText">
-         <string>Descrição detalhada da especialidade (opcional)</string>
+         <string>Digite o endereço completo do hospital</string>
         </property>
        </widget>
       </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="lblStatus">
+      <item row="2" column="0">
+       <widget class="QLabel" name="lblTelefone">
         <property name="text">
-         <string>Status:</string>
+         <string>Telefone: *</string>
         </property>
        </widget>
       </item>
-      <item row="3" column="1">
-       <widget class="QComboBox" name="cmbStatus">
-        <property name="editable">
-         <bool>false</bool>
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="txtTelefone">
+        <property name="placeholderText">
+         <string>(00) 0000-0000 ou (00) 00000-0000</string>
         </property>
-        <property name="currentIndex">
-         <number>1</number>
+        <property name="maxLength">
+         <number>15</number>
         </property>
-        <item>
-         <property name="text">
-          <string>Inativo</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Ativo</string>
-         </property>
-        </item>
+        <property name="clearButtonEnabled">
+         <bool>true</bool>
+        </property>
        </widget>
       </item>
      </layout>
@@ -409,9 +379,8 @@ QLabel#lblMensagem[tipo="aviso"] {
  </widget>
  <tabstops>
   <tabstop>txtNome</tabstop>
-  <tabstop>txtCodigo</tabstop>
-  <tabstop>txtDescricao</tabstop>
-  <tabstop>cmbStatus</tabstop>
+  <tabstop>txtEndereco</tabstop>
+  <tabstop>txtTelefone</tabstop>
   <tabstop>btnSalvar</tabstop>
   <tabstop>btnCancelar</tabstop>
  </tabstops>

@@ -40,3 +40,6 @@ sphinx==7.3.7
 black==24.4.2
 flake8==7.1.0
 mypy==1.10.1
+
+# Migrações de Banco de Dados
+Alembic==1.13.1

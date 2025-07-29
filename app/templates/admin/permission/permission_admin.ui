@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PermissionAdmin</class>
+ <widget class="QWidget" name="PermissionAdmin">
+  <property name="windowTitle">
+   <string>Gestão de Permissões</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+    QWidget {
+        background-color: #fff;
+        font-family: 'Segoe UI';
+    }
+    QLabel#titulo {
+        font-size: 20px;
+        font-weight: bold;
+        color: #2F3E46;
+        padding: 12px;
+        background-color: white;
+        border-radius: 8px;
+        border: 1px solid #e0e0e0;
+        margin-bottom: 16px;
+    }
+    QGroupBox {
+        font-weight: bold;
+        font-size: 12px;
+        color: #2F3E46;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        margin-top: 10px;
+        padding-top: 10px;
+        background-color: white;
+    }
+    QGroupBox::title {
+        subcontrol-origin: margin;
+        left: 10px;
+        padding: 0 8px 0 8px;
+        background-color: white;
+    }
+    QPushButton {
+        background-color: #3D5A80;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 20px;
+        font-weight: bold;
+        font-size: 12px;
+        min-width: 100px;
+    }
+    QPushButton:hover {
+        background-color: #2E4A66;
+    }
+    QPushButton:pressed {
+        background-color: #1D3557;
+    }
+    QTableWidget {
+        background-color: white;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        gridline-color: #f0f0f0;
+    }
+    QHeaderView::section {
+        background-color: #3D5A80;
+        color: white;
+        padding: 8px;
+        border: none;
+        font-weight: bold;
+    }
+    QTableWidget::item {
+        padding: 8px;
+        border-bottom: 1px solid #f0f0f0;
+    }
+    QTableWidget::item:selected {
+        background-color: #e3f2fd;
+        color: #1565c0;
+    }
+   </string>
+  </property>
+  <layout class="QVBoxLayout" name="mainLayout">
+   <property name="spacing">
+    <number>16</number>
+   </property>
+   <property name="leftMargin">
+    <number>8</number>
+   </property>
+   <property name="topMargin">
+    <number>8</number>
+   </property>
+   <property name="rightMargin">
+    <number>8</number>
+   </property>
+   <property name="bottomMargin">
+    <number>8</number>
+   </property>
+   <item>
+    <widget class="QLabel" name="titulo">
+     <property name="text">
+      <string>🔑 Gestão de Permissões</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="usuarioLayout">
+     <item>
+      <widget class="QLabel" name="lblUsuario">
+       <property name="text">
+        <string>Usuário:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="cmbUsuario"/>
+     </item>
+     <item>
+      <spacer name="spacerUsuario">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QTableWidget" name="tablePermissoes">
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
+     <property name="selectionBehavior">
+      <enum>QAbstractItemView::SelectRows</enum>
+     </property>
+     <property name="showGrid">
+      <bool>true</bool>
+     </property>
+     <property name="sortingEnabled">
+      <bool>false</bool>
+     </property>
+     <property name="rowCount">
+      <number>0</number>
+     </property>
+     <property name="columnCount">
+      <number>4</number>
+     </property>
+     <column>
+      <property name="text">
+       <string>Função</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Usar/Visualizar</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Cadastrar</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Alterar</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupJustificativa">
+     <property name="title">
+      <string>Justificativa para alteração</string>
+     </property>
+     <layout class="QVBoxLayout" name="justificativaLayout">
+      <item>
+       <widget class="QTextEdit" name="txtJustificativa">
+        <property name="placeholderText">
+         <string>Descreva o motivo da alteração das permissões (obrigatório)...</string>
+        </property>
+        <property name="maximumHeight">
+         <number>60</number>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="botoesAcoesLayout">
+     <item>
+      <widget class="QPushButton" name="btnRestaurarPadrao">
+       <property name="text">
+        <string>Restaurar Permissões Padrão</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="spacerAcoes">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnSalvarPermissoes">
+       <property name="text">
+        <string>💾 Salvar Permissões</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QPushButton" name="btnHistoricoPermissoes">
+     <property name="text">
+      <string>Ver Histórico de Permissões</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

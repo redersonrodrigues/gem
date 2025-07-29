@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>UserAdminForm</class>
+ <widget class="QWidget" name="UserAdminForm">
+  <property name="windowTitle">
+   <string>Cadastro/Edição de Usuário</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+    QWidget {
+        background-color: #fff;
+        font-family: 'Segoe UI';
+    }
+    QLabel#titulo {
+        font-size: 20px;
+        font-weight: bold;
+        color: #2F3E46;
+        padding: 12px;
+        background-color: white;
+        border-radius: 8px;
+        border: 1px solid #e0e0e0;
+        margin-bottom: 16px;
+    }
+    QGroupBox {
+        font-weight: bold;
+        font-size: 12px;
+        color: #2F3E46;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        margin-top: 10px;
+        padding-top: 10px;
+        background-color: white;
+    }
+    QGroupBox::title {
+        subcontrol-origin: margin;
+        left: 10px;
+        padding: 0 8px 0 8px;
+        background-color: white;
+    }
+    QPushButton {
+        background-color: #3D5A80;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 20px;
+        font-weight: bold;
+        font-size: 12px;
+        min-width: 100px;
+    }
+    QPushButton:hover {
+        background-color: #2E4A66;
+    }
+    QPushButton:pressed {
+        background-color: #1D3557;
+    }
+   </string>
+  </property>
+  <layout class="QVBoxLayout" name="mainLayout">
+   <property name="spacing">
+    <number>16</number>
+   </property>
+   <property name="leftMargin">
+    <number>8</number>
+   </property>
+   <property name="topMargin">
+    <number>8</number>
+   </property>
+   <property name="rightMargin">
+    <number>8</number>
+   </property>
+   <property name="bottomMargin">
+    <number>8</number>
+   </property>
+   <item>
+    <widget class="QLabel" name="titulo">
+     <property name="text">
+      <string>👤 Cadastro/Edição de Usuário</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupDadosUsuario">
+     <property name="title">
+      <string>Dados do Usuário</string>
+     </property>
+     <layout class="QFormLayout" name="formLayoutUsuario">
+      <property name="horizontalSpacing">
+       <number>16</number>
+      </property>
+      <property name="verticalSpacing">
+       <number>12</number>
+      </property>
+      <property name="leftMargin">
+       <number>16</number>
+      </property>
+      <property name="topMargin">
+       <number>16</number>
+      </property>
+      <property name="rightMargin">
+       <number>16</number>
+      </property>
+      <property name="bottomMargin">
+       <number>16</number>
+      </property>
+      <item row="0" column="0">
+       <widget class="QLabel" name="lblNome">
+        <property name="text">
+         <string>Nome Completo: *</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="txtNome"/>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="lblEmail">
+        <property name="text">
+         <string>E-mail: *</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="txtEmail"/>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="lblCargo">
+        <property name="text">
+         <string>Cargo:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="txtCargo"/>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="lblSenha">
+        <property name="text">
+         <string>Senha:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLineEdit" name="txtSenha">
+        <property name="echoMode">
+         <enum>QLineEdit::Password</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="lblPerfil">
+        <property name="text">
+         <string>Perfil:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QComboBox" name="cmbPerfil">
+        <item>
+         <property name="text">
+          <string>Administrador</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Gestor</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Usuário</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="lblStatus">
+        <property name="text">
+         <string>Status:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QComboBox" name="cmbStatus">
+        <item>
+         <property name="text">
+          <string>Ativo</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Inativo</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="botoesPermissoesLayout">
+     <item>
+      <spacer name="spacerPermissoes">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnGerenciarPermissoes">
+       <property name="text">
+        <string>🔑 Gerenciar Permissões</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="botoesAcoesLayout">
+     <item>
+      <spacer name="spacerAcoes">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnSalvar">
+       <property name="text">
+        <string>💾 Salvar</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnCancelar">
+       <property name="text">
+        <string>Cancelar</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

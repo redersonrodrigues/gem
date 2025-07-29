@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MonitorAdmin</class>
+ <widget class="QWidget" name="MonitorAdmin">
+  <property name="windowTitle">
+   <string>Monitoramento e Manutenção</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+    QWidget {
+        background-color: #fff;
+        font-family: 'Segoe UI';
+    }
+    QLabel#titulo {
+        font-size: 20px;
+        font-weight: bold;
+        color: #2F3E46;
+        padding: 12px;
+        background-color: white;
+        border-radius: 8px;
+        border: 1px solid #e0e0e0;
+        margin-bottom: 16px;
+    }
+    QGroupBox {
+        font-weight: bold;
+        font-size: 12px;
+        color: #2F3E46;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        margin-top: 10px;
+        padding-top: 10px;
+        background-color: white;
+    }
+    QGroupBox::title {
+        subcontrol-origin: margin;
+        left: 10px;
+        padding: 0 8px 0 8px;
+        background-color: white;
+    }
+    QPushButton {
+        background-color: #3D5A80;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 20px;
+        font-weight: bold;
+        font-size: 12px;
+        min-width: 100px;
+    }
+    QPushButton:hover {
+        background-color: #2E4A66;
+    }
+    QPushButton:pressed {
+        background-color: #1D3557;
+    }
+    QLabel#alerta {
+        color: #b8860b;
+        font-size: 12px;
+        font-style: italic;
+        margin-top: 4px;
+    }
+   </string>
+  </property>
+  <layout class="QVBoxLayout" name="mainLayout">
+   <property name="spacing">
+    <number>16</number>
+   </property>
+   <property name="leftMargin">
+    <number>8</number>
+   </property>
+   <property name="topMargin">
+    <number>8</number>
+   </property>
+   <property name="rightMargin">
+    <number>8</number>
+   </property>
+   <property name="bottomMargin">
+    <number>8</number>
+   </property>
+   <item>
+    <widget class="QLabel" name="titulo">
+     <property name="text">
+      <string>🖥️ Monitoramento e Manutenção</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="alerta">
+     <property name="text">
+      <string>Atenção: operações de manutenção podem afetar o funcionamento do sistema.</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="painelStatusLayout">
+     <item>
+      <widget class="QGroupBox" name="groupStatusServicos">
+       <property name="title">
+        <string>Status dos Serviços</string>
+       </property>
+       <layout class="QVBoxLayout" name="statusServicosLayout">
+        <item>
+         <widget class="QLabel" name="lblStatusBanco">
+          <property name="text">
+           <string>Banco de Dados: OK</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lblStatusApi">
+          <property name="text">
+           <string>API: OK</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lblStatusEmail">
+          <property name="text">
+           <string>E-mail: OK</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="groupRecursos">
+       <property name="title">
+        <string>Uso de Recursos</string>
+       </property>
+       <layout class="QVBoxLayout" name="recursosLayout">
+        <item>
+         <widget class="QLabel" name="lblCpu">
+          <property name="text">
+           <string>CPU: 12%</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lblMemoria">
+          <property name="text">
+           <string>Memória: 45%</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lblDisco">
+          <property name="text">
+           <string>Disco: 30%</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="painelManutencaoLayout">
+     <item>
+      <widget class="QGroupBox" name="groupManutencao">
+       <property name="title">
+        <string>Manutenção</string>
+       </property>
+       <layout class="QVBoxLayout" name="manutencaoLayout">
+        <item>
+         <widget class="QPushButton" name="btnLimparCache">
+          <property name="text">
+           <string>Limpar Cache</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnReiniciarServicos">
+          <property name="text">
+           <string>Reiniciar Serviços</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnVerificarIntegridade">
+          <property name="text">
+           <string>Verificar Integridade</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="groupLogsRapidos">
+       <property name="title">
+        <string>Logs Recentes</string>
+       </property>
+       <layout class="QVBoxLayout" name="logsRapidosLayout">
+        <item>
+         <widget class="QLabel" name="lblLog1">
+          <property name="text">
+           <string>[28/07/2025 10:00] Sistema inicializado.</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lblLog2">
+          <property name="text">
+           <string>[28/07/2025 10:05] Backup realizado com sucesso.</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lblLog3">
+          <property name="text">
+           <string>[28/07/2025 10:10] Cache limpo.</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

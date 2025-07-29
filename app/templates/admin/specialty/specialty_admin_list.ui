@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>CompanyListForm</class>
- <widget class="QWidget" name="CompanyListForm">
+ <class>SpecialtyAdminList</class>
+ <widget class="QWidget" name="SpecialtyAdminList">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -17,7 +17,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>GEM - Gerenciamento de Empresas</string>
+   <string>GEM - Gerenciamento de Especialidades</string>
   </property>
   <property name="windowIcon">
    <iconset>
@@ -229,6 +229,9 @@ QLabel#lblContador {
    </property>
    <item>
     <widget class="QLabel" name="lblTitulo">
+     <property name="text">
+      <string>🩺 Gerenciamento de Especialidades</string>
+     </property>
      <property name="styleSheet">
       <string notr="true">QLabel {
     font-size: 18px;
@@ -239,9 +242,6 @@ QLabel#lblContador {
     border-radius: 8px;
     border: 1px solid #e0e0e0;
 }</string>
-     </property>
-     <property name="text">
-      <string>🏢 Gerenciamento de Empresas</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -279,7 +279,7 @@ QLabel#lblContador {
           <item>
            <widget class="QLabel" name="lblFiltroNome">
             <property name="text">
-             <string>Nome da Empresa:</string>
+             <string>Nome da Especialidade:</string>
             </property>
            </widget>
           </item>
@@ -296,18 +296,18 @@ QLabel#lblContador {
          </layout>
         </item>
         <item>
-         <layout class="QVBoxLayout" name="filtroCnpjLayout">
+         <layout class="QVBoxLayout" name="filtroCodigoLayout">
           <item>
-           <widget class="QLabel" name="lblFiltroCnpj">
+           <widget class="QLabel" name="lblFiltroCodigo">
             <property name="text">
-             <string>CNPJ:</string>
+             <string>Código:</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="txtFiltroCnpj">
+           <widget class="QLineEdit" name="txtFiltroCodigo">
             <property name="placeholderText">
-             <string>Digite o CNPJ</string>
+             <string>Digite o código da especialidade</string>
             </property>
             <property name="clearButtonEnabled">
              <bool>true</bool>
@@ -317,16 +317,16 @@ QLabel#lblContador {
          </layout>
         </item>
         <item>
-         <layout class="QVBoxLayout" name="filtroActiveLayout">
+         <layout class="QVBoxLayout" name="filtroStatusLayout">
           <item>
-           <widget class="QLabel" name="lblFiltroActive">
+           <widget class="QLabel" name="lblFiltroStatus">
             <property name="text">
-             <string>Ativo:</string>
+             <string>Status:</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QComboBox" name="cmbFiltroActive">
+           <widget class="QComboBox" name="cmbFiltroStatus">
             <item>
              <property name="text">
               <string>Todos</string>
@@ -334,12 +334,12 @@ QLabel#lblContador {
             </item>
             <item>
              <property name="text">
-              <string>Sim</string>
+              <string>Ativo</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>Não</string>
+              <string>Inativo</string>
              </property>
             </item>
            </widget>
@@ -391,18 +391,18 @@ QLabel#lblContador {
           <property name="text">
            <string>🔍 Buscar</string>
           </property>
-          <property name="shortcut">
-           <string>Return</string>
-          </property>
           <property name="default">
            <bool>true</bool>
+          </property>
+          <property name="shortcut">
+           <string>Return</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QPushButton" name="btnNovo">
           <property name="text">
-           <string>➕ Nova Empresa</string>
+           <string>➕ Nova Especialidade</string>
           </property>
           <property name="shortcut">
            <string>Ctrl+N</string>
@@ -419,7 +419,7 @@ QLabel#lblContador {
      <item>
       <widget class="QLabel" name="lblContador">
        <property name="text">
-        <string>📊 Total de empresas: 0</string>
+        <string>📊 Total de especialidades: 0</string>
        </property>
       </widget>
      </item>
@@ -439,7 +439,7 @@ QLabel#lblContador {
     </layout>
    </item>
    <item>
-    <widget class="QTableWidget" name="tableEmpresas">
+    <widget class="QTableWidget" name="tableEspecialidades">
      <property name="alternatingRowColors">
       <bool>true</bool>
      </property>
@@ -452,11 +452,11 @@ QLabel#lblContador {
      <property name="sortingEnabled">
       <bool>true</bool>
      </property>
-     <property name="rowCount">
-      <number>0</number>
-     </property>
      <property name="columnCount">
       <number>5</number>
+     </property>
+     <property name="rowCount">
+      <number>0</number>
      </property>
      <column>
       <property name="text">
@@ -470,12 +470,12 @@ QLabel#lblContador {
      </column>
      <column>
       <property name="text">
-       <string>CNPJ</string>
+       <string>Código</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Ativo</string>
+       <string>Status</string>
       </property>
      </column>
      <column>
@@ -489,12 +489,12 @@ QLabel#lblContador {
  </widget>
  <tabstops>
   <tabstop>txtFiltroNome</tabstop>
-  <tabstop>txtFiltroCnpj</tabstop>
-  <tabstop>cmbFiltroActive</tabstop>
+  <tabstop>txtFiltroCodigo</tabstop>
+  <tabstop>cmbFiltroStatus</tabstop>
   <tabstop>btnLimpar</tabstop>
   <tabstop>btnBuscar</tabstop>
   <tabstop>btnNovo</tabstop>
-  <tabstop>tableEmpresas</tabstop>
+  <tabstop>tableEspecialidades</tabstop>
  </tabstops>
  <resources/>
  <connections/>

@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ConfigAdmin</class>
+ <widget class="QWidget" name="ConfigAdmin">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>646</width>
+    <height>609</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Parâmetros do Sistema</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+    QWidget {
+        background-color: #fff;
+        font-family: 'Segoe UI';
+    }
+    QLabel#titulo {
+        font-size: 20px;
+        font-weight: bold;
+        color: #2F3E46;
+        padding: 12px;
+        background-color: white;
+        border-radius: 8px;
+        border: 1px solid #e0e0e0;
+        margin-bottom: 16px;
+    }
+    QPushButton {
+        background-color: #3D5A80;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 20px;
+        font-weight: bold;
+        font-size: 12px;
+        min-width: 100px;
+    }
+    QPushButton:hover {
+        background-color: #2E4A66;
+    }
+    QPushButton:pressed {
+        background-color: #1D3557;
+    }
+    QTableWidget {
+        background-color: white;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        gridline-color: #f0f0f0;
+    }
+    QHeaderView::section {
+        background-color: #3D5A80;
+        color: white;
+        padding: 8px;
+        border: none;
+        font-weight: bold;
+    }
+    QTableWidget::item {
+        padding: 8px;
+        border-bottom: 1px solid #f0f0f0;
+    }
+    QTableWidget::item:selected {
+        background-color: #e3f2fd;
+        color: #1565c0;
+    }
+   </string>
+  </property>
+  <layout class="QVBoxLayout" name="mainLayout">
+   <property name="spacing">
+    <number>16</number>
+   </property>
+   <property name="leftMargin">
+    <number>8</number>
+   </property>
+   <property name="topMargin">
+    <number>8</number>
+   </property>
+   <property name="rightMargin">
+    <number>8</number>
+   </property>
+   <property name="bottomMargin">
+    <number>8</number>
+   </property>
+   <item>
+    <widget class="QLabel" name="titulo">
+     <property name="text">
+      <string>⚙️ Parâmetros do Sistema</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="filtrosLayout">
+     <property name="spacing">
+      <number>12</number>
+     </property>
+     <item>
+      <widget class="QLineEdit" name="txtFiltroNome">
+       <property name="placeholderText">
+        <string>Nome do parâmetro</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="txtFiltroValor">
+       <property name="placeholderText">
+        <string>Valor</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnBuscar">
+       <property name="text">
+        <string>🔍 Buscar</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnNovoParametro">
+       <property name="text">
+        <string>➕ Novo Parâmetro</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QTableWidget" name="tableParametros">
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
+     <property name="selectionBehavior">
+      <enum>QAbstractItemView::SelectRows</enum>
+     </property>
+     <property name="showGrid">
+      <bool>true</bool>
+     </property>
+     <property name="sortingEnabled">
+      <bool>true</bool>
+     </property>
+     <property name="rowCount">
+      <number>0</number>
+     </property>
+     <property name="columnCount">
+      <number>6</number>
+     </property>
+     <column>
+      <property name="text">
+       <string>ID</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Nome</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Valor Atual</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Última Atualização</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Usuário</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Ações</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupEdicao">
+     <property name="title">
+      <string>Edição/Cadastro de Parâmetro</string>
+     </property>
+     <layout class="QFormLayout" name="formLayoutEdicao">
+      <property name="horizontalSpacing">
+       <number>16</number>
+      </property>
+      <property name="verticalSpacing">
+       <number>12</number>
+      </property>
+      <property name="leftMargin">
+       <number>16</number>
+      </property>
+      <property name="topMargin">
+       <number>16</number>
+      </property>
+      <property name="rightMargin">
+       <number>16</number>
+      </property>
+      <property name="bottomMargin">
+       <number>16</number>
+      </property>
+      <item row="0" column="0">
+       <widget class="QLabel" name="lblNome">
+        <property name="text">
+         <string>Nome:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="txtNome"/>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="lblValor">
+        <property name="text">
+         <string>Valor:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="txtValor"/>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="lblJustificativa">
+        <property name="text">
+         <string>Justificativa:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="txtJustificativa"/>
+      </item>
+      <item row="3" column="0">
+       <widget class="QPushButton" name="btnSalvarParametro">
+        <property name="text">
+         <string>💾 Salvar</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QPushButton" name="btnCancelarEdicao">
+        <property name="text">
+         <string>Cancelar</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="btnHistoricoParametro">
+     <property name="text">
+      <string>Ver Histórico de Alterações</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
