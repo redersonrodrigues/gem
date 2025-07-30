@@ -2,13 +2,14 @@
 # Dependências principais para desenvolvimento e produção
 
 # Interface Gráfica
-PySide6==6.7.2
-PySide6-Addons==6.7.2
-PySide6-Essentials==6.7.2
+PySide6==6.9.1
+PySide6-Addons==6.9.1
+PySide6-Essentials==6.9.1
+shiboken6==6.9.1
 
 # Banco de Dados
 SQLAlchemy==2.0.31
-sqlite3  # Já incluído no Python padrão
+# sqlite3  # Já incluído no Python padrão
 
 # Geração de PDF
 reportlab==4.2.0
@@ -43,3 +44,6 @@ mypy==1.10.1
 
 # Migrações de Banco de Dados
 Alembic==1.13.1
+
+# Manipulação de Imagens
+Pillow==10.3.0

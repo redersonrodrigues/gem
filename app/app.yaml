@@ -1,0 +1,5 @@
+# Configuração mínima para inicialização da aplicação GEM
+app_path: "c:/Users/rrodrigues/Desktop/gem/app"
+database_path: "c:/Users/rrodrigues/Desktop/gem/app/database/escalas.db"
+log_path: "c:/Users/rrodrigues/Desktop/gem/app/log"
+# Adicione outros parâmetros conforme necessidade do projeto
